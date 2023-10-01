@@ -34,6 +34,15 @@ jobs:
     - name: Build project
       working-directory: frontend
       run: npm run build
+   
+    - name: Run the tests
+      working-directory: frontend
+      run: npm test
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}    
 
     - name: Deploy
       working-directory: frontend
