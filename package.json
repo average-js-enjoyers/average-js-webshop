@@ -1,0 +1,19 @@
+{
+  "name": "average-js-webshop-backend",
+  "version": "1.0.0",
+  "description": "Average JS Webshop backend.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/average-js-enjoyers/average-js-webshop.git"
+  },
+  "author": "Average JS Enjoyers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/average-js-enjoyers/average-js-webshop/issues"
+  },
+  "homepage": "https://github.com/average-js-enjoyers/average-js-webshop#readme"
+}
