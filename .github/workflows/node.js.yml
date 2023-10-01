@@ -37,10 +37,12 @@ jobs:
    
     - name: Run the tests
       working-directory: frontend
-      run: npm test
+      run: npm test -- --coverage
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
+      with:
+        directory: frontend
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}    
 
