@@ -36,6 +36,7 @@ jobs:
       run: npm run build
 
     - name: Deploy
+      working-directory: frontend
       run: |
         git config --global user.name $user_name
         git config --global user.email $user_email
