@@ -11,7 +11,7 @@ const UserPaymentMethodSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "PaymentType",
   },
-  iseDefault: Boolean,
+  isDefault: Boolean,
 });
 
 module.exports = mongoose.model("UserPaymentMethod", UserPaymentMethodSchema);

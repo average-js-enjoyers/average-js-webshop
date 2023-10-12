@@ -7,7 +7,7 @@ const UserAddressSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "SiteUser",
   },
-  adressID: [
+  addressID: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Address",
