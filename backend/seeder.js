@@ -5,7 +5,7 @@ import colors from "colors";
 import { productCategories } from "./data/productCategories.js";
 import ProductCategory from "./db/productCategory.model.js";
 
-import { gamerPCs as products } from "./data/products/computers/computerConfigs/gamerPCs.js";
+import { products } from "./data/products.js";
 import Product from "./db/product.model.js";
 
 import connectDB from "./config/db.js";
@@ -34,7 +34,7 @@ const importData = async () => {
       return {
         name: product.name,
         description: product.description,
-        categoryID: product.categoryID,
+        categoryID: new mongoose.Types.ObjectId(product.categoryID),
       };
     });
 
