@@ -1,4 +1,4 @@
-export const products = [
+const products = [
   {
     name: "BattleRig Titan",
     description:
