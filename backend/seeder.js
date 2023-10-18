@@ -5,6 +5,10 @@ import colors from "colors";
 import { productCategories } from "./data/productCategories.js";
 import ProductCategory from "./db/productCategory.model.js";
 
+import Variation from "./db/variation.js";
+import VariationOption from "./db/variation_option.js";
+import ProductVariationConfiguration from "./db/productVariationConfiguration.js";
+
 import { products } from "./data/products.js";
 import Product from "./db/product.model.js";
 
@@ -19,6 +23,10 @@ const importData = async () => {
     // Clear out all existing data in the database
     await ProductCategory.deleteMany();
     await Product.deleteMany();
+
+    await Variation.deleteMany();
+    await VariationOption.deleteMany();
+    await ProductVariationConfiguration.deleteMany();
 
     // Get all categories from the categories array and add the admin user to each category
     const sampleCategories = productCategories.map((category) => {
@@ -58,6 +66,10 @@ const destroyData = async () => {
     // Clear out all existing data in the database
     await Product.deleteMany();
     await ProductCategory.deleteMany();
+
+    await Variation.deleteMany();
+    await VariationOption.deleteMany();
+    await ProductVariationConfiguration.deleteMany();
 
     console.log("Data Destroyed!".red.inverse);
     process.exit();
