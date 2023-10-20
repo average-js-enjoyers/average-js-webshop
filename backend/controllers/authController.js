@@ -37,6 +37,8 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
@@ -48,6 +50,8 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 exports.login = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+
   const { email, password } = req.body;
 
   // 1) Check if email and password exist
@@ -121,6 +125,8 @@ exports.restrictTo = (...roles) => {
 };
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+
   // 1) Get user based on POSTed email
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
@@ -162,6 +168,8 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+
   // 1) Get user based on the token
   const hashedToken = crypto
     .createHash("sha256")
@@ -189,6 +197,8 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+
   // 1) Get user from collection
   const user = await User.findById(req.user.id).select("+password");
 

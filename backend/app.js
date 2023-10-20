@@ -10,7 +10,12 @@ const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 const userRouter = require("./routes/userRoutes");
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./config/swagger/swagger.json");
+
 const app = express();
+
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // 1) GLOBAL MIDDLEWARES
 // Set security HTTP headers
@@ -37,20 +42,6 @@ app.use(mongoSanitize());
 
 // Data sanitization against XSS
 app.use(xss());
-
-// Prevent parameter pollution
-app.use(
-  hpp({
-    whitelist: [
-      "duration",
-      "ratingsQuantity",
-      "ratingsAverage",
-      "maxGroupSize",
-      "difficulty",
-      "price",
-    ],
-  })
-);
 
 // Serving static files
 app.use(express.static(`${__dirname}/public`));

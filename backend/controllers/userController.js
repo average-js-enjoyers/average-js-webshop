@@ -12,11 +12,14 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 exports.getMe = (req, res, next) => {
+  // #swagger.tags = ['Profile']
   req.params.id = req.user.id;
   next();
 };
 
 exports.updateMe = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+
   // 1) Create error if user POSTs password data
   if (req.body.password || req.body.passwordConfirm) {
     return next(
@@ -45,6 +48,8 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+
   await User.findByIdAndUpdate(req.user.id, { active: false });
 
   res.status(204).json({
