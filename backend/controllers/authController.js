@@ -47,6 +47,20 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
   });
 
+  try {
+    await sendEmail({
+      emailAddress: newUser.emailAddress,
+      subject: "Welcome to Average JS Webshop",
+      message:
+        "Welcome to Average JS Webshop! We are thrilled to have you as a new member of our online community. Thank you for choosing us for your shopping needs.",
+    });
+  } catch (err) {
+    return next(
+      new AppError("There was an error sending the email. Try again later!"),
+      500
+    );
+  }
+
   createSendToken(newUser, 201, res);
 });
 

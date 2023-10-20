@@ -4,7 +4,7 @@ const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
-const hpp = require("hpp");
+const cors = require("cors");
 
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
@@ -14,6 +14,8 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./config/swagger/swagger.json");
 
 const app = express();
+
+app.use(cors());
 
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
