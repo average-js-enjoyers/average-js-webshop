@@ -13,8 +13,8 @@ const sendEmail = async (options) => {
 
   // 2) Define the email options
   const mailOptions = {
-    from: "JS Enjoyer <info@ajse.io>",
-    to: options.email,
+    from: "Average JS Enjoyer <info@ajse.io>",
+    to: options.emailAddress,
     subject: options.subject,
     text: options.message,
     // html:

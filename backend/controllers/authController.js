@@ -40,8 +40,9 @@ exports.signup = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
   const newUser = await User.create({
-    name: req.body.name,
-    email: req.body.email,
+    firstName: req.body.firstName,
+    lastName: req.body.LastName,
+    emailAddress: req.body.emailAddress,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
@@ -52,14 +53,14 @@ exports.signup = catchAsync(async (req, res, next) => {
 exports.login = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
-  const { email, password } = req.body;
+  const { emailAddress, password } = req.body;
 
   // 1) Check if email and password exist
-  if (!email || !password) {
+  if (!emailAddress || !password) {
     return next(new AppError("Please provide email and password!", 400));
   }
   // 2) Check if user exists && password is correct
-  const user = await User.findOne({ email }).select("+password");
+  const user = await User.findOne({ emailAddress }).select("+password");
 
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError("Incorrect email or password", 401));
@@ -128,7 +129,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
   // 1) Get user based on POSTed email
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne({ emailAddress: req.body.emailAddress });
   if (!user) {
     return next(new AppError("There is no user with email address.", 404));
   }
@@ -140,13 +141,13 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 3) Send it to user's email
   const resetURL = `${req.protocol}://${req.get(
     "host"
-  )}/api/v1/users/resetPassword/${resetToken}`;
+  )}/api/users/resetPassword/${resetToken}`;
 
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
 
   try {
     await sendEmail({
-      email: user.email,
+      emailAddress: user.emailAddress,
       subject: "Your password reset token (valid for 10 min)",
       message,
     });

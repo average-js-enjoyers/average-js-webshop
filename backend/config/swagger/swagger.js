@@ -21,10 +21,6 @@ const doc = {
       name: "Profile",
       description: "API endpoints related to user profile",
     },
-    {
-      name: "Admin",
-      description: "API endpoints related to admin dashboard",
-    },
   ],
 };
 

@@ -15,10 +15,6 @@
     {
       "name": "Profile",
       "description": "API endpoints related to user profile"
-    },
-    {
-      "name": "Admin",
-      "description": "API endpoints related to admin dashboard"
     }
   ],
   "schemes": [
@@ -38,10 +34,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "firstName": {
                   "example": "any"
                 },
-                "email": {
+                "LastName": {
+                  "example": "any"
+                },
+                "emailAddress": {
                   "example": "any"
                 },
                 "password": {
@@ -74,7 +73,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "email": {
+                "emailAddress": {
                   "example": "any"
                 },
                 "password": {
@@ -104,7 +103,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "email": {
+                "emailAddress": {
                   "example": "any"
                 }
               }
@@ -212,41 +211,6 @@
         }
       }
     },
-    "/api/users/updateMe": {
-      "patch": {
-        "tags": [
-          "Profile"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "password": {
-                  "example": "any"
-                },
-                "passwordConfirm": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/users/deleteMe": {
       "delete": {
         "tags": [
@@ -263,118 +227,6 @@
         "responses": {
           "204": {
             "description": "No Content"
-          }
-        }
-      }
-    },
-    "/api/users/": {
-      "get": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/api/users/{id}": {
-      "get": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
           }
         }
       }
