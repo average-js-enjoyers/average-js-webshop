@@ -1,0 +1,111 @@
+// ################### BOOTSTRAP OVERRIDE ###################
+
+$spacer: 2rem !default;
+
+$spacer-multiplier-0: 0.25;
+$spacer-multiplier-1: 0.5;
+$spacer-multiplier-2: 0.75;
+$spacer-multiplier-3: 1.5;
+$spacer-multiplier-4: 2.25;
+$spacer-multiplier-5: 3;
+$spacer-multiplier-6: 6;
+$spacer-multiplier-auto: 1;
+
+$spacers: (
+  0: $spacer * $spacer-multiplier-0,
+  // 0.5rem (5px)
+  1: $spacer * $spacer-multiplier-1,
+  // 1rem (10px)
+  2: $spacer * $spacer-multiplier-2,
+  // 1.5rem (15px)
+  3: $spacer * $spacer-multiplier-3,
+  // 3rem (30px)
+  4: $spacer * $spacer-multiplier-4,
+  // 4.5rem (45px)
+  5: $spacer * $spacer-multiplier-5,
+  // 6rem (60px)
+  6: $spacer * $spacer-multiplier-6,
+  // 12rem (120px)
+  auto: auto,
+);
+
+:root {
+  --default-font-size: 1.4rem;
+
+  // ################### COLORS ###################
+
+  /* Primary Tonal Pattern */
+  --primary-0: rgba(235, 255, 255, 1);
+  --primary-10: rgba(205, 245, 255, 1);
+  --primary-20: rgba(175, 235, 245, 1);
+  --primary-30: rgba(145, 225, 240, 1);
+  --primary-40: rgba(110, 210, 235, 1);
+  --primary-50: rgba(0, 165, 210, 1);
+  --primary-60: rgba(0, 145, 180, 1);
+  --primary-70: rgba(0, 120, 160, 1);
+  --primary-80: rgba(0, 100, 140, 1);
+  --primary-90: rgba(0, 80, 115, 1);
+  --primary-100: rgba(0, 55, 85, 1);
+
+  /* Secondary Tonal Pattern */
+  --secondary-0: rgba(240, 255, 245, 1);
+  --secondary-10: rgba(220, 255, 230, 1);
+  --secondary-20: rgba(190, 250, 210, 1);
+  --secondary-30: rgba(160, 245, 180, 1);
+  --secondary-40: rgba(130, 240, 160, 1);
+  --secondary-50: rgba(120, 230, 140, 1);
+  --secondary-60: rgba(90, 200, 120, 1);
+  --secondary-70: rgba(40, 175, 90, 1);
+  --secondary-80: rgba(20, 150, 75, 1);
+  --secondary-90: rgba(10, 130, 70, 1);
+  --secondary-100: rgba(0, 100, 50, 1);
+
+  /* Accent Tonal Pattern */
+  --accent-0: rgba(255, 242, 246, 1);
+  --accent-10: rgba(255, 230, 235, 1);
+  --accent-20: rgba(255, 210, 215, 1);
+  --accent-30: rgba(255, 185, 190, 1);
+  --accent-40: rgba(255, 150, 155, 1);
+  --accent-50: rgba(255, 100, 100, 1);
+  --accent-60: rgba(240, 85, 90, 1);
+  --accent-70: rgba(200, 70, 80, 1);
+  --accent-80: rgba(160, 60, 70, 1);
+  --accent-90: rgba(120, 30, 40, 1);
+  --accent-100: rgba(90, 20, 30, 1);
+
+  /* Grayscale Tonal Pattern */
+  --grayscale-0: rgba(255, 255, 255, 1);
+  --grayscale-10: rgba(240, 240, 240, 1);
+  --grayscale-20: rgba(220, 220, 220, 1);
+  --grayscale-30: rgba(179, 179, 179, 1);
+  --grayscale-40: rgba(153, 153, 153, 1);
+  --grayscale-50: rgba(128, 128, 128, 1);
+  --grayscale-60: rgba(102, 102, 102, 1);
+  --grayscale-70: rgba(77, 77, 77, 1);
+  --grayscale-80: rgba(51, 51, 51, 1);
+  --grayscale-90: rgba(26, 26, 26, 1);
+  --grayscale-100: rgba(0, 0, 0, 1);
+
+  /* Warning Tonal Pattern */
+  --warning-0: rgba(255, 250, 245, 1);
+  --warning-10: rgba(255, 245, 235, 1);
+  --warning-20: rgba(255, 240, 225, 1);
+  --warning-30: rgba(255, 225, 175, 1);
+  --warning-40: rgba(255, 185, 85, 1);
+  --warning-50: rgb(210, 150, 20);
+  --warning-60: rgba(180, 120, 10, 1);
+  --warning-70: rgba(150, 100, 5, 1);
+  --warning-80: rgba(120, 80, 0, 1);
+  --warning-90: rgba(90, 60, 0, 1);
+  --warning-100: rgba(90, 45, 10, 1);
+
+  // ################### SHADOWS ###################
+
+  --dropshadow-std: 2px 3px 5px 0px rgba(0, 0, 0, 0.25);
+  --dropshadow-std--hover: 2px 3px 12px 0px rgba(0, 0, 0, 0.15); /* Slightly larger blur, but lower opacity */
+  --dropshadow-std--active: 2px 3px 3px 0px rgba(0, 0, 0, 0.3); /* Smaller blur, but higher opacity */
+
+  --dropshadow-muted: 2px 3px 5px 0px rgba(0, 0, 0, 0.1);
+  --dropshadow-muted--hover: 2px 3px 12px 0px rgba(0, 0, 0, 0.08); /* Slightly larger blur, but lower opacity */
+  --dropshadow-muted--active: 2px 3px 3px 0px rgba(0, 0, 0, 0.15); /* Smaller blur, but higher opacity */
+}
