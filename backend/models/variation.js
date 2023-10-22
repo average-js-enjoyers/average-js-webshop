@@ -10,4 +10,4 @@ const VariationSchema = new Schema({
   name: String,
 });
 
-module.exports = mongoose.model("VariationSchema", VariationSchema);
+module.exports = mongoose.model("Variation", VariationSchema);
