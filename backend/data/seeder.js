@@ -1,18 +1,20 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import colors from "colors";
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const colors = require("colors");
 
-import { productCategories } from "./data/productCategories.js";
-import ProductCategory from "./db/productCategory.model.js";
+const SiteUser = require("../models/siteUser.model.js");
 
-import Variation from "./db/variation.js";
-import VariationOption from "./db/variation_option.js";
-import ProductVariationConfiguration from "./db/productVariationConfiguration.js";
+const productCategories = require("../models/siteUser.model.js");
+const ProductCategory = require("../models/productCategory.model.js");
 
-import { products } from "./data/products.js";
-import Product from "./db/product.model.js";
+const Variation = require("../models/variation.js");
+const VariationOption = require("../models/variation_option.js");
+const ProductVariationConfiguration = require("../models/productVariationConfiguration.js");
 
-import connectDB from "./config/db.js";
+const products = require("./products.js");
+const Product = require("../models/product.model.js");
+
+const connectDB = require("../config/db.js");
 
 dotenv.config();
 
@@ -21,6 +23,8 @@ connectDB();
 const importData = async () => {
   try {
     // Clear out all existing data in the database
+    await SiteUser.deleteMany();
+
     await ProductCategory.deleteMany();
     await Product.deleteMany();
 
@@ -64,6 +68,8 @@ const importData = async () => {
 const destroyData = async () => {
   try {
     // Clear out all existing data in the database
+    await SiteUser.deleteMany();
+
     await Product.deleteMany();
     await ProductCategory.deleteMany();
 
