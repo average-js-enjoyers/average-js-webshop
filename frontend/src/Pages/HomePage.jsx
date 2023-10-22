@@ -4,7 +4,6 @@ import { Outlet, Link } from "react-router-dom";
 const HomePage = () => (
   <div className="Layout">
     <nav>
-      <ul>
         <li>
           <Link to="/example2">
             <button type="button">example2</button>
@@ -15,7 +14,11 @@ const HomePage = () => (
             <button type="button">example</button>
           </Link>
         </li>
-      </ul>
+        <li>
+          <Link to="/signup">
+            <button type="button">Sign Up!</button>
+          </Link>
+        </li>
     </nav>
     <Outlet />
   </div>

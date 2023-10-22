@@ -7,6 +7,8 @@ import HomePage from "./Pages/HomePage";
 import ErrorPage from "./Pages/ErrorPage";
 import Example from "./Components/Example";
 import Example2 from "./Components/Example2";
+import UserCreator from "./Components/SignUpForm";
+import FAQ from "./Components/FAQ";
 
 
 
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: "/example2",
         element: <Example2/>,
+      },
+      {
+        path: "/signup",
+        element: <UserCreator/>,
+      },
+      {
+        path: "/faq",
+        element: <FAQ/>,
       },
     ],
   },
