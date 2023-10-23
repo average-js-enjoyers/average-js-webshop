@@ -43,6 +43,9 @@
                 "emailAddress": {
                   "example": "any"
                 },
+                "phoneNumber": {
+                  "example": "any"
+                },
                 "password": {
                   "example": "any"
                 },
@@ -70,16 +73,23 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Some description...",
             "schema": {
               "type": "object",
               "properties": {
                 "emailAddress": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "any@gmail.com"
                 },
                 "password": {
+                  "type": "string",
                   "example": "any"
                 }
-              }
+              },
+              "required": [
+                "emailAddress",
+                "password"
+              ]
             }
           }
         ],
@@ -207,6 +217,53 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/api/users/updateMe": {
+      "patch": {
+        "tags": [
+          "Profile"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Some description...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Doe"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "example": "+36201230044"
+                }
+              },
+              "required": [
+                "firstName",
+                "lastName",
+                "phoneNumber"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }

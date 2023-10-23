@@ -43,6 +43,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     firstName: req.body.firstName,
     lastName: req.body.LastName,
     emailAddress: req.body.emailAddress,
+    phoneNumber: req.body.phoneNumber,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
@@ -65,7 +66,16 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 exports.login = catchAsync(async (req, res, next) => {
+  /*  
   // #swagger.tags = ['Auth']
+  #swagger.parameters['body'] = {
+                in: 'body',
+                description: 'Some description...',
+                schema: {
+                    $emailAddress: 'any@gmail.com',
+                    $password: 'any',
+                }
+        } */
 
   const { emailAddress, password } = req.body;
 
