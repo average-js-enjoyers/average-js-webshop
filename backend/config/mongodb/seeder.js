@@ -2,19 +2,22 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const colors = require("colors");
 
-const SiteUser = require("../models/siteUser.model.js");
+// Users
+const SiteUser = require("../../models/siteUser.model.js");
 
-const productCategories = require("../models/siteUser.model.js");
-const ProductCategory = require("../models/productCategory.model.js");
+// Products
+const Product = require("../../models/product.model.js");
+const ProductCategory = require("../../models/productCategory.model.js");
 
-const Variation = require("../models/variation.js");
-const VariationOption = require("../models/variation_option.js");
-const ProductVariationConfiguration = require("../models/productVariationConfiguration.js");
+const Variation = require("../../models/variation.js");
+const VariationOption = require("../../models/variation_option.js");
+const ProductVariationConfiguration = require("../../models/productVariationConfiguration.js");
 
-const products = require("./products.js");
-const Product = require("../models/product.model.js");
+const users = require("./data/users.js");
+const productCategories = require("./data/productCategories.js");
+const products = require("./data/products.js");
 
-const connectDB = require("../config/db.js");
+const connectDB = require("./db.js");
 
 dotenv.config();
 
@@ -31,6 +34,23 @@ const importData = async () => {
     await Variation.deleteMany();
     await VariationOption.deleteMany();
     await ProductVariationConfiguration.deleteMany();
+
+    // Get all users
+    const sampleUsers = users.map((user) => {
+      return {
+        _id: new mongoose.Types.ObjectId(user._id),
+        emailAddress: user.emailAddress,
+        phoneNumber: user.phoneNumber,
+        password: user.password,
+        passwordConfirm: user.password,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        registrationDate: user.registrationDate,
+        role: user.role,
+        twoFactorEnabled: user.twoFactorEnabled,
+        active: user.active,
+      };
+    });
 
     // Get all categories from the categories array and add the admin user to each category
     const sampleCategories = productCategories.map((category) => {
@@ -50,7 +70,7 @@ const importData = async () => {
       };
     });
 
-    // Insert all products from the sampleProducts array
+    await SiteUser.create(sampleUsers);
     await ProductCategory.insertMany(sampleCategories);
     await Product.insertMany(sampleProducts);
 

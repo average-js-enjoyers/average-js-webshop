@@ -7,8 +7,8 @@
     "start": "nodemon --config config/nodemon/nodemon.json server.js",
     "start:prod": "node server.js",
     "debug": "ndb server.js",
-    "data:import": "node ./data/seeder.js",
-    "data:destroy": "node ./data/seeder.js -d"
+    "data:import": "node ./config/mongodb/seeder.js",
+    "data:destroy": "node ./config/mongodb/seeder.js -d"
   },
   "repository": {
     "type": "git",

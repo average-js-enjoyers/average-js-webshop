@@ -62,3 +62,8 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 });
 
 exports.getUser = factory.getOne(User);
+
+exports.getAddresses = () => {
+  const user = factory.getOne(User);
+  return user;
+};
