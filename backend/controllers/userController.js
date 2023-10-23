@@ -1,6 +1,7 @@
-const User = require("../models/siteUser.model");
+const User = require("../models/user.model");
+const Address = require("../models/address.model");
 const catchAsync = require("./../utils/catchAsync");
-const factory = require("./handlerFactory");
+const AppError = require("./../utils/appError");
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -61,9 +62,19 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getUser = factory.getOne(User);
+exports.getUser = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ _id: req.params.id })
+    .populate("addresses")
+    .exec();
 
-exports.getAddresses = () => {
-  const user = factory.getOne(User);
-  return user;
-};
+  if (!user) {
+    return next(new AppError("No user found with that ID", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      data: user,
+    },
+  });
+});

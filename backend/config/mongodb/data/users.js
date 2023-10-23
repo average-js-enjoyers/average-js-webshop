@@ -10,6 +10,9 @@ module.exports = [
     role: "user",
     twoFactorEnabled: true,
     active: true,
+    addresses: [
+      "614ce88d8101e980a49f0427", // Reference the address ID
+    ],
   },
   {
     _id: "614ce88d8101e980a49f0428",
@@ -22,6 +25,9 @@ module.exports = [
     role: "user",
     twoFactorEnabled: false,
     active: true,
+    addresses: [
+      "614ce88d8101e980a49f0428", // Reference the address ID
+    ],
   },
   {
     _id: "614ce88d8101e980a49f0429",
@@ -34,6 +40,9 @@ module.exports = [
     role: "admin",
     twoFactorEnabled: true,
     active: true,
+    addresses: [
+      "614ce88d8101e980a49f0429", // Reference the address ID
+    ],
   },
   {
     _id: "614ce88d8101e980a49f0430",
@@ -46,6 +55,9 @@ module.exports = [
     role: "user",
     twoFactorEnabled: true,
     active: true,
+    addresses: [
+      "614ce88d8101e980a49f0430", // Reference the address ID
+    ],
   },
   {
     _id: "614ce88d8101e980a49f0431",
@@ -58,5 +70,8 @@ module.exports = [
     role: "user",
     twoFactorEnabled: false,
     active: false,
+    addresses: [
+      "614ce88d8101e980a49f0431", // Reference the address ID
+    ],
   },
 ];

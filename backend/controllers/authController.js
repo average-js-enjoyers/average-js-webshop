@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
-const User = require("../models/siteUser.model");
+const User = require("../models/user.model");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
 const sendEmail = require("./../utils/email");
@@ -72,8 +72,8 @@ exports.login = catchAsync(async (req, res, next) => {
                 in: 'body',
                 description: 'Some description...',
                 schema: {
-                    $emailAddress: 'any@gmail.com',
-                    $password: 'any',
+                    $emailAddress: 'user1@example.com',
+                    $password: 'password123',
                 }
         } */
 

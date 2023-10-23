@@ -3,18 +3,16 @@ const dotenv = require("dotenv");
 const colors = require("colors");
 
 // Users
-const SiteUser = require("../../models/siteUser.model.js");
+const User = require("../../models/user.model.js");
+const Address = require("../../models/address.model.js");
 
 // Products
 const Product = require("../../models/product.model.js");
-const ProductCategory = require("../../models/productCategory.model.js");
-
-const Variation = require("../../models/variation.js");
-const VariationOption = require("../../models/variation_option.js");
-const ProductVariationConfiguration = require("../../models/productVariationConfiguration.js");
+const Category = require("../../models/category.model.js");
 
 const users = require("./data/users.js");
-const productCategories = require("./data/productCategories.js");
+const addresses = require("./data/addresses.js");
+const categories = require("./data/categories.js");
 const products = require("./data/products.js");
 
 const connectDB = require("./db.js");
@@ -26,14 +24,27 @@ connectDB();
 const importData = async () => {
   try {
     // Clear out all existing data in the database
-    await SiteUser.deleteMany();
+    await User.deleteMany();
+    await Address.deleteMany();
 
-    await ProductCategory.deleteMany();
+    await Category.deleteMany();
     await Product.deleteMany();
 
-    await Variation.deleteMany();
-    await VariationOption.deleteMany();
-    await ProductVariationConfiguration.deleteMany();
+    const sampleAddresses = addresses.map((address) => {
+      return {
+        _id: new mongoose.Types.ObjectId(address._id), // Generate a new ObjectId for each address
+        unitNumber: address.unitNumber,
+        streetNumber: address.streetNumber,
+        addressLine1: address.addressLine1,
+        addressLine2: address.addressLine2,
+        city: address.city,
+        region: address.region,
+        postalCode: address.postalCode,
+        vatID: address.vatID,
+        countryID: new mongoose.Types.ObjectId(address.countryID), // Assuming countryID is an ObjectId
+        type: address.type,
+      };
+    });
 
     // Get all users
     const sampleUsers = users.map((user) => {
@@ -49,11 +60,12 @@ const importData = async () => {
         role: user.role,
         twoFactorEnabled: user.twoFactorEnabled,
         active: user.active,
+        addresses: user.addresses,
       };
     });
 
     // Get all categories from the categories array and add the admin user to each category
-    const sampleCategories = productCategories.map((category) => {
+    const sampleCategories = categories.map((category) => {
       return {
         _id: new mongoose.Types.ObjectId(category._id),
         categoryName: category.categoryName,
@@ -70,8 +82,9 @@ const importData = async () => {
       };
     });
 
-    await SiteUser.create(sampleUsers);
-    await ProductCategory.insertMany(sampleCategories);
+    await User.create(sampleUsers);
+    await Address.insertMany(sampleAddresses);
+    await Category.insertMany(sampleCategories);
     await Product.insertMany(sampleProducts);
 
     /* await ProductCategory.create(...sampleCategories);
@@ -88,14 +101,11 @@ const importData = async () => {
 const destroyData = async () => {
   try {
     // Clear out all existing data in the database
-    await SiteUser.deleteMany();
+    await User.deleteMany();
+    await Address.deleteMany();
 
     await Product.deleteMany();
-    await ProductCategory.deleteMany();
-
-    await Variation.deleteMany();
-    await VariationOption.deleteMany();
-    await ProductVariationConfiguration.deleteMany();
+    await Category.deleteMany();
 
     console.log("Data Destroyed!".red.inverse);
     process.exit();

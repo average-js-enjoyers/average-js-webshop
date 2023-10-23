@@ -11,10 +11,7 @@ const AddressSchema = new Schema({
   region: String,
   postalCode: Number,
   vatID: Number,
-  countryID:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Country",
-  },
+  country: String,
   type: String,
 });
 

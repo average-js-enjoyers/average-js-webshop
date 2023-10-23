@@ -79,11 +79,11 @@
               "properties": {
                 "emailAddress": {
                   "type": "string",
-                  "example": "any@gmail.com"
+                  "example": "user1@example.com"
                 },
                 "password": {
                   "type": "string",
-                  "example": "any"
+                  "example": "password123"
                 }
               },
               "required": [
@@ -215,8 +215,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       }
