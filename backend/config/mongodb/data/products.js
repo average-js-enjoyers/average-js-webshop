@@ -1,4 +1,4 @@
-const products = [
+module.exports = [
   {
     name: "BattleRig Titan",
     description:

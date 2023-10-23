@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const ProductSchema = new Schema({
   categoryID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "ProductCategory",
+    ref: "Category",
   },
   name: String,
   description: String,
