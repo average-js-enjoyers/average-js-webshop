@@ -130,3 +130,4 @@ dist
 .pnp.*
 
 swagger.js
+backend/config/swagger/swagger.json

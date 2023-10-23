@@ -125,3 +125,65 @@ exports.createAddress = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+exports.deleteAddress = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+
+  const address = await Address.findById(req.body.id);
+  const user = await User.findById(req.user.id);
+
+  if (address === null || !user.addresses.includes(address._id)) {
+    return next(new AppError("No address found with that ID", 404));
+  }
+
+  await Address.findByIdAndDelete(address._id);
+
+  res.status(204).json({
+    status: "success",
+    data: {
+      data: null,
+    },
+  });
+});
+
+exports.updateAddress = catchAsync(async (req, res, next) => {
+  /*  
+  #swagger.tags = ['Profile']
+  #swagger.parameters['body'] = {
+    in: 'body',
+    schema: {
+        id: '614ce88d8101e980a49f0427',
+        unitNumber: 101,
+        streetNumber: 123,
+        addressLine1: '123 Main Street',
+        addressLine2: 'Apt 101',
+        city: 'City1',
+        region: 'Region1',
+        postalCode: 12345,
+        vatID: 67890,
+        country: 'Country1',
+        type: 'Residential'
+    }
+}
+  */
+
+  const address = await Address.findById(req.body.id);
+  const user = await User.findById(req.user.id);
+
+  if (address === null || !user.addresses.includes(address._id)) {
+    return next(new AppError("No address found with that ID", 404));
+  }
+
+  // 3) Update user document
+  const updateAddress = await Address.findByIdAndUpdate(req.body.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: updateAddress,
+    },
+  });
+});
