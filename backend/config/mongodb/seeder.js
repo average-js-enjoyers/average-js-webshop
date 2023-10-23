@@ -41,7 +41,7 @@ const importData = async () => {
         region: address.region,
         postalCode: address.postalCode,
         vatID: address.vatID,
-        countryID: new mongoose.Types.ObjectId(address.countryID), // Assuming countryID is an ObjectId
+        countryID: address.country, // Assuming countryID is an ObjectId
         type: address.type,
       };
     });
@@ -53,7 +53,6 @@ const importData = async () => {
         emailAddress: user.emailAddress,
         phoneNumber: user.phoneNumber,
         password: user.password,
-        passwordConfirm: user.password,
         firstName: user.firstName,
         lastName: user.lastName,
         registrationDate: user.registrationDate,
