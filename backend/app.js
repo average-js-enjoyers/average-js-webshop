@@ -57,7 +57,6 @@ app.use((req, res, next) => {
 
 // 3) ROUTES
 app.use("/api/users", userRouter);
-app.use("/api/users", userRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

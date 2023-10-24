@@ -11,12 +11,6 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
-exports.getMe = (req, res, next) => {
-  // #swagger.tags = ['Profile']
-  req.params.id = req.user.id;
-  next();
-};
-
 exports.deleteMe = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
 
@@ -63,7 +57,9 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 });
 
 exports.getUser = catchAsync(async (req, res, next) => {
-  const user = await User.findOne({ _id: req.params.id })
+  // #swagger.tags = ['Profile']
+
+  const user = await User.findOne({ _id: req.user.id })
     .populate("addresses")
     .exec();
 
@@ -98,7 +94,7 @@ exports.createAddress = catchAsync(async (req, res, next) => {
                 }
         } */
 
-  const user = await User.findOne({ _id: req.params.id }).exec();
+  const user = await User.findOne({ _id: req.user.id }).exec();
 
   const newAddress = await Address.create({
     unitNumber: req.body.unitNumber,
@@ -116,12 +112,10 @@ exports.createAddress = catchAsync(async (req, res, next) => {
   user.addresses.push(newAddress._id);
   user.save();
 
-  await user.populate("addresses");
-
   res.status(200).json({
     status: "success",
     data: {
-      data: user,
+      data: newAddress,
     },
   });
 });
