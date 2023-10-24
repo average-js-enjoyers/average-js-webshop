@@ -16,7 +16,7 @@ const UserSchema = new Schema({
   phoneNumber: Number,
   password: {
     type: String,
-    required: [true, "Please provide a password"],
+    required: [false, "Please provide a password"],
     minlength: 8,
     select: false,
   },
@@ -25,11 +25,11 @@ const UserSchema = new Schema({
   passwordResetExpires: Date,
   firstName: {
     type: String,
-    required: [true, "Please tell us your first name!"],
+    required: [false, "Please tell us your first name!"],
   },
   lastName: {
     type: String,
-    required: [true, "Please tell us your last name!"],
+    required: [false, "Please tell us your last name!"],
   },
   profilePhoto: {
     type: mongoose.Schema.Types.ObjectId,

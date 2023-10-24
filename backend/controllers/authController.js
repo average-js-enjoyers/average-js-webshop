@@ -5,6 +5,7 @@ const User = require("../models/user.model");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
 const sendEmail = require("./../utils/email");
+const { google } = require("googleapis");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -86,8 +87,43 @@ exports.login = catchAsync(async (req, res, next) => {
   // 2) Check if user exists && password is correct
   const user = await User.findOne({ emailAddress }).select("+password");
 
-  if (!user || !(await user.correctPassword(password, user.password))) {
+  if (
+    !user ||
+    user.password === undefined ||
+    !(await user.correctPassword(password, user.password))
+  ) {
     return next(new AppError("Incorrect email or password", 401));
+  }
+
+  // 3) If everything ok, send token to client
+  createSendToken(user, 200, res);
+});
+
+exports.googleLogin = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+
+  const accessToken = req.query.token;
+
+  const oAuth2Client = new google.auth.OAuth2();
+
+  oAuth2Client.setCredentials({
+    access_token: accessToken,
+  });
+
+  // Now you can use the oAuth2Client to fetch user information
+  const oauth2 = google.oauth2({
+    auth: oAuth2Client,
+    version: "v2",
+  });
+
+  const userInfo = await oauth2.userinfo.get();
+
+  const emailAddress = userInfo.data.email;
+
+  let user = await User.findOne({ emailAddress });
+
+  if (!user) {
+    user = await User.create({ emailAddress });
   }
 
   // 3) If everything ok, send token to client
