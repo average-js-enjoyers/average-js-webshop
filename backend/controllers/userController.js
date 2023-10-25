@@ -2,16 +2,7 @@ const User = require("../models/user.model");
 const Address = require("../models/address.model");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
-const admin = require("firebase-admin");
-const serviceAccount = require("./../config/firebase/serviceAccountKey.json");
-const sharp = require("sharp");
-const path = require("path");
-const fs = require("fs");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: "gs://average-js-webshop.appspot.com",
-});
+const imageRepository = require("./../utils/imageRepository.js");
 
 exports.deletePhoto = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
@@ -46,56 +37,14 @@ exports.uploadPhoto = catchAsync(async (req, res, next) => {
     return res.status(400).json({ error: "No file uploaded" });
   }
 
-  const uploadedImage = req.file;
+  let uploadedImage = req.file;
+  const imgUrl = await imageRepository.create(uploadedImage, req.user.id);
+  await User.findByIdAndUpdate(req.user.id, { profilePhoto: imgUrl });
 
-  const imageBuffer = uploadedImage.path; // The image data
-
-  const processedImageBuffer = await sharp(imageBuffer)
-    .resize({ width: 800 })
-    .toBuffer();
-
-  const bucket = admin.storage().bucket();
-
-  const filePath = `profile-photos/${req.user.id}.jpg`;
-
-  const file = bucket.file(filePath);
-
-  // Stream the file to Firebase Storage
-  const fileStream = file.createWriteStream({
-    metadata: {
-      contentType: "image/jpeg", // Adjust the content type based on your file type
-    },
-    validation: "md5",
+  res.status(200).json({
+    message: "Image uploaded and overwritten successfully",
+    imageUrl: imgUrl,
   });
-
-  fileStream.on("error", (error) => {
-    fs.unlink(uploadedImage.path, (err) => {
-      if (err) {
-        console.error("Error deleting the uploaded file:", err);
-      }
-    });
-    res.status(500).json({ error: "Error uploading the image" });
-  });
-
-  fileStream.on("finish", () => {
-    const publicUrl = `https://storage.googleapis.com/${bucket.name}/${filePath}`;
-
-    fs.unlink(uploadedImage.path, (err) => {
-      if (err) {
-        console.error("Error deleting the uploaded file:", err);
-      }
-    });
-
-    User.findByIdAndUpdate(req.user.id, { profilePhoto: publicUrl }).exec();
-
-    res.status(200).json({
-      message: "Image uploaded and overwritten successfully",
-      imageUrl: publicUrl,
-    });
-  });
-
-  fileStream.write(processedImageBuffer);
-  fileStream.end();
 });
 
 const filterObj = (obj, ...allowedFields) => {
