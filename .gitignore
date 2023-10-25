@@ -133,3 +133,5 @@ swagger.js
 backend/config/swagger/swagger.json
 
 backend/config/firebase/serviceAccountKey.json
+
+backend/uploads
