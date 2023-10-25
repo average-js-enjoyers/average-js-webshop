@@ -31,10 +31,7 @@ const UserSchema = new Schema({
     type: String,
     required: [false, "Please tell us your last name!"],
   },
-  profilePhoto: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Image",
-  },
+  profilePhoto: String,
   registrationDate: {
     type: Date,
     default: Date.now,

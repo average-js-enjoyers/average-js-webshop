@@ -119,12 +119,20 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
 
   const userInfo = await oauth2.userinfo.get();
 
+  const firstName = userInfo.data.given_name;
+  const lastName = userInfo.data.family_name;
   const emailAddress = userInfo.data.email;
+  const profilePhoto = userInfo.data.picture;
 
   let user = await User.findOne({ emailAddress });
 
   if (!user) {
-    user = await User.create({ emailAddress });
+    user = await User.create({
+      emailAddress,
+      firstName,
+      lastName,
+      profilePhoto,
+    });
   }
 
   // 3) If everything ok, send token to client
