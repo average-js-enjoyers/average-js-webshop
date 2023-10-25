@@ -44,10 +44,10 @@ exports.create = async (uploadedImage, newfileName) => {
         console.error("Error deleting the uploaded file:", err);
       }
     });
-
-    return `https://storage.googleapis.com/${bucket.name}/${filePath}`;
   });
 
   fileStream.write(processedImageBuffer);
   fileStream.end();
+
+  return `https://storage.googleapis.com/${bucket.name}/${filePath}`;
 };
