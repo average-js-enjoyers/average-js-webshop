@@ -5,6 +5,8 @@ const User = require("../models/user.model");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
 const sendEmail = require("./../utils/email");
+const { google } = require("googleapis");
+const axios = require("axios");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -41,7 +43,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 
   const newUser = await User.create({
     firstName: req.body.firstName,
-    lastName: req.body.LastName,
+    lastName: req.body.lastName,
     emailAddress: req.body.emailAddress,
     phoneNumber: req.body.phoneNumber,
     password: req.body.password,
@@ -86,12 +88,82 @@ exports.login = catchAsync(async (req, res, next) => {
   // 2) Check if user exists && password is correct
   const user = await User.findOne({ emailAddress }).select("+password");
 
-  if (!user || !(await user.correctPassword(password, user.password))) {
+  if (
+    !user ||
+    user.password === undefined ||
+    !(await user.correctPassword(password, user.password))
+  ) {
     return next(new AppError("Incorrect email or password", 401));
   }
 
   // 3) If everything ok, send token to client
   createSendToken(user, 200, res);
+});
+
+exports.googleLogin = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+
+  const accessToken = req.query.token;
+
+  const oAuth2Client = new google.auth.OAuth2();
+
+  oAuth2Client.setCredentials({
+    access_token: accessToken,
+  });
+
+  // Now you can use the oAuth2Client to fetch user information
+  const oauth2 = google.oauth2({
+    auth: oAuth2Client,
+    version: "v2",
+  });
+
+  const userInfo = await oauth2.userinfo.get();
+
+  const firstName = userInfo.data.given_name;
+  const lastName = userInfo.data.family_name;
+  const emailAddress = userInfo.data.email;
+  const profilePhoto = userInfo.data.picture;
+
+  let user = await User.findOne({ emailAddress });
+
+  if (!user) {
+    user = await User.create({
+      emailAddress,
+      firstName,
+      lastName,
+      profilePhoto,
+    });
+  }
+
+  // 3) If everything ok, send token to client
+  createSendToken(user, 200, res);
+});
+
+exports.facebookLogin = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+
+  const accessToken = req.query.token;
+
+  const apiUrl = `https://graph.facebook.com/v18.0/me?fields=id,email,first_name,last_name&access_token=${accessToken}`;
+
+  const response = await axios.get(apiUrl);
+
+  const emailAddress = response.data.email;
+  const firstName = response.data.first_name;
+  const lastName = response.data.last_name;
+
+  let user = await User.findOne({ emailAddress });
+
+  if (!user) {
+    user = await User.create({ emailAddress, firstName, lastName });
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      data: user,
+    },
+  });
 });
 
 exports.protect = catchAsync(async (req, res, next) => {

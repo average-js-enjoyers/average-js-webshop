@@ -16,25 +16,32 @@ const UserSchema = new Schema({
   phoneNumber: Number,
   password: {
     type: String,
-    required: [true, "Please provide a password"],
-    minlength: 8,
+    required: [false, "Please provide a password"],
     select: false,
+    validate: [
+      (password) =>
+        validator.isStrongPassword(password, {
+          minLength: 8,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 1,
+          minSymbols: 0,
+        }),
+      "Please provide a valid password",
+    ],
   },
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
   firstName: {
     type: String,
-    required: [true, "Please tell us your first name!"],
+    required: [false, "Please tell us your first name!"],
   },
   lastName: {
     type: String,
-    required: [true, "Please tell us your last name!"],
+    required: [false, "Please tell us your last name!"],
   },
-  profilePhoto: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Image",
-  },
+  profilePhoto: String,
   registrationDate: {
     type: Date,
     default: Date.now,

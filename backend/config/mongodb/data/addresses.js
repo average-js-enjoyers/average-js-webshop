@@ -10,7 +10,7 @@ module.exports = [
     postalCode: 12345,
     vatID: 67890,
     country: "Country1",
-    type: "Residential",
+    type: "Both",
   },
   {
     _id: "614ce88d8101e980a49f0428", // Replace with a valid ObjectId
@@ -23,7 +23,7 @@ module.exports = [
     postalCode: 54321,
     vatID: 12345,
     country: "Country2",
-    type: "Commercial",
+    type: "Shipping",
   },
   {
     _id: "614ce88d8101e980a49f0429", // Replace with a valid ObjectId
@@ -36,7 +36,7 @@ module.exports = [
     postalCode: 98765,
     vatID: 54321,
     country: "Country3",
-    type: "Residential",
+    type: "Both",
   },
   {
     _id: "614ce88d8101e980a49f0430", // Replace with a valid ObjectId
@@ -49,7 +49,7 @@ module.exports = [
     postalCode: 23456,
     vatID: 98765,
     country: "Country4",
-    type: "Commercial",
+    type: "Shipping",
   },
   {
     _id: "614ce88d8101e980a49f0431", // Replace with a valid ObjectId
@@ -62,6 +62,6 @@ module.exports = [
     postalCode: 34567,
     vatID: 43210,
     country: "Country5",
-    type: "Residential",
+    type: "Billing",
   },
 ];

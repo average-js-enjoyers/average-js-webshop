@@ -2,6 +2,50 @@ const User = require("../models/user.model");
 const Address = require("../models/address.model");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
+const imageRepository = require("./../utils/imageRepository.js");
+
+exports.deletePhoto = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+
+  const defaultPhoto =
+    "https://storage.googleapis.com/profile-photos/default.png";
+
+  await User.findByIdAndUpdate(req.user.id, {
+    profilePhoto: defaultPhoto,
+  });
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      profilePhoto: defaultPhoto,
+    },
+  });
+});
+
+exports.uploadPhoto = catchAsync(async (req, res, next) => {
+  /*  
+  #swagger.tags = ['Profile']
+  #swagger.consumes = ['multipart/form-data']
+  #swagger.parameters[0] = {
+    name: 'image',
+    in: 'formData',
+    type: 'file',
+    required: true,
+    } */
+
+  if (!req.file) {
+    return res.status(400).json({ error: "No file uploaded" });
+  }
+
+  let uploadedImage = req.file;
+  const imgUrl = await imageRepository.create(uploadedImage, req.user.id);
+  await User.findByIdAndUpdate(req.user.id, { profilePhoto: imgUrl });
+
+  res.status(200).json({
+    message: "Image uploaded and overwritten successfully",
+    imageUrl: imgUrl,
+  });
+});
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -9,12 +53,6 @@ const filterObj = (obj, ...allowedFields) => {
     if (allowedFields.includes(el) && el) newObj[el] = obj[el];
   });
   return newObj;
-};
-
-exports.getMe = (req, res, next) => {
-  // #swagger.tags = ['Profile']
-  req.params.id = req.user.id;
-  next();
 };
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
@@ -63,7 +101,9 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 });
 
 exports.getUser = catchAsync(async (req, res, next) => {
-  const user = await User.findOne({ _id: req.params.id })
+  // #swagger.tags = ['Profile']
+
+  const user = await User.findOne({ _id: req.user.id })
     .populate("addresses")
     .exec();
 
@@ -98,7 +138,7 @@ exports.createAddress = catchAsync(async (req, res, next) => {
                 }
         } */
 
-  const user = await User.findOne({ _id: req.params.id }).exec();
+  const user = await User.findOne({ _id: req.user.id }).exec();
 
   const newAddress = await Address.create({
     unitNumber: req.body.unitNumber,
@@ -116,12 +156,10 @@ exports.createAddress = catchAsync(async (req, res, next) => {
   user.addresses.push(newAddress._id);
   user.save();
 
-  await user.populate("addresses");
-
   res.status(200).json({
     status: "success",
     data: {
-      data: user,
+      data: newAddress,
     },
   });
 });
