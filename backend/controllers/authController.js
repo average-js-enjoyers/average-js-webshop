@@ -144,13 +144,13 @@ exports.facebookLogin = catchAsync(async (req, res, next) => {
 
   const accessToken = req.query.token;
 
-  const apiUrl = `https://graph.facebook.com/v18.0/me?fields=id,name,email&access_token=${accessToken}`;
+  const apiUrl = `https://graph.facebook.com/v18.0/me?fields=id,email,first_name,last_name&access_token=${accessToken}`;
 
   const response = await axios.get(apiUrl);
 
   const emailAddress = response.data.email;
-  const firstName = response.data.name.split(" ")[0];
-  const lastName = response.data.name.split(" ")[1];
+  const firstName = response.data.first_name;
+  const lastName = response.data.last_name;
 
   let user = await User.findOne({ emailAddress });
 
