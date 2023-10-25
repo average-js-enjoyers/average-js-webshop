@@ -38,6 +38,23 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 
+exports.isExists = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+
+  const emailAddress = req.query.email;
+
+  const user = await User.findOne({ emailAddress });
+
+  const value = user !== null;
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      exists: value,
+    },
+  });
+});
+
 exports.signup = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 

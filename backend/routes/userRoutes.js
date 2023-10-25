@@ -13,6 +13,7 @@ router.post("/login/google", authController.googleLogin);
 router.post("/login/facebook", authController.facebookLogin);
 router.post("/forgotPassword", authController.forgotPassword);
 router.patch("/resetPassword/:token", authController.resetPassword);
+router.get("/isExists", authController.isExists);
 
 // Protect all routes after this middleware
 router.use(authController.protect);

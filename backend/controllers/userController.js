@@ -167,7 +167,7 @@ exports.createAddress = catchAsync(async (req, res, next) => {
 exports.deleteAddress = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
 
-  const address = await Address.findById(req.body.id);
+  const address = await Address.findById(req.query.id);
   const user = await User.findById(req.user.id);
 
   if (address === null || !user.addresses.includes(address._id)) {
