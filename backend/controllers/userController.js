@@ -13,6 +13,24 @@ admin.initializeApp({
   storageBucket: "gs://average-js-webshop.appspot.com",
 });
 
+exports.deletePhoto = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+
+  const defaultPhoto =
+    "https://storage.googleapis.com/profile-photos/default.png";
+
+  await User.findByIdAndUpdate(req.user.id, {
+    profilePhoto: defaultPhoto,
+  });
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      profilePhoto: defaultPhoto,
+    },
+  });
+});
+
 exports.uploadPhoto = catchAsync(async (req, res, next) => {
   /*  
   #swagger.tags = ['Profile']
@@ -67,6 +85,8 @@ exports.uploadPhoto = catchAsync(async (req, res, next) => {
         console.error("Error deleting the uploaded file:", err);
       }
     });
+
+    User.findByIdAndUpdate(req.user.id, { profilePhoto: publicUrl }).exec();
 
     res.status(200).json({
       message: "Image uploaded and overwritten successfully",
