@@ -2,7 +2,7 @@ const User = require("../models/user.model");
 const Address = require("../models/address.model");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
-const imageRepository = require("./../utils/imageRepository.js");
+const cdn = require("../utils/cdn.js");
 
 exports.deletePhoto = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
@@ -38,7 +38,7 @@ exports.uploadPhoto = catchAsync(async (req, res, next) => {
   }
 
   let uploadedImage = req.file;
-  const imgUrl = await imageRepository.create(uploadedImage, req.user.id);
+  const imgUrl = await cdn.create(uploadedImage, req.user.id);
   await User.findByIdAndUpdate(req.user.id, { profilePhoto: imgUrl });
 
   res.status(200).json({

@@ -92,7 +92,7 @@ exports.login = catchAsync(async (req, res, next) => {
                 description: 'Some description...',
                 schema: {
                     $emailAddress: 'user1@example.com',
-                    $password: 'password123',
+                    $password: 'Password123',
                 }
         } */
 
