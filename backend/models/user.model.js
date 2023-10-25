@@ -17,8 +17,18 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: [false, "Please provide a password"],
-    minlength: 8,
     select: false,
+    validate: [
+      (password) =>
+        validator.isStrongPassword(password, {
+          minLength: 8,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 1,
+          minSymbols: 0,
+        }),
+      "Please provide a valid password",
+    ],
   },
   passwordChangedAt: Date,
   passwordResetToken: String,
