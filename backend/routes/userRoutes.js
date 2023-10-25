@@ -2,6 +2,9 @@ const express = require("express");
 const userController = require("./../controllers/userController");
 const authController = require("./../controllers/authController");
 
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
 const router = express.Router();
 
 router.post("/signup", authController.signup);
@@ -17,6 +20,7 @@ router.get("/me", userController.getUser);
 router.patch("/me", userController.updateMe);
 router.delete("/me", userController.deleteMe);
 
+router.post("/me/photo", upload.single("image"), userController.uploadPhoto);
 router.patch("/me/password", authController.updatePassword);
 router.post("/me/address", userController.createAddress);
 router.patch("/me/address", userController.updateAddress);
