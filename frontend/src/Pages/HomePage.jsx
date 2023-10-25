@@ -6,16 +6,6 @@ const HomePage = () => (
   <div className="Layout">
     <nav>
       <li>
-        <Link to="/example2">
-          <Button variant="primary">Go To Example 2</Button>
-        </Link>
-      </li>
-      <li>
-        <Link to="/example">
-          <button type="button">example</button>
-        </Link>
-      </li>
-      <li>
         <Link to="/signup">
           <button type="button">Sign Up!</button>
         </Link>
@@ -25,6 +15,11 @@ const HomePage = () => (
           <Button variant="dark-outline" className="btn--compact">
             Go To UI Templates
           </Button>
+        </Link>
+      </li>
+      <li>
+        <Link to="/userdata">
+          <button type="button">Userdata!</button>
         </Link>
       </li>
     </nav>

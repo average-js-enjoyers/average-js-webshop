@@ -7,8 +7,6 @@ import "./assets/styles/css/index.css";
 
 import HomePage from "./Pages/HomePage";
 import ErrorPage from "./Pages/ErrorPage";
-import Example from "./Components/Example";
-import Example2 from "./Components/Example2";
 import UserCreator from "./Components/SignUpForm";
 import FAQ from "./Components/FAQ";
 
@@ -16,6 +14,7 @@ import Button from "react-bootstrap/Button";
 
 import ButtonTemplate from "./Components/templates/ButtonTemplate";
 import TypographyTemplate from "./Components/templates/TypographyTemplate";
+import UserModifier from "./Pages/UserModifier";
 
 const router = createBrowserRouter([
   {
@@ -24,20 +23,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/example",
-        element: <Button variant="primary">Go To Example</Button>,
-      },
-      {
-        path: "/example2",
-        element: <Example2 />,
-      },
-      {
         path: "/signup",
         element: <UserCreator />,
       },
       {
         path: "/faq",
         element: <FAQ />,
+      },
+      {
+        path: "/userdata",
+        element: <UserModifier />,
       },
       {
         path: "/ui-template",
