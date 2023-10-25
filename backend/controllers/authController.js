@@ -6,6 +6,7 @@ const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
 const sendEmail = require("./../utils/email");
 const { google } = require("googleapis");
+const axios = require("axios");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -128,6 +129,33 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
 
   // 3) If everything ok, send token to client
   createSendToken(user, 200, res);
+});
+
+exports.facebookLogin = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+
+  const accessToken = req.query.token;
+
+  const apiUrl = `https://graph.facebook.com/v18.0/me?fields=id,name,email&access_token=${accessToken}`;
+
+  const response = await axios.get(apiUrl);
+
+  const emailAddress = response.data.email;
+  const firstName = response.data.name.split(" ")[0];
+  const lastName = response.data.name.split(" ")[1];
+
+  let user = await User.findOne({ emailAddress });
+
+  if (!user) {
+    user = await User.create({ emailAddress, firstName, lastName });
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      data: user,
+    },
+  });
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
