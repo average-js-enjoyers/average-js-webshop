@@ -7,10 +7,8 @@ import "./assets/styles/css/index.css";
 
 import HomePage from "./Pages/HomePage";
 import ErrorPage from "./Pages/ErrorPage";
-import UserCreator from "./Components/SignUpForm";
+import UserCreator from "./Pages/UserCreator";
 import FAQ from "./Components/FAQ";
-
-import Button from "react-bootstrap/Button";
 
 import ButtonTemplate from "./Components/templates/ButtonTemplate";
 import TypographyTemplate from "./Components/templates/TypographyTemplate";

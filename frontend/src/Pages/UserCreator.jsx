@@ -1,9 +1,9 @@
-import SignUp from "../Components/SignUpForm";
+import SignUpForm from "../Components/SignUpForm";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const createUser = (user) => {
-  return fetch("DONTLEAVEMEHERE", {
+  return fetch("/api/users/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,15 +13,16 @@ const createUser = (user) => {
 };
 
 const UserCreator = () => {
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  console.log(loading);
 
   const handleSignUp = (user) => {
-    return setLoading(true);
+    console.log(user)
+    createUser(user).then(()=>{
+      console.log("this works");
+    })
+    
   };
 
-  return <SignUp onSignUp={handleSignUp} />;
+  return <SignUpForm onSignUp={handleSignUp} />;
 };
 
 export default UserCreator;
