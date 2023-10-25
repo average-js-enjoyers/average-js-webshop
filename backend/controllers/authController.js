@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
-const User = require("../models/siteUser.model");
+const User = require("../models/user.model");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
 const sendEmail = require("./../utils/email");
@@ -43,6 +43,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     firstName: req.body.firstName,
     lastName: req.body.LastName,
     emailAddress: req.body.emailAddress,
+    phoneNumber: req.body.phoneNumber,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
@@ -65,7 +66,16 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 exports.login = catchAsync(async (req, res, next) => {
+  /*  
   // #swagger.tags = ['Auth']
+  #swagger.parameters['body'] = {
+                in: 'body',
+                description: 'Some description...',
+                schema: {
+                    $emailAddress: 'user1@example.com',
+                    $password: 'password123',
+                }
+        } */
 
   const { emailAddress, password } = req.body;
 
@@ -148,16 +158,21 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     return next(new AppError("There is no user with email address.", 404));
   }
 
+  const resetCallback = req.get("Reset-URL");
+  if (!resetCallback) {
+    return next(
+      new AppError("There is no reset URL defined in the header.", 404)
+    );
+  }
+
   // 2) Generate the random reset token
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
 
   // 3) Send it to user's email
-  const resetURL = `${req.protocol}://${req.get(
-    "host"
-  )}/api/users/resetPassword/${resetToken}`;
+  const resetURL = `${resetCallback}/${resetToken}`;
 
-  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
+  const message = `Forgot your password? Click here to reset your password: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
 
   try {
     await sendEmail({

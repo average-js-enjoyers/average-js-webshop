@@ -17,16 +17,16 @@ const app = express();
 
 app.use(cors());
 
-app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+  app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+}
 
 // 1) GLOBAL MIDDLEWARES
 // Set security HTTP headers
 app.use(helmet());
 
 // Development logging
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-}
 
 // Limit requests from same API
 const limiter = rateLimit({
@@ -56,6 +56,7 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
+app.use("/api/users", userRouter);
 app.use("/api/users", userRouter);
 
 app.all("*", (req, res, next) => {

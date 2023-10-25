@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 
 const { Schema } = mongoose;
 
-const SiteUserSchema = new Schema({
+const UserSchema = new Schema({
   emailAddress: {
     type: String,
     required: [true, "Please provide your email"],
@@ -19,17 +19,6 @@ const SiteUserSchema = new Schema({
     required: [true, "Please provide a password"],
     minlength: 8,
     select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, "Please confirm your password"],
-    validate: {
-      // This only works on CREATE and SAVE!!!
-      validator: function (el) {
-        return el === this.password;
-      },
-      message: "Passwords are not the same!",
-    },
   },
   passwordChangedAt: Date,
   passwordResetToken: String,
@@ -62,41 +51,45 @@ const SiteUserSchema = new Schema({
     default: true,
     select: false,
   },
+  addresses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Address",
+    },
+  ],
 });
 
-SiteUserSchema.pre("save", async function (next) {
+UserSchema.pre("save", async function (next) {
   // Only run this function if password was actually modified
   if (!this.isModified("password")) return next();
 
   // Hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12);
 
-  // Delete passwordConfirm field
-  this.passwordConfirm = undefined;
   next();
 });
 
-SiteUserSchema.pre("save", function (next) {
+UserSchema.pre("save", function (next) {
   if (!this.isModified("password") || this.isNew) return next();
 
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
-SiteUserSchema.pre(/^find/, function (next) {
+UserSchema.pre(/^find/, function (next) {
   // this points to the current query
   this.find({ active: { $ne: false } });
   next();
 });
 
-SiteUserSchema.methods.correctPassword = async function (
+UserSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-SiteUserSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+UserSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
@@ -110,7 +103,7 @@ SiteUserSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   return false;
 };
 
-SiteUserSchema.methods.createPasswordResetToken = function () {
+UserSchema.methods.createPasswordResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString("hex");
 
   this.passwordResetToken = crypto
@@ -125,4 +118,4 @@ SiteUserSchema.methods.createPasswordResetToken = function () {
   return resetToken;
 };
 
-module.exports = mongoose.model("SiteUser", SiteUserSchema);
+module.exports = mongoose.model("User", UserSchema);
