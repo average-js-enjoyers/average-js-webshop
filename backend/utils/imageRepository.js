@@ -13,7 +13,7 @@ exports.create = async (uploadedImage, newfileName) => {
   const imageBuffer = uploadedImage.path; // The image data
 
   const processedImageBuffer = await sharp(imageBuffer)
-    .resize({ width: 800 })
+    .resize({ width: 400 })
     .toBuffer();
 
   const bucket = admin.storage().bucket();
