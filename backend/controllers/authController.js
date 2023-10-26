@@ -80,7 +80,7 @@ exports.confirmEmail = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
-exports.requestEmailConfirm = catchAsync(async (req, res, next) => {
+exports.requestEmailLogin = catchAsync(async (req, res, next) => {
   /*  
   // #swagger.tags = ['Auth']
    #swagger.parameters['body'] = {
@@ -109,7 +109,6 @@ exports.requestEmailConfirm = catchAsync(async (req, res, next) => {
     );
   }
 
-  console.log(user.emailConfirmed);
   if (user.emailConfirmed) {
     return next(new AppError("This email has already been confirmed!", 400));
   }
@@ -123,12 +122,10 @@ exports.requestEmailConfirm = catchAsync(async (req, res, next) => {
   }
 
   // 2) Generate the random reset token
-  const confirmToken = user.createEmailConfirmationToken();
-
-  await user.save({ validateBeforeSave: false });
+  const token = signToken(user._id);
 
   // 3) Send it to user's email
-  const confirmURL = `${confirmCallback}/${confirmToken}`;
+  const confirmURL = `${confirmCallback}/${token}`;
 
   const message = `Welcome to Average JS Webshop! We are thrilled to have you as a new member of our online community. Thank you for choosing us for your shopping needs. Click here to confirm your email: ${confirmURL}.`;
 
@@ -143,10 +140,6 @@ exports.requestEmailConfirm = catchAsync(async (req, res, next) => {
       message: "Token sent to email!",
     });
   } catch (err) {
-    user.emailConfirmationToken = undefined;
-    user.emailConfirmationExpires = undefined;
-    await user.save({ validateBeforeSave: false });
-
     return next(
       new AppError("There was an error sending the email. Try again later!"),
       500
@@ -216,15 +209,6 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Incorrect email or password", 401));
   }
 
-  if (!user.emailConfirmed) {
-    return next(
-      new AppError(
-        "Email confirmation is required. Send a POST request to api/users/email/request",
-        401
-      )
-    );
-  }
-
   // 3) If everything ok, send token to client
   createSendToken(user, 200, res);
 });
@@ -261,13 +245,8 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
       firstName,
       lastName,
       profilePhoto,
-      emailConfirmed: true,
+      externalAuth: true,
     });
-  }
-
-  if (!user.emailConfirmed) {
-    user.emailConfirmed = true;
-    user.save();
   }
 
   // 3) If everything ok, send token to client
@@ -294,13 +273,8 @@ exports.facebookLogin = catchAsync(async (req, res, next) => {
       emailAddress,
       firstName,
       lastName,
-      emailConfirmed: true,
+      externalAuth: true,
     });
-  }
-
-  if (!user.emailConfirmed) {
-    user.emailConfirmed = true;
-    user.save();
   }
 
   // 3) If everything ok, send token to client

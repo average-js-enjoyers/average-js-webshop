@@ -40,8 +40,6 @@ const UserSchema = new Schema({
     select: true,
   },
   emailConfirmedAt: Date,
-  emailConfirmationToken: String,
-  emailConfirmationExpires: Date,
   firstName: {
     type: String,
     required: [false, "Please tell us your first name!"],
@@ -66,6 +64,11 @@ const UserSchema = new Schema({
     type: Boolean,
     default: true,
     select: false,
+  },
+  externalAuth: {
+    type: Boolean,
+    default: false,
+    select: true,
   },
   addresses: [
     {
@@ -139,21 +142,6 @@ UserSchema.methods.createPasswordResetToken = function () {
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;
-};
-
-UserSchema.methods.createEmailConfirmationToken = function () {
-  const confirmToken = crypto.randomBytes(32).toString("hex");
-
-  this.emailConfirmationToken = crypto
-    .createHash("sha256")
-    .update(confirmToken)
-    .digest("hex");
-
-  console.log({ confirmToken: confirmToken }, this.emailConfirmationToken);
-
-  this.emailConfirmationExpires = Date.now() + 10 * 60 * 1000;
-
-  return confirmToken;
 };
 
 module.exports = mongoose.model("User", UserSchema);

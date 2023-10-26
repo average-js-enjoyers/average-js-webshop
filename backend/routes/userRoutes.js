@@ -7,15 +7,17 @@ const router = express.Router();
 
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);
+router.post("/login/email", authController.requestEmailLogin);
 router.post("/login/google/:token", authController.googleLogin);
 router.post("/login/facebook/:token", authController.facebookLogin);
 router.post("/forgotPassword", authController.forgotPassword);
 router.patch("/resetPassword/:token", authController.resetPassword);
 router.get("/email/exists", authController.isExists);
-router.post("/email/confirm/:token", authController.confirmEmail);
-router.post("/email/request", authController.requestEmailConfirm);
 
 // Protect all routes after this middleware
+router.use(authController.protect);
+router.post("/me/onboard", userController.onboard);
+router.use(userController.checkOnboard);
 router.get("/me", userController.getUser);
 router.patch("/me", userController.updateMe);
 router.delete("/me", userController.deleteMe);

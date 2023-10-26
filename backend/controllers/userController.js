@@ -4,6 +4,59 @@ const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
 const cdn = require("../utils/cdn.js");
 
+exports.onboard = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+  const { firstName, lastName, phoneNumber } = req.body;
+
+  if (!firstName || !lastName || !phoneNumber) {
+    return next(
+      new AppError("Please provide first name, last name, phone number!", 400)
+    );
+  }
+
+  const user = await User.findById(req.user.id);
+  user.firstName = firstName;
+  user.lastName = lastName;
+  user.phoneNumber = phoneNumber;
+
+  const { password, passwordConfirm } = req.body;
+
+  if (!user.externalAuth) {
+    if (!password || !passwordConfirm) {
+      return next(
+        new AppError("Please provide password, passwordConfirm!", 400)
+      );
+    }
+    user.password = password;
+    user.passwordConfirm = passwordConfirm;
+  }
+
+  user.emailConfirmed = true;
+  user.save();
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      message: "You are now onboarded!",
+    },
+  });
+});
+
+exports.checkOnboard = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  if (!user.emailConfirmed) {
+    return next(
+      new AppError(
+        "You haven't finished on boarding process. Please send a POST request to api/users/me/onboard",
+        401
+      )
+    );
+  }
+
+  next();
+});
+
 exports.deletePhoto = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
 
