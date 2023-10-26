@@ -41,7 +41,7 @@ const createSendToken = (user, statusCode, res) => {
 exports.isExists = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
-  const emailAddress = req.query.email;
+  const emailAddress = req.body.email;
 
   const user = await User.findOne({ emailAddress });
 
@@ -55,33 +55,142 @@ exports.isExists = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.signup = catchAsync(async (req, res, next) => {
+exports.confirmEmail = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
-  const newUser = await User.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    emailAddress: req.body.emailAddress,
-    phoneNumber: req.body.phoneNumber,
-    password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    emailConfirmationToken: hashedToken,
+    emailConfirmationExpires: { $gt: Date.now() },
   });
+
+  if (!user) {
+    return next(new AppError("Token is invalid or has expired", 400));
+  }
+
+  user.emailConfirmed = true;
+  user.emailConfirmationToken = undefined;
+  user.emailConfirmationExpires = undefined;
+  await user.save();
+
+  createSendToken(user, 200, res);
+});
+
+exports.requestEmailConfirm = catchAsync(async (req, res, next) => {
+  /*  
+  // #swagger.tags = ['Auth']
+   #swagger.parameters['body'] = {
+                in: 'body',
+                schema: {
+                    $emailAddress: 'example@example.com'
+                }
+              }
+  #swagger.parameters['Confirmation-URL'] = {
+                in: 'header',
+                type: 'string'
+        } */
+
+  const emailAddress = req.body.emailAddress;
+
+  // 1) Check if email and password exist
+  if (!emailAddress) {
+    return next(new AppError("Please provide email!", 400));
+  }
+
+  const user = await User.findOne({ emailAddress });
+
+  if (!user) {
+    return next(
+      new AppError("There is no user associated with this email!", 400)
+    );
+  }
+
+  console.log(user.emailConfirmed);
+  if (user.emailConfirmed) {
+    return next(new AppError("This email has already been confirmed!", 400));
+  }
+
+  const confirmCallback = req.get("Confirmation-URL");
+
+  if (!confirmCallback) {
+    return next(
+      new AppError("There is no confirmation URL defined in the header.", 404)
+    );
+  }
+
+  // 2) Generate the random reset token
+  const confirmToken = user.createEmailConfirmationToken();
+
+  await user.save({ validateBeforeSave: false });
+
+  // 3) Send it to user's email
+  const confirmURL = `${confirmCallback}/${confirmToken}`;
+
+  const message = `Welcome to Average JS Webshop! We are thrilled to have you as a new member of our online community. Thank you for choosing us for your shopping needs. Click here to confirm your email: ${confirmURL}.`;
 
   try {
     await sendEmail({
-      emailAddress: newUser.emailAddress,
-      subject: "Welcome to Average JS Webshop",
-      message:
-        "Welcome to Average JS Webshop! We are thrilled to have you as a new member of our online community. Thank you for choosing us for your shopping needs.",
+      emailAddress: user.emailAddress,
+      subject: "(AJSE) Email confirmation",
+      message: message,
+    });
+    res.status(200).json({
+      status: "success",
+      message: "Token sent to email!",
     });
   } catch (err) {
+    user.emailConfirmationToken = undefined;
+    user.emailConfirmationExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+
     return next(
       new AppError("There was an error sending the email. Try again later!"),
       500
     );
   }
+});
 
-  createSendToken(newUser, 201, res);
+exports.signup = catchAsync(async (req, res, next) => {
+  /*  
+  // #swagger.tags = ['Auth']
+  #swagger.parameters['body'] = {
+                in: 'body',
+                schema: {
+                    $emailAddress: 'example@example.com',
+                    $password: 'Password123',
+                    $passwordConfirm: 'Password123',
+                }
+  } */
+
+  const { emailAddress, password, passwordConfirm } = req.body;
+
+  // 1) Check if email and password exist
+  if (!emailAddress || !password || !passwordConfirm) {
+    return next(
+      new AppError("Please provide email,password and passwordConfirm !", 400)
+    );
+  }
+
+  const newUser = await User.create({
+    emailAddress: req.body.emailAddress,
+    password: req.body.password,
+    passwordConfirm: req.body.passwordConfirm,
+  });
+
+  newUser.password = undefined;
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      message:
+        "Email confirmation is required. Send a POST request to api/users/email/request",
+      data: newUser,
+    },
+  });
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -120,7 +229,7 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.googleLogin = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
-  const accessToken = req.query.token;
+  const accessToken = req.params.token;
 
   const oAuth2Client = new google.auth.OAuth2();
 
@@ -149,7 +258,13 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
       firstName,
       lastName,
       profilePhoto,
+      emailConfirmed: true,
     });
+  }
+
+  if (!user.emailConfirmed) {
+    user.emailConfirmed = true;
+    user.save();
   }
 
   // 3) If everything ok, send token to client
@@ -159,7 +274,7 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
 exports.facebookLogin = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
-  const accessToken = req.query.token;
+  const accessToken = req.params.token;
 
   const apiUrl = `https://graph.facebook.com/v18.0/me?fields=id,email,first_name,last_name&access_token=${accessToken}`;
 
@@ -172,15 +287,21 @@ exports.facebookLogin = catchAsync(async (req, res, next) => {
   let user = await User.findOne({ emailAddress });
 
   if (!user) {
-    user = await User.create({ emailAddress, firstName, lastName });
+    user = await User.create({
+      emailAddress,
+      firstName,
+      lastName,
+      emailConfirmed: true,
+    });
   }
 
-  res.status(200).json({
-    status: "success",
-    data: {
-      data: user,
-    },
-  });
+  if (!user.emailConfirmed) {
+    user.emailConfirmed = true;
+    user.save();
+  }
+
+  // 3) If everything ok, send token to client
+  createSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {

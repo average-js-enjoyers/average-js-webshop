@@ -33,6 +33,15 @@ const UserSchema = new Schema({
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
+  passwordChangedAt: Date,
+  emailConfirmed: {
+    type: Boolean,
+    default: false,
+    select: true,
+  },
+  emailConfirmedAt: Date,
+  emailConfirmationToken: String,
+  emailConfirmationExpires: Date,
   firstName: {
     type: String,
     required: [false, "Please tell us your first name!"],
@@ -83,6 +92,13 @@ UserSchema.pre("save", function (next) {
   next();
 });
 
+UserSchema.pre("save", function (next) {
+  if (!this.isModified("emailConfirmed") || this.isNew) return next();
+
+  this.emailConfirmedAt = Date.now() - 1000;
+  next();
+});
+
 UserSchema.pre(/^find/, function (next) {
   // this points to the current query
   this.find({ active: { $ne: false } });
@@ -123,6 +139,21 @@ UserSchema.methods.createPasswordResetToken = function () {
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;
+};
+
+UserSchema.methods.createEmailConfirmationToken = function () {
+  const confirmToken = crypto.randomBytes(32).toString("hex");
+
+  this.emailConfirmationToken = crypto
+    .createHash("sha256")
+    .update(confirmToken)
+    .digest("hex");
+
+  console.log({ confirmToken: confirmToken }, this.emailConfirmationToken);
+
+  this.emailConfirmationExpires = Date.now() + 10 * 60 * 1000;
+
+  return confirmToken;
 };
 
 module.exports = mongoose.model("User", UserSchema);
