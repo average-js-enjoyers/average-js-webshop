@@ -166,22 +166,16 @@ exports.signup = catchAsync(async (req, res, next) => {
                 }
   } */
 
-  const { emailAddress, password, passwordConfirm } = req.body;
+  const { emailAddress } = req.body;
 
   // 1) Check if email and password exist
-  if (!emailAddress || !password || !passwordConfirm) {
-    return next(
-      new AppError("Please provide email,password and passwordConfirm !", 400)
-    );
+  if (!emailAddress) {
+    return next(new AppError("Please provide email!", 400));
   }
 
   const newUser = await User.create({
     emailAddress: req.body.emailAddress,
-    password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
   });
-
-  newUser.password = undefined;
 
   res.status(200).json({
     status: "success",
@@ -220,6 +214,15 @@ exports.login = catchAsync(async (req, res, next) => {
     !(await user.correctPassword(password, user.password))
   ) {
     return next(new AppError("Incorrect email or password", 401));
+  }
+
+  if (!user.emailConfirmed) {
+    return next(
+      new AppError(
+        "Email confirmation is required. Send a POST request to api/users/email/request",
+        401
+      )
+    );
   }
 
   // 3) If everything ok, send token to client

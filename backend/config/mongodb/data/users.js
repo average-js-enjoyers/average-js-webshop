@@ -10,6 +10,7 @@ module.exports = [
     role: "user",
     twoFactorEnabled: true,
     active: true,
+    emailConfirmed: true,
     addresses: [
       "614ce88d8101e980a49f0427", // Reference the address ID
     ],
@@ -25,6 +26,7 @@ module.exports = [
     role: "user",
     twoFactorEnabled: false,
     active: true,
+    emailConfirmed: true,
     addresses: [
       "614ce88d8101e980a49f0428", // Reference the address ID
     ],
@@ -40,6 +42,7 @@ module.exports = [
     role: "admin",
     twoFactorEnabled: true,
     active: true,
+    emailConfirmed: true,
     addresses: [
       "614ce88d8101e980a49f0429", // Reference the address ID
     ],
@@ -55,6 +58,7 @@ module.exports = [
     role: "user",
     twoFactorEnabled: true,
     active: true,
+    emailConfirmed: true,
     addresses: [
       "614ce88d8101e980a49f0430", // Reference the address ID
     ],
@@ -70,6 +74,7 @@ module.exports = [
     role: "user",
     twoFactorEnabled: false,
     active: false,
+    emailConfirmed: true,
     addresses: [
       "614ce88d8101e980a49f0431", // Reference the address ID
     ],

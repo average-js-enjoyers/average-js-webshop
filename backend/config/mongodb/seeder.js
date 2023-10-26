@@ -60,6 +60,7 @@ const importData = async () => {
         twoFactorEnabled: user.twoFactorEnabled,
         active: user.active,
         addresses: user.addresses,
+        emailConfirmed: user.emailConfirmed,
       };
     });
 

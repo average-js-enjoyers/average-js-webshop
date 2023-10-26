@@ -16,7 +16,6 @@ router.post("/email/confirm/:token", authController.confirmEmail);
 router.post("/email/request", authController.requestEmailConfirm);
 
 // Protect all routes after this middleware
-router.use(authController.protect);
 router.get("/me", userController.getUser);
 router.patch("/me", userController.updateMe);
 router.delete("/me", userController.deleteMe);
