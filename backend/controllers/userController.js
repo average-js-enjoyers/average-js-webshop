@@ -1,21 +1,89 @@
-const User = require("../models/user.model");
-const Address = require("../models/address.model");
-const catchAsync = require("./../utils/catchAsync");
-const AppError = require("./../utils/appError");
-const imageRepository = require("./../utils/imageRepository.js");
+const { validationResult } = require('express-validator');
+const User = require('../models/user.model');
+const Address = require('../models/address.model');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
+const cdn = require('../utils/cdn');
+const jwtHandler = require('../utils/jwtHandler');
+
+exports.onboard = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+    //return next(new AppError(errors.array(), 400));
+  }
+
+  const { firstName, lastName, phoneNumber } = req.body;
+
+  // if (
+  //   !firstName ||
+  //   !lastName ||
+  //   !phoneNumber ||
+  //   typeof phoneNumber !== 'number'
+  // ) {
+  //   return next(
+  //     new AppError('Please provide first name, last name, phone number!', 400),
+  //   );
+  // }
+
+  const user = await User.findById(req.user.id);
+  user.firstName = firstName;
+  user.lastName = lastName;
+  user.phoneNumber = phoneNumber;
+
+  const { password, passwordConfirm } = req.body;
+
+  if (!user.externalAuth) {
+    if (!password || !passwordConfirm) {
+      return next(
+        new AppError('Please provide password, passwordConfirm!', 400),
+      );
+    }
+    user.password = password;
+    user.passwordConfirm = passwordConfirm;
+  }
+
+  user.emailConfirmed = true;
+  user.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      message: 'You are now onboarded!',
+    },
+  });
+});
+
+exports.checkOnboard = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  if (!user.emailConfirmed) {
+    return next(
+      new AppError(
+        "You haven't finished on boarding process. Please send a POST request to api/users/me/onboard",
+        401,
+      ),
+    );
+  }
+
+  next();
+});
 
 exports.deletePhoto = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
 
   const defaultPhoto =
-    "https://storage.googleapis.com/profile-photos/default.png";
+    'https://storage.googleapis.com/profile-photos/default.png';
 
   await User.findByIdAndUpdate(req.user.id, {
     profilePhoto: defaultPhoto,
   });
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       profilePhoto: defaultPhoto,
     },
@@ -34,15 +102,15 @@ exports.uploadPhoto = catchAsync(async (req, res, next) => {
     } */
 
   if (!req.file) {
-    return res.status(400).json({ error: "No file uploaded" });
+    return res.status(400).json({ error: 'No file uploaded' });
   }
 
-  let uploadedImage = req.file;
-  const imgUrl = await imageRepository.create(uploadedImage, req.user.id);
+  const uploadedImage = req.file;
+  const imgUrl = await cdn.create(uploadedImage, req.user.id);
   await User.findByIdAndUpdate(req.user.id, { profilePhoto: imgUrl });
 
   res.status(200).json({
-    message: "Image uploaded and overwritten successfully",
+    message: 'Image uploaded and overwritten successfully',
     imageUrl: imgUrl,
   });
 });
@@ -61,7 +129,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user.id, { active: false });
 
   res.status(204).json({
-    status: "success",
+    status: 'success',
     data: null,
   });
 });
@@ -81,9 +149,9 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
   const filteredBody = filterObj(
     req.body,
-    "firstName",
-    "lastName",
-    "phoneNumber"
+    'firstName',
+    'lastName',
+    'phoneNumber',
   );
 
   // 3) Update user document
@@ -93,7 +161,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user: updatedUser,
     },
@@ -103,18 +171,32 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 exports.getUser = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
 
-  const user = await User.findOne({ _id: req.user.id })
-    .populate("addresses")
-    .exec();
+  const user = await User.findOne({ _id: req.user.id });
+  user.addresses = undefined;
 
   if (!user) {
-    return next(new AppError("No user found with that ID", 404));
+    return next(new AppError('No user found with that ID', 404));
   }
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       data: user,
+    },
+  });
+});
+
+exports.getAllAddress = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+
+  const { addresses } = await User.findOne({ _id: req.user.id }).populate(
+    'addresses',
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: addresses,
     },
   });
 });
@@ -128,13 +210,12 @@ exports.createAddress = catchAsync(async (req, res, next) => {
                     $unitNumber: '12345',
                     $streetNumber: '12343',
                     $addressLine1: 'Rabbit street',
-                    $addressLine1: '',
                     $city: 'New York',
                     $region: 'EAST COAST',
                     $postalCode: '2483',
                     $vatID: '6326434',
                     $country: 'US',
-                    $type: 'Commercial',
+                    $type: 'Both',
                 }
         } */
 
@@ -149,7 +230,7 @@ exports.createAddress = catchAsync(async (req, res, next) => {
     region: req.body.region,
     postalCode: req.body.postalCode,
     vatID: req.body.vatID,
-    countryID: req.body.country, // Assuming countryID is an ObjectId
+    country: req.body.country,
     type: req.body.type,
   });
 
@@ -157,7 +238,7 @@ exports.createAddress = catchAsync(async (req, res, next) => {
   user.save();
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       data: newAddress,
     },
@@ -167,17 +248,17 @@ exports.createAddress = catchAsync(async (req, res, next) => {
 exports.deleteAddress = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
 
-  const address = await Address.findById(req.body.id);
+  const address = await Address.findById(req.query.id);
   const user = await User.findById(req.user.id);
 
   if (address === null || !user.addresses.includes(address._id)) {
-    return next(new AppError("No address found with that ID", 404));
+    return next(new AppError('No address found with that ID', 404));
   }
 
   await Address.findByIdAndDelete(address._id);
 
   res.status(204).json({
-    status: "success",
+    status: 'success',
     data: {
       data: null,
     },
@@ -209,7 +290,7 @@ exports.updateAddress = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
   if (address === null || !user.addresses.includes(address._id)) {
-    return next(new AppError("No address found with that ID", 404));
+    return next(new AppError('No address found with that ID', 404));
   }
 
   // 3) Update user document
@@ -219,9 +300,30 @@ exports.updateAddress = catchAsync(async (req, res, next) => {
   });
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user: updateAddress,
     },
   });
+});
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+
+  // 1) Get user from collection
+  const user = await User.findById(req.user.id).select('+password');
+
+  // 2) Check if POSTed current password is correct
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(new AppError('Your current password is wrong.', 401));
+  }
+
+  // 3) If so, update password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+  // User.findByIdAndUpdate will NOT work as intended!
+
+  // 4) Log user in, send JWT
+  jwtHandler.createSendToken(user, 200, res);
 });
