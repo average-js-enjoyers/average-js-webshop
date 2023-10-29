@@ -4,6 +4,7 @@ const Address = require('../models/address.model');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const cdn = require('../utils/cdn');
+const jwtHandler = require('../utils/jwtHandler');
 
 exports.onboard = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
@@ -305,4 +306,25 @@ exports.updateAddress = catchAsync(async (req, res, next) => {
       user: updateAddress,
     },
   });
+});
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+
+  // 1) Get user from collection
+  const user = await User.findById(req.user.id).select('+password');
+
+  // 2) Check if POSTed current password is correct
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(new AppError('Your current password is wrong.', 401));
+  }
+
+  // 3) If so, update password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+  // User.findByIdAndUpdate will NOT work as intended!
+
+  // 4) Log user in, send JWT
+  jwtHandler.createSendToken(user, 200, res);
 });

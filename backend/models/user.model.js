@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const passwordRules = require('../config/mongodb/passwordRules');
 
 const { Schema } = mongoose;
 
@@ -19,14 +20,7 @@ const UserSchema = new Schema({
     required: [false, 'Please provide a password'],
     select: false,
     validate: [
-      (password) =>
-        validator.isStrongPassword(password, {
-          minLength: 8,
-          minLowercase: 1,
-          minUppercase: 1,
-          minNumbers: 1,
-          minSymbols: 0,
-        }),
+      (password) => validator.isStrongPassword(password, passwordRules),
       'Please provide a valid password',
     ],
   },

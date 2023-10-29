@@ -11,6 +11,7 @@ const swaggerUi = require('swagger-ui-express');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const userRouter = require('./routes/userRoutes');
+const authRouter = require('./routes/authRoutes');
 
 const swaggerDocument = require('./config/swagger/swagger.json');
 
@@ -60,6 +61,7 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
+app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 
 app.all('*', (req, res, next) => {

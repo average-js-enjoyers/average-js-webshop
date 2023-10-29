@@ -1,41 +1,12 @@
-const crypto = require('crypto');
-const { promisify } = require('util');
-const jwt = require('jsonwebtoken');
 const { google } = require('googleapis');
 const axios = require('axios');
+const { promisify } = require('util');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
-
-const signToken = (id) =>
-  jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-
-const createSendToken = (user, statusCode, res) => {
-  const token = signToken(user._id);
-  const cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
-    ),
-    httpOnly: true,
-  };
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-
-  res.cookie('jwt', token, cookieOptions);
-
-  // Remove password from output
-  user.password = undefined;
-
-  res.status(statusCode).json({
-    status: 'success',
-    token,
-    data: {
-      user,
-    },
-  });
-};
+const jwtHandler = require('../utils/jwtHandler');
 
 exports.isExists = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
@@ -76,7 +47,7 @@ exports.confirmEmail = catchAsync(async (req, res, next) => {
   user.emailConfirmationExpires = undefined;
   await user.save();
 
-  createSendToken(user, 200, res);
+  jwtHandler.createSendToken(user, 200, res);
 });
 
 exports.requestEmailLogin = catchAsync(async (req, res, next) => {
@@ -95,11 +66,6 @@ exports.requestEmailLogin = catchAsync(async (req, res, next) => {
 
   const { emailAddress } = req.body;
 
-  // 1) Check if email and password exist
-  if (!emailAddress) {
-    return next(new AppError('Please provide email!', 400));
-  }
-
   const user = await User.findOne({ emailAddress });
 
   if (!user) {
@@ -114,14 +80,8 @@ exports.requestEmailLogin = catchAsync(async (req, res, next) => {
 
   const confirmCallback = req.get('Confirmation-URL');
 
-  if (!confirmCallback) {
-    return next(
-      new AppError('There is no confirmation URL defined in the header.', 404),
-    );
-  }
-
   // 2) Generate the random reset token
-  const token = signToken(user._id);
+  const token = jwtHandler.signToken(user._id);
 
   // 3) Send it to user's email
   const confirmURL = `${confirmCallback}/${token}`;
@@ -152,28 +112,19 @@ exports.signup = catchAsync(async (req, res, next) => {
   #swagger.parameters['body'] = {
                 in: 'body',
                 schema: {
-                    $emailAddress: 'example@example.com',
-                    $password: 'Password123',
-                    $passwordConfirm: 'Password123',
+                    $emailAddress: 'example@example.com'
                 }
   } */
 
   const { emailAddress } = req.body;
 
-  // 1) Check if email and password exist
-  if (!emailAddress) {
-    return next(new AppError('Please provide email!', 400));
-  }
-
-  const newUser = await User.create({
-    emailAddress: req.body.emailAddress,
-  });
+  const newUser = await User.create({ emailAddress });
 
   res.status(200).json({
     status: 'success',
     data: {
       message:
-        'Email confirmation is required. Send a POST request to api/users/email/request',
+        'Email confirmation is required. Send a POST request to api/users/login/email',
       data: newUser,
     },
   });
@@ -193,10 +144,6 @@ exports.login = catchAsync(async (req, res, next) => {
 
   const { emailAddress, password } = req.body;
 
-  // 1) Check if email and password exist
-  if (!emailAddress || !password) {
-    return next(new AppError('Please provide email and password!', 400));
-  }
   // 2) Check if user exists && password is correct
   const user = await User.findOne({ emailAddress }).select('+password');
 
@@ -209,7 +156,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 3) If everything ok, send token to client
-  createSendToken(user, 200, res);
+  jwtHandler.createSendToken(user, 200, res);
 });
 
 exports.googleLogin = catchAsync(async (req, res, next) => {
@@ -249,7 +196,7 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
   }
 
   // 3) If everything ok, send token to client
-  createSendToken(user, 200, res);
+  jwtHandler.createSendToken(user, 200, res);
 });
 
 exports.facebookLogin = catchAsync(async (req, res, next) => {
@@ -277,7 +224,7 @@ exports.facebookLogin = catchAsync(async (req, res, next) => {
   }
 
   // 3) If everything ok, send token to client
-  createSendToken(user, 200, res);
+  jwtHandler.createSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -336,20 +283,26 @@ exports.restrictTo =
   };
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
+  /*  
   // #swagger.tags = ['Auth']
+  #swagger.parameters['body'] = {
+                in: 'body',
+                schema: {
+                    $emailAddress: 'user1@example.com'
+                }
+              }
+  #swagger.parameters['Reset-URL'] = {
+                in: 'header',
+                type: 'string',
+                schema: 'http://localhost:3000/callback/'
+        } */
 
-  // 1) Get user based on POSTed email
   const user = await User.findOne({ emailAddress: req.body.emailAddress });
   if (!user) {
     return next(new AppError('There is no user with email address.', 404));
   }
 
   const resetCallback = req.get('Reset-URL');
-  if (!resetCallback) {
-    return next(
-      new AppError('There is no reset URL defined in the header.', 404),
-    );
-  }
 
   // 2) Generate the random reset token
   const resetToken = user.createPasswordResetToken();
@@ -409,7 +362,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 3) Update changedPasswordAt property for the user
   // 4) Log the user in, send JWT
-  createSendToken(user, 200, res);
+  jwtHandler.createSendToken(user, 200, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -430,5 +383,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // User.findByIdAndUpdate will NOT work as intended!
 
   // 4) Log user in, send JWT
-  createSendToken(user, 200, res);
+  jwtHandler.createSendToken(user, 200, res);
 });
