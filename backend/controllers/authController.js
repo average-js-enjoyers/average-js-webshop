@@ -8,6 +8,19 @@ const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
 const jwtHandler = require('../utils/jwtHandler');
 
+exports.getAuthType = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+
+  const user = await User.findById(req.user.id);
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      externalAuth: user.externalAuth,
+    },
+  });
+});
+
 exports.isExists = catchAsync(async (req, res, next) => {
   /*  
   // #swagger.tags = ['Auth']

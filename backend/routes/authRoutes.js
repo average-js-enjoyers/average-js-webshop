@@ -32,5 +32,6 @@ router.patch(
   authController.resetPassword,
 );
 router.post('/email/exists', authValidator.isExists, authController.isExists);
+router.get('/type', authController.protect, authController.getAuthType);
 
 module.exports = router;
