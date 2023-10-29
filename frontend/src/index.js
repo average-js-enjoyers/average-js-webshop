@@ -13,6 +13,7 @@ import FAQ from "./Components/FAQ";
 import ButtonTemplate from "./Components/templates/ButtonTemplate";
 import TypographyTemplate from "./Components/templates/TypographyTemplate";
 import UserModifier from "./Pages/UserModifier";
+import UserLogin from "./Pages/UserLogin";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/userdata",
         element: <UserModifier />,
+      },
+      {
+        path: "/signin",
+        element: <UserLogin />,
       },
       {
         path: "/ui-template",

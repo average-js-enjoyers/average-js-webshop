@@ -5,12 +5,7 @@ import Button from "react-bootstrap/esm/Button";
 const HomePage = () => (
   <div className="Layout">
     <nav>
-      <li>
-        <Link to="/signup">
-          <button type="button">Sign Up!</button>
-        </Link>
-      </li>
-      <li>
+    <li>
         <Link to="/ui-template">
           <Button variant="dark-outline" className="btn--compact">
             Go To UI Templates
@@ -18,8 +13,18 @@ const HomePage = () => (
         </Link>
       </li>
       <li>
+        <Link to="/signup">
+          <button type="button">Sign Up!</button>
+        </Link>
+      </li>
+      <li>
         <Link to="/userdata">
           <button type="button">Userdata!</button>
+        </Link>
+      </li>
+      <li>
+        <Link to="/signin">
+          <button type="button">Sign in!</button>
         </Link>
       </li>
     </nav>
