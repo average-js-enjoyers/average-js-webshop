@@ -2,13 +2,14 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
     "bootstrap": "^5.3.2",
+    "gh-pages": "^6.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.0",
     "react-dom": "^18.2.0",
@@ -16,8 +17,7 @@
     "react-router-bootstrap": "^0.26.2",
     "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "gh-pages": "^6.0.0"
+    "web-vitals": "^2.1.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
@@ -61,5 +61,6 @@
   "main": "index.js",
   "author": "Average JS Enjoyers",
   "license": "MIT",
-  "homepage": "https://average-js-enjoyers.github.io/average-js-webshop"
+  "homepage": "https://average-js-enjoyers.github.io/",
+  "proxy": "http://127.0.0.1:5001/"
 }

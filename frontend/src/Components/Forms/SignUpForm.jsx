@@ -1,36 +1,36 @@
 import { useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 
-const isEmailValid=(email)=>{
-    const re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    return re.test(String(email).toLowerCase());
-  }
+const isEmailValid = (email) => {
+  const re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  return re.test(String(email).toLowerCase());
+};
 
-const checkIfUserIsRegistered = async (email) => {
-    if (isEmailValid(email)) {
-      try {
-        const response = await fetch("DONTLEAVEMEHERE", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email}),
-        });
-  
-        if (response.ok) {
-          const data = await response.json();
-          return data.exists; 
-        } else {
-          throw new Error("Failed to fetch email check");
-        }
-      } catch (error) {
-        console.error(error);
-        return false; 
-      }
-    }
-  };
+// const checkIfUserIsRegistered = async (email) => {
+//   if (isEmailValid(email)) {
+//     try {
+//       const response = await fetch("DONTLEAVEMEHERE", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ email }),
+//       });
 
-const SignUp = ({onSignUp}) => {
+//       if (response.ok) {
+//         const data = await response.json();
+//         return data.exists;
+//       } else {
+//         throw new Error("Failed to fetch email check");
+//       }
+//     } catch (error) {
+//       console.error(error);
+//       return false;
+//     }
+//   }
+// };
+
+const SignUpForm = ({ onSignUp }) => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState("");
@@ -41,25 +41,37 @@ const SignUp = ({onSignUp}) => {
   const [emailValid, setEmailValid] = useState(true);
   const [emailTaken, setEmailTaken] = useState(false);
 
-  const isPasswordValid=(password)=>{
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    return onSignUp({
+      firstName: firstName,
+      lastName: lastName,
+      emailAddress: email,
+      password: nonHashedPassword,
+      passwordConfirm: confirmPassword,
+    });
+  };
+
+  const isPasswordValid = (password) => {
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     return passwordPattern.test(password);
-  }
+  };
 
-  const errorStatesHandler = (email,password) => {
-
+  const emailErrorStateHandler = (email) => {
     if (isEmailValid(email)) {
-        setEmailValid(true);
-      } else if (email.length > 5) {
-        setEmailValid(false);
-      }
+      setEmailValid(true);
+    } else if (email.length > 5) {
+      setEmailValid(false);
+    }
 
-    if (checkIfUserIsRegistered(email)) {
-        setEmailTaken(true);
-      } else if (email.length > 5) {
-        setEmailTaken(false);
-      }
-
+    // if (checkIfUserIsRegistered(email)) {
+    //   setEmailTaken(true);
+    // } else if (email.length > 5) {
+    //   setEmailTaken(false);
+    // }
+  };
+  const passWordErrorStatesHandler = (password) => {
     if (nonHashedPassword === confirmPassword) {
       setPassWordsMatch(true);
     } else if (confirmPassword.length > 5) {
@@ -73,21 +85,13 @@ const SignUp = ({onSignUp}) => {
     }
   };
 
-  const onSubmit = (e)=> {
-    e.preventDefault();
-
-    return onSignUp({
-        firstName,
-        lastName,
-        email,
-        nonHashedPassword,
-    }
-    )
-  }
+  useEffect(() => {
+    emailErrorStateHandler(email);
+  }, [email]);
 
   useEffect(() => {
-    errorStatesHandler(email,nonHashedPassword);
-  }, [email,nonHashedPassword, confirmPassword]);
+    passWordErrorStatesHandler(nonHashedPassword);
+  }, [nonHashedPassword, confirmPassword]);
 
   return (
     <>
@@ -95,9 +99,9 @@ const SignUp = ({onSignUp}) => {
       {!emailValid && (
         <div style={{ color: "red" }}>Invalid E-mail address!</div>
       )}
-      {!emailTaken && (
+      {/* {!emailTaken && (
         <div style={{ color: "red" }}>E-mail address already in use!</div>
-      )}
+      )} */}
       {!passWordsMatch && (
         <div style={{ color: "red" }}>The passwords do not match!</div>
       )}
@@ -105,7 +109,7 @@ const SignUp = ({onSignUp}) => {
         <div style={{ color: "red" }}>The password is too weak!</div>
       )}
 
-      <form className="SignUpFields" onSubmit={onSubmit}>
+      <form className="SignUpFields" onSubmit={handleSubmit}>
         <div className="control">
           <label htmlFor="firstName">First Name:</label>
           <input
@@ -165,10 +169,9 @@ const SignUp = ({onSignUp}) => {
             <button type="button">Need help?</button>
           </Link>
         </li>
-
       </form>
     </>
   );
 };
 
-export default SignUp;
+export default SignUpForm;

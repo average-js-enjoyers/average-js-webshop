@@ -9,9 +9,12 @@
 @import "./sass/base/typography";
 
 @import "./sass/components/_buttons.scss";
-@import "./sass/components/_components.scss";
+@import "./sass/components/_logo.scss";
 
 @import "./sass/layout/_layout.scss";
+@import "./sass/layout/_header.scss";
+@import "./sass/layout/_footer.scss";
+
 @import "./sass/pages/_pages.scss";
 @import "./sass/themes/_themes.scss";
 @import "./sass/vendors/_vendors.scss";

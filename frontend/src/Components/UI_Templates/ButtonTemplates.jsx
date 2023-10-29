@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 function ButtonTemplate() {
   return (
     <>
-      <h1 className="py-3">Button Template Examples</h1>
+      <h3 className="py-3 mt-5">Button Template Examples</h3>
       <Button variant="primary">Primary</Button>{" "}
       <Button variant="outline-primary">Outline Prim.</Button> <hr />
       <Button variant="secondary">Secondary</Button>{" "}

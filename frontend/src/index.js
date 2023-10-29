@@ -5,17 +5,16 @@ import reportWebVitals from "./reportWebVitals";
 
 import "./assets/styles/css/index.css";
 
-import HomePage from "./Pages/HomePage";
-import ErrorPage from "./Pages/ErrorPage";
-import Example from "./Components/Example";
-import Example2 from "./Components/Example2";
-import UserCreator from "./Components/SignUpForm";
-import FAQ from "./Components/FAQ";
+import HomePage from "./Screens/HomeScreen";
+import ErrorPage from "./Screens/ErrorScreen";
+import UserCreator from "./Components/Forms/SignUpForm";
+import FAQ from "./Components/Miscellaneous/FAQ";
 
 import Button from "react-bootstrap/Button";
 
-import ButtonTemplate from "./Components/templates/ButtonTemplate";
-import TypographyTemplate from "./Components/templates/TypographyTemplate";
+import UITemplateExamplesPage from "./Screens/UITemplateExamplesScreen";
+import UserModifier from "./Screens/UserModifier";
+import UserLogin from "./Screens/UserLogin";
 
 const router = createBrowserRouter([
   {
@@ -23,14 +22,6 @@ const router = createBrowserRouter([
     element: <HomePage />,
     errorElement: <ErrorPage />,
     children: [
-      {
-        path: "/example",
-        element: <Button variant="primary">Go To Example</Button>,
-      },
-      {
-        path: "/example2",
-        element: <Example2 />,
-      },
       {
         path: "/signup",
         element: <UserCreator />,
@@ -40,13 +31,23 @@ const router = createBrowserRouter([
         element: <FAQ />,
       },
       {
-        path: "/ui-template",
-        element: (
-          <>
-            <ButtonTemplate />
-            <TypographyTemplate />
-          </>
-        ),
+        path: "/userdata",
+        element: <UserModifier />,
+      },
+      {
+        path: "/signin",
+        element: <UserLogin />,
+      },
+    ],
+  },
+  {
+    path: "/ui-template",
+    element: <UITemplateExamplesPage />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "example",
+        element: <Button variant="primary">Go To Example</Button>,
       },
     ],
   },

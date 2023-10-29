@@ -1,0 +1,62 @@
+$logo-border-radius: 0.3rem;
+$logo-font-size: 2.4rem;
+$small-logo-font-size: 1.8rem;
+$logo-box-shadow: var(--dropshadow-std);
+$logo-background-color: var(--primary-100);
+$logo-font-color: var(--primary-10);
+$hover-box-shadow: var(--dropshadow-hover);
+$transition-duration: 0.3s;
+
+.logo {
+  width: 27rem;
+  height: 6rem;
+  border-radius: $logo-border-radius;
+  box-shadow: $logo-box-shadow;
+  background-color: $logo-background-color;
+  transition: transform $transition-duration, box-shadow $transition-duration;
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: $hover-box-shadow;
+  }
+
+  &__link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.65rem;
+      height: 100%;
+    }
+
+    span {
+      color: $logo-font-color;
+      font-size: $logo-font-size;
+      font-variant: small-caps;
+    }
+  }
+
+  &__bold {
+    font-weight: 700;
+  }
+
+  &__light {
+    font-weight: 300;
+  }
+
+  &--small {
+    width: 20.3rem;
+    height: 4.5rem;
+
+    & .logo__link {
+      span {
+        font-size: $small-logo-font-size;
+      }
+    }
+  }
+}
