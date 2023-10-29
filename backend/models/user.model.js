@@ -1,22 +1,22 @@
-const mongoose = require("mongoose");
-const crypto = require("crypto");
-const validator = require("validator");
-const bcrypt = require("bcryptjs");
+const mongoose = require('mongoose');
+const crypto = require('crypto');
+const validator = require('validator');
+const bcrypt = require('bcryptjs');
 
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
   emailAddress: {
     type: String,
-    required: [true, "Please provide your email"],
+    required: [true, 'Please provide your email'],
     unique: true,
     lowercase: true,
-    validate: [validator.isEmail, "Please provide a valid email"],
+    validate: [validator.isEmail, 'Please provide a valid email'],
   },
   phoneNumber: Number,
   password: {
     type: String,
-    required: [false, "Please provide a password"],
+    required: [false, 'Please provide a password'],
     select: false,
     validate: [
       (password) =>
@@ -27,13 +27,12 @@ const UserSchema = new Schema({
           minNumbers: 1,
           minSymbols: 0,
         }),
-      "Please provide a valid password",
+      'Please provide a valid password',
     ],
   },
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
-  passwordChangedAt: Date,
   emailConfirmed: {
     type: Boolean,
     default: false,
@@ -42,11 +41,11 @@ const UserSchema = new Schema({
   emailConfirmedAt: Date,
   firstName: {
     type: String,
-    required: [false, "Please tell us your first name!"],
+    required: [false, 'Please tell us your first name!'],
   },
   lastName: {
     type: String,
-    required: [false, "Please tell us your last name!"],
+    required: [false, 'Please tell us your last name!'],
   },
   profilePhoto: String,
   registrationDate: {
@@ -56,8 +55,8 @@ const UserSchema = new Schema({
   lastLoginDate: Date,
   role: {
     type: String,
-    enum: ["user", "admin"],
-    default: "user",
+    enum: ['user', 'admin'],
+    default: 'user',
   },
   twoFactorEnabled: Boolean,
   active: {
@@ -73,14 +72,14 @@ const UserSchema = new Schema({
   addresses: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Address",
+      ref: 'Address',
     },
   ],
 });
 
-UserSchema.pre("save", async function (next) {
+UserSchema.pre('save', async function (next) {
   // Only run this function if password was actually modified
-  if (!this.isModified("password")) return next();
+  if (!this.isModified('password')) return next();
 
   // Hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12);
@@ -88,15 +87,15 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-UserSchema.pre("save", function (next) {
-  if (!this.isModified("password") || this.isNew) return next();
+UserSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
 
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
-UserSchema.pre("save", function (next) {
-  if (!this.isModified("emailConfirmed") || this.isNew) return next();
+UserSchema.pre('save', function (next) {
+  if (!this.isModified('emailConfirmed') || this.isNew) return next();
 
   this.emailConfirmedAt = Date.now() - 1000;
   next();
@@ -110,7 +109,7 @@ UserSchema.pre(/^find/, function (next) {
 
 UserSchema.methods.correctPassword = async function (
   candidatePassword,
-  userPassword
+  userPassword,
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
@@ -119,7 +118,7 @@ UserSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
-      10
+      10,
     );
 
     return JWTTimestamp < changedTimestamp;
@@ -130,12 +129,12 @@ UserSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 };
 
 UserSchema.methods.createPasswordResetToken = function () {
-  const resetToken = crypto.randomBytes(32).toString("hex");
+  const resetToken = crypto.randomBytes(32).toString('hex');
 
   this.passwordResetToken = crypto
-    .createHash("sha256")
+    .createHash('sha256')
     .update(resetToken)
-    .digest("hex");
+    .digest('hex');
 
   console.log({ resetToken }, this.passwordResetToken);
 
@@ -144,4 +143,4 @@ UserSchema.methods.createPasswordResetToken = function () {
   return resetToken;
 };
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model('User', UserSchema);

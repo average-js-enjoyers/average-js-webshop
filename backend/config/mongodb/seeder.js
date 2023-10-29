@@ -1,21 +1,21 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const colors = require("colors");
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const colors = require('colors');
 
 // Users
-const User = require("../../models/user.model.js");
-const Address = require("../../models/address.model.js");
+const User = require('../../models/user.model');
+const Address = require('../../models/address.model');
 
 // Products
-const Product = require("../../models/product.model.js");
-const Category = require("../../models/category.model.js");
+const Product = require('../../models/product.model');
+const Category = require('../../models/category.model');
 
-const users = require("./data/users.js");
-const addresses = require("./data/addresses.js");
-const categories = require("./data/categories.js");
-const products = require("./data/products.js");
+const users = require('./data/users');
+const addresses = require('./data/addresses');
+const categories = require('./data/categories');
+const products = require('./data/products');
 
-const connectDB = require("./db.js");
+const connectDB = require('./db');
 
 dotenv.config();
 
@@ -30,57 +30,49 @@ const importData = async () => {
     await Category.deleteMany();
     await Product.deleteMany();
 
-    const sampleAddresses = addresses.map((address) => {
-      return {
-        _id: new mongoose.Types.ObjectId(address._id), // Generate a new ObjectId for each address
-        unitNumber: address.unitNumber,
-        streetNumber: address.streetNumber,
-        addressLine1: address.addressLine1,
-        addressLine2: address.addressLine2,
-        city: address.city,
-        region: address.region,
-        postalCode: address.postalCode,
-        vatID: address.vatID,
-        countryID: address.country, // Assuming countryID is an ObjectId
-        type: address.type,
-      };
-    });
+    const sampleAddresses = addresses.map((address) => ({
+      _id: new mongoose.Types.ObjectId(address._id), // Generate a new ObjectId for each address
+      unitNumber: address.unitNumber,
+      streetNumber: address.streetNumber,
+      addressLine1: address.addressLine1,
+      addressLine2: address.addressLine2,
+      city: address.city,
+      region: address.region,
+      postalCode: address.postalCode,
+      vatID: address.vatID,
+      countryID: address.country, // Assuming countryID is an ObjectId
+      type: address.type,
+    }));
 
     // Get all users
-    const sampleUsers = users.map((user) => {
-      return {
-        _id: new mongoose.Types.ObjectId(user._id),
-        emailAddress: user.emailAddress,
-        phoneNumber: user.phoneNumber,
-        password: user.password,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        registrationDate: user.registrationDate,
-        role: user.role,
-        twoFactorEnabled: user.twoFactorEnabled,
-        active: user.active,
-        addresses: user.addresses,
-        emailConfirmed: user.emailConfirmed,
-      };
-    });
+    const sampleUsers = users.map((user) => ({
+      _id: new mongoose.Types.ObjectId(user._id),
+      emailAddress: user.emailAddress,
+      phoneNumber: user.phoneNumber,
+      password: user.password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      registrationDate: user.registrationDate,
+      role: user.role,
+      twoFactorEnabled: user.twoFactorEnabled,
+      active: user.active,
+      addresses: user.addresses,
+      emailConfirmed: user.emailConfirmed,
+    }));
 
     // Get all categories from the categories array and add the admin user to each category
-    const sampleCategories = categories.map((category) => {
-      return {
-        _id: new mongoose.Types.ObjectId(category._id),
-        categoryName: category.categoryName,
-        parentCategory: new mongoose.Types.ObjectId(category.parentCategory),
-      };
-    });
+    const sampleCategories = categories.map((category) => ({
+      _id: new mongoose.Types.ObjectId(category._id),
+      categoryName: category.categoryName,
+      parentCategory: new mongoose.Types.ObjectId(category.parentCategory),
+    }));
 
     // Get all products from the products array and add the admin user to each product
-    const sampleProducts = products.map((product) => {
-      return {
-        name: product.name,
-        description: product.description,
-        categoryID: new mongoose.Types.ObjectId(product.categoryID),
-      };
-    });
+    const sampleProducts = products.map((product) => ({
+      name: product.name,
+      description: product.description,
+      categoryID: new mongoose.Types.ObjectId(product.categoryID),
+    }));
 
     await User.create(sampleUsers);
     await Address.insertMany(sampleAddresses);
@@ -90,7 +82,7 @@ const importData = async () => {
     /* await ProductCategory.create(...sampleCategories);
     await Product.create(...sampleProducts); */
 
-    console.log("Data Imported!".green.inverse);
+    console.log('Data Imported!'.green.inverse);
     process.exit();
   } catch (error) {
     console.error(`${error}`.red.inverse);
@@ -107,7 +99,7 @@ const destroyData = async () => {
     await Product.deleteMany();
     await Category.deleteMany();
 
-    console.log("Data Destroyed!".red.inverse);
+    console.log('Data Destroyed!'.red.inverse);
     process.exit();
   } catch (error) {
     console.error(`${error}`.red.inverse);
@@ -117,7 +109,7 @@ const destroyData = async () => {
 
 // console.log(process.argv);
 
-if (process.argv[2] === "-d") {
+if (process.argv[2] === '-d') {
   destroyData();
 } else {
   importData();

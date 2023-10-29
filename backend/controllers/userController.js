@@ -1,8 +1,8 @@
-const User = require("../models/user.model");
-const Address = require("../models/address.model");
-const catchAsync = require("./../utils/catchAsync");
-const AppError = require("./../utils/appError");
-const cdn = require("../utils/cdn.js");
+const User = require('../models/user.model');
+const Address = require('../models/address.model');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
+const cdn = require('../utils/cdn');
 
 exports.onboard = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
@@ -10,7 +10,7 @@ exports.onboard = catchAsync(async (req, res, next) => {
 
   if (!firstName || !lastName || !phoneNumber) {
     return next(
-      new AppError("Please provide first name, last name, phone number!", 400)
+      new AppError('Please provide first name, last name, phone number!', 400),
     );
   }
 
@@ -24,7 +24,7 @@ exports.onboard = catchAsync(async (req, res, next) => {
   if (!user.externalAuth) {
     if (!password || !passwordConfirm) {
       return next(
-        new AppError("Please provide password, passwordConfirm!", 400)
+        new AppError('Please provide password, passwordConfirm!', 400),
       );
     }
     user.password = password;
@@ -35,9 +35,9 @@ exports.onboard = catchAsync(async (req, res, next) => {
   user.save();
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
-      message: "You are now onboarded!",
+      message: 'You are now onboarded!',
     },
   });
 });
@@ -49,8 +49,8 @@ exports.checkOnboard = catchAsync(async (req, res, next) => {
     return next(
       new AppError(
         "You haven't finished on boarding process. Please send a POST request to api/users/me/onboard",
-        401
-      )
+        401,
+      ),
     );
   }
 
@@ -61,14 +61,14 @@ exports.deletePhoto = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
 
   const defaultPhoto =
-    "https://storage.googleapis.com/profile-photos/default.png";
+    'https://storage.googleapis.com/profile-photos/default.png';
 
   await User.findByIdAndUpdate(req.user.id, {
     profilePhoto: defaultPhoto,
   });
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       profilePhoto: defaultPhoto,
     },
@@ -87,15 +87,15 @@ exports.uploadPhoto = catchAsync(async (req, res, next) => {
     } */
 
   if (!req.file) {
-    return res.status(400).json({ error: "No file uploaded" });
+    return res.status(400).json({ error: 'No file uploaded' });
   }
 
-  let uploadedImage = req.file;
+  const uploadedImage = req.file;
   const imgUrl = await cdn.create(uploadedImage, req.user.id);
   await User.findByIdAndUpdate(req.user.id, { profilePhoto: imgUrl });
 
   res.status(200).json({
-    message: "Image uploaded and overwritten successfully",
+    message: 'Image uploaded and overwritten successfully',
     imageUrl: imgUrl,
   });
 });
@@ -114,7 +114,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user.id, { active: false });
 
   res.status(204).json({
-    status: "success",
+    status: 'success',
     data: null,
   });
 });
@@ -134,9 +134,9 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
   const filteredBody = filterObj(
     req.body,
-    "firstName",
-    "lastName",
-    "phoneNumber"
+    'firstName',
+    'lastName',
+    'phoneNumber',
   );
 
   // 3) Update user document
@@ -146,7 +146,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user: updatedUser,
     },
@@ -157,15 +157,15 @@ exports.getUser = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
 
   const user = await User.findOne({ _id: req.user.id })
-    .populate("addresses")
+    .populate('addresses')
     .exec();
 
   if (!user) {
-    return next(new AppError("No user found with that ID", 404));
+    return next(new AppError('No user found with that ID', 404));
   }
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       data: user,
     },
@@ -210,7 +210,7 @@ exports.createAddress = catchAsync(async (req, res, next) => {
   user.save();
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       data: newAddress,
     },
@@ -224,13 +224,13 @@ exports.deleteAddress = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
   if (address === null || !user.addresses.includes(address._id)) {
-    return next(new AppError("No address found with that ID", 404));
+    return next(new AppError('No address found with that ID', 404));
   }
 
   await Address.findByIdAndDelete(address._id);
 
   res.status(204).json({
-    status: "success",
+    status: 'success',
     data: {
       data: null,
     },
@@ -262,7 +262,7 @@ exports.updateAddress = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
   if (address === null || !user.addresses.includes(address._id)) {
-    return next(new AppError("No address found with that ID", 404));
+    return next(new AppError('No address found with that ID', 404));
   }
 
   // 3) Update user document
@@ -272,7 +272,7 @@ exports.updateAddress = catchAsync(async (req, res, next) => {
   });
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user: updateAddress,
     },

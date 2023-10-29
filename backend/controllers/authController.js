@@ -1,36 +1,35 @@
-const crypto = require("crypto");
-const { promisify } = require("util");
-const jwt = require("jsonwebtoken");
-const User = require("../models/user.model");
-const catchAsync = require("./../utils/catchAsync");
-const AppError = require("./../utils/appError");
-const sendEmail = require("./../utils/email");
-const { google } = require("googleapis");
-const axios = require("axios");
+const crypto = require('crypto');
+const { promisify } = require('util');
+const jwt = require('jsonwebtoken');
+const { google } = require('googleapis');
+const axios = require('axios');
+const User = require('../models/user.model');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
+const sendEmail = require('../utils/email');
 
-const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+const signToken = (id) =>
+  jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
-};
 
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
   const cookieOptions = {
     expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
     ),
     httpOnly: true,
   };
-  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
-  res.cookie("jwt", token, cookieOptions);
+  res.cookie('jwt', token, cookieOptions);
 
   // Remove password from output
   user.password = undefined;
 
   res.status(statusCode).json({
-    status: "success",
+    status: 'success',
     token,
     data: {
       user,
@@ -48,7 +47,7 @@ exports.isExists = catchAsync(async (req, res, next) => {
   const value = user !== null;
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       exists: value,
     },
@@ -59,9 +58,9 @@ exports.confirmEmail = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
   const hashedToken = crypto
-    .createHash("sha256")
+    .createHash('sha256')
     .update(req.params.token)
-    .digest("hex");
+    .digest('hex');
 
   const user = await User.findOne({
     emailConfirmationToken: hashedToken,
@@ -69,7 +68,7 @@ exports.confirmEmail = catchAsync(async (req, res, next) => {
   });
 
   if (!user) {
-    return next(new AppError("Token is invalid or has expired", 400));
+    return next(new AppError('Token is invalid or has expired', 400));
   }
 
   user.emailConfirmed = true;
@@ -94,30 +93,30 @@ exports.requestEmailLogin = catchAsync(async (req, res, next) => {
                 type: 'string'
         } */
 
-  const emailAddress = req.body.emailAddress;
+  const { emailAddress } = req.body;
 
   // 1) Check if email and password exist
   if (!emailAddress) {
-    return next(new AppError("Please provide email!", 400));
+    return next(new AppError('Please provide email!', 400));
   }
 
   const user = await User.findOne({ emailAddress });
 
   if (!user) {
     return next(
-      new AppError("There is no user associated with this email!", 400)
+      new AppError('There is no user associated with this email!', 400),
     );
   }
 
   if (user.emailConfirmed) {
-    return next(new AppError("This email has already been confirmed!", 400));
+    return next(new AppError('This email has already been confirmed!', 400));
   }
 
-  const confirmCallback = req.get("Confirmation-URL");
+  const confirmCallback = req.get('Confirmation-URL');
 
   if (!confirmCallback) {
     return next(
-      new AppError("There is no confirmation URL defined in the header.", 404)
+      new AppError('There is no confirmation URL defined in the header.', 404),
     );
   }
 
@@ -132,17 +131,17 @@ exports.requestEmailLogin = catchAsync(async (req, res, next) => {
   try {
     await sendEmail({
       emailAddress: user.emailAddress,
-      subject: "(AJSE) Email confirmation",
+      subject: '(AJSE) Email confirmation',
       message: message,
     });
     res.status(200).json({
-      status: "success",
-      message: "Token sent to email!",
+      status: 'success',
+      message: 'Token sent to email!',
     });
   } catch (err) {
     return next(
-      new AppError("There was an error sending the email. Try again later!"),
-      500
+      new AppError('There was an error sending the email. Try again later!'),
+      500,
     );
   }
 });
@@ -163,7 +162,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 
   // 1) Check if email and password exist
   if (!emailAddress) {
-    return next(new AppError("Please provide email!", 400));
+    return next(new AppError('Please provide email!', 400));
   }
 
   const newUser = await User.create({
@@ -171,10 +170,10 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       message:
-        "Email confirmation is required. Send a POST request to api/users/email/request",
+        'Email confirmation is required. Send a POST request to api/users/email/request',
       data: newUser,
     },
   });
@@ -196,17 +195,17 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // 1) Check if email and password exist
   if (!emailAddress || !password) {
-    return next(new AppError("Please provide email and password!", 400));
+    return next(new AppError('Please provide email and password!', 400));
   }
   // 2) Check if user exists && password is correct
-  const user = await User.findOne({ emailAddress }).select("+password");
+  const user = await User.findOne({ emailAddress }).select('+password');
 
   if (
     !user ||
     user.password === undefined ||
     !(await user.correctPassword(password, user.password))
   ) {
-    return next(new AppError("Incorrect email or password", 401));
+    return next(new AppError('Incorrect email or password', 401));
   }
 
   // 3) If everything ok, send token to client
@@ -227,7 +226,7 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
   // Now you can use the oAuth2Client to fetch user information
   const oauth2 = google.oauth2({
     auth: oAuth2Client,
-    version: "v2",
+    version: 'v2',
   });
 
   const userInfo = await oauth2.userinfo.get();
@@ -286,14 +285,14 @@ exports.protect = catchAsync(async (req, res, next) => {
   let token;
   if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
+    req.headers.authorization.startsWith('Bearer')
   ) {
-    token = req.headers.authorization.split(" ")[1];
+    token = req.headers.authorization.split(' ')[1];
   }
 
   if (!token) {
     return next(
-      new AppError("You are not logged in! Please log in to get access.", 401)
+      new AppError('You are not logged in! Please log in to get access.', 401),
     );
   }
 
@@ -305,16 +304,16 @@ exports.protect = catchAsync(async (req, res, next) => {
   if (!currentUser) {
     return next(
       new AppError(
-        "The user belonging to this token does no longer exist.",
-        401
-      )
+        'The user belonging to this token does no longer exist.',
+        401,
+      ),
     );
   }
 
   // 4) Check if user changed password after the token was issued
   if (currentUser.changedPasswordAfter(decoded.iat)) {
     return next(
-      new AppError("User recently changed password! Please log in again.", 401)
+      new AppError('User recently changed password! Please log in again.', 401),
     );
   }
 
@@ -323,18 +322,18 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.restrictTo = (...roles) => {
-  return (req, res, next) => {
+exports.restrictTo =
+  (...roles) =>
+  (req, res, next) => {
     // roles ['admin', 'lead-guide']. role='user'
     if (!roles.includes(req.user.role)) {
       return next(
-        new AppError("You do not have permission to perform this action", 403)
+        new AppError('You do not have permission to perform this action', 403),
       );
     }
 
     next();
   };
-};
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
@@ -342,13 +341,13 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on POSTed email
   const user = await User.findOne({ emailAddress: req.body.emailAddress });
   if (!user) {
-    return next(new AppError("There is no user with email address.", 404));
+    return next(new AppError('There is no user with email address.', 404));
   }
 
-  const resetCallback = req.get("Reset-URL");
+  const resetCallback = req.get('Reset-URL');
   if (!resetCallback) {
     return next(
-      new AppError("There is no reset URL defined in the header.", 404)
+      new AppError('There is no reset URL defined in the header.', 404),
     );
   }
 
@@ -364,13 +363,13 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   try {
     await sendEmail({
       emailAddress: user.emailAddress,
-      subject: "Your password reset token (valid for 10 min)",
+      subject: 'Your password reset token (valid for 10 min)',
       message,
     });
 
     res.status(200).json({
-      status: "success",
-      message: "Token sent to email!",
+      status: 'success',
+      message: 'Token sent to email!',
     });
   } catch (err) {
     user.passwordResetToken = undefined;
@@ -378,8 +377,8 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     return next(
-      new AppError("There was an error sending the email. Try again later!"),
-      500
+      new AppError('There was an error sending the email. Try again later!'),
+      500,
     );
   }
 });
@@ -389,9 +388,9 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 1) Get user based on the token
   const hashedToken = crypto
-    .createHash("sha256")
+    .createHash('sha256')
     .update(req.params.token)
-    .digest("hex");
+    .digest('hex');
 
   const user = await User.findOne({
     passwordResetToken: hashedToken,
@@ -400,7 +399,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 2) If token has not expired, and there is user, set the new password
   if (!user) {
-    return next(new AppError("Token is invalid or has expired", 400));
+    return next(new AppError('Token is invalid or has expired', 400));
   }
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
@@ -417,11 +416,11 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
 
   // 1) Get user from collection
-  const user = await User.findById(req.user.id).select("+password");
+  const user = await User.findById(req.user.id).select('+password');
 
   // 2) Check if POSTed current password is correct
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
-    return next(new AppError("Your current password is wrong.", 401));
+    return next(new AppError('Your current password is wrong.', 401));
   }
 
   // 3) If so, update password

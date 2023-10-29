@@ -1,9 +1,9 @@
-const multer = require("multer");
-const path = require("path");
+const multer = require('multer');
+const path = require('path');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/"); // Specify the upload directory
+    cb(null, 'public/'); // Specify the upload directory
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -14,17 +14,16 @@ const storage = multer.diskStorage({
 const imageFilter = function (req, file, cb) {
   const allowedFileTypes = /jpeg|jpg|png|gif/; // Add more extensions as needed
   const extname = path.extname(file.originalname).toLowerCase();
-  const mimetype = file.mimetype;
+  const { mimetype } = file;
 
   if (allowedFileTypes.test(extname) && allowedFileTypes.test(mimetype)) {
     return cb(null, true);
-  } else {
-    cb(
-      new Error(
-        "Only image files with .jpeg, .jpg, .png, or .gif extensions are allowed."
-      )
-    );
   }
+  cb(
+    new Error(
+      'Only image files with .jpeg, .jpg, .png, or .gif extensions are allowed.',
+    ),
+  );
 };
 
 // Create a multer instance with file size limit
