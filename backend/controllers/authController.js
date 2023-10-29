@@ -9,9 +9,16 @@ const sendEmail = require('../utils/email');
 const jwtHandler = require('../utils/jwtHandler');
 
 exports.isExists = catchAsync(async (req, res, next) => {
+  /*  
   // #swagger.tags = ['Auth']
+   #swagger.parameters['body'] = {
+                in: 'body',
+                schema: {
+                    $emailAddress: 'example@example.com'
+                }
+              }*/
 
-  const emailAddress = req.body.email;
+  const emailAddress = req.body.emailAddress;
 
   const user = await User.findOne({ emailAddress });
 
