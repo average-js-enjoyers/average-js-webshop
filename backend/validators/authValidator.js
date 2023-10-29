@@ -15,7 +15,7 @@ exports.login = [
 
 exports.requestEmailLogin = [
   baseEmailChain,
-  header('Confirmation-URL').isURL(),
+  header('Confirmation-URL').notEmpty(),
   handleValidationError,
 ];
 
@@ -25,7 +25,7 @@ exports.facebookLogin = [param('token').notEmpty(), handleValidationError];
 
 exports.forgotPassword = [
   baseEmailChain,
-  header('Reset-URL').isURL(),
+  header('Reset-URL').notEmpty(),
   handleValidationError,
 ];
 
