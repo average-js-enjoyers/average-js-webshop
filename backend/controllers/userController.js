@@ -170,9 +170,8 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 exports.getUser = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
 
-  const user = await User.findOne({ _id: req.user.id })
-    .populate('addresses')
-    .exec();
+  const user = await User.findOne({ _id: req.user.id });
+  user.addresses = undefined;
 
   if (!user) {
     return next(new AppError('No user found with that ID', 404));
@@ -182,6 +181,21 @@ exports.getUser = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       data: user,
+    },
+  });
+});
+
+exports.getAllAddress = catchAsync(async (req, res, next) => {
+  // #swagger.tags = ['Profile']
+
+  const { addresses } = await User.findOne({ _id: req.user.id }).populate(
+    'addresses',
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: addresses,
     },
   });
 });
