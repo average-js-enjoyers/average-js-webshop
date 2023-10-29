@@ -5,16 +5,16 @@ import reportWebVitals from "./reportWebVitals";
 
 import "./assets/styles/css/index.css";
 
-import HomePage from "./Pages/HomePage";
-import ErrorPage from "./Pages/ErrorPage";
+import HomePage from "./Screens/HomeScreen";
+import ErrorPage from "./Screens/ErrorScreen";
 import UserCreator from "./Components/Forms/SignUpForm";
 import FAQ from "./Components/Miscellaneous/FAQ";
 
 import Button from "react-bootstrap/Button";
 
-import UITemplateExamplesPage from "./Pages/UITemplateExamplesPage";
-import UserModifier from "./Pages/UserModifier";
-import UserLogin from "./Pages/UserLogin";
+import UITemplateExamplesPage from "./Screens/UITemplateExamplesScreen";
+import UserModifier from "./Screens/UserModifier";
+import UserLogin from "./Screens/UserLogin";
 
 const router = createBrowserRouter([
   {

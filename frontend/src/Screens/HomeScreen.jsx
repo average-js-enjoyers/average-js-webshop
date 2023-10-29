@@ -5,7 +5,7 @@ import Button from "react-bootstrap/esm/Button";
 const HomePage = () => (
   <div className="Layout">
     <nav>
-    <li>
+      <li>
         <Link to="/ui-template">
           <Button variant="dark-outline" className="btn--compact">
             Go To UI Templates

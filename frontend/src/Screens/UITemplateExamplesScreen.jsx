@@ -1,9 +1,9 @@
 import React from "react";
 import ButtonTemplates from "../Components/UI_Templates/ButtonTemplates";
 import TypographyTemplates from "../Components/UI_Templates/TypographyTemplates";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
-import Logo from "../Components/Logo";
+import Header from "../Components/Layout/Header";
+import Footer from "../Components/Layout/Footer";
+import Logo from "../Components/Common/Logo";
 
 import { Outlet } from "react-router-dom";
 

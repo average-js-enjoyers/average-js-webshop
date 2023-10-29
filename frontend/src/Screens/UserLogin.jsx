@@ -1,5 +1,5 @@
 import React from "react";
-import LogInForm from "../Components/LogInForm";
+import LogInForm from "../Components/Forms/LogInForm";
 
 const logUserIn = (user) => {
   return fetch("/api/users/login", {

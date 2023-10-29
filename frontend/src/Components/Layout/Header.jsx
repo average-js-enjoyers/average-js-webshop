@@ -7,7 +7,7 @@ import {
   Button,
 } from "react-bootstrap";
 
-import Logo from "./Logo";
+import Logo from "../Common/Logo";
 
 function Header() {
   return (
