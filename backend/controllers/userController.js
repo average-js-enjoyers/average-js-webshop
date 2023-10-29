@@ -210,13 +210,12 @@ exports.createAddress = catchAsync(async (req, res, next) => {
                     $unitNumber: '12345',
                     $streetNumber: '12343',
                     $addressLine1: 'Rabbit street',
-                    $addressLine1: '',
                     $city: 'New York',
                     $region: 'EAST COAST',
                     $postalCode: '2483',
                     $vatID: '6326434',
                     $country: 'US',
-                    $type: 'Commercial',
+                    $type: 'Both',
                 }
         } */
 
@@ -231,7 +230,7 @@ exports.createAddress = catchAsync(async (req, res, next) => {
     region: req.body.region,
     postalCode: req.body.postalCode,
     vatID: req.body.vatID,
-    countryID: req.body.country, // Assuming countryID is an ObjectId
+    country: req.body.country,
     type: req.body.type,
   });
 

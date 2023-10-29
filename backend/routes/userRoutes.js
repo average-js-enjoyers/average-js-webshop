@@ -13,16 +13,24 @@ router.post('/me/onboard', userValidator.onboard, userController.onboard);
 router.use(userController.checkOnboard);
 
 router.get('/me', userController.getUser);
-router.patch('/me', userController.updateMe);
+router.patch('/me', userValidator.updateMe, userController.updateMe);
 router.delete('/me', userController.deleteMe);
 
 router.post('/me/photo', upload.single('image'), userController.uploadPhoto);
 router.delete('/me/photo', userController.deletePhoto);
 
-router.patch('/me/password', userController.updatePassword);
+router.patch(
+  '/me/password',
+  userValidator.updatePassword,
+  userController.updatePassword,
+);
 
 router.get('/me/address', userController.getAllAddress);
-router.post('/me/address', userController.createAddress);
+router.post(
+  '/me/address',
+  userValidator.createAddress,
+  userController.createAddress,
+);
 router.patch('/me/address', userController.updateAddress);
 router.delete('/me/address', userController.deleteAddress);
 
