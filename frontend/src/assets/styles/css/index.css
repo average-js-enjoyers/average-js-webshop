@@ -13011,4 +13011,48 @@ a:visited {
   transform: none;
 }
 
+.logo {
+  width: 27rem;
+  height: 6rem;
+  border-radius: 0.3rem;
+  box-shadow: var(--dropshadow-std);
+  background-color: var(--primary-100);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.logo:hover {
+  transform: scale(1.03);
+  box-shadow: var(--dropshadow-hover);
+}
+.logo__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+.logo__link div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.65rem;
+  height: 100%;
+}
+.logo__link span {
+  color: var(--primary-10);
+  font-size: 2.4rem;
+  font-variant: small-caps;
+}
+.logo__bold {
+  font-weight: 700;
+}
+.logo__light {
+  font-weight: 300;
+}
+.logo--small {
+  width: 20.3rem;
+  height: 4.5rem;
+}
+.logo--small .logo__link span {
+  font-size: 1.8rem;
+}
+
 /*# sourceMappingURL=index.css.map */
