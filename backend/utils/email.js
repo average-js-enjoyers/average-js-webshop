@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {
   // 1) Create a transporter
@@ -13,7 +13,7 @@ const sendEmail = async (options) => {
 
   // 2) Define the email options
   const mailOptions = {
-    from: "Average JS Enjoyer <info@ajse.io>",
+    from: 'Average JS Enjoyer <info@ajse.io>',
     to: options.emailAddress,
     subject: options.subject,
     text: options.message,
