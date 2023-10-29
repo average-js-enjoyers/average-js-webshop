@@ -5,14 +5,11 @@ import Button from "react-bootstrap/esm/Button";
 const HomePage = () => (
   <div className="Layout">
     <nav>
-      <li>
-        <Link to="/example2">
-          <Button variant="primary">Go To Example 2</Button>
-        </Link>
-      </li>
-      <li>
-        <Link to="/example">
-          <button type="button">example</button>
+    <li>
+        <Link to="/ui-template">
+          <Button variant="dark-outline" className="btn--compact">
+            Go To UI Templates
+          </Button>
         </Link>
       </li>
       <li>
@@ -21,10 +18,13 @@ const HomePage = () => (
         </Link>
       </li>
       <li>
-        <Link to="/ui-template">
-          <Button variant="dark-outline" className="btn--compact">
-            Go To UI Templates
-          </Button>
+        <Link to="/userdata">
+          <button type="button">Userdata!</button>
+        </Link>
+      </li>
+      <li>
+        <Link to="/signin">
+          <button type="button">Sign in!</button>
         </Link>
       </li>
     </nav>

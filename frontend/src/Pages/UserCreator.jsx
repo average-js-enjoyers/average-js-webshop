@@ -1,27 +1,35 @@
-import SignUp from "../Components/SignUpForm";
+import SignUpForm from "../Components/SignUpForm";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const createUser = (user) => {
-  return fetch("DONTLEAVEMEHERE", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  }).then((res) => res.json());
+const createUser = async (user) => {
+  try {
+    const response = await fetch("/api/users/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to create user");
+  }
 };
 
+
+
 const UserCreator = () => {
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  console.log(loading);
 
   const handleSignUp = (user) => {
-    return setLoading(true);
+    console.log(user)
+    createUser(user).then(()=>{
+      console.log("this works");
+    })
+    
   };
 
-  return <SignUp onSignUp={handleSignUp} />;
+  return <SignUpForm onSignUp={handleSignUp} />;
 };
 
 export default UserCreator;
