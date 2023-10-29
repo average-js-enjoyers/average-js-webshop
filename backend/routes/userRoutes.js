@@ -1,4 +1,5 @@
 const express = require('express');
+const { body } = require('express-validator');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const upload = require('../utils/upload');
@@ -16,7 +17,22 @@ router.get('/email/exists', authController.isExists);
 
 // Protect all routes after this middleware
 router.use(authController.protect);
-router.post('/me/onboard', userController.onboard);
+router.post(
+  '/me/onboard',
+  [
+    // Define validation rules using express-validator
+    body('firstName')
+      .isAlpha()
+      .withMessage('First name must contain only letters'),
+    body('lastName')
+      .isAlpha()
+      .withMessage('Last name must contain only letters'),
+    body('phoneNumber')
+      .isMobilePhone('any', { strictMode: false })
+      .withMessage('Invalid phone number'),
+  ],
+  userController.onboard,
+);
 router.use(userController.checkOnboard);
 router.get('/me', userController.getUser);
 router.patch('/me', userController.updateMe);

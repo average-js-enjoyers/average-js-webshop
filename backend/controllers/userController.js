@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const User = require('../models/user.model');
 const Address = require('../models/address.model');
 const catchAsync = require('../utils/catchAsync');
@@ -6,13 +7,26 @@ const cdn = require('../utils/cdn');
 
 exports.onboard = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Profile']
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+    //return next(new AppError(errors.array(), 400));
+  }
+
   const { firstName, lastName, phoneNumber } = req.body;
 
-  if (!firstName || !lastName || !phoneNumber) {
-    return next(
-      new AppError('Please provide first name, last name, phone number!', 400),
-    );
-  }
+  // if (
+  //   !firstName ||
+  //   !lastName ||
+  //   !phoneNumber ||
+  //   typeof phoneNumber !== 'number'
+  // ) {
+  //   return next(
+  //     new AppError('Please provide first name, last name, phone number!', 400),
+  //   );
+  // }
 
   const user = await User.findById(req.user.id);
   user.firstName = firstName;

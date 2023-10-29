@@ -126,7 +126,7 @@ exports.requestEmailLogin = catchAsync(async (req, res, next) => {
   // 3) Send it to user's email
   const confirmURL = `${confirmCallback}/${token}`;
 
-  const message = `Welcome to Average JS Webshop! We are thrilled to have you as a new member of our online community. Thank you for choosing us for your shopping needs. Click here to confirm your email: ${confirmURL}.`;
+  const message = `Welcome to Average JS Webshop! We are thrilled to have you as a new member of our online community. Thank you for choosing us for your shopping needs. Click here to confirm your email: ${confirmURL}`;
 
   try {
     await sendEmail({
