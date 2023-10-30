@@ -2,7 +2,6 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -33,7 +32,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "sass": "sass src/assets/styles/main.scss src/assets/styles/css/index.css",
+    "sass": "sass src/Assets/styles/main.scss src/assets/styles/css/index.css",
     "watch:sass": "sass src/assets/styles/main.scss src/assets/styles/css/index.css --watch",
     "start:sass": "npm-run-all -p watch:sass start",
     "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' src/assets/styles/css/*.css -d src/assets/styles/css",
