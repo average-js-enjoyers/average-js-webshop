@@ -1,8 +1,8 @@
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Button from "react-bootstrap/esm/Button";
 
-const HomePage = () => (
+const HomeScreen = () => (
   <div className="Layout">
     <nav>
       <li>
@@ -18,7 +18,7 @@ const HomePage = () => (
         </Link>
       </li>
       <li>
-        <Link to="/userdata">
+        <Link to="/profile/edit">
           <button type="button">Userdata!</button>
         </Link>
       </li>
@@ -28,8 +28,7 @@ const HomePage = () => (
         </Link>
       </li>
     </nav>
-    <Outlet />
   </div>
 );
 
-export default HomePage;
+export default HomeScreen;

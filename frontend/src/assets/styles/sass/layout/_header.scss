@@ -1,2 +1,28 @@
 .header {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.header__top,
+.header__bot {
+  padding: 0;
+  margin: 0;
+}
+
+.header__top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__bot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+pre {
+  margin: 0;
 }
