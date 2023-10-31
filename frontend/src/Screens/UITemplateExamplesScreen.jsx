@@ -11,12 +11,22 @@ const UITemplateExamplesPage = () => {
   return (
     <>
       <Header />
-      <h1>UI Template Examples</h1>
-      <p className="lead">Router test:</p>
+      <h1 style={{ textAlign: "center" }}>UI Template Examples</h1>
+      <p style={{ fontSize: "1.25rem", textAlign: "center" }}>Router test:</p>
       <Outlet />
-      <p className="lead">UI Component Templates</p>
-      <Logo />
-      <Logo logoSize="small" />
+      <p style={{ fontSize: "1.25rem", textAlign: "center" }}>
+        UI Component Templates
+      </p>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Logo />
+        <Logo logoSize="small" />
+      </div>
       <ButtonTemplates />
       <TypographyTemplates />
       <Footer />

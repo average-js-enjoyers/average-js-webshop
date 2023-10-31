@@ -1,6 +1,4 @@
 import SignUpForm from "components/forms/SignUpForm";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { createUser } from "api";
 

@@ -1,9 +1,13 @@
-import React from "react";
-
 export default function Footer() {
   return (
     <footer className="footer">
-      <pre>
+      <pre
+        style={{
+          whiteSpace: "pre",
+          fontFamily: "monospace",
+          lineHeight: "normal",
+        }}
+      >
         {`
   _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
  |                                                                           |
