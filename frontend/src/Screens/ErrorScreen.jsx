@@ -1,6 +1,5 @@
 import React from "react";
 import { useRouteError } from "react-router-dom";
-import { Container, Row, Col, Alert } from "react-bootstrap";
 
 const ErrorScreen = () => {
   const error = useRouteError();
@@ -10,22 +9,32 @@ const ErrorScreen = () => {
   const errorStatusText = error?.statusText || "Error";
 
   return (
-    <Container className="mt-5">
-      <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-          <Alert variant="danger">
-            <Alert.Heading>{errorStatusText}</Alert.Heading>
+    <div style={{ marginTop: "3rem" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ width: "50%" }}>
+          <div
+            style={{
+              padding: "1rem",
+              border: "1px solid red",
+              borderRadius: "0.25rem",
+              backgroundColor: "#f8d7da",
+              color: "#721c24",
+            }}
+          >
+            <h4 style={{ marginTop: "0", color: "#721c24" }}>
+              {errorStatusText}
+            </h4>
             <p>{errorMessage}</p>
             <hr />
-            <p className="mb-0">
+            <p style={{ marginBottom: "0" }}>
               <small>
                 Error details: <i>{errorMessage}</i>
               </small>
             </p>
-          </Alert>
-        </Col>
-      </Row>
-    </Container>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

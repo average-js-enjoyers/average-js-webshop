@@ -1,23 +1,20 @@
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
-
 import Logo from "components/common/Logo";
 
 function Header() {
   return (
     <header className="header">
       <nav>
-        <Navbar className="header__top " expand="lg" collapseOnSelect>
+        <div className="header__top" role="navigation" aria-label="Main">
           <Logo logoSize="small" />
-        </Navbar>
-        <Navbar className="header__bot" expand="lg" collapseOnSelect>
-          <pre>
+        </div>
+        <div className="header__bot" role="navigation" aria-label="Secondary">
+          <pre
+            style={{
+              whiteSpace: "pre",
+              fontFamily: "monospace",
+              lineHeight: "normal",
+            }}
+          >
             {`
   _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
  |                                                                           |
@@ -26,7 +23,7 @@ function Header() {
  |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
       `}
           </pre>
-        </Navbar>
+        </div>
       </nav>
     </header>
   );

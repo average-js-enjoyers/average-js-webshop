@@ -1,58 +1,48 @@
-import Button from "react-bootstrap/Button";
-
 function ButtonTemplate() {
   return (
     <>
       <h3 className="py-3 mt-5">Button Template Examples</h3>
-      <Button variant="primary">Primary</Button>{" "}
-      <Button variant="outline-primary">Outline Prim.</Button> <hr />
-      <Button variant="secondary">Secondary</Button>{" "}
-      <Button variant="outline-secondary">Outline Sec.</Button> <hr />
-      <Button variant="success" className="btn--compact">
-        Success
-      </Button>{" "}
-      <Button variant="outline-success" className="btn--compact">
+      <button className="btn btn-primary">Primary</button>{" "}
+      <button className="btn btn-outline-primary">Outline Prim.</button> <hr />
+      <button className="btn btn-secondary">Secondary</button>{" "}
+      <button className="btn btn-outline-secondary">Outline Sec.</button> <hr />
+      <button className="btn btn-success btn--compact">Success</button>{" "}
+      <button className="btn btn-outline-success btn--compact">
         Outline Succ.
-      </Button>{" "}
+      </button>{" "}
       <hr />
-      <Button variant="warning" className="btn--compact">
-        Warning
-      </Button>{" "}
-      <Button variant="outline-warning" className="btn--compact">
+      <button className="btn btn-warning btn--compact">Warning</button>{" "}
+      <button className="btn btn-outline-warning btn--compact">
         Outline Warn.
-      </Button>{" "}
+      </button>{" "}
       <hr />
-      <Button variant="danger" className="btn--compact">
-        Danger
-      </Button>{" "}
-      <Button variant="outline-danger" className="btn--compact">
+      <button className="btn btn-danger btn--compact">Danger</button>{" "}
+      <button className="btn btn-outline-danger btn--compact">
         Outline Dang.
-      </Button>{" "}
+      </button>{" "}
       <hr />
-      <Button variant="info" className="btn--compact">
-        Info
-      </Button>{" "}
-      <Button variant="outline-info" className={`btn--compact btn--muted`}>
+      <button className="btn btn-info btn--compact">Info</button>{" "}
+      <button className="btn btn-outline-info btn--compact btn--muted">
         Outline Info
-      </Button>{" "}
+      </button>{" "}
       <hr />
-      <Button variant="light" className={`btn--compact btn--muted`}>
+      <button className="btn btn-light btn--compact btn--muted">
         Light
-      </Button>{" "}
-      <Button variant="outline-light" className={`btn--compact btn--muted`}>
+      </button>{" "}
+      <button className="btn btn-outline-light btn--compact btn--muted">
         Outline Light
-      </Button>{" "}
+      </button>{" "}
       <hr />
-      <Button variant="dark" className={`btn--compact btn--muted`}>
+      <button className="btn btn-dark btn--compact btn--muted">
         Dark
-      </Button>{" "}
-      <Button variant="outline-dark" className={`btn--compact btn--muted`}>
+      </button>{" "}
+      <button className="btn btn-outline-dark btn--compact btn--muted">
         Outline Dark
-      </Button>{" "}
+      </button>{" "}
       <hr />
-      <Button variant="link" className={`btn--compact btn--muted`}>
+      <button className="btn btn-link btn--compact btn--muted">
         Forgot password?
-      </Button>{" "}
+      </button>{" "}
     </>
   );
 }

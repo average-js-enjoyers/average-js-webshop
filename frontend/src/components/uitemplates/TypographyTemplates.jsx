@@ -1,7 +1,7 @@
 const TypographyTemplate = () => {
   return (
     <>
-      <h3 className="mt-5">Typography Template Examples</h3>
+      <h3>Typography Template Examples</h3>
       <hr />
       <h1>Welcome to Our Webshop</h1>
       <h2>Featured Products</h2>
