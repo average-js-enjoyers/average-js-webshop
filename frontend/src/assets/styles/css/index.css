@@ -81,9 +81,9 @@
     var(--warning-40) 0%,
     var(--warning-50) 100%
   );
-  --dropshadow-std: 2px 3px 5px 0px rgba(0, 0, 0, 0.25);
-  --dropshadow-std--hover: 2px 3px 12px 0px rgba(0, 0, 0, 0.15); /* Slightly larger blur, but lower opacity */
-  --dropshadow-std--active: 2px 3px 3px 0px rgba(0, 0, 0, 0.3); /* Smaller blur, but higher opacity */
+  --dropshadow-std: 1px 2px 5px 0px rgba(0, 0, 0, 0.25);
+  --dropshadow-std--hover: 1px 2px 12px 0px rgba(0, 0, 0, 0.2); /* Slightly larger blur, but lower opacity */
+  --dropshadow-std--active: 1px 2px 4px 0px rgba(0, 0, 0, 0.35); /* Smaller blur, but higher opacity */
   --dropshadow-muted: 2px 3px 5px 0px rgba(0, 0, 0, 0.1);
   --dropshadow-muted--hover: 2px 3px 12px 0px rgba(0, 0, 0, 0.08); /* Slightly larger blur, but lower opacity */
   --dropshadow-muted--active: 2px 3px 3px 0px rgba(0, 0, 0, 0.15); /* Smaller blur, but higher opacity */
@@ -580,11 +580,14 @@ a:visited {
   border-radius: 0.3rem;
   box-shadow: var(--dropshadow-std);
   background-color: var(--primary-100);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: all 0.15s ease-in-out;
 }
 .logo:hover {
-  transform: scale(1.03);
-  box-shadow: var(--dropshadow-hover);
+  box-shadow: var(--dropshadow-std--hover);
+  border-radius: 1rem;
+}
+.logo:active {
+  box-shadow: var(--dropshadow-std--active);
 }
 .logo__link {
   display: block;
@@ -845,15 +848,15 @@ main {
   background-image: linear-gradient(90deg, rgb(235, 255, 255) 0%, var(--grayscale-0) 100%);
   box-shadow: var(--dropshadow-std);
   cursor: pointer;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 .header__product-list-button:hover {
-  color: var(--grayscale-0);
-  transform: scale(1.05) translateY(0.1rem);
+  transform: scale(1.01);
+  box-shadow: var(--dropshadow-std--hover);
 }
 .header__product-list-button:active {
-  color: var(--grayscale-0);
-  transform: scale(0.975) translateY(0.05rem);
+  transform: scale(0.99);
+  box-shadow: var(--dropshadow-std--active);
 }
 .header__product-list-icon {
   margin-right: 1.5rem;
@@ -888,7 +891,6 @@ main {
 }
 .header__link-item:hover {
   color: var(--secondary-20);
-  transform: scale(1.05);
 }
 .header__link-item:not(:last-child) {
   padding: 0 5rem;
@@ -912,15 +914,17 @@ main {
   background-image: var(--warning-gradient-90deg);
   text-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.25);
   box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.15);
-  transition: all 0.15s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 .header__link-item--highlight:hover {
   color: var(--grayscale-0);
-  transform: scale(1.05) translateY(0.1rem);
+  transform: scale(1.03);
+  box-shadow: var(--dropshadow-std--hover);
 }
 .header__link-item--highlight:active {
   color: var(--grayscale-0);
-  transform: scale(0.975) translateY(0.05rem);
+  transform: scale(0.99);
+  box-shadow: var(--dropshadow-std--active);
 }
 .header__flex-util {
   height: 3rem;

@@ -4,8 +4,9 @@ $small-logo-font-size: 1.8rem;
 $logo-box-shadow: var(--dropshadow-std);
 $logo-background-color: var(--primary-100);
 $logo-font-color: var(--primary-10);
-$hover-box-shadow: var(--dropshadow-hover);
-$transition-duration: 0.3s;
+$hover-box-shadow: var(--dropshadow-std--hover);
+$active-box-shadow: var(--dropshadow-std--active);
+$transition-duration: 0.15s;
 
 .logo {
   width: 27rem;
@@ -13,11 +14,14 @@ $transition-duration: 0.3s;
   border-radius: $logo-border-radius;
   box-shadow: $logo-box-shadow;
   background-color: $logo-background-color;
-  transition: transform $transition-duration, box-shadow $transition-duration;
+  transition: all $transition-duration ease-in-out;
 
   &:hover {
-    transform: scale(1.03);
     box-shadow: $hover-box-shadow;
+    border-radius: 1rem;
+  }
+  &:active {
+    box-shadow: $active-box-shadow;
   }
 
   &__link {
