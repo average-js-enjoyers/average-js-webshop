@@ -60,14 +60,50 @@
   --warning-80: rgba(120, 80, 0, 1);
   --warning-90: rgba(90, 60, 0, 1);
   --warning-100: rgba(90, 45, 10, 1);
-  --dropshadow-std: 2px 3px 5px 0px rgba(0, 0, 0, 0.25);
-  --dropshadow-std--hover: 2px 3px 12px 0px rgba(0, 0, 0, 0.15); /* Slightly larger blur, but lower opacity */
-  --dropshadow-std--active: 2px 3px 3px 0px rgba(0, 0, 0, 0.3); /* Smaller blur, but higher opacity */
+  /* Primary Gradient */
+  --primary-gradient-0deg: linear-gradient(
+    0deg,
+    var(--primary-90) 0%,
+    var(--primary-50) 100%
+  );
+  --primary-gradient-90deg: linear-gradient(
+    90deg,
+    var(--primary-50) 0%,
+    var(--primary-90) 100%
+  );
+  --primary-gradient-270deg: linear-gradient(
+    270deg,
+    var(--primary-50) 0%,
+    var(--primary-90) 100%
+  );
+  --warning-gradient-90deg: linear-gradient(
+    90deg,
+    var(--warning-40) 0%,
+    var(--warning-50) 100%
+  );
+  --dropshadow-std: 1px 2px 5px 0px rgba(0, 0, 0, 0.25);
+  --dropshadow-std--hover: 1px 2px 12px 0px rgba(0, 0, 0, 0.2); /* Slightly larger blur, but lower opacity */
+  --dropshadow-std--active: 1px 2px 4px 0px rgba(0, 0, 0, 0.35); /* Smaller blur, but higher opacity */
   --dropshadow-muted: 2px 3px 5px 0px rgba(0, 0, 0, 0.1);
   --dropshadow-muted--hover: 2px 3px 12px 0px rgba(0, 0, 0, 0.08); /* Slightly larger blur, but lower opacity */
   --dropshadow-muted--active: 2px 3px 3px 0px rgba(0, 0, 0, 0.15); /* Smaller blur, but higher opacity */
 }
 
+/* .container {
+  width: 100%;
+  @include breakpoint('sm', 'max') {
+    width: 80%;
+  }
+  @include breakpoint('md', 'min') {
+    width: 60%;
+  }
+  @include breakpoint('lg', 'max') {
+    width: 40%;
+  }
+  @include breakpoint('xl', 'min') {
+    width: 20%;
+  }
+} */
 *,
 ::after,
 ::before {
@@ -89,6 +125,39 @@ input {
 
 ::selection {
   /* TBD */
+}
+
+/* SCROLLBAR */
+/* This styles the scrollbar track (the part the thumb moves along) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the tracking area */
+}
+
+/* This styles the scrollbar thumb (the part that is draggable) */
+::-webkit-scrollbar-thumb {
+  background: #888; /* color of the thumb */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color when the thumb is hovered over */
+}
+
+/* This styles the scrollbar button (the buttons at the end of the scrollbar) */
+::-webkit-scrollbar-button {
+  display: none; /* this will disable the buttons */
+}
+
+/* This styles the overall scrollbar width */
+::-webkit-scrollbar {
+  width: 10px; /* width of the vertical scrollbar */
+  height: 10px; /* height of the horizontal scrollbar */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: #888 #f1f1f1; /* thumb and track color */
 }
 
 *,
@@ -511,11 +580,14 @@ a:visited {
   border-radius: 0.3rem;
   box-shadow: var(--dropshadow-std);
   background-color: var(--primary-100);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: all 0.15s ease-in-out;
 }
 .logo:hover {
-  transform: scale(1.03);
-  box-shadow: var(--dropshadow-hover);
+  box-shadow: var(--dropshadow-std--hover);
+  border-radius: 1rem;
+}
+.logo:active {
+  box-shadow: var(--dropshadow-std--active);
 }
 .logo__link {
   display: block;
@@ -548,45 +620,360 @@ a:visited {
   font-size: 1.8rem;
 }
 
+.search-bar {
+  display: flex;
+  flex: 1;
+  margin: 0 3rem;
+  max-width: 75rem;
+  align-items: stretch;
+  min-height: 4.5rem;
+  border-radius: 10rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 0.1rem solid rgba(0, 55, 85, 0.2);
+  box-shadow: var(--dropshadow-muted);
+}
+@media (max-width: 1600px) {
+  .search-bar {
+    max-width: 65rem;
+  }
+}
+.search-bar__select {
+  display: block;
+  padding: 0.5rem 1rem;
+  border: 0.1rem solid transparent;
+  border-bottom-left-radius: 10rem;
+  border-top-left-radius: 10rem;
+  font-size: 1.4rem;
+  max-width: 15rem;
+  cursor: pointer;
+  color: var(--primary-90);
+  background-color: var(--secondary-0);
+  transition: all 0.2s ease-in-out;
+}
+.search-bar__select:hover {
+  background-color: var(--secondary-20);
+}
+.search-bar__select:active {
+  background-color: var(--secondary-30);
+}
+.search-bar__select option {
+  color: var(--primary-90);
+  background-color: var(--secondary-0);
+}
+.search-bar__input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 0.1rem solid transparent;
+  font-size: 1.4rem;
+  outline: none;
+  color: var(--primary-90);
+  padding-left: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+.search-bar__input::placeholder {
+  color: var(--primary-70);
+  text-align: center;
+  font-variant: small-caps;
+  font-size: 1.6rem;
+}
+.search-bar__input:focus {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.search-bar__button {
+  width: 6rem;
+  border: 0.1rem solid transparent;
+  border-top-right-radius: 10rem;
+  border-bottom-right-radius: 10rem;
+  background-color: var(--secondary-0);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+.search-bar__button:hover {
+  background-color: var(--secondary-20);
+  transform: scale(1.03);
+}
+.search-bar__button:active {
+  background-color: var(--secondary-30);
+  transform: scale(0.97);
+}
+.search-bar__icon {
+  font-weight: 800;
+  font-style: normal;
+  color: var(--primary-90);
+  font-size: 1.8rem;
+}
+
+main {
+  /* For development purposes TODO */
+  min-height: calc(100vh - 12rem - 20rem);
+  position: relative;
+  z-index: 0;
+  background-color: var(--grayscale-0);
+  padding: 6rem 15% 6rem;
+  width: 100%;
+}
+@media (max-width: 1900px) {
+  main {
+    padding: 6rem 10% 6rem;
+  }
+}
+@media (max-width: 1200px) {
+  main {
+    padding: 6rem 5% 6rem;
+  }
+}
+@media (max-width: 992px) {
+  main {
+    padding: 4.5rem 3rem 4.5rem;
+  }
+}
+@media (max-width: 768px) {
+  main {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
 .header {
   display: flex;
   flex-direction: column;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 12rem;
+}
+.header__top, .header__bot {
   padding: 0;
   margin: 0;
+  position: relative;
+  padding: 0 15%;
+  width: 100%;
 }
-
-.header__top,
-.header__bot {
-  padding: 0;
-  margin: 0;
+@media (max-width: 1900px) {
+  .header__top, .header__bot {
+    padding: 0 10%;
+  }
 }
-
+@media (max-width: 1200px) {
+  .header__top, .header__bot {
+    padding: 0 5%;
+  }
+}
+@media (max-width: 992px) {
+  .header__top, .header__bot {
+    padding: 0 3rem;
+  }
+}
 .header__top {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  z-index: 2;
+  height: 9rem;
+  background-image: var(--primary-gradient-90deg);
+  box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.2);
 }
-
+.header__top-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__icon-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  width: 7rem;
+  cursor: pointer;
+}
+.header__icon-container:not(:last-child) {
+  margin-right: 3rem;
+}
+@media (max-width: 1200px) {
+  .header__icon-container:not(:last-child) {
+    margin-right: 1.5rem;
+  }
+}
+@media (max-width: 992px) {
+  .header__icon-container:not(:last-child) {
+    margin-right: 1rem;
+  }
+}
+.header__icon-container .header__icon, .header__icon-container .header__icon-text {
+  transition: all 0.1s ease-in-out;
+}
+.header__icon-container:hover .header__icon, .header__icon-container:hover .header__icon-text {
+  color: var(--secondary-20);
+}
+.header__icon-container:active .header__icon, .header__icon-container:active .header__icon-text {
+  color: var(--secondary-40);
+}
+.header__icon {
+  font-size: 3rem;
+  line-height: 3rem;
+  font-style: normal;
+  font-weight: 800;
+  color: var(--secondary-0);
+}
+.header__icon-text {
+  font-size: 1.2rem;
+  line-height: 2.4rem;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  color: var(--secondary-0);
+}
 .header__bot {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  z-index: 0;
+  height: 3rem;
+  background-image: var(--primary-gradient-270deg);
+  box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.2);
 }
-
-pre {
-  margin: 0;
+.header__product-list-button {
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  width: 15rem;
+  border-radius: 0;
+  border: none;
+  background-image: linear-gradient(90deg, rgb(235, 255, 255) 0%, var(--grayscale-0) 100%);
+  box-shadow: var(--dropshadow-std);
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.header__product-list-button:hover {
+  transform: scale(1.01);
+  box-shadow: var(--dropshadow-std--hover);
+}
+.header__product-list-button:active {
+  transform: scale(0.99);
+  box-shadow: var(--dropshadow-std--active);
+}
+.header__product-list-icon {
+  margin-right: 1.5rem;
+  line-height: 3rem;
+  font-style: normal;
+  font-size: 1.6rem;
+  color: var(--primary-100);
+}
+.header__product-list-text {
+  line-height: 3rem;
+  color: var(--primary-100);
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+}
+.header__link-list {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+.header__link-item {
+  font-size: 1.7rem;
+  color: var(--grayscale-0);
+  letter-spacing: 0.1rem;
+  font-variant: small-caps;
+  font-weight: 500;
+  height: 3rem;
+  line-height: 3rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.header__link-item:hover {
+  color: var(--secondary-20);
+}
+.header__link-item:not(:last-child) {
+  padding: 0 5rem;
+}
+@media (max-width: 1600px) {
+  .header__link-item:not(:last-child) {
+    padding: 0 3rem;
+  }
+}
+@media (max-width: 1200px) {
+  .header__link-item:not(:last-child) {
+    padding: 0 2rem;
+  }
+}
+@media (max-width: 992px) {
+  .header__link-item:not(:last-child) {
+    padding: 0 1.5rem;
+  }
+}
+.header__link-item--highlight {
+  background-image: var(--warning-gradient-90deg);
+  text-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.15);
+  transition: all 0.1s ease-in-out;
+}
+.header__link-item--highlight:hover {
+  color: var(--grayscale-0);
+  transform: scale(1.03);
+  box-shadow: var(--dropshadow-std--hover);
+}
+.header__link-item--highlight:active {
+  color: var(--grayscale-0);
+  transform: scale(0.99);
+  box-shadow: var(--dropshadow-std--active);
+}
+.header__flex-util {
+  height: 3rem;
+  width: 15rem;
+}
+@media (max-width: 1200px) {
+  .header__flex-util {
+    height: 3rem;
+    width: 5rem;
+  }
 }
 
 .footer {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+  flex-direction: column;
   margin: 0;
+  position: relative;
+  width: 100%;
+  height: 12rem;
 }
-
-pre {
+.footer__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem 15% 15rem;
   margin: 0;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  background-image: var(--primary-gradient-0deg);
+  box-shadow: 0 -0.2rem 1rem rgba(0, 0, 0, 0.33);
+}
+@media (max-width: 1900px) {
+  .footer__container {
+    padding: 6rem 10% 15rem;
+  }
+}
+@media (max-width: 1200px) {
+  .footer__container {
+    padding: 6rem 5% 15rem;
+  }
+}
+@media (max-width: 992px) {
+  .footer__container {
+    padding: 6rem 3rem 15rem;
+  }
+}
+.footer__container div {
+  color: var(--grayscale-0);
 }
 
 /*# sourceMappingURL=index.css.map */

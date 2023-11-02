@@ -68,11 +68,38 @@
   --warning-90: rgba(90, 60, 0, 1);
   --warning-100: rgba(90, 45, 10, 1);
 
+  // ################### GRADIENTS ###################
+
+  /* Primary Gradient */
+  --primary-gradient-0deg: linear-gradient(
+    0deg,
+    var(--primary-90) 0%,
+    var(--primary-50) 100%
+  );
+
+  --primary-gradient-90deg: linear-gradient(
+    90deg,
+    var(--primary-50) 0%,
+    var(--primary-90) 100%
+  );
+
+  --primary-gradient-270deg: linear-gradient(
+    270deg,
+    var(--primary-50) 0%,
+    var(--primary-90) 100%
+  );
+
+  --warning-gradient-90deg: linear-gradient(
+    90deg,
+    var(--warning-40) 0%,
+    var(--warning-50) 100%
+  );
+
   // ################### SHADOWS ###################
 
-  --dropshadow-std: 2px 3px 5px 0px rgba(0, 0, 0, 0.25);
-  --dropshadow-std--hover: 2px 3px 12px 0px rgba(0, 0, 0, 0.15); /* Slightly larger blur, but lower opacity */
-  --dropshadow-std--active: 2px 3px 3px 0px rgba(0, 0, 0, 0.3); /* Smaller blur, but higher opacity */
+  --dropshadow-std: 1px 2px 5px 0px rgba(0, 0, 0, 0.25);
+  --dropshadow-std--hover: 1px 2px 12px 0px rgba(0, 0, 0, 0.2); /* Slightly larger blur, but lower opacity */
+  --dropshadow-std--active: 1px 2px 4px 0px rgba(0, 0, 0, 0.35); /* Smaller blur, but higher opacity */
 
   --dropshadow-muted: 2px 3px 5px 0px rgba(0, 0, 0, 0.1);
   --dropshadow-muted--hover: 2px 3px 12px 0px rgba(0, 0, 0, 0.08); /* Slightly larger blur, but lower opacity */

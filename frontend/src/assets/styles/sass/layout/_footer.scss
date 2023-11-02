@@ -1,11 +1,43 @@
 .footer {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-}
+  flex-direction: column;
 
-pre {
   margin: 0;
+
+  position: relative;
+
+  width: 100%;
+  height: 12rem;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 6rem 15% 15rem;
+    margin: 0;
+
+    position: relative;
+
+    width: 100%;
+
+    z-index: 1;
+
+    background-image: var(--primary-gradient-0deg);
+    box-shadow: 0 -0.2rem 1rem rgba(0, 0, 0, 0.33);
+
+    @include breakpoint("4xl") {
+      padding: 6rem 10% 15rem;
+    }
+    @include breakpoint("xl") {
+      padding: 6rem 5% 15rem;
+    }
+    @include breakpoint("lg") {
+      padding: 6rem 3rem 15rem;
+    }
+
+    & div {
+      color: var(--grayscale-0);
+    }
+  }
 }
