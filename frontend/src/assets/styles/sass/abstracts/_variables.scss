@@ -68,6 +68,33 @@
   --warning-90: rgba(90, 60, 0, 1);
   --warning-100: rgba(90, 45, 10, 1);
 
+  // ################### GRADIENTS ###################
+
+  /* Primary Gradient */
+  --primary-gradient-0deg: linear-gradient(
+    0deg,
+    var(--primary-90) 0%,
+    var(--primary-50) 100%
+  );
+
+  --primary-gradient-90deg: linear-gradient(
+    90deg,
+    var(--primary-50) 0%,
+    var(--primary-90) 100%
+  );
+
+  --primary-gradient-270deg: linear-gradient(
+    270deg,
+    var(--primary-50) 0%,
+    var(--primary-90) 100%
+  );
+
+  --warning-gradient-90deg: linear-gradient(
+    90deg,
+    var(--warning-40) 0%,
+    var(--warning-50) 100%
+  );
+
   // ################### SHADOWS ###################
 
   --dropshadow-std: 2px 3px 5px 0px rgba(0, 0, 0, 0.25);

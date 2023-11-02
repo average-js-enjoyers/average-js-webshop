@@ -1,0 +1,116 @@
+.search-bar {
+  display: flex;
+  flex: 1;
+
+  margin: 0 3rem;
+  max-width: 75rem;
+
+  @include breakpoint("3xl") {
+    max-width: 65rem;
+  }
+
+  align-items: stretch;
+
+  min-height: 4.5rem;
+
+  border-radius: 10rem;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 0.1rem solid rgba(0, 55, 85, 0.2);
+
+  box-shadow: var(--dropshadow-muted);
+
+  &__select {
+    display: block;
+
+    padding: 0.5rem 1rem;
+
+    border: 0.1rem solid transparent;
+
+    border-bottom-left-radius: 10rem;
+    border-top-left-radius: 10rem;
+
+    font-size: 1.4rem;
+
+    max-width: 15rem;
+
+    cursor: pointer;
+
+    color: var(--primary-90);
+    background-color: var(--secondary-0);
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: var(--secondary-20);
+    }
+    &:active {
+      background-color: var(--secondary-30);
+    }
+
+    & option {
+      color: var(--primary-90);
+      background-color: var(--secondary-0);
+    }
+  }
+
+  &__input {
+    flex: 1;
+    padding: 0.5rem;
+
+    border: 0.1rem solid transparent;
+
+    font-size: 1.4rem;
+
+    outline: none;
+
+    color: var(--primary-90);
+    padding-left: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.05rem;
+
+    background-color: transparent;
+
+    transition: all 0.2s ease-in-out;
+
+    &::placeholder {
+      color: var(--primary-70);
+      text-align: center;
+      font-variant: small-caps;
+      font-size: 1.6rem;
+    }
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  &__button {
+    width: 6rem;
+
+    border: 0.1rem solid transparent;
+    border-top-right-radius: 10rem;
+    border-bottom-right-radius: 10rem;
+
+    background-color: var(--secondary-0);
+
+    cursor: pointer;
+
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      background-color: var(--secondary-20);
+      transform: scale(1.03);
+    }
+    &:active {
+      background-color: var(--secondary-30);
+      transform: scale(0.97);
+    }
+  }
+
+  &__icon {
+    font-weight: 800;
+    font-style: normal;
+    color: var(--primary-90);
+    font-size: 1.8rem;
+  }
+}

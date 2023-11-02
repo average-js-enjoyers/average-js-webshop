@@ -1,21 +1,13 @@
 export default function Footer() {
   return (
     <footer className="footer">
-      <pre
-        style={{
-          whiteSpace: "pre",
-          fontFamily: "monospace",
-          lineHeight: "normal",
-        }}
-      >
-        {`
-  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
- |                                                                           |
- |                            THIS IS THE FOOTER                             |
- |                                                                           |
- |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
-      `}
-      </pre>
+      <div className="footer__container">
+        <div className="footer__left">Gyurcsány Ferenc</div>
+
+        <div className="footer__center">To Do</div>
+
+        <div className="footer__right">Orbán Viktor</div>
+      </div>
     </footer>
   );
 }
