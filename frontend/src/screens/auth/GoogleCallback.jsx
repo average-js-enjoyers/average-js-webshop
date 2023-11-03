@@ -67,10 +67,12 @@ const GoogleCallback = () => {
       }
 
       console.log("User is authenticated", data);
-      navigate("/"); // Redirect to the homepage or dashboard on success
+      // Redirect to the homepage or dashboard on success
+      // Pass a state object that includes a success message or flag
+      navigate("/", { state: { signInSuccess: true } });
     } catch (error) {
       console.error("Error during token exchange:", error);
-      navigate("/signin");
+      navigate("/signin", { state: { signInError: error.message } });
     }
   };
 
