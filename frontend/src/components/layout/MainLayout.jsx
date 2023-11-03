@@ -7,7 +7,7 @@ const MainLayout = () => {
   return (
     <>
       <Header />
-      <main>
+      <main className="main-layout">
         <Outlet /> {/* This is where child routes will be rendered */}
       </main>
       <Footer />
