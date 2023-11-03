@@ -19,6 +19,8 @@ import EditProfileScreen from "screens/profile/EditProfileScreen";
 import SignInScreen from "screens/auth/SignInScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
 
+import GoogleCallback from "screens/auth/GoogleCallback";
+
 import "assets/styles/css/index.css";
 
 // Recommended (new) router setup
@@ -37,6 +39,8 @@ const router = createBrowserRouter(
       {/* other routes */}
       {/*  <Route path="/product/:id" element={<ProductScreen />} /> */}
       {/* <Route path="/cart" element={<CartScreen />} /> */}
+
+      <Route path="/oauth/google" element={<GoogleCallback />} />
 
       {/* For Development: */}
       <Route path="/ui-template" element={<UITemplateExamplesScreen />} />

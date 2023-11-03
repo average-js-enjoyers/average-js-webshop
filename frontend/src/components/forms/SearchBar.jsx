@@ -1,10 +1,8 @@
 function SearchBar() {
   return (
     <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
-      <select className="search-bar__select">
-        <option value="All" selected>
-          All categories...
-        </option>
+      <select defaultValue={"All"} className="search-bar__select">
+        <option value="All">All categories...</option>
         <option value="Computers">Computers</option>
         <option value="Mobile devices">Mobile devices</option>
         <option value="Household appliances">Household appliances</option>

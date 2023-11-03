@@ -1,4 +1,7 @@
 import { useState } from "react";
+import GoogleSignInButton from "components/forms/GoogleSignInButton";
+
+import jsSHA from "jssha";
 
 function SignInForm({ onSignUp }) {
   const [email, setEmail] = useState("");
@@ -13,32 +16,129 @@ function SignInForm({ onSignUp }) {
     });
   };
 
+  // You might need to use a more secure random generator for production code
+  const generateRandomString = (length) => {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+
+  const generateCodeVerifier = () => {
+    // The code verifier should be between 43 and 128 characters long
+    const codeVerifier = generateRandomString(43);
+    sessionStorage.setItem("codeVerifier", codeVerifier);
+    return codeVerifier;
+  };
+
+  const generateCodeChallenge = (codeVerifier) => {
+    const shaObj = new jsSHA("SHA-256", "TEXT");
+    shaObj.update(codeVerifier);
+    const hash = shaObj.getHash("HEX");
+    return base64urlencode(hash);
+  };
+
+  // Helper function to Base64URL encode a string
+  const base64urlencode = (str) => {
+    // Convert the hex string to a Base64 string
+    const base64 = btoa(
+      String.fromCharCode.apply(
+        null,
+        str.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
+      )
+    );
+    // Replace non-URL-safe characters with their URL-safe equivalents
+    return base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  };
+
+  // TODO - Implement higher security for Google Sign In
+  const handleSignInClick = () => {
+    function generateAuthUrl({
+      clientId,
+      redirectUri,
+      scope,
+      state,
+      responseType = "code",
+      codeChallenge,
+      prompt = "consent",
+      accessType = "offline",
+      codeChallengeMethod = "S256",
+    }) {
+      // Construct the base URL with required query parameters
+      const baseUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+      const params = new URLSearchParams({
+        client_id: clientId,
+        redirect_uri: redirectUri,
+        scope: scope,
+        state: state,
+        response_type: responseType,
+        prompt: prompt,
+        access_type: accessType,
+        code_challenge: codeChallenge,
+        code_challenge_method: codeChallengeMethod,
+      });
+
+      // Return the full authentication URL
+      return `${baseUrl}?${params.toString()}`;
+    }
+
+    // Usage:
+    const options = {
+      clientId:
+        "1053966644924-fornicn3hjv71v74tshvep32sa6u7erl.apps.googleusercontent.com",
+      redirectUri: "http://localhost:3000/oauth/google",
+      scope:
+        "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
+      state: generateRandomStateValue(),
+      codeChallenge: generateCodeChallenge(generateCodeVerifier()),
+    };
+
+    const authUrl = generateAuthUrl(options);
+
+    window.location.href = authUrl;
+
+    console.log(authUrl);
+  };
+
+  const generateRandomStateValue = () => {
+    // Replace this with your method of generating a random string
+    return Math.random().toString(36).substring(2, 15);
+  };
+
   return (
-    <form className="SignUpFields" onSubmit={handleSubmit}>
-      <div className="control">
-        <label htmlFor="email">E-mail:</label>
-        <input
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          name="email"
-          id="email"
-        />
-      </div>
+    <>
+      <form className="" onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="email">E-mail:</label>
+          <input
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            id="email"
+          />
+        </div>
 
-      <div className="control">
-        <label htmlFor="nonHashedPassword">Password:</label>
-        <input
-          type="password"
-          onChange={(e) => setnonHashedPassword(e.target.value)}
-          name="nonHashedPassword"
-          id="nonHashedPassword"
-        />
-      </div>
+        <div>
+          <label htmlFor="nonHashedPassword">Password:</label>
+          <input
+            type="password"
+            onChange={(e) => setnonHashedPassword(e.target.value)}
+            name="nonHashedPassword"
+            id="nonHashedPassword"
+          />
+        </div>
 
-      <div className="button">
-        <button type="submit">Sign In</button>
-      </div>
-    </form>
+        <div className="button">
+          <button type="submit">Sign In</button>
+        </div>
+      </form>
+
+      <GoogleSignInButton onSignIn={handleSignInClick} />
+    </>
   );
 }
 

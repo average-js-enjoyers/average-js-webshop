@@ -1,6 +1,6 @@
 import SignUpForm from "components/forms/SignUpForm";
 
-import { createUser } from "api";
+import { createUser, handleSignUp } from "api";
 
 const SignUpScreen = () => {
   const handleSignUp = (user) => {
