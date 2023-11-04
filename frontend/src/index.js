@@ -7,45 +7,64 @@ import {
   Route,
 } from "react-router-dom";
 
+// APP LEVEL COMPONENTS
+
 import App from "App";
 import MainLayout from "components/layout/MainLayout";
+
+// CONTEXTS
+
+import GlobalContextProvider from "context/GlobalContext";
+
+// SCREENS
 
 import HomeScreen from "screens/HomeScreen";
 import ErrorScreen from "screens/ErrorScreen";
 import SignUpScreen from "screens/auth/SignUpScreen";
-import UITemplateExamplesScreen from "screens/UITemplateExamplesScreen";
 import ViewProfileScreen from "screens/profile/ViewProfileScreen";
 import EditProfileScreen from "screens/profile/EditProfileScreen";
 import SignInScreen from "screens/auth/SignInScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
+import PrivacyPolicyScreen from "screens/PrivacyPolicyScreen";
 
-import GoogleCallback from "screens/auth/GoogleCallback";
+import GoogleCallbackScreen from "screens/auth/GoogleCallbackScreen";
+import FacebookCallbackScreen from "screens/auth/FacebookCallbackScreen";
+// import UITemplateExamplesScreen from "screens/UITemplateExamplesScreen";
+
+// STYLES
 
 import "assets/styles/css/index.css";
 
 // Recommended (new) router setup
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
+    <Route
+      path="/"
+      element={
+        <GlobalContextProvider>
+          <App />
+        </GlobalContextProvider>
+      }
+    >
       <Route element={<MainLayout />}>
         <Route index element={<HomeScreen />} />
         <Route path="/profile/edit" element={<EditProfileScreen />} />
         <Route path="/profile" element={<ViewProfileScreen />} />
+
+        <Route path="/privacy-policy" element={<PrivacyPolicyScreen />} />
       </Route>
 
-      <Route path="/signin" element={<SignInScreen />} />
       <Route path="/signup" element={<SignUpScreen />} />
+      <Route path="/signin" element={<SignInScreen />} />
+      <Route path="/onboard" element={"Fasz"} />
 
-      {/* other routes */}
-      {/*  <Route path="/product/:id" element={<ProductScreen />} /> */}
-      {/* <Route path="/cart" element={<CartScreen />} /> */}
-
-      <Route path="/oauth/google" element={<GoogleCallback />} />
-
-      {/* For Development: */}
-      <Route path="/ui-template" element={<UITemplateExamplesScreen />} />
+      <Route path="/oauth/google" element={<GoogleCallbackScreen />} />
+      <Route path="/oauth/facebook" element={<FacebookCallbackScreen />} />
 
       <Route path="*" element={<NotFoundScreen />} />
+
+      {/* TODO For Development: 
+      <Route path="/ui-template" element={<UITemplateExamplesScreen />} /> */}
     </Route>
   ),
   {
@@ -53,41 +72,6 @@ const router = createBrowserRouter(
     errorElement: <ErrorScreen />,
   }
 );
-
-// Traditional router setup
-//import Button from "react-bootstrap/Button";
-/* const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomeScreen />,
-    errorElement: <ErrorScreen />,
-    children: [
-      {
-        path: "/signup",
-        element: <SignUpScreen />,
-      },
-      {
-        path: "/profile/edit",
-        element: <EditProfileScreen />,
-      },
-      {
-        path: "/signin",
-        element: <SignInScreen />,
-      },
-    ],
-  },
-  {
-    path: "/ui-template",
-    element: <UITemplateExamplesScreen />,
-    errorElement: <ErrorScreen />,
-    children: [
-      {
-        path: "example",
-        element: <Button variant="primary">Go To Example</Button>,
-      },
-    ],
-  },
-]); */
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -1,5 +1,5 @@
 import Logo from "components/common/Logo";
-import SearchBar from "components/forms/SearchBar";
+import SearchBar from "components/navigation/SearchBar";
 
 function Header() {
   return (
