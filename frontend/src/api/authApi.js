@@ -14,16 +14,6 @@ export async function createUser(user) {
   }
 }
 
-export function signIn(user) {
-  return fetch("/api/users/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  }).then((res) => res.json());
-}
-
 export function modifyUser(user) {
   return "I am modifying the user 🪄";
 }
@@ -44,6 +34,5 @@ export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
 
   sessionStorage.setItem("accessToken", res.token);
 
-  // For the purpose of this example, we'll mock the user info
   return res.data.user;
 }

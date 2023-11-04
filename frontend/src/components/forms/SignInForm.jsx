@@ -12,14 +12,6 @@ function SignInForm() {
   const [email, setEmail] = useState("");
   const [nonHashedPassword, setnonHashedPassword] = useState("");
 
-  /*   const handleSubmit = (e) => {
-    e.preventDefault();
-    signIn({
-      emailAddress: email,
-      password: nonHashedPassword,
-    });
-  }; */
-
   const signInError = location.state?.signInError;
 
   useEffect(() => {
@@ -53,7 +45,7 @@ function SignInForm() {
         className=""
         onSubmit={(e) => {
           e.preventDefault();
-          // TODO: Own backend signIn function call should be here.
+          signIn(email, nonHashedPassword);
         }}
       >
         <div>

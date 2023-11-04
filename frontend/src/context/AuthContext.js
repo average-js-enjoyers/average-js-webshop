@@ -139,15 +139,41 @@ export const AuthProvider = ({ children }) => {
   );
 
   const signIn = useCallback(
-    async (user) => {
+    async (email, password) => {
+      const user = {
+        emailAddress: email,
+        password: password,
+      };
+
       try {
-        const data = await apiSignIn(user);
-        setAuthState({ isAuthenticated: true, user: data.user });
-        sessionStorage.setItem("accessToken", data.accessToken);
-        navigate("/", { state: { signInSuccess: true } });
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        });
+
+        const res = await response.json();
+        const userInfo = res.data.user;
+
+        if (!response.ok) {
+          throw new Error(res.error || "Failed to exchange code for tokens.");
+        }
+
+        setAuthState({ isAuthenticated: true, user: userInfo });
+        sessionStorage.setItem("accessToken", res.token);
+
+        if (!userInfo.emailConfirmed) {
+          navigate("/onboard", { replace: true });
+        } else {
+          // Redirect the user to the homepage or dashboard on successful sign-in
+          navigate("/", { state: { signInSuccess: true } });
+        }
       } catch (error) {
-        // handle error, maybe set some state to show an error message
-        console.error(error);
+        // Handle any errors that occur during the fetch
+        console.error("Error during signIn:", error);
+        throw error; // Rethrow the error if you want to handle it at a higher level
       }
     },
     [navigate]
@@ -170,13 +196,9 @@ export const AuthProvider = ({ children }) => {
   const signOut = useCallback(() => {
     // Clear the application session
     sessionStorage.removeItem("accessToken");
-    sessionStorage.removeItem("refreshToken");
-    sessionStorage.removeItem("oauthState");
-    sessionStorage.removeItem("codeVerifier");
+    setAuthState({ isAuthenticated: false, user: null });
     // Redirect to the sign-in page or home page
     navigate("/", { replace: true, state: { signOutSuccess: true } });
-
-    setAuthState({ isAuthenticated: false, user: null });
 
     // Optionally, sign out from Google too. Uncomment the following line if needed.
     // window.location.href = 'https://accounts.google.com/Logout';
