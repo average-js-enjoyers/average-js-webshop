@@ -1,13 +1,17 @@
+//src/screens/HomeScreen.jsx
 import React from "react";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "context/AuthContext";
 
 import SignOutButton from "components/forms/SignOutButton";
 
 const HomeScreen = () => {
-  const location = useLocation();
-  const signOutSuccess = location.state?.signOutSuccess;
-  const signInSuccess = location.state?.signInSuccess;
+  const { isAuthenticated, user, signIn, signOut } = useAuth();
+
+  const location = useLocation(); // Use the useLocation hook here
+  // Check for the navigation state
+  const { signInSuccess, signOutSuccess } = location.state || {};
+
   return (
     <div className="Layout">
       {signInSuccess && (
