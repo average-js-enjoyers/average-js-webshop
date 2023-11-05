@@ -1,45 +1,29 @@
+//src/utils/oauthHelpers.js
 import jsSHA from "jssha";
 
-// Google Constants
-export const clientId =
-  "1053966644924-fornicn3hjv71v74tshvep32sa6u7erl.apps.googleusercontent.com";
-export const clientSecret = "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";
-export const redirectUri = "http://localhost:3000/oauth/google";
-export const scope =
-  "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile";
+import oauthConfig from "utils/oauthConfig";
 
-// Facebook Constants
-export const facebookAppId = "1781823298942364";
-export const facebookAppSecret = "d92dfb2a0f4eb0ad604b0052b97c253f";
-export const facebookRedirectUri = "http://localhost:3000/oauth/facebook";
-export const facebookScope = "email public_profile";
+export function getAuthUrl(provider, state, codeChallenge) {
+  const { clientId, redirectUri, scope, baseUrl } = oauthConfig[provider];
 
-export function getGoogleAuthUrl({
-  clientId,
-  redirectUri,
-  scope,
-  state,
-  responseType = "code",
-  codeChallenge,
-  prompt = "consent",
-  accessType = "offline",
-  codeChallengeMethod = "S256",
-}) {
-  // Construct the base URL with required query parameters
-  const baseUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+  const responseType = "code";
+  const codeChallengeMethod = "S256";
+
   const params = new URLSearchParams({
     client_id: clientId,
     redirect_uri: redirectUri,
     scope: scope,
     state: state,
     response_type: responseType,
-    prompt: prompt,
-    access_type: accessType,
     code_challenge: codeChallenge,
     code_challenge_method: codeChallengeMethod,
   });
 
-  // Return the full authentication URL
+  if (provider === "google") {
+    params.append("prompt", "consent");
+    params.append("access_type", "offline");
+  }
+
   return `${baseUrl}?${params.toString()}`;
 }
 
@@ -72,31 +56,6 @@ function generateRandomString(length) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
-
-export function getFacebookAuthUrl({
-  facebookAppId,
-  facebookRedirectUri,
-  state,
-  facebookScope,
-  codeChallenge,
-  responseType = "code",
-  codeChallengeMethod = "S256",
-}) {
-  // Construct the base URL with required query parameters
-  const baseUrl = "https://www.facebook.com/v18.0/dialog/oauth";
-  const params = new URLSearchParams({
-    client_id: facebookAppId,
-    redirect_uri: facebookRedirectUri,
-    state: state,
-    scope: facebookScope,
-    response_type: responseType,
-    code_challenge: codeChallenge,
-    code_challenge_method: codeChallengeMethod,
-  });
-
-  // Return the full authentication URL
-  return `${baseUrl}?${params.toString()}`;
 }
 
 // Helper function to Base64URL encode a string

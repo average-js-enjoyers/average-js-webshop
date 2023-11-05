@@ -8,6 +8,8 @@ export async function createUser(user) {
       },
       body: JSON.stringify(user),
     });
+    const data = response.json();
+    return data;
   } catch (error) {
     console.error(error);
     throw new Error("Failed to create user");
@@ -35,4 +37,11 @@ export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
   sessionStorage.setItem("accessToken", res.token);
 
   return res.data.user;
+}
+
+export function handleSignUp(user) {
+  console.log(user);
+  createUser(user).then(() => {
+    console.log("this works");
+  });
 }

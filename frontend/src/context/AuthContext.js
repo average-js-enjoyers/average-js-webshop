@@ -2,19 +2,13 @@
 import React, { createContext, useState, useContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { createUser as apiCreateUser, signIn as apiSignIn } from "api";
+import { createUser as apiCreateUser } from "api";
+
 import {
-  clientId,
-  facebookAppId,
-  redirectUri,
-  facebookRedirectUri,
-  scope,
-  facebookScope,
-  getGoogleAuthUrl,
   generateRandomStateValue,
   generateCodeChallenge,
   generateCodeVerifier,
-  getFacebookAuthUrl,
+  getAuthUrl,
 } from "utils/oauthHelpers";
 
 import { fetchUserInfoAndGetNewToken } from "api";
@@ -32,17 +26,12 @@ export const AuthProvider = ({ children }) => {
   });
 
   const signInWithGoogle = useCallback(() => {
-    // TODO - Implement higher security for Google Sign In
+    // TODO - Implement higher security with state
     const state = generateRandomStateValue();
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = generateCodeChallenge(codeVerifier);
 
-    const authUrl = getGoogleAuthUrl({
-      clientId,
-      redirectUri,
-      scope,
-      codeChallenge,
-    });
+    const authUrl = getAuthUrl("google", state, codeChallenge);
 
     window.location.href = authUrl;
 
@@ -85,23 +74,14 @@ export const AuthProvider = ({ children }) => {
   );
 
   const signInWithFacebook = useCallback(() => {
-    // TODO - Implement higher security for Google Sign In
+    // TODO - Implement higher security with state
     const state = generateRandomStateValue();
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = generateCodeChallenge(codeVerifier);
 
-    const authUrl = getFacebookAuthUrl({
-      facebookAppId,
-      facebookRedirectUri,
-      state,
-      facebookScope,
-      codeChallenge,
-    });
+    const authUrl = getAuthUrl("facebook", state, codeChallenge);
 
     window.location.href = authUrl;
-
-    // TODO - Remove later
-    console.log(authUrl);
   }, []);
 
   // This function will be called after successfully receiving tokens from Facebook
@@ -184,7 +164,11 @@ export const AuthProvider = ({ children }) => {
       try {
         const data = await apiCreateUser(user);
         // Maybe sign in the user directly or set some state to confirm registration
-        navigate("/signin", { state: { signUpSuccess: true } });
+        // TODO - Implement sign in after sign up
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        navigate("/onboard", { state: { signUpSuccess: true } });
       } catch (error) {
         // handle error
         console.error(error);
@@ -208,6 +192,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         ...authState,
+        signUp,
         signIn,
         signInWithGoogle,
         signInWithGoogleToken,
