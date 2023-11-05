@@ -26,9 +26,7 @@ import EditProfileScreen from "screens/profile/EditProfileScreen";
 import SignInScreen from "screens/auth/SignInScreen";
 import NotFoundScreen from "screens/NotFoundScreen";
 import PrivacyPolicyScreen from "screens/PrivacyPolicyScreen";
-
-import GoogleCallbackScreen from "screens/auth/GoogleCallbackScreen";
-import FacebookCallbackScreen from "screens/auth/FacebookCallbackScreen";
+import OAuthCallbackScreen from "screens/auth/OAuthCallbackScreen";
 // import UITemplateExamplesScreen from "screens/UITemplateExamplesScreen";
 
 // STYLES
@@ -58,8 +56,14 @@ const router = createBrowserRouter(
       <Route path="/signin" element={<SignInScreen />} />
       <Route path="/onboard" element={"Fasz"} />
 
-      <Route path="/oauth/google" element={<GoogleCallbackScreen />} />
-      <Route path="/oauth/facebook" element={<FacebookCallbackScreen />} />
+      <Route
+        path="/oauth/google"
+        element={<OAuthCallbackScreen provider="google" />}
+      />
+      <Route
+        path="/oauth/facebook"
+        element={<OAuthCallbackScreen provider="facebook" />}
+      />
 
       <Route path="*" element={<NotFoundScreen />} />
 
