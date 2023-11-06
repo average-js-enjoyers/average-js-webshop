@@ -1,4 +1,4 @@
-import SignUpForm from "components/forms/SignUpForm";
+import QuickSignUpForm from "components/forms/QickSignUpForm";
 
 import { createUser } from "api";
 
@@ -12,7 +12,7 @@ const SignUpScreen = () => {
 
   return (
     <main>
-      <SignUpForm onSignUp={handleSignUp} />
+      <QuickSignUpForm onSignUp={handleSignUp} />
     </main>
   );
 };

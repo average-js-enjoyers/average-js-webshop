@@ -30,7 +30,7 @@ const isEmailValid = (email) => {
 //   }
 // };
 
-const SignUpForm = ({ onSignUp }) => {
+const OnBoardingForm = ({ onSignUp }) => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState("");

@@ -1,3 +1,19 @@
+export async function checkEmailExists(email) {
+  try {
+    const response = await fetch("/api/auth/email/exists", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(email),
+    });
+    const data = await response.json();
+    return data.data.exists;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function createUser(user) {
   try {
     const response = await fetch("/api/users/signup", {
@@ -26,3 +42,5 @@ export function signIn(user) {
 export function modifyUser(user) {
   return "I am modifying the user 🪄";
 }
+
+
