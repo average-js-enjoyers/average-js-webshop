@@ -12,8 +12,10 @@
 
   transition: all 0.1s ease-in-out;
 
+  cursor: pointer;
+
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.01) translateY(0.05rem);
     box-shadow: var(--dropshadow-std--hover);
   }
 
@@ -344,18 +346,18 @@
 .btn-outline-dark {
   font-weight: 500;
   background-color: var(--grayscale-0);
-  border: 0.3rem solid var(--grayscale-80);
+  border: 0.2rem solid var(--grayscale-70);
   color: var(--grayscale-80);
 
   &:hover {
     background-color: var(--grayscale-70);
-    border: 0.3rem solid var(--grayscale-70);
+    border: 0.2rem solid var(--grayscale-70);
     color: var(--grayscale-0);
   }
 
   &:active {
     background-color: var(--grayscale-90) !important;
-    border: 0.3rem solid var(--grayscale-90) !important;
+    border: 0.2rem solid var(--grayscale-90) !important;
     color: var(--grayscale-0) !important;
   }
 }
