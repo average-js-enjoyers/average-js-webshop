@@ -1,0 +1,49 @@
+// Define the breakpoints
+$breakpoints: (
+  "xs": 0,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "2xl": 1440px,
+  "3xl": 1600px,
+  "4xl": 1900px,
+  "5xl": 2200px,
+);
+
+// Media query mixin
+@mixin breakpoint($name, $type: "max") {
+  @if map-has-key($breakpoints, $name) {
+    $width: map-get($breakpoints, $name);
+    @if $type == "min" {
+      @media (min-width: $width) {
+        @content;
+      }
+    } @else if $type == "max" {
+      @media (max-width: $width) {
+        @content;
+      }
+    } @else {
+      @warn "Invalid type '#{$type}', use 'min' or 'max'";
+    }
+  } @else {
+    @warn "Invalid breakpoint name '#{$name}'";
+  }
+}
+
+// Usage
+/* .container {
+  width: 100%;
+  @include breakpoint('sm', 'max') {
+    width: 80%;
+  }
+  @include breakpoint('md', 'min') {
+    width: 60%;
+  }
+  @include breakpoint('lg', 'max') {
+    width: 40%;
+  }
+  @include breakpoint('xl', 'min') {
+    width: 20%;
+  }
+} */

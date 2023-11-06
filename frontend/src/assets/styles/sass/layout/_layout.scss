@@ -1,0 +1,27 @@
+main {
+  /* For development purposes TODO */
+  min-height: calc(100vh - 12rem - 20rem);
+
+  position: relative;
+  z-index: 0;
+  background-color: var(--grayscale-0);
+
+  padding: 6rem 15% 6rem;
+
+  width: 100%;
+
+  @include breakpoint("4xl") {
+    padding: 6rem 10% 6rem;
+  }
+  @include breakpoint("xl") {
+    padding: 6rem 5% 6rem;
+  }
+  @include breakpoint("lg") {
+    padding: 4.5rem 3rem 4.5rem;
+  }
+
+  @include breakpoint("md") {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
