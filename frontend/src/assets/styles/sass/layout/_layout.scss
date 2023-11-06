@@ -1,4 +1,4 @@
-main {
+.main-layout {
   /* For development purposes TODO */
   min-height: calc(100vh - 12rem - 20rem);
 
@@ -10,16 +10,12 @@ main {
 
   width: 100%;
 
-  @include breakpoint("4xl") {
-    padding: 6rem 10% 6rem;
-  }
-  @include breakpoint("xl") {
-    padding: 6rem 5% 6rem;
-  }
-  @include breakpoint("lg") {
-    padding: 4.5rem 3rem 4.5rem;
-  }
+  @include responsivePadding($padding-top: 6rem, $padding-bottom: 6rem);
 
+  @include breakpoint("lg") {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
   @include breakpoint("md") {
     padding-top: 3rem;
     padding-bottom: 3rem;

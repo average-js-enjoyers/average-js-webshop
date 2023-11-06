@@ -47,3 +47,44 @@ $breakpoints: (
     width: 20%;
   }
 } */
+
+@mixin responsivePadding(
+  $padding-top: null,
+  $padding-bottom: null,
+  $padding-horizontal: null
+) {
+  // Set default horizontal padding if not provided
+  $default-horizontal: if($padding-horizontal, $padding-horizontal, 15%);
+
+  // Apply horizontal padding
+  padding-left: $default-horizontal;
+  padding-right: $default-horizontal;
+
+  // Apply vertical padding if provided
+  @if $padding-top {
+    padding-top: $padding-top;
+  }
+  @if $padding-bottom {
+    padding-bottom: $padding-bottom;
+  }
+
+  width: 100%;
+
+  // Adjust horizontal paddings at breakpoints
+  @include breakpoint("5xl") {
+    padding-left: if($padding-horizontal, $padding-horizontal, 10%);
+    padding-right: if($padding-horizontal, $padding-horizontal, 10%);
+  }
+  @include breakpoint("4xl") {
+    padding-left: if($padding-horizontal, $padding-horizontal, 5%);
+    padding-right: if($padding-horizontal, $padding-horizontal, 5%);
+  }
+  @include breakpoint("lg") {
+    padding-left: if($padding-horizontal, $padding-horizontal, 3rem);
+    padding-right: if($padding-horizontal, $padding-horizontal, 3rem);
+  }
+  @include breakpoint("md") {
+    padding-left: if($padding-horizontal, $padding-horizontal, 1.5rem);
+    padding-right: if($padding-horizontal, $padding-horizontal, 1.5rem);
+  }
+}
