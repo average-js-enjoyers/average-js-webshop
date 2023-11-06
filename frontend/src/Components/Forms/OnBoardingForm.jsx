@@ -6,31 +6,31 @@ const isEmailValid = (email) => {
   return re.test(String(email).toLowerCase());
 };
 
-// const checkIfUserIsRegistered = async (email) => {
-//   if (isEmailValid(email)) {
-//     try {
-//       const response = await fetch("DONTLEAVEMEHERE", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ email }),
-//       });
+const checkIfUserIsRegistered = async (email) => {
+  if (isEmailValid(email)) {
+    try {
+      const response = await fetch("DONTLEAVEMEHERE", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
 
-//       if (response.ok) {
-//         const data = await response.json();
-//         return data.exists;
-//       } else {
-//         throw new Error("Failed to fetch email check");
-//       }
-//     } catch (error) {
-//       console.error(error);
-//       return false;
-//     }
-//   }
-// };
+      if (response.ok) {
+        const data = await response.json();
+        return data.exists;
+      } else {
+        throw new Error("Failed to fetch email check");
+      }
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+};
 
-const SignUpForm = ({ onSignUp }) => {
+const OnBoardingForm = ({ onSignUp }) => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState("");

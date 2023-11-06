@@ -20,7 +20,8 @@ import GlobalContextProvider from "context/GlobalContext";
 
 import HomeScreen from "screens/HomeScreen";
 import ErrorScreen from "screens/ErrorScreen";
-import SignUpScreen from "screens/auth/SignUpScreen";
+import SignUpScreen from "screens/auth/QuickSignUpScreen";
+import UITemplateExamplesScreen from "screens/UITemplateExamplesScreen";
 import ViewProfileScreen from "screens/profile/ViewProfileScreen";
 import EditProfileScreen from "screens/profile/EditProfileScreen";
 import SignInScreen from "screens/auth/SignInScreen";
