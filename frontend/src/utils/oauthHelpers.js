@@ -19,11 +19,6 @@ export function getAuthUrl(provider, state, codeChallenge) {
     code_challenge_method: codeChallengeMethod,
   });
 
-  if (provider === "google") {
-    params.append("prompt", "consent");
-    params.append("access_type", "offline");
-  }
-
   return `${baseUrl}?${params.toString()}`;
 }
 
