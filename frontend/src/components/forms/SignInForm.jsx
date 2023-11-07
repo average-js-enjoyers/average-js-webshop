@@ -68,9 +68,12 @@ function SignInForm() {
           />
         </div>
 
-        <div className="button">
-          <button type="submit">Sign In</button>
-        </div>
+        <input
+          type="submit"
+          className="btn btn-primary"
+          disabled
+          value="Sign In Now"
+        />
       </form>
     </>
   );

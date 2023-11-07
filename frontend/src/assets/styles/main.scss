@@ -5,12 +5,15 @@
 
 @import "./sass/base/base";
 @import "./sass/base/typography";
+@import "./sass/base/utilities";
 
 @import "./sass/components/_buttons.scss";
 @import "./sass/components/_status-messages.scss";
 @import "./sass/components/_loaders.scss";
 @import "./sass/components/_logo.scss";
-@import "./sass/components/_searchbar.scss";
+@import "./sass/components/_search-bar.scss";
+@import "./sass/components/_forms.scss";
+@import "./sass/components/_search-bar.scss";
 @import "./sass/components/_cards.scss";
 
 @import "./sass/layout/_layout.scss";

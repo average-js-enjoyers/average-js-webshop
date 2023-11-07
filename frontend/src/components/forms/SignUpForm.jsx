@@ -48,61 +48,55 @@ const QuickSignUpForm = ({ onSignUp }) => {
   }, [email]);
 
   return (
-    <>
-      <div>Sign up here:</div>
-      {!emailValid && (
-        <div style={{ color: "red" }}>Invalid E-mail address!</div>
-      )}
-      {emailTaken && (
-        <div style={{ color: "red" }}>E-mail address is already in use!</div>
-      )}
-
-      <form className="SignUpFields" onSubmit={handleSubmit}>
-        <div className="control">
-          <label htmlFor="email">E-mail:</label>
-          <input
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            name="email"
-            id="email"
-          />
-        </div>
-
-        <div className="control">
-          <label htmlFor="email">I accept the Terms of Service:</label>
-          <input
-            type="checkbox"
-            checked={termsAndServicesBox}
-            onChange={handleTermsAndServicesBox}
-            name="email"
-            id="email"
-          />
-        </div>
-
-        <div className="control">
-          <label htmlFor="email">I accept the Privacy Policy:</label>
-          <input
-            type="checkbox"
-            checked={privacyPolicyBox}
-            onChange={handlePrivacyPolicyBox}
-            name="email"
-            id="email"
-          />
-        </div>
-
-        {emailValid && privacyPolicyBox && termsAndServicesBox && (
-          <div className="button">
-            <button type="submit">Sign up!</button>
-          </div>
+    <form onSubmit={handleSubmit}>
+      <div className="control">
+        {!emailValid && (
+          <div style={{ color: "red" }}>Invalid E-mail address!</div>
         )}
+        {emailTaken && (
+          <div style={{ color: "red" }}>E-mail address is already in use!</div>
+        )}
+        <label htmlFor="email">Your Email Address</label>
+        <input
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          id="email"
+          placeholder="Enter your email address here"
+        />
+      </div>
 
-        <li>
-          <Link to="/faq">
-            <button type="button">Need help?</button>
-          </Link>
-        </li>
-      </form>
-    </>
+      <div className="control">
+        <label htmlFor="email">I accept the Terms of Service:</label>
+        <input
+          type="checkbox"
+          checked={termsAndServicesBox}
+          onChange={handleTermsAndServicesBox}
+          name="email"
+          id="email"
+        />
+      </div>
+
+      <div className="control">
+        <label htmlFor="email">I accept the Privacy Policy:</label>
+        <input
+          type="checkbox"
+          checked={privacyPolicyBox}
+          onChange={handlePrivacyPolicyBox}
+          name="email"
+          id="email"
+        />
+      </div>
+
+      {emailValid && privacyPolicyBox && termsAndServicesBox && (
+        <input
+          type="submit"
+          className="btn btn-primary"
+          disabled
+          value="Sign Up Now"
+        />
+      )}
+    </form>
   );
 };
 

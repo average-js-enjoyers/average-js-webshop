@@ -1,3 +1,5 @@
+//src/assets/styles/sass/base/_typography.scss
+
 *,
 *:before,
 *:after {
@@ -54,9 +56,15 @@ small {
 
 a {
   font-size: calc(var(--default-font-size) * 1);
-  font-weight: 400;
+  font-weight: 500;
   color: var(--primary-50);
   text-decoration: none;
+
+  transition: all 0.2s ease-in-out;
+}
+
+a:visited {
+  color: var(--primary-50);
 }
 
 a:hover {
@@ -65,10 +73,6 @@ a:hover {
 
 a:active {
   color: var(--primary-60);
-}
-
-a:visited {
-  color: var(--primary-50);
 }
 
 strong {
