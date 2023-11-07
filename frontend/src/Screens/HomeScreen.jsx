@@ -3,7 +3,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "context/AuthContext";
 
-import Button from "components/common/Buttons";
+import Button from "components/common/Button";
 import StatusMessage from "components/common/StatusMessage";
 
 const HomeScreen = () => {

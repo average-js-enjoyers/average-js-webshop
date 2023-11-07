@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {checkEmailExists} from "api";
+import { doesEmailExist } from "api";
 
 const isEmailValid = (email) => {
   const re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   return re.test(String(email).toLowerCase());
 };
-
 
 const QuickSignUpForm = ({ onSignUp }) => {
   const [email, setEmail] = useState("");
@@ -14,7 +13,6 @@ const QuickSignUpForm = ({ onSignUp }) => {
   const [privacyPolicyBox, setPrivacyPolicyBox] = useState(false);
   const [emailValid, setEmailValid] = useState(true);
   const [emailTaken, setEmailTaken] = useState(false);
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,9 +26,9 @@ const QuickSignUpForm = ({ onSignUp }) => {
     setTermsAndServicesBox(!termsAndServicesBox);
   };
 
-  const handlePrivacyPolicyBox= ()=> {
+  const handlePrivacyPolicyBox = () => {
     setPrivacyPolicyBox(!privacyPolicyBox);
-  }
+  };
 
   const emailErrorStateHandler = async (email) => {
     if (isEmailValid(email)) {
@@ -40,9 +38,9 @@ const QuickSignUpForm = ({ onSignUp }) => {
     }
 
     if (isEmailValid(email)) {
-        const emailTaken = await checkEmailExists({ emailAddress : email });
-        setEmailTaken(emailTaken);
-      }
+      const emailTaken = await doesEmailExist({ emailAddress: email });
+      setEmailTaken(emailTaken);
+    }
   };
 
   useEffect(() => {
@@ -84,7 +82,7 @@ const QuickSignUpForm = ({ onSignUp }) => {
         <div className="control">
           <label htmlFor="email">I accept the Privacy Policy:</label>
           <input
-            type="checkbox" 
+            type="checkbox"
             checked={privacyPolicyBox}
             onChange={handlePrivacyPolicyBox}
             name="email"

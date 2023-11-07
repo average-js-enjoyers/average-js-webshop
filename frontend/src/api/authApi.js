@@ -1,7 +1,9 @@
 //src/api/authApi.js
+import { isEmailValid } from "utils/validators";
+
 export async function createUser(user) {
   try {
-    const response = await fetch("/api/users/signup", {
+    const response = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -14,6 +16,63 @@ export async function createUser(user) {
     console.error(error);
     throw new Error("Failed to create user");
   }
+}
+
+export async function doesEmailExist(email) {
+  try {
+    const response = await fetch("/api/auth/email/exists", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(email),
+    });
+    const data = await response.json();
+    return data.data.exists;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const isUserRegistered = async (email) => {
+  if (isEmailValid(email)) {
+    try {
+      const response = await fetch("DONTLEAVEMEHERE", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data.exists;
+      } else {
+        throw new Error("Failed to fetch email check");
+      }
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+};
+
+export function handleSignUp(user) {
+  console.log(user);
+  createUser(user).then(() => {
+    console.log("this works");
+  });
+}
+
+export function signIn(user) {
+  return fetch("/api/users/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  }).then((res) => res.json());
 }
 
 export function modifyUser(user) {
@@ -37,11 +96,4 @@ export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
   sessionStorage.setItem("accessToken", res.token);
 
   return res.data.user;
-}
-
-export function handleSignUp(user) {
-  console.log(user);
-  createUser(user).then(() => {
-    console.log("this works");
-  });
 }
