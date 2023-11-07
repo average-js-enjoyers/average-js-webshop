@@ -7,10 +7,11 @@ import Button from "components/common/Button";
 import SignUpForm from "components/forms/SignUpForm";
 import { handleSignUp } from "api";
 
-import OnboardingForm from "components/forms/OnboardingForm";
+import {OnboardingForm} from "api";
 
 import SignInForm from "components/forms/SignInForm";
 import { signIn } from "api";
+
 
 import { useAuth } from "context/AuthContext";
 

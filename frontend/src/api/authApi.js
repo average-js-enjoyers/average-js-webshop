@@ -4,7 +4,6 @@ import { isEmailValid } from "utils/validators";
 export async function createUser(user) {
   try {
     const response = await fetch("/api/auth/signup", {
-    const response = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,6 +15,24 @@ export async function createUser(user) {
   } catch (error) {
     console.error(error);
     throw new Error("Failed to create user");
+  }
+}
+
+//Need to find the user somehow
+export async function onBoardUser(user) {
+  try {
+    const response = await fetch("/api/users/me/onboard", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to onboard user");
   }
 }
 
@@ -97,13 +114,6 @@ export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
   sessionStorage.setItem("accessToken", res.token);
 
   return res.data.user;
-}
-
-export function handleSignUp(user) {
-  console.log(user);
-  createUser(user).then(() => {
-    console.log("this works");
-  });
 }
 
 export async function checkEmailExists(email) {
