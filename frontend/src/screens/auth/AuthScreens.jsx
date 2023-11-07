@@ -50,9 +50,9 @@ function AuthScreenWrapper({ children }) {
 }
 
 function SignInScreen() {
-  const handleSignIn = (user) => {
+  /*   const handleSignIn = (user) => {
     signIn(user);
-  };
+  }; */
 
   const { signInWithGoogle, signInWithFacebook } = useAuth();
 
@@ -62,7 +62,7 @@ function SignInScreen() {
         <CardTitle level="1" textAlign="center">
           Sign In
         </CardTitle>
-        <SignInForm onSignIn={handleSignIn} />
+        <SignInForm /* onSignIn={handleSignIn} */ />
 
         <p className="mt-3 text-center">
           <Link to="/forgot-password">Forgot your password?</Link>
