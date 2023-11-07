@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { doesEmailExist } from "api";
 
 import { isEmailValid, isPasswordValid } from "utils/validators";
 
@@ -10,8 +9,10 @@ export default function OnboardingForm({ onSignUp }) {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState("");
-  const [termsAndServicesBox, setTermsAndServicesBox] = useState(false);
-  const [privacyPolicyBox, setPrivacyPolicyBox] = useState(false);
+  const [nonHashedPassword, setnonHashedPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
+  const [passWordsMatch, setPassWordsMatch] = useState(true);
+  const [passWordStrong, setPassWordStrong] = useState(true);
   const [emailValid, setEmailValid] = useState(true);
   const [emailTaken, setEmailTaken] = useState(false);
 
@@ -19,7 +20,11 @@ export default function OnboardingForm({ onSignUp }) {
     e.preventDefault();
 
     return onSignUp({
+      firstName: firstName,
+      lastName: lastName,
       emailAddress: email,
+      password: nonHashedPassword,
+      passwordConfirm: confirmPassword,
     });
   };
 
@@ -55,55 +60,81 @@ export default function OnboardingForm({ onSignUp }) {
     emailErrorStateHandler(email);
   }, [email]);
 
+  useEffect(() => {
+    passWordErrorStatesHandler(nonHashedPassword);
+  }, [nonHashedPassword, confirmPassword]);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="control">
-        {!emailValid && (
-          <div style={{ color: "red" }}>Invalid E-mail address!</div>
-        )}
-        {emailTaken && (
-          <div style={{ color: "red" }}>E-mail address is already in use!</div>
-        )}
-        <label htmlFor="email">Your Email Address</label>
-        <input
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          name="email"
-          id="email"
-          placeholder="Enter your email address here"
-        />
-      </div>
-
-      <div className="control">
-        <label htmlFor="email">I accept the Terms of Service:</label>
-        <input
-          type="checkbox"
-          checked={termsAndServicesBox}
-          onChange={handleTermsAndServicesBox}
-          name="email"
-          id="email"
-        />
-      </div>
-
-      <div className="control">
-        <label htmlFor="email">I accept the Privacy Policy:</label>
-        <input
-          type="checkbox"
-          checked={privacyPolicyBox}
-          onChange={handlePrivacyPolicyBox}
-          name="email"
-          id="email"
-        />
-      </div>
-
-      {emailValid && privacyPolicyBox && termsAndServicesBox && (
-        <input
-          type="submit"
-          className="btn btn-primary"
-          disabled
-          value="Sign Up Now"
-        />
+    <>
+      <div>Sign up here:</div>
+      {!emailValid && (
+        <div style={{ color: "red" }}>Invalid E-mail address!</div>
       )}
-    </form>
+      {/* {!emailTaken && (
+        <div style={{ color: "red" }}>E-mail address already in use!</div>
+      )} */}
+      {!passWordsMatch && (
+        <div style={{ color: "red" }}>The passwords do not match!</div>
+      )}
+      {!passWordStrong && (
+        <div style={{ color: "red" }}>The password is too weak!</div>
+      )}
+
+      <form className="SignUpFields" onSubmit={handleSubmit}>
+        <div className="control">
+          <label htmlFor="firstName">First Name:</label>
+          <input
+            onChange={(e) => setFirstName(e.target.value)}
+            name="firstName"
+            id="firstName"
+          />
+        </div>
+
+        <div className="control">
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            onChange={(e) => setLastName(e.target.value)}
+            name="lastName"
+            id="lastName"
+          />
+        </div>
+
+        <div className="control">
+          <label htmlFor="email">E-mail:</label>
+          <input
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            id="email"
+          />
+        </div>
+
+        <div className="control">
+          <label htmlFor="nonHashedPassword">Password:</label>
+          <input
+            type="password"
+            onChange={(e) => setnonHashedPassword(e.target.value)}
+            name="nonHashedPassword"
+            id="nonHashedPassword"
+          />
+        </div>
+
+        <div className="control">
+          <label htmlFor="confirmPassword">Confrim password:</label>
+          <input
+            type="password"
+            onChange={(e) => setconfirmPassword(e.target.value)}
+            name="confirmPassword"
+            id="confirmPassword"
+          />
+        </div>
+
+        {emailValid && passWordsMatch && passWordStrong && (
+          <div className="button">
+            <button type="submit">Sign up!</button>
+          </div>
+        )}
+      </form>
+    </>
   );
 }

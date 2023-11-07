@@ -50,7 +50,7 @@ export function CardBody({ className, children, ...props }) {
 export function CardTitle({
   className,
   level = "5",
-  textAlign = "leftr",
+  textAlign = "left", // Adding a default value for textAlign
   children,
   ...props
 }) {
@@ -63,17 +63,15 @@ export function CardTitle({
     safeLevel = 5; // Default to '5' if the provided level is invalid
   }
 
-  const combinedStyle = { textAlign, ...props.style }; // Combine textAlign with existing styles
+  const combinedStyle = { textAlign: textAlign, ...props.style }; // Ensure textAlign is set
 
-  // Extract the style prop from the rest to avoid it being overwritten
-  const { style: _, ...otherProps } = props;
-
-  console.log(combinedStyle);
+  // Log the textAlign to debug
+  console.log("textAlign:", textAlign);
 
   // Create the element dynamically based on the level prop
   return React.createElement(
-    `h${level}`,
-    { className: cardTitleClass, ...props },
+    `h${safeLevel}`,
+    { className: cardTitleClass, ...props, style: combinedStyle }, // style is included in the props spread
     children
   );
 }

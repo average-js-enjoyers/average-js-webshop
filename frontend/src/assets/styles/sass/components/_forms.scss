@@ -74,6 +74,12 @@ select {
   }
 }
 
+input[type="submit"] {
+  margin-top: 3rem;
+  min-width: 30rem;
+  align-self: center;
+}
+
 // Checkbox and Radio Styles
 input[type="checkbox"],
 input[type="radio"] {

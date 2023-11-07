@@ -64,11 +64,16 @@
     }
   }
 
+  // position: relative;
   height: 100%;
   z-index: 3;
 
   @include responsivePadding($padding-top: 6rem, $padding-bottom: 6rem);
 
+  @include breakpoint("lg") {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  }
   @include breakpoint("lg") {
     padding-top: 4.5rem;
     padding-bottom: 4.5rem;
@@ -81,10 +86,21 @@
   display: flex;
   justify-content: space-between;
 
+  @include breakpoint("lg") {
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 6rem;
+  }
+
   &__logo {
     align-self: flex-start;
     z-index: 1;
     width: 30rem;
+
+    @include breakpoint("lg") {
+      align-self: center;
+    }
   }
 
   &__main {
@@ -109,5 +125,18 @@
     align-items: flex-end;
     z-index: 1;
     width: 30rem;
+
+    @include breakpoint("lg") {
+      align-self: center;
+      align-items: center;
+    }
   }
+}
+
+.oauth-button-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
 }

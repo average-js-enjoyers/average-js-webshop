@@ -21,27 +21,19 @@
   }
   .card__body {
     background-color: var(--grayscale-0);
-    padding: 3rem 6rem 6rem;
+    padding: 3rem 6rem 0rem;
     border-top-right-radius: 0.8rem;
     border-top-left-radius: 0.8rem;
   }
   .card__footer {
-    padding: 1.5rem 6rem;
+    padding: 3rem 6rem;
     background-color: var(--grayscale-10);
     align-items: center;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 
     border-bottom-left-radius: 0.8rem;
     border-bottom-right-radius: 0.8rem;
-
-    .card__footer__left {
-      align-items: center;
-      display: flex;
-    }
-    .card__footer__right {
-      align-items: center;
-      display: flex;
-    }
   }
 }
