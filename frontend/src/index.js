@@ -19,15 +19,17 @@ import GlobalContextProvider from "context/GlobalContext";
 // SCREENS
 
 import HomeScreen from "screens/HomeScreen";
-import ErrorScreen from "screens/ErrorScreen";
-import SignUpScreen from "screens/auth/SignUpScreen";
+
+import AuthScreen from "screens/auth/AuthScreens";
+import OAuthCallbackScreen from "screens/auth/OAuthCallbackScreen";
+
 import ViewProfileScreen from "screens/profile/ViewProfileScreen";
 import EditProfileScreen from "screens/profile/EditProfileScreen";
-import SignInScreen from "screens/auth/SignInScreen";
-import NotFoundScreen from "screens/NotFoundScreen";
+
 import PrivacyPolicyScreen from "screens/PrivacyPolicyScreen";
-import OAuthCallbackScreen from "screens/auth/OAuthCallbackScreen";
-// import UITemplateExamplesScreen from "screens/UITemplateExamplesScreen";
+
+import NotFoundScreen from "screens/NotFoundScreen";
+import ErrorScreen from "screens/ErrorScreen";
 
 // STYLES
 
@@ -52,9 +54,9 @@ const router = createBrowserRouter(
         <Route path="/privacy-policy" element={<PrivacyPolicyScreen />} />
       </Route>
 
-      <Route path="/signup" element={<SignUpScreen />} />
-      <Route path="/signin" element={<SignInScreen />} />
-      <Route path="/onboard" element={"Fasz"} />
+      <Route path="/signup" element={<AuthScreen route="signup" />} />
+      <Route path="/onboard" element={<AuthScreen route="onboard" />} />
+      <Route path="/signin" element={<AuthScreen route="signin" />} />
 
       <Route
         path="/oauth/google"
@@ -66,9 +68,6 @@ const router = createBrowserRouter(
       />
 
       <Route path="*" element={<NotFoundScreen />} />
-
-      {/* TODO For Development: 
-      <Route path="/ui-template" element={<UITemplateExamplesScreen />} /> */}
     </Route>
   ),
   {

@@ -50,16 +50,7 @@
 }
 
 /* StatusMessage.css */
-@keyframes slideAndFloat {
-  0% {
-    opacity: 0;
-    transform: translateX(-3rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+
 .status-message--enter {
   animation: slideAndFloat 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }

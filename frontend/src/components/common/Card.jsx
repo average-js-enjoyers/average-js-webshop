@@ -72,8 +72,8 @@ export function CardTitle({
 
   // Create the element dynamically based on the level prop
   return React.createElement(
-    `h${safeLevel}`,
-    { className: cardTitleClass, ...otherProps, style: combinedStyle }, // style is spread last
+    `h${level}`,
+    { className: cardTitleClass, ...props },
     children
   );
 }

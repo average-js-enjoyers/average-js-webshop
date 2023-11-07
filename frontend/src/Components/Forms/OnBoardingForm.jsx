@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { doesEmailExist } from "api";
 
-const isEmailValid = (email) => {
-  const re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-  return re.test(String(email).toLowerCase());
-};
+import { isEmailValid, isPasswordValid } from "utils/validators";
 
-const QuickSignUpForm = ({ onSignUp }) => {
+import { isUserRegistered } from "api/authApi";
+
+export default function OnboardingForm({ onSignUp }) {
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState("");
   const [termsAndServicesBox, setTermsAndServicesBox] = useState(false);
   const [privacyPolicyBox, setPrivacyPolicyBox] = useState(false);
@@ -22,24 +23,31 @@ const QuickSignUpForm = ({ onSignUp }) => {
     });
   };
 
-  const handleTermsAndServicesBox = () => {
-    setTermsAndServicesBox(!termsAndServicesBox);
-  };
-
-  const handlePrivacyPolicyBox = () => {
-    setPrivacyPolicyBox(!privacyPolicyBox);
-  };
-
-  const emailErrorStateHandler = async (email) => {
+  const emailErrorStateHandler = (email) => {
     if (isEmailValid(email)) {
       setEmailValid(true);
     } else if (email.length > 5) {
       setEmailValid(false);
     }
 
-    if (isEmailValid(email)) {
-      const emailTaken = await doesEmailExist({ emailAddress: email });
-      setEmailTaken(emailTaken);
+    // if (checkIfUserIsRegistered(email)) {
+    //   setEmailTaken(true);
+    // } else if (email.length > 5) {
+    //   setEmailTaken(false);
+    // }
+  };
+
+  const passWordErrorStatesHandler = (password) => {
+    if (nonHashedPassword === confirmPassword) {
+      setPassWordsMatch(true);
+    } else if (confirmPassword.length > 5) {
+      setPassWordsMatch(false);
+    }
+
+    if (isPasswordValid(password)) {
+      setPassWordStrong(true);
+    } else if (nonHashedPassword.length > 5) {
+      setPassWordStrong(false);
     }
   };
 
@@ -98,6 +106,4 @@ const QuickSignUpForm = ({ onSignUp }) => {
       )}
     </form>
   );
-};
-
-export default QuickSignUpForm;
+}
