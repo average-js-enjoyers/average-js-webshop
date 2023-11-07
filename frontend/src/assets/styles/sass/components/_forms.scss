@@ -1,0 +1,95 @@
+//src/assets/styles/sass/components/_forms.scss
+
+// Form Base Styles
+form {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; // Ensuring adequate spacing between form elements
+}
+
+// Label Styles
+label {
+  display: block; // To ensure it takes up its own line
+  margin-bottom: 0.5rem;
+
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  color: var(--grayscale-80);
+}
+
+// Input Styles
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-bottom: 0.15rem solid var(--grayscale-30);
+  border-radius: 0.3rem;
+  background-color: var(--grayscale-0);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-size: 1.6rem;
+
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-50);
+    box-shadow: var(--dropshadow-muted--hover);
+  }
+
+  &:hover {
+    border-color: var(--primary-40);
+  }
+
+  &::placeholder {
+    color: var(--grayscale-30);
+  }
+}
+
+// Select Styles
+select {
+  padding: 1rem;
+  border: 1px solid var(--grayscale-20);
+  border-radius: 0.4rem;
+  background-color: var(--grayscale-0);
+  -webkit-appearance: none; // Disables native dropdown styling
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="12px" height="12px" viewBox="0 0 4 5" xmlns="http://www.w3.org/2000/svg"><path fill="%23007acc" d="M2 0L0 2h4L2 0zm0 5L0 3h4l-2 2z"/></svg>'); // SVG for custom dropdown arrow
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  transition: border-color 0.3s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-50);
+  }
+
+  &:hover {
+    border-color: var(--primary-20);
+  }
+}
+
+// Checkbox and Radio Styles
+input[type="checkbox"],
+input[type="radio"] {
+  margin-right: 0.5rem;
+  // Custom styles can be applied here if needed
+}
+
+// File Input Styles - to keep it minimalistic, we style only the text
+input[type="file"] {
+  color: var(--grayscale-80);
+}
+
+// Error Messages Styles
+.errorMessage {
+  color: var(--accent-70);
+  font-size: calc(var(--default-font-size) * 0.9);
+}
+
+// This SCSS should be compiled and the resulting CSS should be linked or included in your project.
