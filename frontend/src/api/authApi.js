@@ -1,7 +1,7 @@
 //src/api/authApi.js
 export async function createUser(user) {
   try {
-    const response = await fetch("/api/users/signup", {
+    const response = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,4 +44,20 @@ export function handleSignUp(user) {
   createUser(user).then(() => {
     console.log("this works");
   });
+}
+
+export async function checkEmailExists(email) {
+  try {
+    const response = await fetch("/api/auth/email/exists", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(email),
+    });
+    const data = await response.json();
+    return data.data.exists;
+  } catch (error) {
+    console.error(error);
+  }
 }
