@@ -1,36 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const isEmailValid = (email) => {
-  const re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-  return re.test(String(email).toLowerCase());
-};
+import { isEmailValid, isPasswordValid } from "utils/validators";
 
-const checkIfUserIsRegistered = async (email) => {
-  if (isEmailValid(email)) {
-    try {
-      const response = await fetch("DONTLEAVEMEHERE", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+import { isUserRegistered } from "api/authApi";
 
-      if (response.ok) {
-        const data = await response.json();
-        return data.exists;
-      } else {
-        throw new Error("Failed to fetch email check");
-      }
-    } catch (error) {
-      console.error(error);
-      return false;
-    }
-  }
-};
-
-const OnBoardingForm = ({ onSignUp }) => {
+export default function OnboardingForm({ onSignUp }) {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState("");
@@ -53,11 +28,6 @@ const OnBoardingForm = ({ onSignUp }) => {
     });
   };
 
-  const isPasswordValid = (password) => {
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-    return passwordPattern.test(password);
-  };
-
   const emailErrorStateHandler = (email) => {
     if (isEmailValid(email)) {
       setEmailValid(true);
@@ -71,6 +41,7 @@ const OnBoardingForm = ({ onSignUp }) => {
     //   setEmailTaken(false);
     // }
   };
+
   const passWordErrorStatesHandler = (password) => {
     if (nonHashedPassword === confirmPassword) {
       setPassWordsMatch(true);
@@ -163,15 +134,7 @@ const OnBoardingForm = ({ onSignUp }) => {
             <button type="submit">Sign up!</button>
           </div>
         )}
-
-        <li>
-          <Link to="/faq">
-            <button type="button">Need help?</button>
-          </Link>
-        </li>
       </form>
     </>
   );
-};
-
-export default SignUpForm;
+}

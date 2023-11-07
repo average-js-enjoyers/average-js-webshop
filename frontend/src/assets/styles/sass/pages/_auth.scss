@@ -1,0 +1,101 @@
+.oauth-callback-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 500;
+  z-index: 9999;
+  animation: pulse 1s infinite;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.auth-screen {
+  &-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+
+    overflow: hidden;
+
+    background-color: var(--grayscale-0);
+
+    &__deco {
+      position: absolute;
+      width: 55vw;
+      height: 55vw;
+      border-radius: 100vw;
+      z-index: 0;
+
+      box-shadow: 0 0 5rem 0 var(--primary-100);
+      // border: 0.3rem solid var(--primary-20);
+
+      // Modifiers for specific decoration elements
+      &--1 {
+        bottom: 0;
+        left: 0;
+        transform: translate(-25vw, 25vw);
+        background-image: linear-gradient(
+          135deg,
+          var(--primary-50) 0%,
+          var(--primary-100) 100%
+        );
+      }
+
+      &--2 {
+        top: 0;
+        right: 0;
+        transform: translate(25vw, -25vw);
+        background-image: linear-gradient(
+          -135deg,
+          var(--primary-50) 0%,
+          var(--primary-100) 100%
+        );
+      }
+    }
+  }
+
+  height: 100%;
+  z-index: 3;
+
+  @include responsivePadding($padding-top: 6rem, $padding-bottom: 6rem);
+
+  @include breakpoint("lg") {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+  @include breakpoint("md") {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__header {
+    align-self: flex-start;
+    z-index: 1;
+  }
+
+  &__main {
+    align-self: center;
+    width: 100%;
+    max-width: 55rem;
+    z-index: 1;
+  }
+
+  &__footer {
+    align-self: flex-end;
+    z-index: 1;
+  }
+}
