@@ -24,14 +24,6 @@ const QuickSignUpForm = ({ onSignUp }) => {
   const signUpEnabled =
     emailValid && !emailTaken && privacyPolicyBox && termsAndServicesBox;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    return onSignUp({
-      emailAddress: email,
-    });
-  };
-
   const handleTermsAndServicesBox = () => {
     setTermsAndServicesBox(!termsAndServicesBox);
   };
@@ -109,7 +101,15 @@ const QuickSignUpForm = ({ onSignUp }) => {
   ];
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+
+        return onSignUp({
+          emailAddress: email,
+        });
+      }}
+    >
       <FormValidationMessageWrapper messages={messages} />
 
       <div className="control">
@@ -151,7 +151,7 @@ const QuickSignUpForm = ({ onSignUp }) => {
         type="submit"
         className="btn btn-primary"
         disabled={!signUpEnabled}
-        value="Sign Up Now"
+        value="Sign Up Now!"
       />
     </form>
   );

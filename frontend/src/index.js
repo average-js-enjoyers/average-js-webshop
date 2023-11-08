@@ -55,6 +55,10 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path="/signup" element={<AuthScreen route="signup" />} />
+      <Route
+        path="/confirm-registration"
+        element={<AuthScreen route="confirm-registration" />}
+      />
       <Route path="/onboard" element={<AuthScreen route="onboard" />} />
       <Route path="/signin" element={<AuthScreen route="signin" />} />
 

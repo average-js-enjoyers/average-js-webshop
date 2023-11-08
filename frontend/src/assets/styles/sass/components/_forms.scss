@@ -151,3 +151,36 @@ input[type="file"] {
 }
 
 // This SCSS should be compiled and the resulting CSS should be linked or included in your project.
+
+input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  height: 3rem;
+  opacity: 0;
+  cursor: pointer;
+
+  aria-pressed: false;
+}
+
+input[type="checkbox"]:checked {
+  aria-pressed: true;
+}
+
+input[type="checkbox"]:checked + label:before {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  background: var(--primary-50);
+  border-color: var(--primary-90);
+  border-radius: 10rem;
+  color: var(--primary-10);
+}
+
+input[type="checkbox"]:focus + label:before {
+  border-color: var(--primary-active);
+}

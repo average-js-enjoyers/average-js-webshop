@@ -23,8 +23,11 @@ function AuthScreen({ route }) {
     case "onboard":
       screen = <OnboardScreen />;
       break;
-    default:
+    case "signup":
       screen = <SignUpScreen />;
+      break;
+    default:
+      screen = <ConfirmRegistrationScreen />;
       break;
   }
 
@@ -108,7 +111,7 @@ function OnboardScreen() {
 }
 
 function SignUpScreen() {
-  const { signUp } = useAuth();
+  const { signUp, signInWithProvider } = useAuth();
 
   return (
     <Card>
@@ -119,8 +122,66 @@ function SignUpScreen() {
         <SignUpForm onSignUp={signUp} />
       </CardBody>
       <CardFooter>
-        <p>
-          Clicking the button will <strong>activate your account</strong>.
+        <p className="text-center">
+          <strong>Or sign up simply with:</strong>
+        </p>
+        <div className="oauth-button-wrapper mt-2">
+          <Button
+            variant="outline-danger"
+            onClick={() => signInWithProvider("google")}
+          >
+            Google
+          </Button>
+          <Button
+            variant="outline-info "
+            onClick={() => signInWithProvider("facebook")}
+          >
+            Facebook
+          </Button>
+        </div>
+      </CardFooter>
+    </Card>
+  );
+}
+
+function ConfirmRegistrationScreen() {
+  return (
+    <Card>
+      <CardBody>
+        <CardTitle level="1" textAlign="center">
+          Confirm Registration
+        </CardTitle>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            height: "90%",
+            gap: "3rem",
+          }}
+        >
+          <p
+            className="text-center"
+            style={{ fontWeight: "500", fontSize: "1.6rem" }}
+          >
+            We’ve sent you an email. <br />
+            You can finalise your registration by clicking <br />
+            the link in the email.
+          </p>
+          <p className=" text-center">
+            Once you’ve clicked the link, you can sign in.
+          </p>
+        </div>
+      </CardBody>
+      <CardFooter>
+        <p
+          className="text-center"
+          style={{ fontWeight: "300", fontSize: "1.6rem" }}
+        >
+          Didn't get the email?
+        </p>
+        <p className="mt-1 text-center">
+          <Link to="/resend-confirmation">Resend my confirmation email!</Link>
         </p>
       </CardFooter>
     </Card>

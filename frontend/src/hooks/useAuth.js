@@ -103,7 +103,7 @@ export const useAuth = () => {
         if (data.error) {
           throw new Error(data.error);
         }
-        navigate("/onboard", { state: { signUpSuccess: true } });
+        navigate("/confirm-registration", { state: { signUpSuccess: true } });
       } catch (error) {
         // handle error
         console.error(error);

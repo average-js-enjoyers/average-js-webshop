@@ -146,12 +146,12 @@ html {
   font-size: 62.5%;
   scroll-behavior: smooth;
 }
-@media (max-width: 1440px) {
+@media (max-width: 1900px) {
   html {
     font-size: 56.25%;
   }
 }
-@media (max-width: 1200px) {
+@media (max-width: 1600px) {
   html {
     font-size: 50%;
   }
@@ -1137,8 +1137,8 @@ strong {
   cursor: default;
 }
 .form-validation-message-wrapper {
-  max-height: 8rem;
-  overflow: hidden;
+  /* max-height: 8rem;
+  overflow: hidden; */
   transition: all 0.3s ease-in-out;
 }
 .form-validation-message span {
@@ -1464,6 +1464,38 @@ input[type=file] {
   font-size: calc(var(--default-font-size) * 0.9);
 }
 
+input[type=checkbox] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  height: 3rem;
+  opacity: 0;
+  cursor: pointer;
+  aria-pressed: false;
+}
+
+input[type=checkbox]:checked {
+  aria-pressed: true;
+}
+
+input[type=checkbox]:checked + label:before {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  background: var(--primary-50);
+  border-color: var(--primary-90);
+  border-radius: 10rem;
+  color: var(--primary-10);
+}
+
+input[type=checkbox]:focus + label:before {
+  border-color: var(--primary-active);
+}
+
 .search-bar {
   display: flex;
   flex-direction: row;
@@ -1561,7 +1593,7 @@ input[type=file] {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 3rem;
+  gap: 6rem;
 }
 .card:hover {
   box-shadow: var(--dropshadow-muted--hover);
@@ -1571,12 +1603,13 @@ input[type=file] {
 }
 .card .card__body {
   background-color: var(--grayscale-0);
-  padding: 3rem 6rem 0rem;
+  padding: 4.5rem 4.5rem 0rem;
   border-top-right-radius: 0.8rem;
   border-top-left-radius: 0.8rem;
+  height: 100%;
 }
 .card .card__footer {
-  padding: 3rem 6rem;
+  padding: 3rem 4.5rem;
   background-color: var(--grayscale-10);
   align-items: center;
   display: flex;

@@ -16,16 +16,26 @@ export function FormValidationMessage({ message, type = "error", isVisible }) {
 }
 
 export function FormValidationMessageWrapper({ messages }) {
+  let counter = 0;
+
   return (
     <div className="form-validation-message-wrapper">
-      {messages.map((message) => (
-        <FormValidationMessage
-          key={message.id}
-          message={message.text}
-          type={message.type}
-          isVisible={message.isVisible}
-        />
-      ))}
+      {messages.map((message, i) => {
+        if (message.isVisible) {
+          counter++;
+          if (counter <= 2) {
+            return (
+              <FormValidationMessage
+                key={message.id}
+                message={message.text}
+                type={message.type}
+                isVisible={message.isVisible}
+              />
+            );
+          }
+        }
+        return null;
+      })}
     </div>
   );
 }
