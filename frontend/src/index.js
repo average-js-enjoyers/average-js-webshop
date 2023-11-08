@@ -14,7 +14,7 @@ import MainLayout from "components/layout/MainLayout";
 
 // CONTEXTS
 
-import GlobalContextProvider from "context/GlobalContext";
+import GlobalContextProvider from "context";
 
 // SCREENS
 
@@ -26,10 +26,10 @@ import OAuthCallbackScreen from "screens/auth/OAuthCallbackScreen";
 import ViewProfileScreen from "screens/profile/ViewProfileScreen";
 import EditProfileScreen from "screens/profile/EditProfileScreen";
 
-import PrivacyPolicyScreen from "screens/PrivacyPolicyScreen";
+import PrivacyPolicyScreen from "screens/gdpr/PrivacyPolicyScreen";
 
-import NotFoundScreen from "screens/NotFoundScreen";
-import ErrorScreen from "screens/ErrorScreen";
+import NotFoundScreen from "screens/error/NotFoundScreen";
+import ErrorScreen from "screens/error/ErrorScreen";
 
 // STYLES
 

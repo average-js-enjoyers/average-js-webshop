@@ -1,14 +1,18 @@
 // src/components/auth/OAuthCallbackScreen.jsx
 import React, { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "context/AuthContext";
+import { useAuth } from "hooks/useAuth";
 import oauthConfig from "utils/oauthConfig";
 
 import Logo from "components/common/Logo";
 
 function OAuthCallbackScreen({ provider }) {
   const navigate = useNavigate();
-  const auth = useAuth();
+  const { signInWithProviderToken } = useAuth();
+
+  // TODO - Do something with the codeVerifier
+  const codeVerifier = sessionStorage.getItem(`${provider}CodeVerifier`);
+  sessionStorage.removeItem(`${provider}CodeVerifier`);
 
   const { clientId, clientSecret, redirectUri, tokenExchangeUrl } =
     oauthConfig[provider];
@@ -42,12 +46,12 @@ function OAuthCallbackScreen({ provider }) {
           );
         }
 
-        const signInFunction =
-          provider === "google"
-            ? auth.signInWithGoogleToken
-            : auth.signInWithFacebookToken;
         // Call the respective signIn function from context
-        signInFunction(data.access_token, data.refresh_token);
+        signInWithProviderToken(
+          provider,
+          data.access_token,
+          data.refresh_token
+        );
       } catch (error) {
         console.error(`Error during ${provider} token exchange:`, error);
         navigate("/signin", { state: { signInError: error.message } });
@@ -59,8 +63,7 @@ function OAuthCallbackScreen({ provider }) {
       navigate,
       redirectUri,
       tokenExchangeUrl,
-      auth.signInWithGoogleToken,
-      auth.signInWithFacebookToken,
+      signInWithProviderToken,
       provider,
     ]
   );

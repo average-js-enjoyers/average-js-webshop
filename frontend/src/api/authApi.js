@@ -11,10 +11,32 @@ export async function createUser(user) {
       body: JSON.stringify(user),
     });
     const data = response.json();
+
+    // TODO - Remove console.log
+    if (!!data) console.log("User created successfully!");
+
     return data;
   } catch (error) {
     console.error(error);
     throw new Error("Failed to create user");
+  }
+}
+
+//Need to find the user somehow
+export async function onboardUser(user) {
+  try {
+    const response = await fetch("/api/users/me/onboard", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to onboard user");
   }
 }
 
@@ -58,13 +80,6 @@ export const isUserRegistered = async (email) => {
   }
 };
 
-export function handleSignUp(user) {
-  console.log(user);
-  createUser(user).then(() => {
-    console.log("this works");
-  });
-}
-
 export function signIn(user) {
   return fetch("/api/users/login", {
     method: "POST",
@@ -96,4 +111,20 @@ export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
   sessionStorage.setItem("accessToken", res.token);
 
   return res.data.user;
+}
+
+export async function checkEmailExists(email) {
+  try {
+    const response = await fetch("/api/auth/email/exists", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(email),
+    });
+    const data = await response.json();
+    return data.data.exists;
+  } catch (error) {
+    console.error(error);
+  }
 }

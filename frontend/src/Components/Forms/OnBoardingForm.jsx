@@ -1,45 +1,32 @@
+//src/components/forms/OnboardingForm.jsx
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { isEmailValid, isPasswordValid } from "utils/validators";
+import { isPasswordValid } from "utils/validators";
+import { onboardUser } from "api";
 
-import { isUserRegistered } from "api/authApi";
-
-export default function OnboardingForm({ onSignUp }) {
+export default function OnboardingForm() {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState("");
   const [nonHashedPassword, setnonHashedPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(null);
   const [passWordsMatch, setPassWordsMatch] = useState(true);
   const [passWordStrong, setPassWordStrong] = useState(true);
-  const [emailValid, setEmailValid] = useState(true);
-  const [emailTaken, setEmailTaken] = useState(false);
+
+  //fetch email
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    return onSignUp({
+    return onboardUser({
       firstName: firstName,
       lastName: lastName,
-      emailAddress: email,
+      phoneNumber: phoneNumber,
       password: nonHashedPassword,
       passwordConfirm: confirmPassword,
     });
-  };
-
-  const emailErrorStateHandler = (email) => {
-    if (isEmailValid(email)) {
-      setEmailValid(true);
-    } else if (email.length > 5) {
-      setEmailValid(false);
-    }
-
-    // if (checkIfUserIsRegistered(email)) {
-    //   setEmailTaken(true);
-    // } else if (email.length > 5) {
-    //   setEmailTaken(false);
-    // }
   };
 
   const passWordErrorStatesHandler = (password) => {
@@ -57,22 +44,13 @@ export default function OnboardingForm({ onSignUp }) {
   };
 
   useEffect(() => {
-    emailErrorStateHandler(email);
-  }, [email]);
-
-  useEffect(() => {
     passWordErrorStatesHandler(nonHashedPassword);
   }, [nonHashedPassword, confirmPassword]);
 
   return (
     <>
       <div>Sign up here:</div>
-      {!emailValid && (
-        <div style={{ color: "red" }}>Invalid E-mail address!</div>
-      )}
-      {/* {!emailTaken && (
-        <div style={{ color: "red" }}>E-mail address already in use!</div>
-      )} */}
+
       {!passWordsMatch && (
         <div style={{ color: "red" }}>The passwords do not match!</div>
       )}
@@ -100,12 +78,12 @@ export default function OnboardingForm({ onSignUp }) {
         </div>
 
         <div className="control">
-          <label htmlFor="email">E-mail:</label>
+          <label htmlFor="lastName">Phone Number:</label>
           <input
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            name="email"
-            id="email"
+            type="tel"
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            name="phoneNumber"
+            id="phoneNumber"
           />
         </div>
 
@@ -129,11 +107,9 @@ export default function OnboardingForm({ onSignUp }) {
           />
         </div>
 
-        {emailValid && passWordsMatch && passWordStrong && (
-          <div className="button">
-            <button type="submit">Sign up!</button>
-          </div>
-        )}
+        <div className="button">
+          <button type="submit">Ready to Shop!</button>
+        </div>
       </form>
     </>
   );

@@ -1,7 +1,9 @@
 //src/screens/HomeScreen.jsx
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useAuth } from "context/AuthContext";
+
+// import { useAuth } from "context/AuthContext";
+import { useAuth } from "hooks/useAuth";
 
 import Button from "components/common/Button";
 import StatusMessage from "components/common/StatusMessage";
@@ -9,9 +11,8 @@ import StatusMessage from "components/common/StatusMessage";
 const HomeScreen = () => {
   const { isAuthenticated, user, signIn, signOut } = useAuth();
 
-  const location = useLocation();
-
   // Check for the navigation state
+  const location = useLocation();
   const { signInSuccess, signOutSuccess } = location.state || {};
 
   return (
