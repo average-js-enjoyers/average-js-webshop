@@ -2,6 +2,13 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { doesEmailExist } from "api";
 
+import {
+  FormValidationMessageWrapper,
+  FormValidationMessage,
+} from "components/forms/FormValidationMessage";
+
+import { useAuth } from "hooks";
+
 const isEmailValid = (email) => {
   const re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   return re.test(String(email).toLowerCase());
@@ -13,6 +20,9 @@ const QuickSignUpForm = ({ onSignUp }) => {
   const [privacyPolicyBox, setPrivacyPolicyBox] = useState(false);
   const [emailValid, setEmailValid] = useState(true);
   const [emailTaken, setEmailTaken] = useState(false);
+
+  const signUpEnabled =
+    emailValid && !emailTaken && privacyPolicyBox && termsAndServicesBox;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,15 +41,16 @@ const QuickSignUpForm = ({ onSignUp }) => {
   };
 
   const emailErrorStateHandler = async (email) => {
-    if (isEmailValid(email)) {
-      setEmailValid(true);
-    } else if (email.length > 5) {
-      setEmailValid(false);
-    }
+    const valid = isEmailValid(email);
+    setEmailValid(valid);
 
-    if (isEmailValid(email)) {
-      const emailTaken = await doesEmailExist({ emailAddress: email });
-      setEmailTaken(emailTaken);
+    if (valid) {
+      // Only check if the email is taken when it's valid.
+      const taken = await doesEmailExist({ emailAddress: email });
+      setEmailTaken(taken);
+    } else {
+      // If the email is not valid, it can't be taken.
+      setEmailTaken(false);
     }
   };
 
@@ -47,15 +58,61 @@ const QuickSignUpForm = ({ onSignUp }) => {
     emailErrorStateHandler(email);
   }, [email]);
 
+  const messages = [
+    {
+      id: 1,
+      text: "Invalid E-Mail address!",
+      type: "danger",
+      isVisible: !emailValid && email.length > 0,
+    },
+    {
+      id: 2,
+      text: "E-Mail address is already in use!",
+      type: "danger",
+      isVisible: emailTaken,
+    },
+    {
+      id: 3,
+      text: "E-Mail address is available!",
+      type: "success",
+      isVisible: emailValid && !emailTaken && email.length > 5,
+    },
+    {
+      id: 4,
+      text: "Please enter an E-Mail address!",
+      type: "warning",
+      isVisible: emailValid && email.length === 0,
+    },
+    {
+      id: 5,
+      text: (
+        <span>
+          You must accept the{" "}
+          <Link to="/terms-of-service">Terms of Service</Link> to sign up!
+        </span>
+      ),
+      type: "warning",
+      isVisible:
+        termsAndServicesBox === false && emailValid && email.length > 5,
+    },
+    {
+      id: 6,
+      text: (
+        <span>
+          You must accept the <Link to="/privacy-policy">Privacy Policy</Link>{" "}
+          to sign up!
+        </span>
+      ),
+      type: "warning",
+      isVisible: privacyPolicyBox === false && emailValid && email.length > 5,
+    },
+  ];
+
   return (
     <form onSubmit={handleSubmit}>
+      <FormValidationMessageWrapper messages={messages} />
+
       <div className="control">
-        {!emailValid && (
-          <div style={{ color: "red" }}>Invalid E-mail address!</div>
-        )}
-        {emailTaken && (
-          <div style={{ color: "red" }}>E-mail address is already in use!</div>
-        )}
         <label htmlFor="email">Your Email Address</label>
         <input
           type="email"
@@ -66,36 +123,36 @@ const QuickSignUpForm = ({ onSignUp }) => {
         />
       </div>
 
-      <div className="control">
-        <label htmlFor="email">I accept the Terms of Service:</label>
+      <div className="checkbox mt-2">
         <input
           type="checkbox"
           checked={termsAndServicesBox}
           onChange={handleTermsAndServicesBox}
-          name="email"
-          id="email"
+          name="termsAndServices"
+          id="termsAndServices" // Unique ID for this checkbox
+          className="custom-checkbox" // Class for custom styling
         />
+        <label htmlFor="termsAndServices">I accept the Terms of Service</label>
       </div>
 
-      <div className="control">
-        <label htmlFor="email">I accept the Privacy Policy:</label>
+      <div className="checkbox mt-1">
         <input
           type="checkbox"
           checked={privacyPolicyBox}
           onChange={handlePrivacyPolicyBox}
-          name="email"
-          id="email"
+          name="privacyPolicy"
+          id="privacyPolicy" // Unique ID for this checkbox
+          className="custom-checkbox" // Same class for consistent styling
         />
+        <label htmlFor="privacyPolicy">I accept the Privacy Policy</label>
       </div>
 
-      {emailValid && privacyPolicyBox && termsAndServicesBox && (
-        <input
-          type="submit"
-          className="btn btn-primary"
-          disabled
-          value="Sign Up Now"
-        />
-      )}
+      <input
+        type="submit"
+        className="btn btn-primary"
+        disabled={!signUpEnabled}
+        value="Sign Up Now"
+      />
     </form>
   );
 };

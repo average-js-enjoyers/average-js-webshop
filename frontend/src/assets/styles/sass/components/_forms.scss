@@ -87,6 +87,58 @@ input[type="radio"] {
   // Custom styles can be applied here if needed
 }
 
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  margin: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.checkbox label {
+  position: relative;
+  padding-left: 4.5rem;
+  cursor: pointer;
+  margin-bottom: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.checkbox label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  background: white;
+  border: 0.2rem solid var(--grayscale-30);
+  border-radius: 0.5rem;
+  transition: all 0.1s ease-in-out;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.checkbox input:checked + label:before {
+  content: "✓";
+  background: var(--primary-50);
+  border-color: var(--primary-90);
+  border-radius: 10rem;
+  color: var(--primary-10);
+}
+
+.checkbox input:checked + label {
+  transform: translateX(-0.5rem);
+}
+
 // File Input Styles - to keep it minimalistic, we style only the text
 input[type="file"] {
   color: var(--grayscale-80);

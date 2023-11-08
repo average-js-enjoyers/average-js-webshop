@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --default-font-size: 1.4rem;
   /* Primary Tonal Pattern */
@@ -709,6 +710,28 @@ strong {
 .btn--muted {
   box-shadow: var(--dropshadow-muted);
 }
+.btn.disabled, .btn:disabled {
+  color: var(--grayscale-50); /* Lighter text color */
+  background-color: var(--grayscale-20); /* Lighter background */
+  border: 0.3rem solid var(--grayscale-30); /* Lighter border if needed */
+  opacity: 0.5; /* Transparency to suggest inactivity */
+  cursor: not-allowed; /* The cursor that indicates the button is disabled */
+  box-shadow: none; /* No shadow to suggest depth */
+  pointer-events: none; /* Ensures the button doesn't react to clicks */
+  /* You would add this class to a button like this in HTML:
+  <button class="btn btn-primary disabled" disabled>Primary Button</button>
+  */
+  /* Or if you're using just HTML disabled attribute, the :disabled pseudo-class can be enough:
+  <button class="btn btn-primary" disabled>Primary Button</button>
+  */
+}
+.btn.disabled:hover, .btn.disabled:active, .btn:disabled:hover, .btn:disabled:active {
+  color: var(--grayscale-50); /* Same color as the disabled state */
+  background-color: var(--grayscale-20); /* Same background as the disabled state */
+  border: 0.3rem solid var(--grayscale-30); /* Same border as the disabled state */
+  box-shadow: none; /* No shadow */
+  transform: none; /* No transformation on hover or active */
+}
 
 .btn-primary {
   color: var(--grayscale-0);
@@ -1098,6 +1121,64 @@ strong {
   background: #f2f2f2;
 }
 
+.form-validation-message {
+  font-size: var(--default-font-size);
+  padding: 0.5rem;
+  padding-left: 1.5rem;
+  margin: 1rem 0 0;
+  border-radius: 10rem;
+  border-top-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  max-width: 50rem;
+  font-size: 1.3rem;
+  position: relative;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+  cursor: default;
+}
+.form-validation-message-wrapper {
+  max-height: 8rem;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+.form-validation-message span {
+  font-size: 1.3rem;
+  position: relative;
+  z-index: 1;
+}
+.form-validation-message:hover {
+  opacity: 0.7 !important;
+}
+
+.form-validation-message--success {
+  background-color: var(--secondary-20);
+  border-left: 0.5rem solid var(--secondary-50);
+}
+
+.form-validation-message--danger {
+  background-color: var(--accent-20);
+  border-left: 0.5rem solid var(--accent-50);
+}
+
+.form-validation-message--warning {
+  background-color: var(--warning-20);
+  border-left: 0.5rem solid var(--warning-50);
+}
+
+.form-validation-message--info {
+  background-color: var(--primary-20);
+  border-left: 0.5rem solid var(--primary-50);
+}
+
+.form-validation-message__text {
+  color: var(--grayscale-90);
+}
+
+/* StatusMessage.css */
+.form-validation-message--enter {
+  animation: slideAndFloat 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
 .loader {
   border: 5px solid #f3f3f3; /* Light grey */
   border-top: 5px solid var(--primary-50); /* Blue */
@@ -1321,6 +1402,57 @@ input[type=submit] {
 input[type=checkbox],
 input[type=radio] {
   margin-right: 0.5rem;
+}
+
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  margin: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.checkbox label {
+  position: relative;
+  padding-left: 4.5rem;
+  cursor: pointer;
+  margin-bottom: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.checkbox label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  background: white;
+  border: 0.2rem solid var(--grayscale-30);
+  border-radius: 0.5rem;
+  transition: all 0.1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.checkbox input:checked + label:before {
+  content: "✓";
+  background: var(--primary-50);
+  border-color: var(--primary-90);
+  border-radius: 10rem;
+  color: var(--primary-10);
+}
+
+.checkbox input:checked + label {
+  transform: translateX(-0.5rem);
 }
 
 input[type=file] {

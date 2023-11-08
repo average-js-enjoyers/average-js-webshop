@@ -35,6 +35,36 @@
   &--muted {
     box-shadow: var(--dropshadow-muted);
   }
+
+  &.disabled,
+  &:disabled {
+    color: var(--grayscale-50); /* Lighter text color */
+    background-color: var(--grayscale-20); /* Lighter background */
+    border: 0.3rem solid var(--grayscale-30); /* Lighter border if needed */
+    opacity: 0.5; /* Transparency to suggest inactivity */
+    cursor: not-allowed; /* The cursor that indicates the button is disabled */
+    box-shadow: none; /* No shadow to suggest depth */
+    pointer-events: none; /* Ensures the button doesn't react to clicks */
+
+    &:hover,
+    &:active {
+      color: var(--grayscale-50); /* Same color as the disabled state */
+      background-color: var(
+        --grayscale-20
+      ); /* Same background as the disabled state */
+      border: 0.3rem solid var(--grayscale-30); /* Same border as the disabled state */
+      box-shadow: none; /* No shadow */
+      transform: none; /* No transformation on hover or active */
+    }
+
+    /* You would add this class to a button like this in HTML:
+<button class="btn btn-primary disabled" disabled>Primary Button</button>
+*/
+
+    /* Or if you're using just HTML disabled attribute, the :disabled pseudo-class can be enough:
+<button class="btn btn-primary" disabled>Primary Button</button>
+*/
+  }
 }
 
 .btn-primary {
