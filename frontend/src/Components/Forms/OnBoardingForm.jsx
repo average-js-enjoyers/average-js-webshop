@@ -1,8 +1,9 @@
+//src/components/forms/OnboardingForm.jsx
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import {isPasswordValid } from "utils/validators";
-import {onBoardUser} from "api";
+import { isPasswordValid } from "utils/validators";
+import { onboardUser } from "api";
 
 export default function OnboardingForm() {
   const [firstName, setFirstName] = useState(null);
@@ -15,12 +16,11 @@ export default function OnboardingForm() {
   const [passWordStrong, setPassWordStrong] = useState(true);
 
   //fetch email
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    return onBoardUser({
+    return onboardUser({
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
@@ -28,7 +28,6 @@ export default function OnboardingForm() {
       passwordConfirm: confirmPassword,
     });
   };
-
 
   const passWordErrorStatesHandler = (password) => {
     if (nonHashedPassword === confirmPassword) {
@@ -44,10 +43,6 @@ export default function OnboardingForm() {
     }
   };
 
-
-
-
-
   useEffect(() => {
     passWordErrorStatesHandler(nonHashedPassword);
   }, [nonHashedPassword, confirmPassword]);
@@ -55,7 +50,7 @@ export default function OnboardingForm() {
   return (
     <>
       <div>Sign up here:</div>
-   
+
       {!passWordsMatch && (
         <div style={{ color: "red" }}>The passwords do not match!</div>
       )}
@@ -92,8 +87,6 @@ export default function OnboardingForm() {
           />
         </div>
 
-       
-
         <div className="control">
           <label htmlFor="nonHashedPassword">Password:</label>
           <input
@@ -114,11 +107,9 @@ export default function OnboardingForm() {
           />
         </div>
 
-
-          <div className="button">
-            <button type="submit">Ready to Shop!</button>
-          </div>
-        
+        <div className="button">
+          <button type="submit">Ready to Shop!</button>
+        </div>
       </form>
     </>
   );

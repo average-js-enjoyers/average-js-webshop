@@ -5,15 +5,14 @@ import Logo from "components/common/Logo";
 import Button from "components/common/Button";
 
 import SignUpForm from "components/forms/SignUpForm";
-import { handleSignUp } from "api";
 
-import {OnboardingForm} from "api";
+import OnboardingForm from "components/forms/OnboardingForm";
 
 import SignInForm from "components/forms/SignInForm";
-import { signIn } from "api";
+// import { signIn } from "api";
 
-
-import { useAuth } from "context/AuthContext";
+// import { useAuth } from "context/AuthContext";
+import { useAuth } from "hooks/useAuth";
 
 function AuthScreen({ route }) {
   let screen;
@@ -51,11 +50,7 @@ function AuthScreenWrapper({ children }) {
 }
 
 function SignInScreen() {
-  /*   const handleSignIn = (user) => {
-    signIn(user);
-  }; */
-
-  const { signInWithGoogle, signInWithFacebook } = useAuth();
+  const { signInWithProvider } = useAuth();
 
   return (
     <Card>
@@ -63,7 +58,7 @@ function SignInScreen() {
         <CardTitle level="1" textAlign="center">
           Sign In
         </CardTitle>
-        <SignInForm /* onSignIn={handleSignIn} */ />
+        <SignInForm />
 
         <p className="mt-3 text-center">
           <Link to="/forgot-password">Forgot your password?</Link>
@@ -75,13 +70,13 @@ function SignInScreen() {
         <div className="oauth-button-wrapper mt-3">
           <Button
             variant="outline-danger btn--compact"
-            onClick={signInWithGoogle}
+            onClick={() => signInWithProvider("google")}
           >
             Google Sign In
           </Button>
           <Button
             variant="outline-info btn--compact"
-            onClick={signInWithFacebook}
+            onClick={() => signInWithProvider("facebook")}
           >
             Facebook Sign In
           </Button>
@@ -113,13 +108,15 @@ function OnboardScreen() {
 }
 
 function SignUpScreen() {
+  const { signUp } = useAuth();
+
   return (
     <Card>
       <CardBody>
         <CardTitle level="1" textAlign="center">
           Sign Up
         </CardTitle>
-        <SignUpForm onSignUp={handleSignUp} />
+        <SignUpForm onSignUp={signUp} />
       </CardBody>
       <CardFooter>
         <p>

@@ -11,6 +11,10 @@ export async function createUser(user) {
       body: JSON.stringify(user),
     });
     const data = response.json();
+
+    // TODO - Remove console.log
+    if (!!data) console.log("User created successfully!");
+
     return data;
   } catch (error) {
     console.error(error);
@@ -19,7 +23,7 @@ export async function createUser(user) {
 }
 
 //Need to find the user somehow
-export async function onBoardUser(user) {
+export async function onboardUser(user) {
   try {
     const response = await fetch("/api/users/me/onboard", {
       method: "PATCH",
@@ -75,13 +79,6 @@ export const isUserRegistered = async (email) => {
     }
   }
 };
-
-export function handleSignUp(user) {
-  console.log(user);
-  createUser(user).then(() => {
-    console.log("this works");
-  });
-}
 
 export function signIn(user) {
   return fetch("/api/users/login", {
