@@ -29,3 +29,52 @@
     transform: rotate(360deg);
   }
 }
+
+/* Animated routes */
+#routeRootWithAnimations {
+  width: 100%;
+  height: 100%;
+}
+
+/* Start state for entering */
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+/* End state for entering */
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+/* Start state for exiting */
+.fade-exit {
+  opacity: 1;
+}
+
+/* End state for exiting */
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
+/* Define the initial and final states */
+.slide-enter {
+  transform: translateX(-100%);
+  //opacity: 0;
+}
+.slide-enter-active {
+  transform: translateX(0);
+  //opacity: 1;
+  transition: opacity 400ms, transform 400ms;
+}
+.slide-exit {
+  transform: translateX(0);
+  //opacity: 1;
+}
+.slide-exit-active {
+  transform: translateX(-100%);
+  //opacity: 0;
+  transition: opacity 400ms, transform 400ms;
+}

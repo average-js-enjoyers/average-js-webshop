@@ -19,7 +19,7 @@ function OAuthCallbackScreen({ provider }) {
 
   // Abstracted logic for exchanging tokens
   const exchangeCodeForTokens = useCallback(
-    async (code, codeVerifier) => {
+    async (code, codeVerifier, state, innerState) => {
       const grant_type = "authorization_code";
 
       try {
@@ -45,6 +45,14 @@ function OAuthCallbackScreen({ provider }) {
             data.error || `Failed to exchange code for tokens with ${provider}.`
           );
         }
+
+        console.log(innerState, typeof innerState, state, typeof state);
+        if (state !== innerState) {
+          throw new Error(
+            `State does not match. Possible CSRF attack with ${provider}.`
+          );
+        }
+        sessionStorage.removeItem(`${provider}State`);
 
         // Call the respective signIn function from context
         signInWithProviderToken(
@@ -75,11 +83,13 @@ function OAuthCallbackScreen({ provider }) {
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
     const codeVerifier = sessionStorage.getItem("codeVerifier");
+    const state = params.get("state");
+    const innerState = sessionStorage.getItem(`${provider}State`);
 
     // Set a timeout to wait for 1 second
     const timeoutId = setTimeout(() => {
       if (code && codeVerifier && isSubscribed) {
-        exchangeCodeForTokens(code, codeVerifier);
+        exchangeCodeForTokens(code, codeVerifier, state, innerState);
         sessionStorage.removeItem("codeVerifier");
       }
     }, 1500); // 1500 milliseconds = 1.5 seconds

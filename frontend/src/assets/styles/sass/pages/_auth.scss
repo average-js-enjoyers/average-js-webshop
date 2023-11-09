@@ -71,12 +71,16 @@
   @include responsivePadding($padding-top: 6rem, $padding-bottom: 6rem);
 
   @include breakpoint("lg") {
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-  }
-  @include breakpoint("lg") {
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    gap: 6rem;
     padding-top: 4.5rem;
     padding-bottom: 4.5rem;
+
+    overflow-y: scroll;
+    scroll-behavior: smooth;
   }
   @include breakpoint("md") {
     padding-top: 3rem;
@@ -87,10 +91,6 @@
   justify-content: space-between;
 
   @include breakpoint("lg") {
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    gap: 6rem;
   }
 
   &__logo {
