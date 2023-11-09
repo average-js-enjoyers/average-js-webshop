@@ -64,7 +64,8 @@ export const useAuth = () => {
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = generateCodeChallenge(codeVerifier);
 
-    // Save the codeVerifier in sessionStorage or other secure place to use later
+    // Save the state and codeVerifier in sessionStorage or other secure place to use later
+    sessionStorage.setItem(`${provider}State`, state);
     sessionStorage.setItem(`${provider}CodeVerifier`, codeVerifier);
 
     const authUrl = getAuthUrl(provider, state, codeChallenge);
