@@ -1,12 +1,14 @@
 .main-layout {
   /* For development purposes TODO */
-  min-height: calc(100vh - 12rem - 20rem);
+  min-height: calc(100vh - 20rem);
 
   position: relative;
   z-index: 0;
   background-color: var(--grayscale-0);
 
   padding: 6rem 15% 6rem;
+
+  transform: translateY(12rem);
 
   width: 100%;
 
