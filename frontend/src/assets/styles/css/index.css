@@ -2062,28 +2062,20 @@ input[type=checkbox]:focus + label:before {
 }
 @media (max-width: 992px) {
   .auth-screen {
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-  }
-}
-@media (max-width: 992px) {
-  .auth-screen {
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 6rem;
     padding-top: 4.5rem;
     padding-bottom: 4.5rem;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
   }
 }
 @media (max-width: 768px) {
   .auth-screen {
     padding-top: 3rem;
     padding-bottom: 3rem;
-  }
-}
-@media (max-width: 992px) {
-  .auth-screen {
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    gap: 6rem;
   }
 }
 .auth-screen__logo {
