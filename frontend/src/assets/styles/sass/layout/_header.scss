@@ -68,11 +68,11 @@
     }
     &:hover .header__icon,
     &:hover .header__icon-text {
-      color: var(--secondary-20);
+      color: var(--success-20);
     }
     &:active .header__icon,
     &:active .header__icon-text {
-      color: var(--secondary-40);
+      color: var(--success-40);
     }
   }
 
@@ -82,7 +82,7 @@
     font-style: normal;
     font-weight: 800;
 
-    color: var(--secondary-0);
+    color: var(--success-0);
   }
 
   &__icon-text {
@@ -92,7 +92,7 @@
     font-weight: 500;
     letter-spacing: 0.05rem;
 
-    color: var(--secondary-0);
+    color: var(--success-0);
   }
 
   &__bot {
@@ -186,7 +186,7 @@
     transition: all 0.2s ease-in-out;
 
     &:hover {
-      color: var(--secondary-20);
+      color: var(--success-20);
     }
 
     &:not(:last-child) {

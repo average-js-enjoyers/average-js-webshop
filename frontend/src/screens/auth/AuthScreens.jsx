@@ -44,7 +44,7 @@ function AuthScreenWrapper({ children }) {
         </header>
         <main className="auth-screen__main">{children}</main>
         <footer className="auth-screen__help">
-          <Button variant="outline-secondary">Need Help?</Button>
+          <Button variant="danger">Need Help?</Button>
         </footer>
       </div>
       <div className="auth-screen-wrapper__deco auth-screen-wrapper__deco--2"></div>

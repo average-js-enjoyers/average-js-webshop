@@ -104,19 +104,19 @@
 
 .btn-success {
   font-weight: 500;
-  background-color: var(--secondary-70);
-  border: 0.3rem solid var(--secondary-70);
+  background-color: var(--success-70);
+  border: 0.3rem solid var(--success-70);
   color: var(--grayscale-0);
 
   &:hover {
-    background-color: var(--secondary-60);
-    border: 0.3rem solid var(--secondary-60);
+    background-color: var(--success-60);
+    border: 0.3rem solid var(--success-60);
     color: var(--grayscale-0);
   }
 
   &:active {
-    background-color: var(--secondary-80) !important;
-    border: 0.3rem solid var(--secondary-80) !important;
+    background-color: var(--success-80) !important;
+    border: 0.3rem solid var(--success-80) !important;
     color: var(--grayscale-0) !important;
   }
 }
@@ -319,18 +319,18 @@
 .btn-outline-success {
   font-weight: 500;
   background-color: var(--grayscale-0);
-  border: 0.2rem solid var(--secondary-70);
-  color: var(--secondary-70);
+  border: 0.2rem solid var(--success-70);
+  color: var(--success-70);
 
   &:hover {
-    background-color: var(--secondary-60);
-    border: 0.2rem solid var(--secondary-60);
+    background-color: var(--success-60);
+    border: 0.2rem solid var(--success-60);
     color: var(--grayscale-0);
   }
 
   &:active {
-    background-color: var(--secondary-80) !important;
-    border: 0.2rem solid var(--secondary-80) !important;
+    background-color: var(--success-80) !important;
+    border: 0.2rem solid var(--success-80) !important;
     color: var(--grayscale-0) !important;
   }
 }

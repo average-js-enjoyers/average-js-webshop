@@ -14,17 +14,29 @@
   --primary-90: rgba(0, 80, 115, 1);
   --primary-100: rgba(0, 55, 85, 1);
   /* Secondary Tonal Pattern */
-  --secondary-0: rgba(240, 255, 245, 1);
-  --secondary-10: rgba(220, 255, 230, 1);
-  --secondary-20: rgba(190, 250, 210, 1);
-  --secondary-30: rgba(160, 245, 180, 1);
-  --secondary-40: rgba(130, 240, 160, 1);
-  --secondary-50: rgba(120, 230, 140, 1);
-  --secondary-60: rgba(90, 200, 120, 1);
-  --secondary-70: rgba(40, 175, 90, 1);
-  --secondary-80: rgba(20, 150, 75, 1);
-  --secondary-90: rgba(10, 130, 70, 1);
-  --secondary-100: rgba(0, 100, 50, 1);
+  --secondary-0: rgba(245, 235, 255, 1);
+  --secondary-10: rgba(230, 205, 255, 1);
+  --secondary-20: rgba(210, 175, 245, 1);
+  --secondary-30: rgba(180, 145, 235, 1);
+  --secondary-40: rgba(160, 110, 230, 1);
+  --secondary-50: rgba(140, 0, 255, 1);
+  --secondary-60: rgba(120, 0, 220, 1);
+  --secondary-70: rgba(100, 0, 190, 1);
+  --secondary-80: rgba(80, 0, 160, 1);
+  --secondary-90: rgba(60, 0, 130, 1);
+  --secondary-100: rgba(40, 0, 100, 1);
+  /* Success Tonal Pattern */
+  --success-0: rgba(240, 255, 245, 1);
+  --success-10: rgba(220, 255, 230, 1);
+  --success-20: rgba(190, 250, 210, 1);
+  --success-30: rgba(160, 245, 180, 1);
+  --success-40: rgba(130, 240, 160, 1);
+  --success-50: rgba(120, 230, 140, 1);
+  --success-60: rgba(90, 200, 120, 1);
+  --success-70: rgba(40, 175, 90, 1);
+  --success-80: rgba(20, 150, 75, 1);
+  --success-90: rgba(10, 130, 70, 1);
+  --success-100: rgba(0, 100, 50, 1);
   /* Accent Tonal Pattern */
   --accent-0: rgba(255, 242, 246, 1);
   --accent-10: rgba(255, 230, 235, 1);
@@ -54,13 +66,13 @@
   --warning-10: rgba(255, 245, 235, 1);
   --warning-20: rgba(255, 240, 225, 1);
   --warning-30: rgba(255, 225, 175, 1);
-  --warning-40: rgba(255, 185, 85, 1);
-  --warning-50: rgb(210, 150, 20);
-  --warning-60: rgba(180, 120, 10, 1);
-  --warning-70: rgba(150, 100, 5, 1);
-  --warning-80: rgba(120, 80, 0, 1);
-  --warning-90: rgba(90, 60, 0, 1);
-  --warning-100: rgba(90, 45, 10, 1);
+  --warning-40: rgba(255, 200, 100, 1);
+  --warning-50: rgba(255, 180, 50, 1);
+  --warning-60: rgba(255, 160, 0, 1);
+  --warning-70: rgba(230, 140, 0, 1);
+  --warning-80: rgba(200, 120, 0, 1);
+  --warning-90: rgba(170, 100, 0, 1);
+  --warning-100: rgba(140, 80, 0, 1);
   /* Primary Gradient */
   --primary-gradient-0deg: linear-gradient(
     0deg,
@@ -412,9 +424,10 @@ strong {
   font-size: calc(var(--default-font-size) * 2);
   font-weight: 700;
   line-height: 1;
+  text-shadow: 0.5rem 0.5rem 10rem var(--primary-30);
 }
 .emoji-logo--display {
-  font-size: calc(var(--default-font-size) * 5);
+  font-size: calc(var(--default-font-size) * 6);
 }
 
 .text-center {
@@ -949,18 +962,18 @@ strong {
 
 .btn-success {
   font-weight: 500;
-  background-color: var(--secondary-70);
-  border: 0.3rem solid var(--secondary-70);
+  background-color: var(--success-70);
+  border: 0.3rem solid var(--success-70);
   color: var(--grayscale-0);
 }
 .btn-success:hover {
-  background-color: var(--secondary-60);
-  border: 0.3rem solid var(--secondary-60);
+  background-color: var(--success-60);
+  border: 0.3rem solid var(--success-60);
   color: var(--grayscale-0);
 }
 .btn-success:active {
-  background-color: var(--secondary-80) !important;
-  border: 0.3rem solid var(--secondary-80) !important;
+  background-color: var(--success-80) !important;
+  border: 0.3rem solid var(--success-80) !important;
   color: var(--grayscale-0) !important;
 }
 
@@ -1141,17 +1154,17 @@ strong {
 .btn-outline-success {
   font-weight: 500;
   background-color: var(--grayscale-0);
-  border: 0.2rem solid var(--secondary-70);
-  color: var(--secondary-70);
+  border: 0.2rem solid var(--success-70);
+  color: var(--success-70);
 }
 .btn-outline-success:hover {
-  background-color: var(--secondary-60);
-  border: 0.2rem solid var(--secondary-60);
+  background-color: var(--success-60);
+  border: 0.2rem solid var(--success-60);
   color: var(--grayscale-0);
 }
 .btn-outline-success:active {
-  background-color: var(--secondary-80) !important;
-  border: 0.2rem solid var(--secondary-80) !important;
+  background-color: var(--success-80) !important;
+  border: 0.2rem solid var(--success-80) !important;
   color: var(--grayscale-0) !important;
 }
 
@@ -1251,8 +1264,8 @@ strong {
 }
 
 .status-message--success {
-  background-color: var(--secondary-20);
-  border-left: 0.5rem solid var(--secondary-50);
+  background-color: var(--success-20);
+  border-left: 0.5rem solid var(--success-50);
 }
 
 .status-message--danger {
@@ -1334,8 +1347,8 @@ strong {
 }
 
 .form-validation-message--success {
-  background-color: var(--secondary-20);
-  border-left: 0.5rem solid var(--secondary-50);
+  background-color: var(--success-20);
+  border-left: 0.5rem solid var(--success-50);
 }
 
 .form-validation-message--danger {
@@ -1446,18 +1459,18 @@ strong {
   max-width: 15rem;
   cursor: pointer;
   color: var(--primary-90);
-  background-color: var(--secondary-0);
+  background-color: var(--success-0);
   transition: all 0.2s ease-in-out;
 }
 .search-bar__select:hover {
-  background-color: var(--secondary-20);
+  background-color: var(--success-20);
 }
 .search-bar__select:active {
-  background-color: var(--secondary-30);
+  background-color: var(--success-30);
 }
 .search-bar__select option {
   color: var(--primary-90);
-  background-color: var(--secondary-0);
+  background-color: var(--success-0);
 }
 .search-bar__input {
   flex: 1;
@@ -1486,16 +1499,16 @@ strong {
   border: 0.1rem solid transparent;
   border-top-right-radius: 10rem;
   border-bottom-right-radius: 10rem;
-  background-color: var(--secondary-0);
+  background-color: var(--success-0);
   cursor: pointer;
   transition: all 0.15s ease-in-out;
 }
 .search-bar__button:hover {
-  background-color: var(--secondary-20);
+  background-color: var(--success-20);
   transform: scale(1.03);
 }
 .search-bar__button:active {
-  background-color: var(--secondary-30);
+  background-color: var(--success-30);
   transform: scale(0.97);
 }
 .search-bar__icon {
@@ -1721,18 +1734,18 @@ input[type=checkbox]:focus + label:before {
   max-width: 15rem;
   cursor: pointer;
   color: var(--primary-90);
-  background-color: var(--secondary-0);
+  background-color: var(--success-0);
   transition: all 0.2s ease-in-out;
 }
 .search-bar__select:hover {
-  background-color: var(--secondary-20);
+  background-color: var(--success-20);
 }
 .search-bar__select:active {
-  background-color: var(--secondary-30);
+  background-color: var(--success-30);
 }
 .search-bar__select option {
   color: var(--primary-90);
-  background-color: var(--secondary-0);
+  background-color: var(--success-0);
 }
 .search-bar__input {
   flex: 1;
@@ -1761,16 +1774,16 @@ input[type=checkbox]:focus + label:before {
   border: 0.1rem solid transparent;
   border-top-right-radius: 10rem;
   border-bottom-right-radius: 10rem;
-  background-color: var(--secondary-0);
+  background-color: var(--success-0);
   cursor: pointer;
   transition: all 0.15s ease-in-out;
 }
 .search-bar__button:hover {
-  background-color: var(--secondary-20);
+  background-color: var(--success-20);
   transform: scale(1.03);
 }
 .search-bar__button:active {
-  background-color: var(--secondary-30);
+  background-color: var(--success-30);
   transform: scale(0.97);
 }
 .search-bar__icon {
@@ -1993,17 +2006,17 @@ input[type=checkbox]:focus + label:before {
   transition: all 0.1s ease-in-out;
 }
 .header__icon-container:hover .header__icon, .header__icon-container:hover .header__icon-text {
-  color: var(--secondary-20);
+  color: var(--success-20);
 }
 .header__icon-container:active .header__icon, .header__icon-container:active .header__icon-text {
-  color: var(--secondary-40);
+  color: var(--success-40);
 }
 .header__icon {
   font-size: 3rem;
   line-height: 3rem;
   font-style: normal;
   font-weight: 800;
-  color: var(--secondary-0);
+  color: var(--success-0);
 }
 .header__icon-text {
   font-size: 1.2rem;
@@ -2011,7 +2024,7 @@ input[type=checkbox]:focus + label:before {
   font-style: normal;
   font-weight: 500;
   letter-spacing: 0.05rem;
-  color: var(--secondary-0);
+  color: var(--success-0);
 }
 .header__bot {
   display: flex;
@@ -2074,7 +2087,7 @@ input[type=checkbox]:focus + label:before {
   transition: all 0.2s ease-in-out;
 }
 .header__link-item:hover {
-  color: var(--secondary-20);
+  color: var(--success-20);
 }
 .header__link-item:not(:last-child) {
   padding: 0 5rem;
