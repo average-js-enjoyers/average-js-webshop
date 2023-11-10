@@ -13,11 +13,8 @@ html {
   // Defines 1 rem
   font-size: 62.5%; // 1rem = 10 px -- 10px/16px = 62.5%
 
-  @include breakpoint("4xl") {
-    font-size: 56.25%; // 1rem = 8px -- 8px/16px = 50%
-  }
-  @include breakpoint("3xl") {
-    font-size: 50%; // 1rem = 8px -- 8px/16px = 50%
+  @include breakpoint("xl") {
+    font-size: 56.25%; // 1rem = 9px -- 9px/16px = 56.25%
   }
 
   scroll-behavior: smooth;

@@ -52,64 +52,6 @@ function AuthScreenWrapper({ children }) {
   );
 }
 
-function SignInScreen() {
-  const { signInWithProvider } = useAuth();
-
-  return (
-    <Card>
-      <CardBody>
-        <CardTitle level="1" textAlign="center">
-          Sign In
-        </CardTitle>
-        <SignInForm />
-
-        <p className="mt-3 text-center">
-          <Link to="/forgot-password">Forgot your password?</Link>
-        </p>
-        <hr className="mt-3" />
-        <p className="mt-3 text-center">
-          <strong>Or sign in simply with:</strong>
-        </p>
-        <div className="oauth-button-wrapper mt-3">
-          <Button
-            variant="outline-danger btn--compact"
-            onClick={() => signInWithProvider("google")}
-          >
-            Google Sign In
-          </Button>
-          <Button
-            variant="outline-info btn--compact"
-            onClick={() => signInWithProvider("facebook")}
-          >
-            Facebook Sign In
-          </Button>
-        </div>
-      </CardBody>
-      <CardFooter>
-        <p>
-          You can <Link to="/signup">sign up now</Link> in 2 minutes.
-        </p>
-      </CardFooter>
-    </Card>
-  );
-}
-
-function OnboardScreen() {
-  return (
-    <Card>
-      <CardBody>
-        <CardTitle level="1">Welcome to The Shop!</CardTitle>
-        <OnboardingForm />
-      </CardBody>
-      <CardFooter>
-        <p>
-          Once this is done, <strong>your account will be active</strong>.
-        </p>
-      </CardFooter>
-    </Card>
-  );
-}
-
 function SignUpScreen() {
   const { signUp, signInWithProvider } = useAuth();
 
@@ -117,21 +59,24 @@ function SignUpScreen() {
     <Card>
       <CardBody>
         <CardTitle level="1" textAlign="center">
-          Sign Up
+          <span className="emoji-logo emoji-logo--display">🎀</span> <br />
+          Sign Up Now
         </CardTitle>
         <SignUpForm onSignUp={signUp} />
       </CardBody>
       <CardFooter>
         <p className="text-center">
-          <strong>Or sign up simply with:</strong>
+          <strong>Or Sign Up simply with:</strong>
         </p>
         <div className="oauth-button-wrapper mt-2">
           <Button
+            className="mr-2"
             variant="outline-danger"
             onClick={() => signInWithProvider("google")}
           >
             Google
           </Button>
+
           <Button
             variant="outline-info "
             onClick={() => signInWithProvider("facebook")}
@@ -149,7 +94,8 @@ function ConfirmRegistrationScreen() {
     <Card>
       <CardBody>
         <CardTitle level="1" textAlign="center">
-          Confirm Registration
+          <span className="emoji-logo emoji-logo--display">📨</span> <br />
+          Confirm Your Registration
         </CardTitle>
         <div
           style={{
@@ -182,6 +128,77 @@ function ConfirmRegistrationScreen() {
         </p>
         <p className="mt-1 text-center">
           <Link to="/resend-confirmation">Resend my confirmation email!</Link>
+        </p>
+      </CardFooter>
+    </Card>
+  );
+}
+
+function OnboardScreen() {
+  return (
+    <Card>
+      <CardBody>
+        <CardTitle level="1" textAlign="center">
+          <span className="emoji-logo emoji-logo--display">⚡</span> <br />
+          Welcome On Board!
+        </CardTitle>
+        <p className="lead text-center mt-2 mb-2">
+          Let’s sort out some basic details in a minute.
+        </p>
+        <OnboardingForm />
+      </CardBody>
+      <CardFooter>
+        <p className="text-center">
+          Once this is done, your account will be active.
+          <br />
+          <strong>You can start shopping right away!</strong>
+        </p>
+      </CardFooter>
+    </Card>
+  );
+}
+
+function SignInScreen() {
+  const { signInWithProvider } = useAuth();
+
+  return (
+    <Card>
+      <CardBody>
+        <CardTitle level="1" textAlign="center">
+          <span className="emoji-logo emoji-logo--display">✨</span> <br />
+          Sign In Now
+        </CardTitle>
+        <SignInForm />
+
+        <p className="mt-3 text-center">
+          <Link to="/forgot-password">Forgot your password?</Link>
+        </p>
+        <hr className="mt-3" />
+        <p className="mt-3 text-center">
+          <strong>Or sign in simply with:</strong>
+        </p>
+        <div className="oauth-button-wrapper mt-3">
+          <Button
+            variant="outline-danger btn--compact"
+            onClick={() => signInWithProvider("google")}
+          >
+            Google Sign In
+          </Button>
+          <Button
+            variant="outline-info btn--compact"
+            onClick={() => signInWithProvider("facebook")}
+          >
+            Facebook Sign In
+          </Button>
+        </div>
+      </CardBody>
+      <CardFooter>
+        <p className="text-center">
+          You can also{" "}
+          <Link style={{ fontWeight: "700" }} to="/signup">
+            Sign Up Now
+          </Link>{" "}
+          in 2 minutes, <br /> without any Google or Facebook account.
         </p>
       </CardFooter>
     </Card>

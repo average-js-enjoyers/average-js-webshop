@@ -65,9 +65,6 @@ export function CardTitle({
 
   const combinedStyle = { textAlign: textAlign, ...props.style }; // Ensure textAlign is set
 
-  // Log the textAlign to debug
-  console.log("textAlign:", textAlign);
-
   // Create the element dynamically based on the level prop
   return React.createElement(
     `h${safeLevel}`,

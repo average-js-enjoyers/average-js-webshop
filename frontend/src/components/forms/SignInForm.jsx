@@ -55,6 +55,7 @@ function SignInForm() {
             onChange={(e) => setEmail(e.target.value)}
             name="email"
             id="email"
+            placeholder="Enter your e-mail address here"
           />
         </div>
 
@@ -65,6 +66,7 @@ function SignInForm() {
             onChange={(e) => setnonHashedPassword(e.target.value)}
             name="nonHashedPassword"
             id="nonHashedPassword"
+            placeholder="Enter your password here"
           />
         </div>
 

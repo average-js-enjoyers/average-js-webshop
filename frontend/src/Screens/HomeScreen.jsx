@@ -38,6 +38,13 @@ const HomeScreen = () => {
         <Link to="/signin">
           <Button variant="outline-primary btn--compact">Sign In</Button>
         </Link>
+        <Link to="/onboard">
+          <Button variant="outline-warning btn--compact">Onboarding</Button>
+        </Link>
+        <Link to="/profile">
+          <Button variant="light btn--compact">View Profile</Button>
+        </Link>
+
         <Link to="/profile/edit">
           <Button variant="info btn--compact">Edit Profile</Button>
         </Link>
