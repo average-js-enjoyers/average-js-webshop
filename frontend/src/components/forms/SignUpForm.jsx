@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { doesEmailExist } from "api";
 
-import {
-  FormValidationMessageWrapper,
-  FormValidationMessage,
-} from "components/forms/FormValidationMessage";
+import { FormValidationMessageWrapper } from "components/forms/FormValidationMessage";
 
 import { useAuth } from "hooks";
 

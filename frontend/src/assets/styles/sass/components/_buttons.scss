@@ -10,12 +10,12 @@
   color: var(--grayscale-80);
   font-size: 1.6rem;
 
-  transition: all 0.1s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.01) translateY(0.05rem);
+    transform: translateY(0.1rem);
     box-shadow: var(--dropshadow-std--hover);
   }
 
@@ -24,7 +24,7 @@
   }
 
   &:active {
-    transform: scale(0.98);
+    transform: translateY(-0.1rem);
   }
 
   &--compact {
@@ -85,14 +85,14 @@
 }
 
 .btn-secondary {
-  font-weight: 700;
-  background-color: var(--secondary-20);
-  border: 0.3rem solid var(--secondary-20);
+  font-weight: 500;
+  background-color: var(--secondary-30);
+  border: 0.3rem solid var(--secondary-30);
 
   &:hover {
     background-color: var(--secondary-20);
     border: 0.3rem solid var(--secondary-20);
-    color: var(--grayscale-80);
+    color: var(--grayscale-90);
   }
 
   &:active {
@@ -161,7 +161,7 @@
 
 .btn-info {
   font-weight: 500;
-  background-color: var(--primary-40);
+  background-color: var(--primary-30);
   border: 0.2rem solid var(--primary-40);
 
   &:hover {
@@ -180,17 +180,17 @@
 .btn-light {
   font-weight: 500;
   background-color: var(--grayscale-0);
-  border: 0.1rem solid var(--grayscale-20);
+  border: 0.2rem solid var(--grayscale-20);
 
   &:hover {
     background-color: var(--grayscale-10);
-    border: 0.3rem solid var(--grayscale-10);
+    border: 0.2rem solid var(--grayscale-10);
     color: var(--grayscale-80);
   }
 
   &:active {
     background-color: var(--grayscale-20) !important;
-    border: 0.3rem solid var(--grayscale-20) !important;
+    border: 0.2rem solid var(--grayscale-20) !important;
     color: var(--grayscale-80) !important;
   }
 }
@@ -198,18 +198,18 @@
 .btn-dark {
   font-weight: 500;
   background-color: var(--grayscale-80);
-  border: 0.3rem solid var(--grayscale-80);
+  border: 0.2rem solid var(--grayscale-80);
   color: var(--grayscale-0);
 
   &:hover {
     background-color: var(--grayscale-70);
-    border: 0.3rem solid var(--grayscale-70);
+    border: 0.2rem solid var(--grayscale-70);
     color: var(--grayscale-0);
   }
 
   &:active {
     background-color: var(--grayscale-90) !important;
-    border: 0.3rem solid var(--grayscale-90) !important;
+    border: 0.2rem solid var(--grayscale-90) !important;
     color: var(--grayscale-0) !important;
   }
 }
@@ -243,18 +243,18 @@
 .btn-outline-primary {
   font-weight: 500;
   background-color: var(--grayscale-0);
-  border: 0.3rem solid var(--primary-50);
+  border: 0.2rem solid var(--primary-50);
   color: var(--primary-50);
 
   &:hover {
     background-color: var(--primary-50);
-    border: 0.3rem solid var(--primary-50);
+    border: 0.2rem solid var(--primary-50);
     color: var(--grayscale-0);
   }
 
   &:active {
     background-color: var(--primary-70) !important;
-    border: 0.3rem solid var(--primary-70) !important;
+    border: 0.2rem solid var(--primary-70) !important;
     color: var(--grayscale-0) !important;
   }
 }
@@ -262,18 +262,18 @@
 .btn-outline-secondary {
   font-weight: 500;
   background-color: var(--grayscale-0);
-  border: 0.3rem solid var(--secondary-20);
+  border: 0.2rem solid var(--secondary-30);
   color: var(--grayscale-80);
 
   &:hover {
     background-color: var(--secondary-20);
-    border: 0.3rem solid var(--secondary-20);
+    border: 0.2rem solid var(--secondary-20);
     color: var(--grayscale-80);
   }
 
   &:active {
     background-color: var(--secondary-40) !important;
-    border: 0.3rem solid var(--secondary-40) !important;
+    border: 0.2rem solid var(--secondary-40) !important;
     color: var(--grayscale-80) !important;
   }
 }
@@ -281,18 +281,18 @@
 .btn-outline-warning {
   font-weight: 500;
   background-color: var(--grayscale-0);
-  border: 0.3rem solid var(--warning-50);
-  color: var(--warning-50);
+  border: 0.2rem solid var(--warning-50);
+  color: var(--warning-60);
 
   &:hover {
     background-color: var(--warning-50);
-    border: 0.3rem solid var(--warning-50);
+    border: 0.2rem solid var(--warning-50);
     color: var(--grayscale-0);
   }
 
   &:active {
     background-color: var(--warning-70) !important;
-    border: 0.3rem solid var(--warning-70) !important;
+    border: 0.2rem solid var(--warning-70) !important;
     color: var(--grayscale-0) !important;
   }
 }
@@ -300,18 +300,18 @@
 .btn-outline-danger {
   font-weight: 500;
   background-color: var(--grayscale-0);
-  border: 0.3rem solid var(--accent-50);
+  border: 0.2rem solid var(--accent-50);
   color: var(--accent-50);
 
   &:hover {
     background-color: var(--accent-50);
-    border: 0.3rem solid var(--accent-50);
+    border: 0.2rem solid var(--accent-50);
     color: var(--grayscale-0);
   }
 
   &:active {
     background-color: var(--accent-70) !important;
-    border: 0.3rem solid var(--accent-70) !important;
+    border: 0.2rem solid var(--accent-70) !important;
     color: var(--grayscale-0) !important;
   }
 }
@@ -319,18 +319,18 @@
 .btn-outline-success {
   font-weight: 500;
   background-color: var(--grayscale-0);
-  border: 0.3rem solid var(--secondary-70);
+  border: 0.2rem solid var(--secondary-70);
   color: var(--secondary-70);
 
   &:hover {
     background-color: var(--secondary-60);
-    border: 0.3rem solid var(--secondary-60);
+    border: 0.2rem solid var(--secondary-60);
     color: var(--grayscale-0);
   }
 
   &:active {
     background-color: var(--secondary-80) !important;
-    border: 0.3rem solid var(--secondary-80) !important;
+    border: 0.2rem solid var(--secondary-80) !important;
     color: var(--grayscale-0) !important;
   }
 }
@@ -362,13 +362,13 @@
 
   &:hover {
     background-color: var(--grayscale-10);
-    border: 0.3rem solid var(--grayscale-10);
+    border: 0.2rem solid var(--grayscale-10);
     color: var(--grayscale-80);
   }
 
   &:active {
     background-color: var(--grayscale-20) !important;
-    border: 0.3rem solid var(--grayscale-20) !important;
+    border: 0.2rem solid var(--grayscale-20) !important;
     color: var(--grayscale-80) !important;
   }
 }

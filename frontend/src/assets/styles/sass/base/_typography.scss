@@ -78,3 +78,13 @@ a:active {
 strong {
   font-weight: 700;
 }
+
+.emoji-logo {
+  font-size: calc(var(--default-font-size) * 2);
+  font-weight: 700;
+  line-height: 1;
+
+  &--display {
+    font-size: calc(var(--default-font-size) * 5);
+  }
+}

@@ -31,6 +31,8 @@ import PrivacyPolicyScreen from "screens/gdpr/PrivacyPolicyScreen";
 import NotFoundScreen from "screens/error/NotFoundScreen";
 import ErrorScreen from "screens/error/ErrorScreen";
 
+import EmailTestScreen from "screens/EmailTestScreen";
+
 // STYLES
 
 import "assets/styles/css/index.css";
@@ -72,6 +74,9 @@ const router = createBrowserRouter(
       />
 
       <Route path="*" element={<NotFoundScreen />} />
+
+      {/* For testing emails: */}
+      <Route path="/emails/:emailName" element={<EmailTestScreen />} />
     </Route>
   ),
   {

@@ -3,7 +3,28 @@ export const isEmailValid = (email) => {
   return re.test(String(email).toLowerCase());
 };
 
-export const isPasswordValid = (password) => {
-  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-  return passwordPattern.test(password);
+export const passwordValidationErrors = (password) => {
+  const errors = [];
+
+  // Check for minimum length
+  if (password.length < 8) {
+    errors.push("Password must be at least 8 characters long.");
+  }
+
+  // Check for lowercase letter
+  if (!/[a-z]/.test(password)) {
+    errors.push("Password must contain at least one lowercase letter.");
+  }
+
+  // Check for uppercase letter
+  if (!/[A-Z]/.test(password)) {
+    errors.push("Password must contain at least one uppercase letter.");
+  }
+
+  // Check for a digit
+  if (!/\d/.test(password)) {
+    errors.push("Password must contain at least one digit.");
+  }
+
+  return errors;
 };

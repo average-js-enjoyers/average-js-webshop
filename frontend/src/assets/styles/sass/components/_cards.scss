@@ -11,7 +11,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 6rem;
+
+  overflow: hidden;
 
   &:hover {
     box-shadow: var(--dropshadow-muted--hover);
@@ -21,10 +22,16 @@
   }
   .card__body {
     background-color: var(--grayscale-0);
-    padding: 4.5rem 4.5rem 0rem;
+    padding: 4.5rem;
     border-top-right-radius: 0.8rem;
     border-top-left-radius: 0.8rem;
     height: 100%;
+
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 0.3rem;
+    }
   }
   .card__footer {
     padding: 3rem 4.5rem;
