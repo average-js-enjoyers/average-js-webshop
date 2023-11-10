@@ -102,8 +102,8 @@ function ConfirmRegistrationScreen() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            height: "90%",
             gap: "3rem",
+            marginTop: "3rem",
           }}
         >
           <p
@@ -111,7 +111,8 @@ function ConfirmRegistrationScreen() {
             style={{ fontWeight: "500", fontSize: "1.6rem" }}
           >
             We’ve sent you an email. <br />
-            You can finalise your registration by clicking <br />
+            You can finalise your registration by clicking{" "}
+            <br className="d-none-sm" />
             the link in the email.
           </p>
           <p className=" text-center">

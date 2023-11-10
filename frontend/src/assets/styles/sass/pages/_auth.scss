@@ -29,6 +29,14 @@
 
     background-color: var(--grayscale-0);
 
+    @include breakpoint("lg") {
+      background-image: linear-gradient(
+        135deg,
+        var(--primary-50) 0%,
+        var(--primary-100) 100%
+      );
+    }
+
     &__deco {
       position: absolute;
       width: 55vw;
@@ -38,6 +46,10 @@
 
       box-shadow: 0 0 5rem 0 var(--primary-100);
       // border: 0.3rem solid var(--primary-20);
+
+      @include breakpoint("lg") {
+        display: none;
+      }
 
       // Modifiers for specific decoration elements
       &--1 {
@@ -75,12 +87,31 @@
     justify-content: start;
     align-items: center;
 
-    gap: 6rem;
+    gap: 3rem;
     padding-top: 4.5rem;
     padding-bottom: 4.5rem;
 
     overflow-y: scroll;
+    overflow-x: hidden;
     scroll-behavior: smooth;
+
+    background-color: transparent;
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+      border-top-right-radius: 0.8rem;
+      border-top-left-radius: 0.8rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--grayscale-30);
+      border-radius: 0.8rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: var(--grayscale-10);
+      border-radius: 1rem;
+    }
   }
   @include breakpoint("md") {
     padding-top: 3rem;
@@ -100,22 +131,75 @@
 
     @include breakpoint("lg") {
       align-self: center;
+      transform: scale(1.2);
     }
   }
 
   &__main {
     width: 100%;
-    max-width: 55rem;
+    max-width: 57rem;
     z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
+    padding: 1.5rem;
+    overflow-y: visible;
+
+    @include breakpoint("xl") {
+      margin-left: 6rem;
+    }
+    @include breakpoint("lg") {
+      margin-left: 0;
+      padding: 0;
+      border-radius: 0;
+      max-width: 53rem;
+      overflow-y: visible;
+    }
+    @include breakpoint("sm") {
+      max-width: 45rem;
+    }
+
     & .card {
       width: 100%;
       min-height: 50rem;
-      max-height: 80vh;
+
+      overflow-y: scroll;
+      @include breakpoint("xl") {
+        &__footer {
+          margin-top: 3rem;
+        }
+      }
+      @include breakpoint("lg") {
+        overflow-y: visible;
+        min-height: 40rem;
+        &__footer {
+          margin-top: 0;
+        }
+      }
+      @include breakpoint("md") {
+        min-height: 30rem;
+      }
+
+      border-top-right-radius: 0.8rem;
+      border-top-left-radius: 0.8rem;
+
+      &::-webkit-scrollbar {
+        width: 0.3rem;
+        border-top-right-radius: 0.8rem;
+        border-top-left-radius: 0.8rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--grayscale-40);
+        border-radius: 0.8rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: var(--grayscale-10);
+        border-radius: 1rem;
+      }
     }
   }
 
