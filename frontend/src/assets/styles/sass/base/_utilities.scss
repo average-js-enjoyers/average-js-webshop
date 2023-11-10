@@ -315,3 +315,55 @@
   padding-top: 7.5rem;
   padding-bottom: 7.5rem;
 }
+
+.d-none-5xl {
+  @include breakpoint("5xl") {
+    display: none;
+  }
+}
+
+.d-none-4xl {
+  @include breakpoint("4xl") {
+    display: none;
+  }
+}
+
+.d-none-3xl {
+  @include breakpoint("3xl") {
+    display: none;
+  }
+}
+
+.d-none-2xl {
+  @include breakpoint("2xl") {
+    display: none;
+  }
+}
+
+.d-none-xl {
+  @include breakpoint("xl") {
+    display: none;
+  }
+}
+
+.d-none-lg {
+  @include breakpoint("lg") {
+    display: none;
+  }
+}
+
+.d-none-md {
+  @include breakpoint("md") {
+    display: none;
+  }
+}
+
+.d-none-sm {
+  @include breakpoint("sm") {
+    display: none;
+  }
+}
+
+.d-none {
+  display: none;
+}

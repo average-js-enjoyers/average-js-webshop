@@ -30,23 +30,108 @@ $breakpoints: (
     @warn "Invalid breakpoint name '#{$name}'";
   }
 }
+@mixin responsive-font-size {
+  // Default font size for the smallest screens
+  font-size: 62.5%;
 
-// Usage
-/* .container {
-  width: 100%;
-  @include breakpoint('sm', 'max') {
-    width: 80%;
+  // Max Width Queries
+  $queries: (
+    "xs": (
+      0,
+      62.5%,
+      // Font size for low DPR on xs
+      60%,
+      // Font size for high DPR on xs
+    ),
+    "sm": (
+      576px,
+      62.5%,
+      // Font size for low DPR on sm
+      58%,
+      // Font size for high DPR on sm
+    ),
+    "md": (
+      768px,
+      62.5%,
+      // Font size for low DPR on md
+      56%,
+      // Font size for high DPR on md
+    ),
+    "lg": (
+      992px,
+      62.5%,
+      // Font size for low DPR on lg
+      54%,
+      // Font size for high DPR on lg
+    ),
+    "xl": (
+      1200px,
+      62.5%,
+      // Font size for low DPR on xl
+      52%,
+      // Font size for high DPR on xl
+    ),
+    "2xl": (
+      1440px,
+      62.5%,
+      // Font size for low DPR on 2xl
+      50%,
+      // Font size for high DPR on 2xl
+    ),
+    "3xl": (
+      1600px,
+      62.5%,
+      // Font size for low DPR on 3xl
+      50%,
+      // Font size for high DPR on 3xl
+    ),
+    "4xl": (
+      1900px,
+      62.5%,
+      // Font size for low DPR on 4xl
+      46%,
+      // Font size for high DPR on 4xl
+    ),
+    "5xl": (
+      2200px,
+      62.5%,
+      // Font size for low DPR on 5xl
+      44%,
+      // Font size for high DPR on 5xl
+    ),
+  );
+
+  @each $name, $values in $queries {
+    $width: nth($values, 1);
+    $font-size-low-dpr: nth($values, 2);
+    $font-size-high-dpr: nth($values, 3);
+
+    $prev-width: 0;
+    // Assuming the list is ordered from smallest to largest
+    @if $name != "xs" {
+      // Get the previous width to create a min-width
+      $prev-name: nth(
+        nth(map-keys($queries), index(map-keys($queries), $name) - 1),
+        1
+      );
+      $prev-width: nth(map-get($queries, $prev-name), 1);
+    } @else {
+      $prev-width: 0;
+    }
+
+    // For devices with DPR below 2
+    @media (min-width: $prev-width) and (max-width: $width) and (-webkit-min-device-pixel-ratio: 2),
+      (min-width: $prev-width) and (max-width: $width) and (max-resolution: 191dpi) {
+      font-size: $font-size-low-dpr;
+    }
+
+    // For devices with DPR of 2 and above
+    @media (min-width: $prev-width) and (max-width: $width) and (-webkit-min-device-pixel-ratio: 2),
+      (min-width: $prev-width) and (max-width: $width) and (min-resolution: 192dpi) {
+      font-size: $font-size-high-dpr;
+    }
   }
-  @include breakpoint('md', 'min') {
-    width: 60%;
-  }
-  @include breakpoint('lg', 'max') {
-    width: 40%;
-  }
-  @include breakpoint('xl', 'min') {
-    width: 20%;
-  }
-} */
+}
 
 @mixin responsivePadding(
   $padding-top: null,
@@ -86,6 +171,10 @@ $breakpoints: (
   @include breakpoint("md") {
     padding-left: if($padding-horizontal, $padding-horizontal, 1.5rem);
     padding-right: if($padding-horizontal, $padding-horizontal, 1.5rem);
+  }
+  @include breakpoint("sm") {
+    padding-left: if($padding-horizontal, $padding-horizontal, 1rem);
+    padding-right: if($padding-horizontal, $padding-horizontal, 1rem);
   }
 }
 

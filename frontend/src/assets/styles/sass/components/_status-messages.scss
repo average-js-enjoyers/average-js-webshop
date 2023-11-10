@@ -21,13 +21,18 @@
   cursor: default;
 
   &:hover {
-    opacity: 0.7 !important; // Adjust the value as desired for partial transparency
+    box-shadow: var(--dropshadow-muted--hover);
+
+    & .status-message__close {
+      transform: scale(1.35); // Scale up the X
+      color: var(--danger-50); // Change the color to red
+    }
   }
 }
 
 .status-message--success {
-  background-color: var(--secondary-20);
-  border-left: 0.5rem solid var(--secondary-50);
+  background-color: var(--success-20);
+  border-left: 0.5rem solid var(--success-50);
 }
 
 .status-message--danger {
@@ -41,8 +46,8 @@
 }
 
 .status-message--info {
-  background-color: var(--primary-20);
-  border-left: 0.5rem solid var(--primary-50);
+  background-color: var(--primary-10);
+  border-left: 0.5rem solid var(--primary-60);
 }
 
 .status-message__text {
@@ -74,6 +79,7 @@
   font-weight: bold;
   line-height: 1;
   user-select: none;
+  transition: transform 0.2s ease, color 0.2s ease;
 
   &:hover {
     background: darken(#fff, 5%);
