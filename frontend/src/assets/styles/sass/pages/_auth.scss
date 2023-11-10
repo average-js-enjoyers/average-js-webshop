@@ -1,43 +1,64 @@
-.oauth-callback-loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2rem;
-  text-align: center;
-  font-weight: 500;
-  z-index: 9999;
-  animation: pulse 1s infinite;
+.auth-screen {
+  height: 100%;
+  z-index: 3;
 
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: space-between;
 
-  padding: 1rem;
-  border-radius: 1rem;
-}
+  @include responsivePadding($padding-top: 6rem, $padding-bottom: 6rem);
 
-.auth-screen {
+  &::-webkit-scrollbar {
+    width: 0.7rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--grayscale-50);
+    border-radius: 0.3rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--grayscale-10);
+    border-radius: 0.3rem;
+  }
+
+  @include breakpoint("lg") {
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    gap: 3rem;
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  @include breakpoint("md") {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
   &-wrapper {
-    width: 100vw;
     height: 100vh;
     position: relative;
-
     overflow: hidden;
-
-    background-color: var(--grayscale-0);
 
     &__deco {
       position: absolute;
+
       width: 55vw;
       height: 55vw;
       border-radius: 100vw;
       z-index: 0;
 
       box-shadow: 0 0 5rem 0 var(--primary-100);
-      // border: 0.3rem solid var(--primary-20);
+
+      @include breakpoint("lg") {
+        width: 70vw;
+        height: 70vw;
+        z-index: -1;
+      }
 
       // Modifiers for specific decoration elements
       &--1 {
@@ -64,35 +85,6 @@
     }
   }
 
-  // position: relative;
-  height: 100%;
-  z-index: 3;
-
-  @include responsivePadding($padding-top: 6rem, $padding-bottom: 6rem);
-
-  @include breakpoint("lg") {
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-
-    gap: 6rem;
-    padding-top: 4.5rem;
-    padding-bottom: 4.5rem;
-
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-  }
-  @include breakpoint("md") {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-
-  display: flex;
-  justify-content: space-between;
-
-  @include breakpoint("lg") {
-  }
-
   &__logo {
     align-self: flex-start;
     z-index: 1;
@@ -100,22 +92,52 @@
 
     @include breakpoint("lg") {
       align-self: center;
+      transform: scale(1.2);
     }
   }
 
   &__main {
     width: 100%;
-    max-width: 55rem;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 1;
+
+    padding: 1.5rem;
+    max-width: 57rem;
+
+    @include breakpoint("xl") {
+      margin-left: 6rem;
+    }
+    @include breakpoint("lg") {
+      margin-left: 0;
+      padding: 0;
+
+      max-width: 53rem;
+    }
+    @include breakpoint("sm") {
+      max-width: 45rem;
+    }
 
     & .card {
       width: 100%;
       min-height: 50rem;
-      max-height: 80vh;
+
+      @include breakpoint("xl") {
+        &__footer {
+          margin-top: 3rem;
+        }
+      }
+      @include breakpoint("lg") {
+        min-height: 40rem;
+        &__footer {
+          margin-top: 0;
+        }
+      }
+      @include breakpoint("md") {
+        min-height: 30rem;
+      }
     }
   }
 
@@ -124,7 +146,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    z-index: 1;
     width: 30rem;
 
     @include breakpoint("lg") {
@@ -132,12 +153,12 @@
       align-items: center;
     }
   }
-}
 
-.oauth-button-wrapper {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
+  .oauth-button-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
 }

@@ -33,7 +33,7 @@ const HomeScreen = () => {
 
       <nav style={{ display: "flex", justifyContent: "space-evenly" }}>
         <Link to="/signup">
-          <Button variant="outline-secondary btn--compact">Sign Up</Button>
+          <Button variant="secondary btn--compact">Sign Up</Button>
         </Link>
         <Link to="/signin">
           <Button variant="outline-primary btn--compact">Sign In</Button>

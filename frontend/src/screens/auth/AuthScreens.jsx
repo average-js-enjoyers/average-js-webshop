@@ -26,6 +26,9 @@ function AuthScreen({ route }) {
     case "signup":
       screen = <SignUpScreen />;
       break;
+    case "forgot-password":
+      screen = <ForgotPasswordScreen />;
+      break;
     default:
       screen = <ConfirmRegistrationScreen />;
       break;
@@ -44,7 +47,7 @@ function AuthScreenWrapper({ children }) {
         </header>
         <main className="auth-screen__main">{children}</main>
         <footer className="auth-screen__help">
-          <Button variant="outline-secondary">Need Help?</Button>
+          <Button variant="danger">Need Help?</Button>
         </footer>
       </div>
       <div className="auth-screen-wrapper__deco auth-screen-wrapper__deco--2"></div>
@@ -102,8 +105,8 @@ function ConfirmRegistrationScreen() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            height: "90%",
             gap: "3rem",
+            marginTop: "3rem",
           }}
         >
           <p
@@ -111,7 +114,8 @@ function ConfirmRegistrationScreen() {
             style={{ fontWeight: "500", fontSize: "1.6rem" }}
           >
             We’ve sent you an email. <br />
-            You can finalise your registration by clicking <br />
+            You can finalise your registration by clicking{" "}
+            <br className="d-none-sm" />
             the link in the email.
           </p>
           <p className=" text-center">
@@ -199,6 +203,46 @@ function SignInScreen() {
             Sign Up Now
           </Link>{" "}
           in 2 minutes, <br /> without any Google or Facebook account.
+        </p>
+      </CardFooter>
+    </Card>
+  );
+}
+
+function ForgotPasswordScreen() {
+  return (
+    <Card>
+      <CardBody>
+        <CardTitle level="1" textAlign="center">
+          <span className="emoji-logo emoji-logo--display">🔑</span> <br />
+          Forgot Password
+        </CardTitle>
+        <p className="lead text-center mt-2 mb-2">
+          Enter your email address and we’ll send you a link to reset your
+          password.
+        </p>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            // TODO - send reset link
+          }}
+        >
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              placeholder="Enter your email address"
+            />
+          </div>
+          <Button variant="primary btn-block mt-3">Send Reset Link</Button>
+        </form>
+      </CardBody>
+      <CardFooter>
+        <p className="text-center">
+          <Link to="/signin">Return to Sign In</Link>
         </p>
       </CardFooter>
     </Card>
