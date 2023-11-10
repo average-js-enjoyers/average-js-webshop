@@ -26,6 +26,9 @@ function AuthScreen({ route }) {
     case "signup":
       screen = <SignUpScreen />;
       break;
+    case "forgot-password":
+      screen = <ForgotPasswordScreen />;
+      break;
     default:
       screen = <ConfirmRegistrationScreen />;
       break;
@@ -200,6 +203,46 @@ function SignInScreen() {
             Sign Up Now
           </Link>{" "}
           in 2 minutes, <br /> without any Google or Facebook account.
+        </p>
+      </CardFooter>
+    </Card>
+  );
+}
+
+function ForgotPasswordScreen() {
+  return (
+    <Card>
+      <CardBody>
+        <CardTitle level="1" textAlign="center">
+          <span className="emoji-logo emoji-logo--display">🔑</span> <br />
+          Forgot Password
+        </CardTitle>
+        <p className="lead text-center mt-2 mb-2">
+          Enter your email address and we’ll send you a link to reset your
+          password.
+        </p>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            // TODO - send reset link
+          }}
+        >
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              placeholder="Enter your email address"
+            />
+          </div>
+          <Button variant="primary btn-block mt-3">Send Reset Link</Button>
+        </form>
+      </CardBody>
+      <CardFooter>
+        <p className="text-center">
+          <Link to="/signin">Return to Sign In</Link>
         </p>
       </CardFooter>
     </Card>

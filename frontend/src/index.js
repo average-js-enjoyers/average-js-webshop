@@ -63,6 +63,10 @@ const router = createBrowserRouter(
       />
       <Route path="/onboard" element={<AuthScreen route="onboard" />} />
       <Route path="/signin" element={<AuthScreen route="signin" />} />
+      <Route
+        path="/forgot-password"
+        element={<AuthScreen route="forgot-password" />}
+      />
 
       <Route
         path="/oauth/google"

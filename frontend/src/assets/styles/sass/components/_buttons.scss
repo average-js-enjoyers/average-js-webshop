@@ -1,18 +1,13 @@
 .btn {
   height: 6rem;
-  padding: 0rem 3rem;
-
+  padding: 0 3rem;
   border-radius: 10rem;
-
   box-shadow: var(--dropshadow-std);
   border: none;
-
-  color: var(--grayscale-80);
+  color: var(--grayscale-0);
   font-size: 1.6rem;
-
-  transition: all 0.2s ease-in-out;
-
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     transform: translateY(0.1rem);
@@ -20,16 +15,13 @@
   }
 
   &:active {
-    box-shadow: var(--dropshadow-std--active);
-  }
-
-  &:active {
     transform: translateY(-0.1rem);
+    box-shadow: var(--dropshadow-std--active);
   }
 
   &--compact {
     height: 4.5rem;
-    padding: 0rem 1.5rem;
+    padding: 0 1.5rem;
   }
 
   &--muted {
@@ -38,382 +30,80 @@
 
   &.disabled,
   &:disabled {
-    color: var(--grayscale-50); /* Lighter text color */
-    background-color: var(--grayscale-20); /* Lighter background */
-    border: 0.3rem solid var(--grayscale-30); /* Lighter border if needed */
-    opacity: 0.5; /* Transparency to suggest inactivity */
-    cursor: not-allowed; /* The cursor that indicates the button is disabled */
-    box-shadow: none; /* No shadow to suggest depth */
-    pointer-events: none; /* Ensures the button doesn't react to clicks */
+    color: var(--grayscale-50);
+    background-color: var(--grayscale-20);
+    border: 0.3rem solid var(--grayscale-30);
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    pointer-events: none;
+    transition: none;
+  }
+}
 
-    &:hover,
-    &:active {
-      color: var(--grayscale-50); /* Same color as the disabled state */
-      background-color: var(
-        --grayscale-20
-      ); /* Same background as the disabled state */
-      border: 0.3rem solid var(--grayscale-30); /* Same border as the disabled state */
-      box-shadow: none; /* No shadow */
-      transform: none; /* No transformation on hover or active */
+$button-types: primary, secondary, success, warning, danger, info, light, dark;
+$outline-types: primary, secondary, warning, danger, success, info, light, dark,
+  link;
+
+@each $type in $button-types {
+  .btn-#{$type} {
+    @extend .btn;
+    background-color: var(--#{$type}-50);
+    border: 0.3rem solid var(--#{$type}-50);
+
+    &:hover {
+      background-color: var(--#{$type}-40);
+      border-color: var(--#{$type}-40);
     }
 
-    /* You would add this class to a button like this in HTML:
-<button class="btn btn-primary disabled" disabled>Primary Button</button>
-*/
-
-    /* Or if you're using just HTML disabled attribute, the :disabled pseudo-class can be enough:
-<button class="btn btn-primary" disabled>Primary Button</button>
-*/
+    &:active {
+      background-color: var(--#{$type}-60);
+      border-color: var(--#{$type}-60);
+    }
   }
 }
 
-.btn-primary {
-  color: var(--grayscale-0);
-  font-weight: 700;
-  background-color: var(--primary-50);
-  border: 0.3rem solid var(--primary-50);
+@each $type in $outline-types {
+  .btn-outline-#{$type} {
+    @extend .btn;
+    background-color: var(--grayscale-0);
+    border: 0.2rem solid var(--#{$type}-50);
+    color: var(--#{$type}-50);
 
-  &:hover {
-    background-color: var(--primary-40);
-    border: 0.3rem solid var(--primary-40);
-  }
+    &:hover {
+      background-color: var(--#{$type}-50);
+      color: var(--grayscale-0);
+    }
 
-  &:active {
-    background-color: var(--primary-60) !important;
-    border: 0.3rem solid var(--primary-60) !important;
-  }
-}
-
-.btn-secondary {
-  font-weight: 500;
-  background-color: var(--secondary-30);
-  border: 0.3rem solid var(--secondary-30);
-
-  &:hover {
-    background-color: var(--secondary-20);
-    border: 0.3rem solid var(--secondary-20);
-    color: var(--grayscale-90);
-  }
-
-  &:active {
-    background-color: var(--secondary-40) !important;
-    border: 0.3rem solid var(--secondary-40) !important;
-    color: var(--grayscale-80) !important;
+    &:active {
+      background-color: var(--#{$type}-70);
+      color: var(--grayscale-0);
+    }
   }
 }
 
-.btn-success {
-  font-weight: 500;
-  background-color: var(--success-70);
-  border: 0.3rem solid var(--success-70);
-  color: var(--grayscale-0);
-
-  &:hover {
-    background-color: var(--success-60);
-    border: 0.3rem solid var(--success-60);
-    color: var(--grayscale-0);
-  }
-
-  &:active {
-    background-color: var(--success-80) !important;
-    border: 0.3rem solid var(--success-80) !important;
-    color: var(--grayscale-0) !important;
-  }
-}
-
-.btn-warning {
-  font-weight: 500;
-  background-color: var(--warning-50);
-  border: 0.3rem solid var(--warning-50);
-  color: var(--warning-0);
-
-  &:hover {
-    background-color: var(--warning-40);
-    border: 0.3rem solid var(--warning-40);
-    color: var(--warning-0);
-  }
-
-  &:active {
-    background-color: var(--warning-60) !important;
-    border: 0.3rem solid var(--warning-60) !important;
-    color: var(--warning-0) !important;
-  }
-}
-
-.btn-danger {
-  font-weight: 500;
-  background-color: var(--accent-60);
-  border: 0.3rem solid var(--accent-60);
-  color: var(--grayscale-0);
-
-  &:hover {
-    background-color: var(--accent-50);
-    border: 0.3rem solid var(--accent-50);
-    color: var(--grayscale-0);
-  }
-
-  &:active {
-    background-color: var(--accent-70) !important;
-    border: 0.3rem solid var(--accent-70) !important;
-    color: var(--grayscale-0) !important;
-  }
-}
-
-.btn-info {
-  font-weight: 500;
-  background-color: var(--primary-30);
-  border: 0.2rem solid var(--primary-40);
-
-  &:hover {
-    background-color: var(--primary-30);
-    border: 0.2rem solid var(--primary-30);
-    color: var(--grayscale-80);
-  }
-
-  &:active {
-    background-color: var(--primary-50) !important;
-    border: 0.2rem solid var(--primary-50) !important;
-    color: var(--grayscale-80) !important;
-  }
-}
-
-.btn-light {
-  font-weight: 500;
-  background-color: var(--grayscale-0);
-  border: 0.2rem solid var(--grayscale-20);
-
-  &:hover {
-    background-color: var(--grayscale-10);
-    border: 0.2rem solid var(--grayscale-10);
-    color: var(--grayscale-80);
-  }
-
-  &:active {
-    background-color: var(--grayscale-20) !important;
-    border: 0.2rem solid var(--grayscale-20) !important;
-    color: var(--grayscale-80) !important;
-  }
-}
-
-.btn-dark {
-  font-weight: 500;
-  background-color: var(--grayscale-80);
-  border: 0.2rem solid var(--grayscale-80);
-  color: var(--grayscale-0);
-
-  &:hover {
-    background-color: var(--grayscale-70);
-    border: 0.2rem solid var(--grayscale-70);
-    color: var(--grayscale-0);
-  }
-
-  &:active {
-    background-color: var(--grayscale-90) !important;
-    border: 0.2rem solid var(--grayscale-90) !important;
-    color: var(--grayscale-0) !important;
-  }
+.btn-light,
+.btn-outline-light {
+  color: var(--grayscale-80);
 }
 
 .btn-link {
-  font-weight: 500;
+  @extend .btn;
   background-color: transparent;
   border: none;
   box-shadow: none;
   color: var(--primary-50);
 
-  transition: all 0.1s ease-in-out;
-
   &:hover {
-    background-color: transparent;
-    border: none;
     box-shadow: none;
     color: var(--primary-70);
-    transform: none;
+    text-decoration: underline;
+    text-decoration-thickness: 0.15rem;
+    text-underline-offset: 0.3rem;
   }
 
   &:active {
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: var(--primary-90) !important;
-    transform: none;
-  }
-}
-
-.btn-outline-primary {
-  font-weight: 500;
-  background-color: var(--grayscale-0);
-  border: 0.2rem solid var(--primary-50);
-  color: var(--primary-50);
-
-  &:hover {
-    background-color: var(--primary-50);
-    border: 0.2rem solid var(--primary-50);
-    color: var(--grayscale-0);
-  }
-
-  &:active {
-    background-color: var(--primary-70) !important;
-    border: 0.2rem solid var(--primary-70) !important;
-    color: var(--grayscale-0) !important;
-  }
-}
-
-.btn-outline-secondary {
-  font-weight: 500;
-  background-color: var(--grayscale-0);
-  border: 0.2rem solid var(--secondary-30);
-  color: var(--grayscale-80);
-
-  &:hover {
-    background-color: var(--secondary-20);
-    border: 0.2rem solid var(--secondary-20);
-    color: var(--grayscale-80);
-  }
-
-  &:active {
-    background-color: var(--secondary-40) !important;
-    border: 0.2rem solid var(--secondary-40) !important;
-    color: var(--grayscale-80) !important;
-  }
-}
-
-.btn-outline-warning {
-  font-weight: 500;
-  background-color: var(--grayscale-0);
-  border: 0.2rem solid var(--warning-50);
-  color: var(--warning-60);
-
-  &:hover {
-    background-color: var(--warning-50);
-    border: 0.2rem solid var(--warning-50);
-    color: var(--grayscale-0);
-  }
-
-  &:active {
-    background-color: var(--warning-70) !important;
-    border: 0.2rem solid var(--warning-70) !important;
-    color: var(--grayscale-0) !important;
-  }
-}
-
-.btn-outline-danger {
-  font-weight: 500;
-  background-color: var(--grayscale-0);
-  border: 0.2rem solid var(--accent-50);
-  color: var(--accent-50);
-
-  &:hover {
-    background-color: var(--accent-50);
-    border: 0.2rem solid var(--accent-50);
-    color: var(--grayscale-0);
-  }
-
-  &:active {
-    background-color: var(--accent-70) !important;
-    border: 0.2rem solid var(--accent-70) !important;
-    color: var(--grayscale-0) !important;
-  }
-}
-
-.btn-outline-success {
-  font-weight: 500;
-  background-color: var(--grayscale-0);
-  border: 0.2rem solid var(--success-70);
-  color: var(--success-70);
-
-  &:hover {
-    background-color: var(--success-60);
-    border: 0.2rem solid var(--success-60);
-    color: var(--grayscale-0);
-  }
-
-  &:active {
-    background-color: var(--success-80) !important;
-    border: 0.2rem solid var(--success-80) !important;
-    color: var(--grayscale-0) !important;
-  }
-}
-
-.btn-outline-info {
-  font-weight: 500;
-  background-color: var(--grayscale-0);
-  border: 0.2rem solid var(--primary-40);
-  color: var(--primary-60);
-
-  &:hover {
-    background-color: var(--primary-30);
-    border: 0.2rem solid var(--primary-30);
-    color: var(--primary-80);
-  }
-
-  &:active {
-    background-color: var(--primary-50) !important;
-    border: 0.2rem solid var(--primary-50) !important;
-    color: var(--grayscale-80) !important;
-  }
-}
-
-.btn-outline-light {
-  font-weight: 500;
-  background-color: var(--grayscale-0);
-  border: 0.1rem solid var(--grayscale-20);
-  color: var(--grayscale-80);
-
-  &:hover {
-    background-color: var(--grayscale-10);
-    border: 0.2rem solid var(--grayscale-10);
-    color: var(--grayscale-80);
-  }
-
-  &:active {
-    background-color: var(--grayscale-20) !important;
-    border: 0.2rem solid var(--grayscale-20) !important;
-    color: var(--grayscale-80) !important;
-  }
-}
-
-.btn-outline-dark {
-  font-weight: 500;
-  background-color: var(--grayscale-0);
-  border: 0.2rem solid var(--grayscale-70);
-  color: var(--grayscale-80);
-
-  &:hover {
-    background-color: var(--grayscale-70);
-    border: 0.2rem solid var(--grayscale-70);
-    color: var(--grayscale-0);
-  }
-
-  &:active {
-    background-color: var(--grayscale-90) !important;
-    border: 0.2rem solid var(--grayscale-90) !important;
-    color: var(--grayscale-0) !important;
-  }
-}
-
-.btn-outline-link {
-  font-weight: 500;
-  background-color: var(--grayscale-0);
-  border: none;
-  box-shadow: none;
-  color: var(--primary-50);
-
-  transition: all 0.1s ease-in-out;
-
-  &:hover {
-    background-color: var(--grayscale-0);
-    border: none;
     box-shadow: none;
-    color: var(--primary-70);
-    transform: none;
-  }
-
-  &:active {
-    background-color: var(--grayscale-0) !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: var(--primary-90) !important;
-    transform: none;
+    color: var(--primary-90);
   }
 }

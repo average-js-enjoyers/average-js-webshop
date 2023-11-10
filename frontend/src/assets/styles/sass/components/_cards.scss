@@ -2,66 +2,67 @@
   border: 0.2rem solid var(--grayscale-10);
   border-radius: 1rem;
   box-shadow: var(--dropshadow-muted);
-
-  position: relative;
-  transition: all 0.2s ease-in-out;
-
   background-color: var(--grayscale-0);
-
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   overflow: hidden;
+  transition: box-shadow 0.2s ease-in-out; // Specify property for transition
 
   &:hover {
     box-shadow: var(--dropshadow-muted--hover);
   }
+
   .card__title {
-    /* Styles will come here */
+    // Title styles here
   }
+
   .card__body {
-    background-color: var(--grayscale-0);
     padding: 4.5rem;
-
-    @include breakpoint("lg") {
-      padding: 3rem;
-    }
-    @include breakpoint("md") {
-      padding: 3rem;
-    }
-    @include breakpoint("sm") {
-      padding: 3rem 7.5vw;
-    }
-
+    background-color: var(--grayscale-0);
     height: 100%;
 
-    // overflow-y: scroll;
-
+    overflow-y: auto;
     &::-webkit-scrollbar {
       width: 0.3rem;
     }
-  }
-  .card__footer {
-    padding: 3rem 4.5rem;
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--grayscale-40);
+    }
+    &::-webkit-scrollbar-track {
+      background-color: var(--grayscale-10);
+    }
 
     @include breakpoint("lg") {
-      padding: 3rem 3rem;
-    }
-    @include breakpoint("md") {
-      padding: 3rem 1.5rem;
-    }
-    @include breakpoint("sm") {
-      padding: 1.5rem 1rem;
+      padding: 3rem;
     }
 
-    background-color: var(--grayscale-10);
-    align-items: center;
+    @include breakpoint("sm") {
+      padding: 3rem 7.5vw;
+    }
+  }
+
+  .card__footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
+    align-items: center;
+    padding: 3rem 4.5rem;
+    background-color: var(--grayscale-10);
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+
+    @include breakpoint("lg") {
+      padding: 3rem;
+    }
+
+    @include breakpoint("md") {
+      padding: 3rem 1.5rem;
+    }
+
+    @include breakpoint("sm") {
+      padding: 1.5rem 1rem;
+    }
   }
 }
