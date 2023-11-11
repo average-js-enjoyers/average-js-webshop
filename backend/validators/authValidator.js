@@ -7,21 +7,21 @@ const baseEmailChain = body('emailAddress')
 
 exports.signup = [baseEmailChain, handleValidationError];
 
-exports.login = [
+exports.signin = [
   baseEmailChain,
   body('password').notEmpty(),
   handleValidationError,
 ];
 
-exports.requestEmailLogin = [
+exports.requestEmailSignin = [
   baseEmailChain,
   header('Confirmation-URL').notEmpty(),
   handleValidationError,
 ];
 
-exports.googleLogin = [param('token').notEmpty(), handleValidationError];
+exports.googleSignin = [body('token').notEmpty(), handleValidationError];
 
-exports.facebookLogin = [param('token').notEmpty(), handleValidationError];
+exports.facebookSignin = [body('token').notEmpty(), handleValidationError];
 
 exports.forgotPassword = [
   baseEmailChain,
@@ -29,6 +29,6 @@ exports.forgotPassword = [
   handleValidationError,
 ];
 
-exports.resetPassword = [param('token').notEmpty(), handleValidationError];
+exports.resetPassword = [body('token').notEmpty(), handleValidationError];
 
 exports.isExists = [baseEmailChain, handleValidationError];

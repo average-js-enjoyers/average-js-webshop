@@ -5,21 +5,21 @@ const authValidator = require('../validators/authValidator');
 const router = express.Router();
 
 router.post('/signup', authValidator.signup, authController.signup);
-router.post('/login', authValidator.login, authController.login);
+router.post('/signin', authValidator.signin, authController.signin);
 router.post(
-  '/login/email',
-  authValidator.requestEmailLogin,
-  authController.requestEmailLogin,
+  '/signin/email',
+  authValidator.requestEmailSignin,
+  authController.requestEmailSignin,
 );
 router.post(
-  '/login/google/:token',
-  authValidator.googleLogin,
-  authController.googleLogin,
+  '/signin/google',
+  authValidator.googleSignin,
+  authController.googleSignin,
 );
 router.post(
-  '/login/facebook/:token',
-  authValidator.facebookLogin,
-  authController.facebookLogin,
+  '/signin/facebook',
+  authValidator.facebookSignin,
+  authController.facebookSignin,
 );
 router.post(
   '/forgotPassword',
@@ -27,7 +27,7 @@ router.post(
   authController.forgotPassword,
 );
 router.patch(
-  '/resetPassword/:token',
+  '/resetPassword',
   authValidator.resetPassword,
   authController.resetPassword,
 );
