@@ -2,7 +2,10 @@ const jwt = require('jsonwebtoken');
 
 exports.signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
+    issuer: process.env.JWT_ISSUER,
+    audience: process.env.JWT_AUDIENCE,
     expiresIn: process.env.JWT_EXPIRES_IN,
+    notBefore: process.env.JWT_NOT_VALID_BEFORE,
   });
 
 exports.createSendToken = (user, statusCode, res) => {
