@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.use(authController.protect);
 
-router.post('/me/onboard', userValidator.onboard, userController.onboard);
+router.patch('/me/onboard', userValidator.onboard, userController.onboard);
 
 router.use(userController.checkOnboard);
 

@@ -101,7 +101,7 @@ function OAuthCallbackScreen({ provider }) {
   }, [exchangeCodeForTokens]);
 
   return (
-    <div className="oauth-callback-loader">
+    <div className="auth-callback-loader">
       <Logo logoSize="small" />
       <div className="loader"></div>
       <p>

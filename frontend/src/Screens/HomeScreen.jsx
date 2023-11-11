@@ -31,7 +31,14 @@ const HomeScreen = () => {
         />
       )}
 
-      <nav style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <nav
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          flexWrap: "wrap",
+          gap: "1rem",
+        }}
+      >
         <Link to="/signup">
           <Button variant="secondary btn--compact">Sign Up</Button>
         </Link>
