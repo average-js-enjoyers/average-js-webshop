@@ -72,7 +72,7 @@ exports.confirmEmail = catchAsync(async (req, res, next) => {
   jwtHandler.createSendToken(user, 200, res);
 });
 
-exports.requestEmailLogin = catchAsync(async (req, res, next) => {
+exports.requestEmailSignin = catchAsync(async (req, res, next) => {
   /*  
   // #swagger.tags = ['Auth']
    #swagger.parameters['body'] = {
@@ -160,7 +160,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.login = catchAsync(async (req, res, next) => {
+exports.signin = catchAsync(async (req, res, next) => {
   /*  
   // #swagger.tags = ['Auth']
   #swagger.parameters['body'] = {
@@ -189,10 +189,10 @@ exports.login = catchAsync(async (req, res, next) => {
   jwtHandler.createSendToken(user, 200, res);
 });
 
-exports.googleLogin = catchAsync(async (req, res, next) => {
+exports.googleSignin = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
-  const accessToken = req.params.token;
+  const accessToken = req.body.token;
 
   const oAuth2Client = new google.auth.OAuth2();
 
@@ -229,10 +229,10 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
   jwtHandler.createSendToken(user, 200, res);
 });
 
-exports.facebookLogin = catchAsync(async (req, res, next) => {
+exports.facebookSignin = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
-  const accessToken = req.params.token;
+  const accessToken = req.body.token;
 
   const apiUrl = `https://graph.facebook.com/v18.0/me?fields=id,email,first_name,last_name&access_token=${accessToken}`;
 
@@ -372,7 +372,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on the token
   const hashedToken = crypto
     .createHash('sha256')
-    .update(req.params.token)
+    .update(req.body.token)
     .digest('hex');
 
   const user = await User.findOne({
