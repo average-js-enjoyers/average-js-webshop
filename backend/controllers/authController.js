@@ -7,6 +7,8 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
 const jwtHandler = require('../utils/jwtHandler');
+const fs = require('fs/promises');
+const path = require('path');
 
 exports.getAuthType = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
@@ -108,11 +110,19 @@ exports.requestEmailLogin = catchAsync(async (req, res, next) => {
 
   const message = `Welcome to Average JS Webshop! We are thrilled to have you as a new member of our online community. Thank you for choosing us for your shopping needs. Click here to confirm your email: ${confirmURL}`;
 
+  const template = await fs.readFile(
+    path.join('./templates/email', 'confreg.html'),
+    'utf8',
+  );
+  const filledTemplate = template
+    .replace('{{EMAIL}}', emailAddress)
+    .replace('{{CONFIRMATION-URL}}', confirmURL);
+
   try {
     await sendEmail({
       emailAddress: user.emailAddress,
       subject: '(AJSE) Email confirmation',
-      message: message,
+      message: filledTemplate,
     });
     res.status(200).json({
       status: 'success',

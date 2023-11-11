@@ -16,7 +16,7 @@ const sendEmail = async (options) => {
     from: 'Average JS Enjoyer <info@ajse.io>',
     to: options.emailAddress,
     subject: options.subject,
-    text: options.message,
+    html: options.message,
     // html:
   };
 
