@@ -1,5 +1,6 @@
 module.exports = [
   {
+    _id: '654f4c424f678765f526cddf',
     name: 'BattleRig Titan',
     description:
       'High-performance gaming PC built for intense gaming sessions.',
@@ -11,6 +12,7 @@ module.exports = [
     cooling: 'Liquid Cooling',
   },
   {
+    _id: '654f4c424f678765f526cde0',
     name: 'PixelMaster Pro',
     description:
       'Built for both gaming and content creation, offering top-notch performance.',
@@ -22,6 +24,7 @@ module.exports = [
     cooling: 'Advanced Air Cooling',
   },
   {
+    _id: '654f4c424f678765f526cde1',
     name: 'StealthStrike Elite',
     description: 'Sleek design with a punch of power for all modern games.',
     category_id: '507f1f77bcf86cd799439013',
@@ -32,6 +35,7 @@ module.exports = [
     cooling: 'Quiet Liquid Cooling',
   },
   {
+    _id: '654f4c424f678765f526cde2',
     name: 'CyberPulse Xtreme',
     description: 'A futuristic gaming PC with customizable RGB lighting.',
     category_id: '507f1f77bcf86cd799439013',
@@ -42,6 +46,7 @@ module.exports = [
     cooling: 'RGB Air Cooling',
   },
   {
+    _id: '654f4c424f678765f526cde3',
     name: 'AlphaNode Predator',
     description: 'For gamers who demand nothing but the best.',
     category_id: '507f1f77bcf86cd799439013',
@@ -52,6 +57,7 @@ module.exports = [
     cooling: 'RGB Liquid Cooling',
   },
   {
+    _id: '654f4c424f678765f526cde4',
     name: 'CompactCore i5',
     description:
       'Ultra-compact PC ideal for home entertainment and basic tasks.',
@@ -63,6 +69,7 @@ module.exports = [
     form_factor: 'Ultra-Small Form Factor',
   },
   {
+    _id: '654f4c424f678765f526cde5',
     name: 'NanoRyzen R5',
     description: "Mini PC with AMD's efficiency and power.",
     category_id: '507f1f77bcf86cd799439014',
@@ -73,6 +80,7 @@ module.exports = [
     form_factor: 'Small Form Factor',
   },
   {
+    _id: '654f4c424f678765f526cde6',
     name: 'QuickBox M3',
     description: 'A budget-friendly mini PC for everyday use.',
     category_id: '507f1f77bcf86cd799439014',
@@ -83,6 +91,7 @@ module.exports = [
     form_factor: 'Tiny Form Factor',
   },
   {
+    _id: '654f4c424f678765f526cde7',
     name: 'PicoCube Z2',
     description: 'Tiny yet powerful mini PC for versatile use.',
     category_id: '507f1f77bcf86cd799439014',
@@ -93,6 +102,7 @@ module.exports = [
     form_factor: 'Ultra-Small Form Factor',
   },
   {
+    _id: '654f4c424f678765f526cde8',
     name: 'SwiftCenter i7',
     description: 'Mini PC designed for performance in a small package.',
     category_id: '507f1f77bcf86cd799439014',
@@ -103,6 +113,7 @@ module.exports = [
     form_factor: 'Small Form Factor',
   },
   {
+    _id: '654f4c424f678765f526cde9',
     name: 'BusinessBox Pro',
     description: 'Ideal PC for businesses and offices with multitasking needs.',
     category_id: '507f1f77bcf86cd799439015',
@@ -113,6 +124,7 @@ module.exports = [
     security: 'Biometric Login',
   },
   {
+    _id: '654f4c424f678765f526cdea',
     name: 'OfficeMaster i5',
     description: 'A reliable and efficient office PC for daily tasks.',
     category_id: '507f1f77bcf86cd799439015',
@@ -123,6 +135,7 @@ module.exports = [
     security: 'TPM 2.0',
   },
   {
+    _id: '654f4c424f678765f526cdeb',
     name: 'WorkStream R7',
     description: 'AMD-powered PC optimized for business applications.',
     category_id: '507f1f77bcf86cd799439015',
@@ -133,6 +146,7 @@ module.exports = [
     security: 'Secure Boot',
   },
   {
+    _id: '654f4c424f678765f526cdec',
     name: 'TaskForce Elite',
     description: 'For businesses requiring power and reliability.',
     category_id: '507f1f77bcf86cd799439015',
@@ -143,6 +157,7 @@ module.exports = [
     security: 'Biometric Login and TPM 2.0',
   },
   {
+    _id: '654f4c424f678765f526cded',
     name: 'EfficiencyOne R5',
     description: 'Energy-efficient office PC with solid performance.',
     category_id: '507f1f77bcf86cd799439015',
@@ -153,6 +168,7 @@ module.exports = [
     security: 'Secure Boot',
   },
   {
+    _id: '654f4c424f678765f526cdee',
     name: 'Intel Core i9-12900K',
     description: 'A powerful CPU designed for gamers and content creators.',
     category_id: '507f1f77bcf86cd799439017',
@@ -163,6 +179,7 @@ module.exports = [
     TDP: '125W',
   },
   {
+    _id: '654f4c424f678765f526cdef',
     name: 'AMD Ryzen 9 5950X',
     description:
       "AMD's flagship CPU for high-end applications and multitasking.",
@@ -174,6 +191,7 @@ module.exports = [
     TDP: '105W',
   },
   {
+    _id: '654f4c424f678765f526cdf0',
     name: 'Intel Core i7-12700K',
     description:
       'A balanced CPU offering great performance for gaming and productivity.',
@@ -185,6 +203,7 @@ module.exports = [
     TDP: '125W',
   },
   {
+    _id: '654f4c424f678765f526cdf1',
     name: 'AMD Ryzen 7 5800X',
     description: 'Efficient and powerful, great for gaming and general use.',
     category_id: '507f1f77bcf86cd799439017',
@@ -195,6 +214,7 @@ module.exports = [
     TDP: '105W',
   },
   {
+    _id: '654f4c424f678765f526cdf2',
     name: 'Intel Core i5-11600K',
     description: 'A mid-range CPU perfect for mainstream tasks and gaming.',
     category_id: '507f1f77bcf86cd799439017',
@@ -205,6 +225,7 @@ module.exports = [
     TDP: '125W',
   },
   {
+    _id: '654f4c424f678765f526cdf3',
     name: 'MegaForce Z590-A PRO',
     description: 'Motherboard built for next-gen gaming setups.',
     category_id: '507f1f77bcf86cd799439018',
@@ -215,6 +236,7 @@ module.exports = [
     form_factor: 'ATX',
   },
   {
+    _id: '654f4c424f678765f526cdf4',
     name: 'UltraBoard B550 GAMING X',
     description: 'A reliable AMD motherboard for performance systems.',
     category_id: '507f1f77bcf86cd799439018',
@@ -225,6 +247,7 @@ module.exports = [
     form_factor: 'ATX',
   },
   {
+    _id: '654f4c424f678765f526cdf5',
     name: 'TechStar H570M PRO-VDH',
     description:
       'Micro-ATX motherboard designed for business and mainstream use.',
@@ -236,6 +259,7 @@ module.exports = [
     form_factor: 'Micro-ATX',
   },
   {
+    _id: '654f4c424f678765f526cdf6',
     name: 'ForceBoard X570 ELITE',
     description: 'High-end AMD motherboard with PCIe 4.0 support.',
     category_id: '507f1f77bcf86cd799439018',
@@ -246,6 +270,7 @@ module.exports = [
     form_factor: 'ATX',
   },
   {
+    _id: '654f4c424f678765f526cdf7',
     name: 'NanoForce B460M AORUS',
     description: 'Compact motherboard with great features for gaming setups.',
     category_id: '507f1f77bcf86cd799439018',
@@ -256,6 +281,7 @@ module.exports = [
     form_factor: 'Micro-ATX',
   },
   {
+    _id: '654f4c424f678765f526cdf8',
     name: 'HyperX Predator DDR5 32GB',
     description: 'High-speed memory module with RGB lighting.',
     category_id: '507f1f77bcf86cd799439019',
@@ -266,6 +292,7 @@ module.exports = [
     type: 'DDR5',
   },
   {
+    _id: '654f4c424f678765f526cdf9',
     name: 'G.Skill Ripjaws V DDR4 16GB',
     description: 'Reliable memory module ideal for gaming and multitasking.',
     category_id: '507f1f77bcf86cd799439019',
@@ -276,6 +303,7 @@ module.exports = [
     type: 'DDR4',
   },
   {
+    _id: '654f4c424f678765f526cdfa',
     name: 'Corsair Vengeance LPX DDR4 64GB',
     description: 'High-capacity memory kit designed for demanding tasks.',
     category_id: '507f1f77bcf86cd799439019',
@@ -286,6 +314,7 @@ module.exports = [
     type: 'DDR4',
   },
   {
+    _id: '654f4c424f678765f526cdfb',
     name: 'Crucial Ballistix DDR4 8GB',
     description: 'Affordable memory module perfect for budget builds.',
     category_id: '507f1f77bcf86cd799439019',
@@ -296,6 +325,7 @@ module.exports = [
     type: 'DDR4',
   },
   {
+    _id: '654f4c424f678765f526cdfc',
     name: 'Adata Spectrix D60G DDR4 32GB',
     description: 'Performance memory with customizable RGB lighting.',
     category_id: '507f1f77bcf86cd799439019',
@@ -306,6 +336,7 @@ module.exports = [
     type: 'DDR4',
   },
   {
+    _id: '654f4c424f678765f526cdfd',
     name: 'MechMaster Pro X',
     description: 'Mechanical keyboard with customizable RGB lighting.',
     category_id: '507f1f77bcf86cd79943901b',
@@ -316,6 +347,7 @@ module.exports = [
     layout: 'Full-size',
   },
   {
+    _id: '654f4c424f678765f526cdfe',
     name: 'SilentKey LITE',
     description: 'Quiet membrane keyboard for office use.',
     category_id: '507f1f77bcf86cd79943901b',
@@ -326,6 +358,7 @@ module.exports = [
     layout: 'Tenkeyless',
   },
   {
+    _id: '654f4c424f678765f526cdff',
     name: 'GamerX RGB Elite',
     description: 'High-performance mechanical keyboard for gaming.',
     category_id: '507f1f77bcf86cd79943901b',
@@ -336,6 +369,7 @@ module.exports = [
     layout: 'Full-size',
   },
   {
+    _id: '654f4c424f678765f526ce00',
     name: 'TypeFast Ergo',
     description: 'Ergonomic mechanical keyboard for comfort typing.',
     category_id: '507f1f77bcf86cd79943901b',
@@ -346,6 +380,7 @@ module.exports = [
     layout: 'Split',
   },
   {
+    _id: '654f4c424f678765f526ce01',
     name: 'TravelKey Mini',
     description: 'Portable wireless keyboard with touchpad.',
     category_id: '507f1f77bcf86cd79943901b',
@@ -356,6 +391,7 @@ module.exports = [
     layout: '60%',
   },
   {
+    _id: '654f4c424f678765f526ce02',
     name: 'UltraView Pro 27"',
     description: '27-inch 4K IPS monitor with excellent color accuracy.',
     category_id: '507f1f77bcf86cd79943901d',
@@ -366,6 +402,7 @@ module.exports = [
     connectivity: 'HDMI, DisplayPort',
   },
   {
+    _id: '654f4c424f678765f526ce03',
     name: 'GamerScreen X 24"',
     description: '24-inch 1080p monitor with 144Hz refresh rate for gaming.',
     category_id: '507f1f77bcf86cd79943901d',
@@ -376,6 +413,7 @@ module.exports = [
     connectivity: 'HDMI, DisplayPort',
   },
   {
+    _id: '654f4c424f678765f526ce04',
     name: 'DesignView 32"',
     description: '32-inch 4K monitor with color calibration for professionals.',
     category_id: '507f1f77bcf86cd79943901d',
@@ -386,6 +424,7 @@ module.exports = [
     connectivity: 'HDMI, USB-C',
   },
   {
+    _id: '654f4c424f678765f526ce05',
     name: 'WideView 34"',
     description:
       '34-inch ultrawide monitor with QHD resolution for multitasking.',
@@ -397,6 +436,7 @@ module.exports = [
     connectivity: 'HDMI, DisplayPort',
   },
   {
+    _id: '654f4c424f678765f526ce06',
     name: 'BudgetView 22"',
     description: '22-inch 1080p monitor for everyday use and office tasks.',
     category_id: '507f1f77bcf86cd79943901d',
@@ -407,6 +447,7 @@ module.exports = [
     connectivity: 'HDMI, VGA',
   },
   {
+    _id: '654f4c424f678765f526ce07',
     name: 'GlidePro X7',
     description: 'High-precision gaming mouse with RGB lighting.',
     category_id: '507f1f77bcf86cd79943901c',
@@ -417,6 +458,7 @@ module.exports = [
     ergonomics: 'Right-handed',
   },
   {
+    _id: '654f4c424f678765f526ce08',
     name: 'OfficeMouse Ergo',
     description: 'Ergonomic mouse designed for long working hours.',
     category_id: '507f1f77bcf86cd79943901c',
@@ -427,6 +469,7 @@ module.exports = [
     ergonomics: 'Universal',
   },
   {
+    _id: '654f4c424f678765f526ce09',
     name: 'TravelMouse Compact',
     description: 'Compact wireless mouse for on-the-go use.',
     category_id: '507f1f77bcf86cd79943901c',
@@ -437,6 +480,7 @@ module.exports = [
     ergonomics: 'Universal',
   },
   {
+    _id: '654f4c424f678765f526ce0a',
     name: 'DesignMouse Pro',
     description: 'High-precision mouse for designers with adjustable DPI.',
     category_id: '507f1f77bcf86cd79943901c',
@@ -447,6 +491,7 @@ module.exports = [
     ergonomics: 'Right-handed',
   },
   {
+    _id: '654f4c424f678765f526ce0b',
     name: 'GamerMouse Elite Z',
     description: 'RGB gaming mouse with customizable side buttons.',
     category_id: '507f1f77bcf86cd79943901c',
@@ -457,6 +502,7 @@ module.exports = [
     ergonomics: 'Right-handed',
   },
   {
+    _id: '654f4c424f678765f526ce0c',
     name: 'QuickWave 800',
     description: '800W microwave with multiple preset programs.',
     category_id: '507f1f77bcf86cd799439020',
@@ -467,6 +513,7 @@ module.exports = [
     features: 'Defrost, Grill',
   },
   {
+    _id: '654f4c424f678765f526ce0d',
     name: 'HeatNReheat Pro',
     description: 'Powerful 1000W microwave with convection oven feature.',
     category_id: '507f1f77bcf86cd799439020',
@@ -477,6 +524,7 @@ module.exports = [
     features: 'Defrost, Grill, Convection',
   },
   {
+    _id: '654f4c424f678765f526ce0e',
     name: 'MicroChef Compact',
     description: 'Space-saving microwave ideal for small kitchens.',
     category_id: '507f1f77bcf86cd799439020',
@@ -487,6 +535,7 @@ module.exports = [
     features: 'Defrost',
   },
   {
+    _id: '654f4c424f678765f526ce0f',
     name: 'UltraWave Max',
     description: '1100W microwave with smart sensor cooking.',
     category_id: '507f1f77bcf86cd799439020',
@@ -497,6 +546,7 @@ module.exports = [
     features: 'Defrost, Grill, Sensor Cooking',
   },
   {
+    _id: '654f4c424f678765f526ce10',
     name: 'EasyHeat Classic',
     description: 'Simple and reliable 800W microwave for everyday use.',
     category_id: '507f1f77bcf86cd799439020',
@@ -507,6 +557,7 @@ module.exports = [
     features: 'Defrost, Grill',
   },
   {
+    _id: '654f4c424f678765f526ce11',
     name: 'HeatMaster Pro',
     description: 'A 4-burner stovetop with advanced heat distribution.',
     category_id: '507f1f77bcf86cd799439021',
@@ -517,6 +568,7 @@ module.exports = [
     fuel_type: 'Gas',
   },
   {
+    _id: '654f4c424f678765f526ce12',
     name: 'EcoCook Hybrid',
     description:
       'Environmentally-friendly, induction and gas combined stovetop.',
@@ -528,6 +580,7 @@ module.exports = [
     fuel_type: 'Gas & Induction',
   },
   {
+    _id: '654f4c424f678765f526ce13',
     name: 'QuickHeat Solo',
     description: 'Single burner stovetop for compact spaces.',
     category_id: '507f1f77bcf86cd799439021',
@@ -538,6 +591,7 @@ module.exports = [
     fuel_type: 'Induction',
   },
   {
+    _id: '654f4c424f678765f526ce14',
     name: "Chef's Delight Elite",
     description: '5-burner stovetop with precision heat control.',
     category_id: '507f1f77bcf86cd799439021',
@@ -548,6 +602,7 @@ module.exports = [
     fuel_type: 'Gas',
   },
   {
+    _id: '654f4c424f678765f526ce15',
     name: 'CookEase Premium',
     description: '4-burner stovetop with safety features and easy cleanup.',
     category_id: '507f1f77bcf86cd799439021',
@@ -558,6 +613,7 @@ module.exports = [
     fuel_type: 'Electric',
   },
   {
+    _id: '654f4c424f678765f526ce16',
     name: 'ToastMate 2',
     description: '2-slice toaster with adjustable browning levels.',
     category_id: '507f1f77bcf86cd799439022',
@@ -568,6 +624,7 @@ module.exports = [
     settings: 'Defrost, Reheat',
   },
   {
+    _id: '654f4c424f678765f526ce17',
     name: 'CrispyBread Pro',
     description: '4-slice toaster with individual controls and bagel setting.',
     category_id: '507f1f77bcf86cd799439022',
@@ -578,6 +635,7 @@ module.exports = [
     settings: 'Defrost, Reheat, Bagel',
   },
   {
+    _id: '654f4c424f678765f526ce18',
     name: 'QuickToast Compact',
     description: 'Compact 2-slice toaster with easy-to-clean crumb tray.',
     category_id: '507f1f77bcf86cd799439022',
@@ -588,6 +646,7 @@ module.exports = [
     settings: 'Reheat',
   },
   {
+    _id: '654f4c424f678765f526ce19',
     name: 'BreadWarmer Deluxe',
     description: '4-slice toaster with wide slots for various bread types.',
     category_id: '507f1f77bcf86cd799439022',
@@ -598,6 +657,7 @@ module.exports = [
     settings: 'Defrost, Reheat, Bagel',
   },
   {
+    _id: '654f4c424f678765f526ce1a',
     name: 'MorningGlow Classic',
     description:
       'Efficient 2-slice toaster with consistent results every time.',
@@ -609,6 +669,7 @@ module.exports = [
     settings: 'Defrost, Reheat',
   },
   {
+    _id: '654f4c424f678765f526ce1b',
     name: 'FrostCombo Plus',
     description: 'Modern combined refrigerator with adjustable cooling zones.',
     category_id: '507f1f77bcf86cd799439024',
@@ -619,6 +680,7 @@ module.exports = [
     freezer_capacity: '120 liters',
   },
   {
+    _id: '654f4c424f678765f526ce1c',
     name: 'DuoFridge Elite',
     description: 'Elegant design with smart cooling technology.',
     category_id: '507f1f77bcf86cd799439024',
@@ -629,6 +691,7 @@ module.exports = [
     freezer_capacity: '140 liters',
   },
   {
+    _id: '654f4c424f678765f526ce1d',
     name: 'CoolNFreeze Max',
     description:
       'Top freezer configuration for easy access to frequently used items.',
@@ -640,6 +703,7 @@ module.exports = [
     freezer_capacity: '130 liters',
   },
   {
+    _id: '654f4c424f678765f526ce1e',
     name: 'TwinCool Premium',
     description:
       'Efficiently designed with separate compartments for optimal cooling.',
@@ -651,6 +715,7 @@ module.exports = [
     freezer_capacity: '125 liters',
   },
   {
+    _id: '654f4c424f678765f526ce1f',
     name: 'FreezeNStore Ultimate',
     description: 'Ample storage and freezing space in a sleek design.',
     category_id: '507f1f77bcf86cd799439024',
@@ -661,6 +726,7 @@ module.exports = [
     freezer_capacity: '150 liters',
   },
   {
+    _id: '654f4c424f678765f526ce20',
     name: 'VinoSafe 40',
     description:
       'Store up to 40 bottles of your finest wines at optimal temperatures.',
@@ -672,6 +738,7 @@ module.exports = [
     dimensions: '60x60x100 cm',
   },
   {
+    _id: '654f4c424f678765f526ce21',
     name: 'CellarGuard Premium',
     description: 'Keep your wine collection preserved in perfect conditions.',
     category_id: '507f1f77bcf86cd799439026',
@@ -682,6 +749,7 @@ module.exports = [
     dimensions: '65x65x110 cm',
   },
   {
+    _id: '654f4c424f678765f526ce22',
     name: 'EleganceVino 35',
     description:
       'Sleek design with UV-protected glass for your wine storage needs.',
@@ -693,6 +761,7 @@ module.exports = [
     dimensions: '58x58x105 cm',
   },
   {
+    _id: '654f4c424f678765f526ce23',
     name: 'WineKeeper Deluxe',
     description: 'Dual-zone wine fridge for reds and whites.',
     category_id: '507f1f77bcf86cd799439026',
@@ -703,6 +772,7 @@ module.exports = [
     dimensions: '62x62x115 cm',
   },
   {
+    _id: '654f4c424f678765f526ce24',
     name: 'VinoVault Classic',
     description:
       'Traditional wine fridge design with modern cooling technology.',
@@ -714,6 +784,7 @@ module.exports = [
     dimensions: '60x60x110 cm',
   },
   {
+    _id: '654f4c424f678765f526ce25',
     name: 'CoolPure Basic',
     description:
       'A classic refrigerator designed for simplicity and maximum storage.',
@@ -725,6 +796,7 @@ module.exports = [
     dimensions: '60x60x170 cm',
   },
   {
+    _id: '654f4c424f678765f526ce26',
     name: 'FreshBox Compact',
     description: 'Ideal for small households or as a secondary refrigerator.',
     category_id: '507f1f77bcf86cd799439025',
@@ -735,6 +807,7 @@ module.exports = [
     dimensions: '55x55x150 cm',
   },
   {
+    _id: '654f4c424f678765f526ce27',
     name: 'EcoChill Premium',
     description:
       'Environmentally-friendly, offering efficient cooling without a freezer compartment.',
@@ -746,6 +819,7 @@ module.exports = [
     dimensions: '58x58x165 cm',
   },
   {
+    _id: '654f4c424f678765f526ce28',
     name: 'SimplyCool Classic',
     description: 'Efficient cooling in a timeless design.',
     category_id: '507f1f77bcf86cd799439025',
@@ -756,6 +830,7 @@ module.exports = [
     dimensions: '60x58x160 cm',
   },
   {
+    _id: '654f4c424f678765f526ce29',
     name: 'PureStore XL',
     description: 'Ample storage space for larger households.',
     category_id: '507f1f77bcf86cd799439025',
@@ -766,6 +841,7 @@ module.exports = [
     dimensions: '62x60x180 cm',
   },
   {
+    _id: '654f4c424f678765f526ce2a',
     name: 'QuickDry Compact',
     description: 'Space-saving dryer with efficient drying cycles.',
     category_id: '507f1f77bcf86cd799439028',
@@ -776,6 +852,7 @@ module.exports = [
     features: 'Sensor Drying, Anti-Crease',
   },
   {
+    _id: '654f4c424f678765f526ce2b',
     name: 'EcoDry Pro',
     description: 'Energy-efficient dryer with heat pump technology.',
     category_id: '507f1f77bcf86cd799439028',
@@ -786,6 +863,7 @@ module.exports = [
     features: 'Child Lock, Delayed Start',
   },
   {
+    _id: '654f4c424f678765f526ce2c',
     name: 'AirFlow Max',
     description: 'High-capacity dryer with advanced airflow system.',
     category_id: '507f1f77bcf86cd799439028',
@@ -796,6 +874,7 @@ module.exports = [
     features: 'Quick Dry, Drum Light',
   },
   {
+    _id: '654f4c424f678765f526ce2d',
     name: 'HeatGuard Elite',
     description: 'Dryer with protective technology for delicate fabrics.',
     category_id: '507f1f77bcf86cd799439028',
@@ -806,6 +885,7 @@ module.exports = [
     features: 'Sensor Drying, Cool Down Phase',
   },
   {
+    _id: '654f4c424f678765f526ce2e',
     name: 'UltraDry Advanced',
     description: 'Top-of-the-line dryer with smart sensing and connectivity.',
     category_id: '507f1f77bcf86cd799439028',
@@ -816,6 +896,7 @@ module.exports = [
     features: 'Wi-Fi Control, Anti-Allergy Cycle',
   },
   {
+    _id: '654f4c424f678765f526ce2f',
     name: 'HydroSpin Elite',
     description:
       'High-efficiency front load washer with a variety of wash cycles.',
@@ -827,6 +908,7 @@ module.exports = [
     features: 'Quick Wash, Delayed Start',
   },
   {
+    _id: '654f4c424f678765f526ce30',
     name: 'AquaFresh Pro',
     description:
       'Front load washing machine with advanced fabric care technology.',
@@ -838,6 +920,7 @@ module.exports = [
     features: 'Steam Wash, Child Lock',
   },
   {
+    _id: '654f4c424f678765f526ce31',
     name: 'CleanWave Max',
     description:
       'Front load washer with efficient water and energy consumption.',
@@ -849,6 +932,7 @@ module.exports = [
     features: 'Smart Sensing, Drum Clean',
   },
   {
+    _id: '654f4c424f678765f526ce32',
     name: 'EcoWash Compact',
     description:
       'Space-saving front load washing machine with powerful performance.',
@@ -860,6 +944,7 @@ module.exports = [
     features: 'Quick Wash, Energy Saver',
   },
   {
+    _id: '654f4c424f678765f526ce33',
     name: 'PureClean Advanced',
     description: 'Front load washing machine with antibacterial drum.',
     category_id: '507f1f77bcf86cd799439029',
@@ -870,6 +955,7 @@ module.exports = [
     features: 'Allergy Care, EcoBubble',
   },
   {
+    _id: '654f4c424f678765f526ce34',
     name: 'EasyLoad Classic',
     description:
       'User-friendly top load washing machine with deep clean technology.',
@@ -881,6 +967,7 @@ module.exports = [
     features: 'Smart Rinse, Soak Option',
   },
   {
+    _id: '654f4c424f678765f526ce35',
     name: 'TopClean Pro',
     description: 'High-capacity top load washer with customizable cycles.',
     category_id: '507f1f77bcf86cd79943902a',
@@ -891,6 +978,7 @@ module.exports = [
     features: 'Delay Start, Tub Clean',
   },
   {
+    _id: '654f4c424f678765f526ce36',
     name: 'AeroWash Premium',
     description: 'Top load washing machine with aerodynamic wash motion.',
     category_id: '507f1f77bcf86cd79943902a',
@@ -901,6 +989,7 @@ module.exports = [
     features: 'Child Lock, Water Saver',
   },
   {
+    _id: '654f4c424f678765f526ce37',
     name: 'FreshSpin Active',
     description: 'Efficient top load washer with advanced spin technology.',
     category_id: '507f1f77bcf86cd79943902a',
@@ -911,6 +1000,7 @@ module.exports = [
     features: 'Quick Wash, Fabric Softener Dispenser',
   },
   {
+    _id: '654f4c424f678765f526ce38',
     name: 'UltraLoad Max',
     description:
       'Top load washing machine designed for heavy-duty washing needs.',
@@ -922,6 +1012,7 @@ module.exports = [
     features: 'Deep Water Wash, Delayed Start',
   },
   {
+    _id: '654f4c424f678765f526ce39',
     name: 'GamerX Pro 15',
     description: 'A gaming beast with powerful graphics and blazing speed.',
     category_id: '507f1f77bcf86cd79943902d',
@@ -932,6 +1023,7 @@ module.exports = [
     graphics_card: 'RTX 3080',
   },
   {
+    _id: '654f4c424f678765f526ce3a',
     name: 'AlphaRogue Z20',
     description: 'Designed for hardcore gamers with an immersive experience.',
     category_id: '507f1f77bcf86cd79943902d',
@@ -942,6 +1034,7 @@ module.exports = [
     graphics_card: 'RX 6800M',
   },
   {
+    _id: '654f4c424f678765f526ce3b',
     name: 'Lightblade G7',
     description: 'Portable gaming with a sleek design.',
     category_id: '507f1f77bcf86cd79943902d',
@@ -952,6 +1045,7 @@ module.exports = [
     graphics_card: 'RTX 3070',
   },
   {
+    _id: '654f4c424f678765f526ce3c',
     name: 'TitanForce U5',
     description: 'Dominate games with unstoppable performance.',
     category_id: '507f1f77bcf86cd79943902d',
@@ -962,6 +1056,7 @@ module.exports = [
     graphics_card: 'RTX 3080 Ti',
   },
   {
+    _id: '654f4c424f678765f526ce3d',
     name: 'StealthWarrior Max',
     description: 'A blend of aesthetics and raw gaming power.',
     category_id: '507f1f77bcf86cd79943902d',
@@ -972,6 +1067,7 @@ module.exports = [
     graphics_card: 'RX 6700M',
   },
   {
+    _id: '654f4c424f678765f526ce3e',
     name: 'OfficeMaster L5',
     description: 'Reliable performance for everyday tasks.',
     category_id: '507f1f77bcf86cd79943902e',
@@ -982,6 +1078,7 @@ module.exports = [
     storage: '512GB SSD',
   },
   {
+    _id: '654f4c424f678765f526ce3f',
     name: 'WorkForce Pro 7',
     description: 'Built for productivity on the go.',
     category_id: '507f1f77bcf86cd79943902e',
@@ -992,6 +1089,7 @@ module.exports = [
     storage: '256GB SSD',
   },
   {
+    _id: '654f4c424f678765f526ce40',
     name: 'UltraSleek B9',
     description: 'Compact design with all-day battery.',
     category_id: '507f1f77bcf86cd79943902e',
@@ -1002,6 +1100,7 @@ module.exports = [
     storage: '512GB NVMe SSD',
   },
   {
+    _id: '654f4c424f678765f526ce41',
     name: 'TaskRunner V4',
     description: 'Performance and portability for professionals.',
     category_id: '507f1f77bcf86cd79943902e',
@@ -1012,6 +1111,7 @@ module.exports = [
     storage: '256GB SSD',
   },
   {
+    _id: '654f4c424f678765f526ce42',
     name: 'BizMate 360',
     description: 'Flexibility and reliability in a business laptop.',
     category_id: '507f1f77bcf86cd79943902e',
@@ -1022,6 +1122,7 @@ module.exports = [
     storage: '1TB SSD',
   },
   {
+    _id: '654f4c424f678765f526ce43',
     name: 'TabFlex 10',
     description: 'Entertainment and productivity in one device.',
     category_id: '507f1f77bcf86cd79943902f',
@@ -1032,6 +1133,7 @@ module.exports = [
     battery_life: '12 hours',
   },
   {
+    _id: '654f4c424f678765f526ce44',
     name: 'ClearView S7',
     description: 'Stunning display with smooth performance.',
     category_id: '507f1f77bcf86cd79943902f',
@@ -1042,6 +1144,7 @@ module.exports = [
     battery_life: '10 hours',
   },
   {
+    _id: '654f4c424f678765f526ce45',
     name: 'SketchMate Pro',
     description: 'Designed for creators with high precision stylus.',
     category_id: '507f1f77bcf86cd79943902f',
@@ -1052,6 +1155,7 @@ module.exports = [
     battery_life: '15 hours',
   },
   {
+    _id: '654f4c424f678765f526ce46',
     name: 'TouchStream M5',
     description: 'Portable tablet for media consumption.',
     category_id: '507f1f77bcf86cd79943902f',
@@ -1062,6 +1166,7 @@ module.exports = [
     battery_life: '11 hours',
   },
   {
+    _id: '654f4c424f678765f526ce47',
     name: 'ProSlate 12',
     description: 'Professional-grade tablet with robust apps.',
     category_id: '507f1f77bcf86cd79943902f',
@@ -1072,6 +1177,7 @@ module.exports = [
     battery_life: '14 hours',
   },
   {
+    _id: '654f4c424f678765f526ce48',
     name: 'Leather Wallet Case',
     description: 'Premium leather wallet case for protection and style.',
     category_id: '507f1f77bcf86cd799439031',
@@ -1082,6 +1188,7 @@ module.exports = [
     brand: 'LuxCase',
   },
   {
+    _id: '654f4c424f678765f526ce49',
     name: 'Fast Wireless Charger',
     description: 'Rapid charging with wireless convenience.',
     category_id: '507f1f77bcf86cd799439031',
@@ -1092,6 +1199,7 @@ module.exports = [
     brand: 'ChargeMax',
   },
   {
+    _id: '654f4c424f678765f526ce4a',
     name: 'USB-C Earbuds',
     description: 'Crisp sound quality with USB-C connectivity.',
     category_id: '507f1f77bcf86cd799439031',
@@ -1102,6 +1210,7 @@ module.exports = [
     brand: 'SoundWave',
   },
   {
+    _id: '654f4c424f678765f526ce4b',
     name: '360° Phone Stand',
     description: 'Adjustable stand for hands-free viewing.',
     category_id: '507f1f77bcf86cd799439031',
@@ -1112,6 +1221,7 @@ module.exports = [
     brand: 'SturdyStand',
   },
   {
+    _id: '654f4c424f678765f526ce4c',
     name: 'Screen Protector Pack',
     description: 'Ultra-clear and scratch-resistant screen protectors.',
     category_id: '507f1f77bcf86cd799439031',
@@ -1122,6 +1232,7 @@ module.exports = [
     brand: 'ProtectGuard',
   },
   {
+    _id: '654f4c424f678765f526ce4d',
     name: 'Galaxy X10',
     description: 'A flagship device with premium features.',
     category_id: '507f1f77bcf86cd799439033',
@@ -1132,6 +1243,7 @@ module.exports = [
     camera_resolution: '48MP',
   },
   {
+    _id: '654f4c424f678765f526ce4e',
     name: 'Nexus Ultra',
     description: 'A sleek design with pure Android experience.',
     category_id: '507f1f77bcf86cd799439033',
@@ -1142,6 +1254,7 @@ module.exports = [
     camera_resolution: '40MP',
   },
   {
+    _id: '654f4c424f678765f526ce4f',
     name: 'Pixel 6 Pro',
     description: "Experience the best of Google's software and hardware.",
     category_id: '507f1f77bcf86cd799439033',
@@ -1152,6 +1265,7 @@ module.exports = [
     camera_resolution: '50MP',
   },
   {
+    _id: '654f4c424f678765f526ce50',
     name: 'OneMega 9',
     description: 'Solid performance in an affordable package.',
     category_id: '507f1f77bcf86cd799439033',
@@ -1162,6 +1276,7 @@ module.exports = [
     camera_resolution: '32MP',
   },
   {
+    _id: '654f4c424f678765f526ce51',
     name: 'Xperia Z5',
     description: 'A beautiful design with top-notch specs.',
     category_id: '507f1f77bcf86cd799439033',
@@ -1172,6 +1287,7 @@ module.exports = [
     camera_resolution: '44MP',
   },
   {
+    _id: '654f4c424f678765f526ce52',
     name: 'iPhone 14 Pro',
     description: "Apple's latest flagship with an amazing display.",
     category_id: '507f1f77bcf86cd799439032',
@@ -1182,6 +1298,7 @@ module.exports = [
     camera_resolution: '48MP',
   },
   {
+    _id: '654f4c424f678765f526ce53',
     name: 'iPhone 14',
     description: 'The new standard in smartphones.',
     category_id: '507f1f77bcf86cd799439032',
@@ -1192,6 +1309,7 @@ module.exports = [
     camera_resolution: '40MP',
   },
   {
+    _id: '654f4c424f678765f526ce54',
     name: 'iPhone 14 Pro Max',
     description: 'The biggest and best iPhone ever.',
     category_id: '507f1f77bcf86cd799439032',
@@ -1202,6 +1320,7 @@ module.exports = [
     camera_resolution: '52MP',
   },
   {
+    _id: '654f4c424f678765f526ce55',
     name: 'iPhone 14 Mini',
     description: 'Compact without compromising on features.',
     category_id: '507f1f77bcf86cd799439032',
@@ -1212,6 +1331,7 @@ module.exports = [
     camera_resolution: '38MP',
   },
   {
+    _id: '654f4c424f678765f526ce56',
     name: 'iPhone SE 3',
     description: 'Affordable iPhone with the latest internals.',
     category_id: '507f1f77bcf86cd799439032',
@@ -1222,6 +1342,7 @@ module.exports = [
     camera_resolution: '28MP',
   },
   {
+    _id: '654f4c424f678765f526ce57',
     name: 'Galaxy Watch 5',
     description:
       'The latest smartwatch in the Galaxy series, offering a balance of style and functionality.',
@@ -1233,6 +1354,7 @@ module.exports = [
     display_size: '1.4 inches',
   },
   {
+    _id: '654f4c424f678765f526ce58',
     name: 'Moto 360 3rd Gen',
     description: 'A classic design with the power of modern technology.',
     category_id: '507f1f77bcf86cd799439035',
@@ -1243,6 +1365,7 @@ module.exports = [
     display_size: '1.3 inches',
   },
   {
+    _id: '654f4c424f678765f526ce59',
     name: 'TicWatch Pro',
     description:
       'Innovative dual-display technology for extended battery life.',
@@ -1254,6 +1377,7 @@ module.exports = [
     display_size: '1.4 inches',
   },
   {
+    _id: '654f4c424f678765f526ce5a',
     name: 'ZenWatch 4',
     description: 'Sleek and stylish with a focus on health and fitness.',
     category_id: '507f1f77bcf86cd799439035',
@@ -1264,6 +1388,7 @@ module.exports = [
     display_size: '1.2 inches',
   },
   {
+    _id: '654f4c424f678765f526ce5b',
     name: 'Pixel Watch',
     description: 'The best of Google in a smartwatch format.',
     category_id: '507f1f77bcf86cd799439035',
@@ -1274,6 +1399,7 @@ module.exports = [
     display_size: '1.3 inches',
   },
   {
+    _id: '654f4c424f678765f526ce5c',
     name: 'Apple Watch Series 8',
     description:
       'The newest addition to the Apple Watch family, combining design and technology.',
@@ -1285,6 +1411,7 @@ module.exports = [
     display_size: '1.78 inches',
   },
   {
+    _id: '654f4c424f678765f526ce5d',
     name: 'Apple Watch SE',
     description: 'Affordable yet powerful, perfect for everyday use.',
     category_id: '507f1f77bcf86cd799439036',
@@ -1295,6 +1422,7 @@ module.exports = [
     display_size: '1.57 inches',
   },
   {
+    _id: '654f4c424f678765f526ce5e',
     name: 'Apple Watch Series 7',
     description: 'Robust health features in a refined design.',
     category_id: '507f1f77bcf86cd799439036',
@@ -1305,6 +1433,7 @@ module.exports = [
     display_size: '1.73 inches',
   },
   {
+    _id: '654f4c424f678765f526ce5f',
     name: 'Apple Watch Nike Edition',
     description:
       'Designed for athletes, with exclusive Nike bands and watch faces.',
@@ -1316,6 +1445,7 @@ module.exports = [
     display_size: '1.5 inches',
   },
   {
+    _id: '654f4c424f678765f526ce60',
     name: 'Apple Watch Hermès',
     description:
       'A collaboration between Apple and Hermès, offering luxury bands and unique watch faces.',
@@ -1327,6 +1457,7 @@ module.exports = [
     display_size: '1.78 inches',
   },
   {
+    _id: '654f4c424f678765f526ce61',
     name: 'FitBrace Pulse',
     description: 'Monitor your heart rate and track your daily activity.',
     category_id: '507f1f77bcf86cd799439037',
@@ -1337,6 +1468,7 @@ module.exports = [
     water_resistance: '5 ATM',
   },
   {
+    _id: '654f4c424f678765f526ce62',
     name: 'AquaBand Pro',
     description:
       'Designed for swimmers, with superior water resistance and swim tracking.',
@@ -1348,6 +1480,7 @@ module.exports = [
     water_resistance: '10 ATM',
   },
   {
+    _id: '654f4c424f678765f526ce63',
     name: 'ZenFit Ultra',
     description: 'Ultra-thin design with advanced health metrics.',
     category_id: '507f1f77bcf86cd799439037',
@@ -1358,6 +1491,7 @@ module.exports = [
     water_resistance: '3 ATM',
   },
   {
+    _id: '654f4c424f678765f526ce64',
     name: 'GlowBrace Shine',
     description: 'Illuminated display with sleep and activity tracking.',
     category_id: '507f1f77bcf86cd799439037',
@@ -1368,6 +1502,7 @@ module.exports = [
     water_resistance: '5 ATM',
   },
   {
+    _id: '654f4c424f678765f526ce65',
     name: 'NaturaBand Eco',
     description:
       'Made with eco-friendly materials, perfect for the environmentally conscious.',
