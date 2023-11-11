@@ -20,7 +20,8 @@ const properties = products.flatMap((product) =>
     )
     .map(([key, value]) => ({
       _id: new ObjectId().toString(),
-      name: key,
+      key: key,
+      value: value,
       category_id: product.category_id,
     })),
 );
@@ -29,7 +30,7 @@ const distinctProperties = (properties) => {
   const uniqueCombinations = new Set();
 
   return properties.filter((property) => {
-    const key = `${property.name}-${property.category_id}`;
+    const key = `${property.key}-${property.value}-${property.category_id}`;
 
     if (!uniqueCombinations.has(key)) {
       uniqueCombinations.add(key);

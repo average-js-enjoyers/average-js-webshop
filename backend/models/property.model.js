@@ -7,7 +7,8 @@ const PropertySchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category',
   },
-  name: String,
+  key: String,
+  value: String,
 });
 
 module.exports = mongoose.model('Property', PropertySchema);

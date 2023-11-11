@@ -73,7 +73,8 @@ const importData = async () => {
     // Get all categories from the categories array and add the admin user to each category
     const sampleProperties = properties.map((property) => ({
       _id: new mongoose.Types.ObjectId(property._id),
-      name: property.name,
+      key: property.key,
+      value: property.value,
       categoryID: new mongoose.Types.ObjectId(property.category_id),
     }));
 
