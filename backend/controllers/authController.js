@@ -108,8 +108,6 @@ exports.requestEmailSignin = catchAsync(async (req, res, next) => {
   // 3) Send it to user's email
   const confirmURL = `${confirmCallback}/${token}`;
 
-  const message = `Welcome to Average JS Webshop! We are thrilled to have you as a new member of our online community. Thank you for choosing us for your shopping needs. Click here to confirm your email: ${confirmURL}`;
-
   const template = await fs.readFile(
     path.join('./templates/email', 'confreg.html'),
     'utf8',
@@ -341,13 +339,19 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 3) Send it to user's email
   const resetURL = `${resetCallback}/${resetToken}`;
 
-  const message = `Forgot your password? Click here to reset your password: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
+  const template = await fs.readFile(
+    path.join('./templates/email', 'forgpass.html'),
+    'utf8',
+  );
+  const filledTemplate = template
+    .replace('{{EMAIL}}', user.emailAddress)
+    .replace('{{RESET-URL}}', resetURL);
 
   try {
     await sendEmail({
       emailAddress: user.emailAddress,
       subject: 'Your password reset token (valid for 10 min)',
-      message,
+      message: filledTemplate,
     });
 
     res.status(200).json({
