@@ -26,7 +26,7 @@
     justify-content: start;
     align-items: center;
 
-    gap: 3rem;
+    gap: 6rem;
     padding-top: 4.5rem;
     padding-bottom: 4.5rem;
 
@@ -37,6 +37,9 @@
   @include breakpoint("md") {
     padding-top: 3rem;
     padding-bottom: 3rem;
+  }
+  @include breakpoint("sm") {
+    gap: 3rem;
   }
 
   &-wrapper {
@@ -108,7 +111,7 @@
     max-width: 57rem;
 
     @include breakpoint("xl") {
-      margin-left: 6rem;
+      margin-left: 3vw;
     }
     @include breakpoint("lg") {
       margin-left: 0;
@@ -125,15 +128,10 @@
       min-height: 50rem;
 
       @include breakpoint("xl") {
-        &__footer {
-          margin-top: 3rem;
-        }
+        // There used to be a footer margin fix here. Maybe needed later?
       }
       @include breakpoint("lg") {
         min-height: 40rem;
-        &__footer {
-          margin-top: 0;
-        }
       }
       @include breakpoint("md") {
         min-height: 30rem;
