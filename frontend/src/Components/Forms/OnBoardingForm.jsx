@@ -1,5 +1,5 @@
 //src/components/forms/OnboardingForm.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { passwordValidationErrors } from "utils/validators";
@@ -8,12 +8,15 @@ import { onboardUser } from "api";
 import { FormValidationMessageWrapper } from "components/forms/FormValidationMessage";
 import { set } from "immutable";
 
-export default function OnboardingForm() {
-  const [firstName, setFirstName] = useState(null);
-  const [lastName, setLastName] = useState(null);
+import AuthContext from "context/AuthContext";
 
-  // TODO - fetch email
-  const [email, setEmail] = useState("theshade42@gmail.com");
+export default function OnboardingForm() {
+  const authContext = useContext(AuthContext);
+
+  const [firstName, setFirstName] = useState(authContext.user?.firstName || "");
+  const [lastName, setLastName] = useState(authContext.user?.lastName || "");
+
+  const [email, setEmail] = useState(authContext.user?.emailAddress);
 
   const [phoneNumber, setPhoneNumber] = useState(null);
 
@@ -114,6 +117,7 @@ export default function OnboardingForm() {
           <input
             type="text"
             onChange={(e) => setFirstName(e.target.value)}
+            value={firstName}
             name="firstName"
             id="firstName"
             placeholder="Enter your first name here"
@@ -125,6 +129,7 @@ export default function OnboardingForm() {
           <input
             type="text"
             onChange={(e) => setLastName(e.target.value)}
+            value={lastName}
             name="lastName"
             id="lastName"
             placeholder="Enter your last name here"
@@ -136,6 +141,7 @@ export default function OnboardingForm() {
           <input
             type="tel"
             onChange={(e) => setPhoneNumber(e.target.value)}
+            value={phoneNumber}
             name="phoneNumber"
             id="phoneNumber"
             placeholder="Enter your phone number here"

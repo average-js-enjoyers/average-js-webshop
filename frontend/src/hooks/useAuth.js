@@ -12,46 +12,33 @@ import {
 } from "utils/oauthHelpers";
 
 import { fetchUserInfoAndGetNewToken } from "api";
-import { createUser } from "api";
+import { createUser, fetchAccessToken } from "api";
 
 export const useAuth = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const signIn = useCallback(
+  const signInWithOwnBackend = useCallback(
     async (email, password) => {
-      let response = null;
       try {
-        const response = await fetch("/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ emailAddress: email, password }),
-        });
+        const response = await fetchAccessToken(email, password);
+        authContext.setResponseData(response);
 
-        const res = await response.json();
-        if (!response.ok) {
-          throw new Error(res.error || "Failed to exchange code for tokens.");
+        if (response.error) {
+          throw new Error(response.error.statusCode);
         }
 
-        const { user: userInfo, token } = res.data;
-        authContext.setAuthInfo({ user: userInfo });
-        sessionStorage.setItem("accessToken", token);
-
+        console.log("response", response);
+        authContext.setAuthInfo({
+          user: response.data.user,
+        });
+        sessionStorage.setItem("accessToken", response.token);
         navigate("/auth/internal");
       } catch (error) {
-        console.error("Error during signIn:", error, "Response:", response);
-
-        if (response?.status === 401) {
-          console.log(
-            "Login failed: Unauthorized. Please check your credentials."
-          );
-          authContext.setResponseData(response);
-        } else {
-          throw error;
-        }
+        console.error("Error in signInWithOwnBackend.", error);
       }
     },
-    [navigate, authContext]
+    [authContext, navigate]
   );
 
   const signInWithProvider = useCallback((provider) => {
@@ -84,7 +71,11 @@ export const useAuth = () => {
         }
       } catch (error) {
         console.error(`Error during sign-in with ${provider} token:`, error);
-        navigate("/signin", { state: { signInError: error.message } });
+        navigate("/signin", {
+          state: {
+            oauthError: `Error during sign-in with ${provider} token. Hang tight while we fix this!`,
+          },
+        });
       }
     },
     [navigate, authContext]
@@ -122,7 +113,7 @@ export const useAuth = () => {
   return {
     ...authContext,
     signUp,
-    signIn,
+    signInWithOwnBackend,
     signInWithProvider,
     signInWithProviderToken,
     signOut,

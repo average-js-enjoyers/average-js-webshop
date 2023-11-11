@@ -8,7 +8,7 @@ import AuthContext from "context/AuthContext";
 import { FormValidationMessageWrapper } from "components/forms/FormValidationMessage";
 
 function SignInForm() {
-  const { signIn } = useAuth();
+  const { signInWithOwnBackend } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,6 +22,15 @@ function SignInForm() {
       type: "danger",
       isVisible: responseData?.status === 401,
     },
+    {
+      id: 2,
+      text:
+        "Something went wrong. We are working on it! (Error code " +
+        responseData?.error.statusCode +
+        ")",
+      type: "danger",
+      isVisible: responseData?.error && responseData !== null,
+    },
   ];
 
   return (
@@ -30,7 +39,7 @@ function SignInForm() {
         className=""
         onSubmit={(e) => {
           e.preventDefault();
-          signIn(email, password);
+          signInWithOwnBackend(email, password);
         }}
       >
         <FormValidationMessageWrapper messages={messages} />
