@@ -179,11 +179,8 @@
   }
 
   &__link-item {
-    font-size: 1.7rem;
-    color: var(--grayscale-0);
-    letter-spacing: 0.1rem;
-    font-variant: small-caps;
-    font-weight: 500;
+    @extend %subtitle;
+
     height: 3rem;
     line-height: 3rem;
     cursor: pointer;

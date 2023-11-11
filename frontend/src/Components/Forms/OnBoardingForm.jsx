@@ -118,8 +118,6 @@ export default function OnboardingForm() {
             type="text"
             onChange={(e) => setFirstName(e.target.value)}
             value={firstName}
-            name="firstName"
-            id="firstName"
             placeholder="Enter your first name here"
           />
         </div>
@@ -130,8 +128,6 @@ export default function OnboardingForm() {
             type="text"
             onChange={(e) => setLastName(e.target.value)}
             value={lastName}
-            name="lastName"
-            id="lastName"
             placeholder="Enter your last name here"
           />
         </div>
@@ -142,8 +138,6 @@ export default function OnboardingForm() {
             type="tel"
             onChange={(e) => setPhoneNumber(e.target.value)}
             value={phoneNumber}
-            name="phoneNumber"
-            id="phoneNumber"
             placeholder="Enter your phone number here"
           />
         </div>
@@ -153,8 +147,6 @@ export default function OnboardingForm() {
           <input
             type="password"
             onChange={(e) => setnonHashedPassword(e.target.value)}
-            name="nonHashedPassword"
-            id="nonHashedPassword"
             placeholder="Enter your password here"
           />
         </div>
@@ -164,8 +156,6 @@ export default function OnboardingForm() {
           <input
             type="password"
             onChange={(e) => setconfirmPassword(e.target.value)}
-            name="confirmPassword"
-            id="confirmPassword"
             placeholder="Confirm your password here"
           />
         </div>

@@ -62,7 +62,7 @@ const router = createBrowserRouter(
         path="/confirm-registration"
         element={<AuthScreen route="confirm-registration" />}
       />
-      <Route path="/onboard" element={<AuthScreen route="onboard" />} />
+      <Route path="/onboard/:token" element={<AuthScreen route="onboard" />} />
       <Route path="/signin" element={<AuthScreen route="signin" />} />
 
       <Route path="/auth/internal" element={<InternalAuthCallbackScreen />} />

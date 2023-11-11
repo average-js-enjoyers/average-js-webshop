@@ -131,3 +131,36 @@ export async function checkEmailExists(email) {
     console.error(error);
   }
 }
+
+export async function requestBackendToSendPasswordResetEmail(email) {
+  try {
+    const response = await fetch("/api/auth/password-reset", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(email),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function sendConfirmationEmailRequest(email) {
+  try {
+    const response = await fetch("/api/auth/signin/email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Confirmation-URL": "http://localhost:3000/onboard",
+      },
+      body: JSON.stringify({ emailAddress: email }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}

@@ -114,8 +114,6 @@ const QuickSignUpForm = ({ onSignUp }) => {
         <input
           type="email"
           onChange={(e) => setEmail(e.target.value)}
-          name="email"
-          id="email"
           placeholder="Enter your email address here"
         />
       </div>

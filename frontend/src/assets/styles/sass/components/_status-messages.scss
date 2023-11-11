@@ -61,6 +61,10 @@
   animation: slideAndFloat 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
+.status-message--exit {
+  animation: fadeOutAndSlide 0.3s ease forwards;
+}
+
 .status-message__close {
   position: absolute;
   left: -1rem; // Adjust as needed for your design

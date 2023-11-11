@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "hooks/useAuth";
 import AuthContext from "context/AuthContext";
 
-import { FormValidationMessageWrapper } from "components/forms/FormValidationMessage";
+import StatusMessage from "components/common/StatusMessage";
 
 function SignInForm() {
   const { signInWithOwnBackend } = useAuth();
@@ -13,28 +13,30 @@ function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { responseData } = useContext(AuthContext);
-
-  const messages = [
-    {
-      id: 1,
-      text: "Your email or password is incorrect. Please try again.",
-      type: "danger",
-      isVisible: responseData?.status === 401,
-    },
-    {
-      id: 2,
-      text:
-        "Something went wrong. We are working on it! (Error code " +
-        responseData?.error.statusCode +
-        ")",
-      type: "danger",
-      isVisible: responseData?.error && responseData !== null,
-    },
-  ];
+  const { responseData, clearResponseData } = useContext(AuthContext);
 
   return (
     <>
+      {responseData?.error.statusCode === 401 && (
+        <StatusMessage
+          type="danger"
+          message="Your email or password is incorrect. Please try again."
+          cleanupFunction={() => clearResponseData()}
+        />
+      )}
+      {responseData?.error.statusCode !== 401 &&
+        responseData?.error &&
+        responseData !== null && (
+          <StatusMessage
+            type="danger"
+            message={
+              "Something went wrong. We are working on it! (Error code " +
+              responseData?.error.statusCode +
+              ")"
+            }
+            cleanupFunction={() => clearResponseData()}
+          />
+        )}
       <form
         className=""
         onSubmit={(e) => {
@@ -42,14 +44,11 @@ function SignInForm() {
           signInWithOwnBackend(email, password);
         }}
       >
-        <FormValidationMessageWrapper messages={messages} />
         <div>
           <label htmlFor="email">E-mail:</label>
           <input
             type="email"
             onChange={(e) => setEmail(e.target.value)}
-            name="email"
-            id="email"
             placeholder="Enter your e-mail address here"
           />
         </div>
@@ -59,8 +58,6 @@ function SignInForm() {
           <input
             type="password"
             onChange={(e) => setPassword(e.target.value)}
-            name="password"
-            id="password"
             placeholder="Enter your password here"
           />
         </div>

@@ -1,5 +1,5 @@
 //src/components/common/StatusMessage.jsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 
 const statusTypes = {
   success: "--success",
@@ -9,32 +9,45 @@ const statusTypes = {
 };
 
 // Add a new prop `autoClose` with a default value of `false`
-const StatusMessage = ({ type, message, autoClose = false }) => {
+const StatusMessage = ({
+  type,
+  message,
+  cleanupFunction,
+  autoClose = true,
+}) => {
   const statusClass = statusTypes[type] || "";
   const messageRef = useRef(null);
   const [visible, setVisible] = useState(true); // State to manage visibility
 
   // Close handler
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setVisible(false);
-  };
+    if (cleanupFunction) {
+      cleanupFunction();
+    }
+  }, [cleanupFunction]);
 
   useEffect(() => {
     const node = messageRef.current;
-    node.classList.add("status-message--enter");
+    node?.classList.add("status-message--enter");
 
     const animationDuration = 1000;
     let autoCloseTimer;
 
     if (autoClose) {
-      // Set the auto-dismiss timer
-      autoCloseTimer = setTimeout(handleClose, 10000);
+      autoCloseTimer = setTimeout(() => {
+        // Add class to trigger exit animation
+        node.classList.add("status-message--exit");
+
+        // Set a timeout for the duration of the exit animation
+        setTimeout(handleClose, 300); // Assuming exit animation is 1s
+      }, 5000);
     }
 
     return () => {
       clearTimeout(autoCloseTimer);
     };
-  }, [autoClose]);
+  }, [autoClose, handleClose]);
 
   // If not visible, do not render the component
   if (!visible) return null;

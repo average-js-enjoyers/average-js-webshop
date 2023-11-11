@@ -151,6 +151,17 @@
     transform: rotate(360deg);
   }
 }
+/* Define the exit animation */
+@keyframes fadeOutAndSlide {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
 /* Animated routes */
 #routeRootWithAnimations {
   width: 100%;
@@ -448,6 +459,14 @@ strong {
 }
 .emoji-logo--display {
   font-size: calc(var(--default-font-size) * 6);
+}
+
+.header__link-item {
+  font-size: 1.7rem;
+  color: var(--grayscale-0);
+  letter-spacing: 0.1rem;
+  font-variant: small-caps;
+  font-weight: 500;
 }
 
 .text-center {
@@ -1240,6 +1259,10 @@ strong {
 /* StatusMessage.css */
 .status-message--enter {
   animation: slideAndFloat 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.status-message--exit {
+  animation: fadeOutAndSlide 0.3s ease forwards;
 }
 
 .status-message__close {
@@ -2056,11 +2079,6 @@ input[type=checkbox]:focus + label:before {
   list-style: none;
 }
 .header__link-item {
-  font-size: 1.7rem;
-  color: var(--grayscale-0);
-  letter-spacing: 0.1rem;
-  font-variant: small-caps;
-  font-weight: 500;
   height: 3rem;
   line-height: 3rem;
   cursor: pointer;

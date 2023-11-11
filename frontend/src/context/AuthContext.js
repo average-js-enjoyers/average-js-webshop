@@ -8,6 +8,8 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated: false,
     user: null,
     responseData: null, // Added field for response data
+    passwordResetLinkSent: false,
+    confregEmailSent: false,
   });
 
   const setAuthInfo = ({ user }) => {
@@ -28,6 +30,22 @@ export const AuthProvider = ({ children }) => {
     setAuthState({ ...authState, responseData: null });
   };
 
+  const setPasswordResetLinkSent = (passwordResetLinkSent) => {
+    setAuthState({ ...authState, passwordResetLinkSent });
+  };
+
+  const clearPasswordResetLinkSent = () => {
+    setAuthState({ ...authState, passwordResetLinkSent: false });
+  };
+
+  const setConfregEmailSent = (confregEmailSent) => {
+    setAuthState({ ...authState, confregEmailSent });
+  };
+
+  const clearConfregEmailSent = () => {
+    setAuthState({ ...authState, confregEmailSent: false });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -36,6 +54,10 @@ export const AuthProvider = ({ children }) => {
         clearAuthInfo,
         setResponseData, // Adding the new function to context
         clearResponseData, // Adding the new function to context
+        setPasswordResetLinkSent,
+        clearPasswordResetLinkSent,
+        setConfregEmailSent,
+        clearConfregEmailSent,
       }}
     >
       {children}

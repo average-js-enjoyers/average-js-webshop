@@ -12,7 +12,12 @@ import {
 } from "utils/oauthHelpers";
 
 import { fetchUserInfoAndGetNewToken } from "api";
-import { createUser, fetchAccessToken } from "api";
+import {
+  createUser,
+  fetchAccessToken,
+  requestBackendToSendPasswordResetEmail,
+  sendConfirmationEmailRequest,
+} from "api";
 
 export const useAuth = () => {
   const authContext = useContext(AuthContext);
@@ -28,7 +33,6 @@ export const useAuth = () => {
           throw new Error(response.error.statusCode);
         }
 
-        console.log("response", response);
         authContext.setAuthInfo({
           user: response.data.user,
         });
@@ -90,13 +94,20 @@ export const useAuth = () => {
         if (data.error) {
           throw new Error(data.error);
         }
+        const response = await sendConfirmationEmailRequest(user.emailAddress);
+        if (response.error) {
+          authContext.setConfregEmailSent("COULD_NOT_SEND");
+          navigate("/confirm-registration", {});
+          throw new Error(response.error);
+        }
+        authContext.setConfregEmailSent(true);
         navigate("/confirm-registration", { state: { signUpSuccess: true } });
       } catch (error) {
         // handle error
         console.error(error);
       }
     },
-    [navigate]
+    [navigate, authContext]
   );
 
   const signOut = useCallback(() => {
@@ -110,6 +121,22 @@ export const useAuth = () => {
     // window.location.href = 'https://accounts.google.com/Logout';
   }, [navigate, authContext /* authContext.setAuthInfo */]);
 
+  const sendPasswordResetEmail = useCallback(async (email) => {
+    try {
+      const data = await requestBackendToSendPasswordResetEmail(email);
+
+      if (data.error) {
+        authContext.setResponseData(data);
+        throw new Error(data.error);
+      }
+
+      authContext.setPasswordResetLinkSent(true);
+      return data.exists;
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   return {
     ...authContext,
     signUp,
@@ -117,5 +144,6 @@ export const useAuth = () => {
     signInWithProvider,
     signInWithProviderToken,
     signOut,
+    sendPasswordResetEmail,
   };
 };
