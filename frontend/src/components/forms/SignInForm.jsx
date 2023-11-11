@@ -1,53 +1,39 @@
 //src/components/forms/SignInForm.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "hooks/useAuth";
+import AuthContext from "context/AuthContext";
+
+import { FormValidationMessageWrapper } from "components/forms/FormValidationMessage";
 
 function SignInForm() {
-  const location = useLocation();
-  const navigate = useNavigate();
   const { signIn } = useAuth();
 
   const [email, setEmail] = useState("");
-  const [nonHashedPassword, setnonHashedPassword] = useState("");
+  const [password, setPassword] = useState("");
 
-  const signInError = location.state?.signInError;
+  const { responseData } = useContext(AuthContext);
 
-  useEffect(() => {
-    // Clear any sign-in error from the location state after it's been handled
-    if (signInError) {
-      // Replace the current entry in the history stack to clear the state
-      navigate(location.pathname, { replace: true, state: {} });
-    }
-  }, [signInError, navigate, location.pathname]);
+  const messages = [
+    {
+      id: 1,
+      text: "Your email or password is incorrect. Please try again.",
+      type: "danger",
+      isVisible: responseData?.status === 401,
+    },
+  ];
 
   return (
     <>
-      {signInError && (
-        <div
-          style={{
-            color: "#721c24",
-            backgroundColor: "#f8d7da",
-            borderColor: "#f5c6cb",
-            padding: "0.75rem 1.25rem",
-            marginBottom: "1rem",
-            border: "1px solid transparent",
-            borderRadius: "0.25rem",
-            fontSize: "2rem",
-            lineHeight: 1.5,
-          }}
-        >
-          Error signing in: {signInError}
-        </div>
-      )}
       <form
         className=""
         onSubmit={(e) => {
           e.preventDefault();
-          signIn(email, nonHashedPassword);
+          signIn(email, password);
         }}
       >
+        <FormValidationMessageWrapper messages={messages} />
         <div>
           <label htmlFor="email">E-mail:</label>
           <input
@@ -60,12 +46,12 @@ function SignInForm() {
         </div>
 
         <div>
-          <label htmlFor="nonHashedPassword">Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
-            onChange={(e) => setnonHashedPassword(e.target.value)}
-            name="nonHashedPassword"
-            id="nonHashedPassword"
+            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            id="password"
             placeholder="Enter your password here"
           />
         </div>

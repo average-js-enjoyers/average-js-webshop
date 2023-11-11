@@ -20,43 +20,38 @@ export const useAuth = () => {
 
   const signIn = useCallback(
     async (email, password) => {
-      const user = {
-        emailAddress: email,
-        password: password,
-      };
-
+      let response = null;
       try {
         const response = await fetch("/api/auth/login", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ emailAddress: email, password }),
         });
 
         const res = await response.json();
-        const userInfo = res.data.user;
-
         if (!response.ok) {
           throw new Error(res.error || "Failed to exchange code for tokens.");
         }
 
+        const { user: userInfo, token } = res.data;
         authContext.setAuthInfo({ user: userInfo });
-        sessionStorage.setItem("accessToken", res.token);
+        sessionStorage.setItem("accessToken", token);
 
-        // TODO - Implement callback loader sign in screen
-        if (!userInfo.emailConfirmed) {
-          navigate("/onboard", { replace: true });
-        } else {
-          navigate("/", { state: { signInSuccess: true } });
-        }
+        navigate("/auth/internal");
       } catch (error) {
-        // Handle any errors that occur during the fetch
-        console.error("Error during signIn:", error);
-        throw error; // Rethrow the error if you want to handle it at a higher level
+        console.error("Error during signIn:", error, "Response:", response);
+
+        if (response?.status === 401) {
+          console.log(
+            "Login failed: Unauthorized. Please check your credentials."
+          );
+          authContext.setResponseData(response);
+        } else {
+          throw error;
+        }
       }
     },
-    [navigate, authContext /* authContext.setAuthInfo */]
+    [navigate, authContext]
   );
 
   const signInWithProvider = useCallback((provider) => {

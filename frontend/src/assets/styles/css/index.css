@@ -1335,7 +1335,7 @@ strong {
   animation: spin 0.75s linear infinite;
 }
 
-.oauth-callback-loader {
+.auth-callback-loader {
   position: absolute;
   top: 50%;
   left: 50%;
