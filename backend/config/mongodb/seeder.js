@@ -83,6 +83,7 @@ const importData = async () => {
       name: product.name,
       description: product.description,
       categoryID: new mongoose.Types.ObjectId(product.categoryID),
+      properties: product.properties,
     }));
 
     await User.create(sampleUsers);
