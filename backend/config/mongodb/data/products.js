@@ -724,8 +724,8 @@ module.exports = [
   },
   {
     _id: '654f4c424f678765f526ce16',
-    name: 'ToastMate 2',
-    description: '2-slice toaster with adjustable browning levels.',
+    name: 'Bread Toaster',
+    description: 'Bread toaster',
     category_id: '507f1f77bcf86cd799439022',
     properties: [
       '654fb092f52d84098a241f64',
@@ -1480,7 +1480,7 @@ module.exports = [
   {
     _id: '654f4c424f678765f526ce4f',
     name: 'Pixel 6 Pro',
-    description: "Experience the best of Google's software and hardware.",
+    description: 'Smartphone',
     category_id: '507f1f77bcf86cd799439033',
     properties: [
       '654fb092f52d84098a242081',
@@ -1518,8 +1518,8 @@ module.exports = [
   },
   {
     _id: '654f4c424f678765f526ce52',
-    name: 'iPhone 14 Pro',
-    description: "Apple's latest flagship with an amazing display.",
+    name: 'Phone 14 Pro',
+    description: 'smarthone',
     category_id: '507f1f77bcf86cd799439032',
     properties: [
       '654fb092f52d84098a242090',
@@ -1531,7 +1531,7 @@ module.exports = [
   },
   {
     _id: '654f4c424f678765f526ce53',
-    name: 'iPhone 14',
+    name: 'Phone 14',
     description: 'The new standard in smartphones.',
     category_id: '507f1f77bcf86cd799439032',
     properties: [
@@ -1544,8 +1544,8 @@ module.exports = [
   },
   {
     _id: '654f4c424f678765f526ce54',
-    name: 'iPhone 14 Pro Max',
-    description: 'The biggest and best iPhone ever.',
+    name: 'Phone 14 Pro Max',
+    description: 'The biggest and best Phone ever.',
     category_id: '507f1f77bcf86cd799439032',
     properties: [
       '654fb092f52d84098a24209a',
@@ -1557,7 +1557,7 @@ module.exports = [
   },
   {
     _id: '654f4c424f678765f526ce55',
-    name: 'iPhone 14 Mini',
+    name: 'Phone 14 Mini',
     description: 'Compact without compromising on features.',
     category_id: '507f1f77bcf86cd799439032',
     properties: [
@@ -1570,8 +1570,8 @@ module.exports = [
   },
   {
     _id: '654f4c424f678765f526ce56',
-    name: 'iPhone SE 3',
-    description: 'Affordable iPhone with the latest internals.',
+    name: 'Phone SE 3',
+    description: 'Affordable Phone with the latest internals.',
     category_id: '507f1f77bcf86cd799439032',
     properties: [
       '654fb092f52d84098a2420a4',
@@ -1638,7 +1638,7 @@ module.exports = [
   {
     _id: '654f4c424f678765f526ce5b',
     name: 'Pixel Watch',
-    description: 'The best of Google in a smartwatch format.',
+    description: 'The best of in a smartwatch format.',
     category_id: '507f1f77bcf86cd799439035',
     properties: [
       '654fb092f52d84098a2420a9',
@@ -1650,9 +1650,9 @@ module.exports = [
   },
   {
     _id: '654f4c424f678765f526ce5c',
-    name: 'Apple Watch Series 8',
+    name: 'A Watch Series 8',
     description:
-      'The newest addition to the Apple Watch family, combining design and technology.',
+      'The newest addition to the A Watch family, combining design and technology.',
     category_id: '507f1f77bcf86cd799439036',
     properties: [
       '654fb092f52d84098a2420c2',
@@ -1664,7 +1664,7 @@ module.exports = [
   },
   {
     _id: '654f4c424f678765f526ce5d',
-    name: 'Apple Watch SE',
+    name: 'A Watch SE',
     description: 'Affordable yet powerful, perfect for everyday use.',
     category_id: '507f1f77bcf86cd799439036',
     properties: [
@@ -1677,7 +1677,7 @@ module.exports = [
   },
   {
     _id: '654f4c424f678765f526ce5e',
-    name: 'Apple Watch Series 7',
+    name: 'A Watch Series 7',
     description: 'Robust health features in a refined design.',
     category_id: '507f1f77bcf86cd799439036',
     properties: [
@@ -1690,9 +1690,9 @@ module.exports = [
   },
   {
     _id: '654f4c424f678765f526ce5f',
-    name: 'Apple Watch Nike Edition',
+    name: 'A Watch N Edition',
     description:
-      'Designed for athletes, with exclusive Nike bands and watch faces.',
+      'Designed for athletes, with exclusive N bands and watch faces.',
     category_id: '507f1f77bcf86cd799439036',
     properties: [
       '654fb092f52d84098a2420c2',
@@ -1704,9 +1704,9 @@ module.exports = [
   },
   {
     _id: '654f4c424f678765f526ce60',
-    name: 'Apple Watch Hermès',
+    name: 'A Watch Hermès',
     description:
-      'A collaboration between Apple and Hermès, offering luxury bands and unique watch faces.',
+      'A collaboration between A and Hermès, offering luxury bands and unique watch faces.',
     category_id: '507f1f77bcf86cd799439036',
     properties: [
       '654fb092f52d84098a2420c2',

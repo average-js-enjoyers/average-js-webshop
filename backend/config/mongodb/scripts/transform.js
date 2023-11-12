@@ -1,8 +1,8 @@
 const { ObjectId } = require('mongodb');
 const clipboardy = require('node-clipboardy');
 
-const products = require('./products');
-const properties = require('./properties');
+const products = require('../data/products');
+const properties = require('../data/properties');
 
 // // Add ObjectID to each product
 // const productsWithObjectID = products.map((product) => ({

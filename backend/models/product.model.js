@@ -9,6 +9,7 @@ const ProductSchema = new Schema({
   },
   name: String,
   description: String,
+  images: [String],
   properties: [
     {
       type: mongoose.Schema.Types.ObjectId,
