@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardFooter } from "components/common/Card";
-import OnboardingForm from "components/forms/OnboardingForm";
+import OnboardingForm from "components/forms/On_boardingForm";
 
 export default function OnboardingScreen() {
   // Get token from URL which goes like /onboard/:token
