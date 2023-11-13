@@ -2,77 +2,78 @@
 :root {
   --default-font-size: 1.4rem;
   /* Primary Tonal Pattern */
-  --primary-0: rgba(235, 255, 255, 1); /* Light Cyan */
-  --primary-10: rgba(190, 230, 250, 1); /* Softer Blue */
-  --primary-20: rgba(150, 205, 245, 1); /* Sky Blue */
-  --primary-30: rgba(100, 180, 240, 1); /* Vibrant Sky Blue */
-  --primary-40: rgba(50, 155, 235, 1); /* Deeper Blue */
-  --primary-50: rgba(0, 130, 220, 1); /* Strong Blue */
-  --primary-60: rgba(0, 110, 200, 1); /* Royal Blue */
-  --primary-70: rgba(0, 90, 180, 1); /* Navy Blue */
-  --primary-80: rgba(0, 70, 160, 1); /* Dark Blue */
-  --primary-90: rgba(0, 50, 140, 1); /* Deep Navy */
-  --primary-100: rgba(0, 30, 120, 1); /* Midnight Blue */
+  /* Primary Tonal Pattern */
+  --primary-0: #ebf7ff; /* Light Cyan */
+  --primary-10: #c4e3ff; /* Softer Blue */
+  --primary-20: #9bd0ff; /* Sky Blue */
+  --primary-30: #71bdff; /* Vibrant Sky Blue */
+  --primary-40: #48aaff; /* Deeper Blue */
+  --primary-50: #0082dc; /* Strong Blue */
+  --primary-60: #006ec8; /* Royal Blue */
+  --primary-70: #005ab4; /* Navy Blue */
+  --primary-80: #0046a0; /* Dark Blue */
+  --primary-90: #00328c; /* Deep Navy */
+  --primary-100: #001e78; /* Midnight Blue */
   /* Secondary Tonal Pattern */
-  --secondary-0: rgba(235, 245, 255, 1); /* Light Blue-Purple */
-  --secondary-10: rgba(215, 225, 255, 1); /* Soft Blue-Purple */
-  --secondary-20: rgba(195, 205, 250, 1); /* Mild Blue-Purple */
-  --secondary-30: rgba(175, 185, 245, 1); /* Blue-Purple */
-  --secondary-40: rgba(155, 165, 240, 1); /* Slightly Deeper Blue-Purple */
-  --secondary-50: rgba(135, 145, 235, 1); /* Mid Blue-Purple */
-  --secondary-60: rgba(115, 125, 230, 1); /* Rich Blue-Purple */
-  --secondary-70: rgba(95, 105, 225, 1); /* Darker Blue-Purple */
-  --secondary-80: rgba(75, 85, 220, 1); /* Deep Blue-Purple */
-  --secondary-90: rgba(55, 65, 215, 1); /* Very Deep Blue-Purple */
-  --secondary-100: rgba(35, 45, 210, 1); /* Near Black Blue-Purple */
+  --secondary-0: #ebf5ff; /* Light Blue-Purple */
+  --secondary-10: #d7e1ff; /* Soft Blue-Purple */
+  --secondary-20: #c3cdfa; /* Mild Blue-Purple */
+  --secondary-30: #afb9f5; /* Blue-Purple */
+  --secondary-40: #9ba5f0; /* Slightly Deeper Blue-Purple */
+  --secondary-50: #8793eb; /* Mid Blue-Purple */
+  --secondary-60: #7381e6; /* Rich Blue-Purple */
+  --secondary-70: #5f69e1; /* Darker Blue-Purple */
+  --secondary-80: #4b55dc; /* Deep Blue-Purple */
+  --secondary-90: #3741d7; /* Very Deep Blue-Purple */
+  --secondary-100: #232dd2; /* Near Black Blue-Purple */
   /* Success Tonal Pattern */
-  --success-0: rgba(230, 255, 245, 1); /* Lighter, Bright Green */
-  --success-10: rgba(205, 255, 235, 1); /* Bright Soft Green */
-  --success-20: rgba(180, 250, 220, 1); /* Brighter Mint Green */
-  --success-30: rgba(155, 245, 200, 1); /* Vibrant Fresh Green */
-  --success-40: rgba(130, 240, 180, 1); /* More Vivid Lively Green */
-  --success-50: rgba(105, 235, 160, 1); /* Enhanced Vibrant Green */
-  --success-60: rgba(80, 220, 140, 1); /* Deeper, Bright Green */
-  --success-70: rgba(55, 205, 120, 1); /* More Vivid Dark Green */
-  --success-80: rgba(30, 190, 100, 1); /* Bright Forest Green */
-  --success-90: rgba(5, 175, 80, 1); /* Intense Deep Forest Green */
-  --success-100: rgba(0, 160, 60, 1); /* Darker, Rich Green */
+  --success-0: #e6fff5; /* Lighter, Bright Green */
+  --success-10: #cdffeb; /* Bright Soft Green */
+  --success-20: #b4facd; /* Brighter Mint Green */
+  --success-30: #9bf5c8; /* Vibrant Fresh Green */
+  --success-40: #82f4b4; /* More Vivid Lively Green */
+  --success-50: #69eba0; /* Enhanced Vibrant Green */
+  --success-60: #50dc8c; /* Deeper, Bright Green */
+  --success-70: #37cd78; /* More Vivid Dark Green */
+  --success-80: #1ebc64; /* Bright Forest Green */
+  --success-90: #05af50; /* Intense Deep Forest Green */
+  --success-100: #009c3c; /* Darker, Rich Green */
   /* Accent Tonal Pattern */
-  --accent-0: rgba(255, 235, 240, 1); /* Soft Pink */
-  --accent-10: rgba(255, 210, 220, 1); /* Light Pink */
-  --accent-20: rgba(255, 185, 200, 1); /* Bright Pink */
-  --accent-30: rgba(255, 160, 180, 1); /* Strong Pink */
-  --accent-40: rgba(255, 135, 160, 1); /* Rich Pink */
-  --accent-50: rgba(255, 110, 140, 1); /* Deep Pink */
-  --accent-60: rgba(240, 85, 120, 1); /* Darker Pink */
-  --accent-70: rgba(225, 60, 100, 1); /* Burgundy Pink */
-  --accent-80: rgba(200, 35, 80, 1); /* Dark Burgundy */
-  --accent-90: rgba(175, 10, 60, 1); /* Near Red Burgundy */
-  --accent-100: rgba(150, 0, 40, 1); /* Dark Red */
+  --accent-0: #ffebf0; /* Soft Pink */
+  --accent-10: #ffd2dc; /* Light Pink */
+  --accent-20: #ffb9c8; /* Bright Pink */
+  --accent-30: #ffa0b4; /* Strong Pink */
+  --accent-40: #ff87a0; /* Rich Pink */
+  --accent-50: #ff6e8c; /* Deep Pink */
+  --accent-60: #f05578; /* Darker Pink */
+  --accent-70: #e13c64; /* Burgundy Pink */
+  --accent-80: #c82350; /* Dark Burgundy */
+  --accent-90: #af0a3c; /* Near Red Burgundy */
+  --accent-100: #960028; /* Dark Red */
   /* Grayscale Tonal Pattern */
-  --grayscale-0: rgba(255, 255, 255, 1);
-  --grayscale-10: rgba(240, 240, 240, 1);
-  --grayscale-20: rgba(220, 220, 220, 1);
-  --grayscale-30: rgba(179, 179, 179, 1);
-  --grayscale-40: rgba(153, 153, 153, 1);
-  --grayscale-50: rgba(128, 128, 128, 1);
-  --grayscale-60: rgba(102, 102, 102, 1);
-  --grayscale-70: rgba(77, 77, 77, 1);
-  --grayscale-80: rgba(51, 51, 51, 1);
-  --grayscale-90: rgba(26, 26, 26, 1);
-  --grayscale-100: rgba(0, 0, 0, 1);
+  --grayscale-0: #fff;
+  --grayscale-10: #f5f5f5;
+  --grayscale-20: #e3e3e3;
+  --grayscale-30: #ccc;
+  --grayscale-40: #aaa;
+  --grayscale-50: #888;
+  --grayscale-60: #666;
+  --grayscale-70: #444;
+  --grayscale-80: #333;
+  --grayscale-90: #222;
+  --grayscale-100: #000000;
   /* Warning Tonal Pattern */
-  --warning-0: rgba(255, 250, 245, 1);
-  --warning-10: rgba(255, 245, 235, 1);
-  --warning-20: rgba(255, 240, 225, 1);
-  --warning-30: rgba(255, 225, 175, 1);
-  --warning-40: rgba(255, 200, 100, 1);
-  --warning-50: rgba(255, 180, 50, 1);
-  --warning-60: rgba(255, 160, 0, 1);
-  --warning-70: rgba(230, 140, 0, 1);
-  --warning-80: rgba(200, 120, 0, 1);
-  --warning-90: rgba(170, 100, 0, 1);
-  --warning-100: rgba(140, 80, 0, 1);
+  --warning-0: #fffaf5;
+  --warning-10: #fff5eb;
+  --warning-20: #fff0e1;
+  --warning-30: #ffe1af;
+  --warning-40: #ffc864;
+  --warning-50: #ffb432;
+  --warning-60: #ffa000;
+  --warning-70: #e68c00;
+  --warning-80: #c87800;
+  --warning-90: #aa6400;
+  --warning-100: #8c5000;
   /* Link Tonal Pattern - Similar to primary (blue shades) */
   --link-50: var(--primary-50);
   --link-40: var(--primary-40);
@@ -446,7 +447,7 @@ strong {
   font-size: calc(var(--default-font-size) * 2);
   font-weight: 700;
   line-height: 1;
-  text-shadow: 0.5rem 0.5rem 10rem var(--primary-30);
+  text-shadow: 0.5rem 0.5rem 3rem var(--primary-10);
 }
 .emoji-logo--display {
   font-size: calc(var(--default-font-size) * 6);
@@ -2271,6 +2272,11 @@ input[type=checkbox]:focus + label:before {
     scroll-behavior: smooth;
   }
 }
+@media (max-width: 992px) and (orientation: portrait) and (min-height: 1200px) {
+  .auth-screen {
+    justify-content: space-evenly;
+  }
+}
 @media (max-width: 768px) {
   .auth-screen {
     padding-top: 3rem;
@@ -2327,15 +2333,22 @@ input[type=checkbox]:focus + label:before {
 }
 .auth-screen__main {
   width: 100%;
+  height: 110%;
+  margin-top: -2.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 1;
-  padding: 1.5rem;
+  padding: 0 1.5rem;
   max-width: 57rem;
 }
 @media (max-width: 1200px) {
+  .auth-screen__main {
+    padding: 1.5rem;
+  }
+}
+@media (max-width: 1200px) and (orientation: landscape) {
   .auth-screen__main {
     margin-left: 3vw;
   }
@@ -2344,6 +2357,8 @@ input[type=checkbox]:focus + label:before {
   .auth-screen__main {
     margin-left: 0;
     padding: 0;
+    height: auto;
+    margin-top: 0;
     max-width: 53rem;
   }
 }
