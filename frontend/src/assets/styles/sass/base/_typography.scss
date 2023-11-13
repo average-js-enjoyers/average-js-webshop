@@ -96,3 +96,11 @@ strong {
     font-size: calc(var(--default-font-size) * 6);
   }
 }
+
+%subtitle {
+  font-size: 1.7rem;
+  color: var(--grayscale-0);
+  letter-spacing: 0.1rem;
+  font-variant: small-caps;
+  font-weight: 500;
+}

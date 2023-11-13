@@ -30,6 +30,18 @@
   }
 }
 
+/* Define the exit animation */
+@keyframes fadeOutAndSlide {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30px); // Adjust the slide distance
+  }
+}
+
 /* Animated routes */
 #routeRootWithAnimations {
   width: 100%;
@@ -50,13 +62,13 @@
 
 /* Start state for exiting */
 .fade-exit {
-  opacity: 1;
+  // opacity: 1;
 }
 
 /* End state for exiting */
 .fade-exit.fade-exit-active {
-  opacity: 0;
-  transition: opacity 300ms ease-in;
+  // opacity: 0;
+  // transition: opacity 300ms ease-in;
 }
 
 /* Define the initial and final states */

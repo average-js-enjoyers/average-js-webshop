@@ -16,6 +16,14 @@
     max-width: 65rem;
     margin: 0 3rem;
   }
+  @include breakpoint("lg") {
+    flex-grow: 1;
+  }
+  @include breakpoint("sm") {
+    flex-grow: 0;
+    margin-right: 1rem;
+    margin-left: auto;
+  }
 
   &__select,
   &__input,
@@ -42,6 +50,10 @@
     & option {
       background-color: var(--secondary-0);
     }
+
+    @include breakpoint("lg") {
+      display: none;
+    }
   }
 
   & .search-bar__input {
@@ -66,8 +78,16 @@
     @include breakpoint("2xl") {
       width: 36rem;
     }
+    @include breakpoint("xl") {
+      width: 25vw !important;
+    }
     @include breakpoint("lg") {
-      width: 28rem;
+      border-top-left-radius: 10rem !important;
+      border-bottom-left-radius: 10rem !important;
+      width: 100% !important;
+    }
+    @include breakpoint("sm") {
+      display: none;
     }
 
     &::placeholder {
@@ -92,6 +112,10 @@
     &:active {
       background-color: var(--secondary-30);
       transform: scale(0.97);
+    }
+
+    @include breakpoint("sm") {
+      border-radius: 10rem;
     }
   }
 

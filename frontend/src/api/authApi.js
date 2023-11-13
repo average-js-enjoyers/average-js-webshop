@@ -80,18 +80,21 @@ export const isUserRegistered = async (email) => {
   }
 };
 
-export function signIn(user) {
-  return fetch("/api/users/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  }).then((res) => res.json());
-}
-
-export function modifyUser(user) {
-  return "I am modifying the user 🪄";
+export async function fetchAccessToken(email, password) {
+  try {
+    const response = await fetch("/api/auth/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ emailAddress: email, password }),
+    });
+    return await response.json();
+  } catch (error) {
+    // Handle or throw the error based on your use case
+    console.error("Error in fetchAccessToken:", error);
+    throw error; // Rethrow if you want the caller to handle it
+  }
 }
 
 export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
@@ -99,12 +102,12 @@ export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
 
   //  This is how the call should include the Authorization header
   // TODO - Remove accessToken from the query after backend implementation
-  const response = await fetch(`/api/auth/login/${authServer}/${accessToken}`, {
+  const response = await fetch(`/api/auth/signin/${authServer}`, {
     method: "POST", // Specify the method
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ accessToken }),
+    body: JSON.stringify({ token: accessToken }),
   });
   const res = await response.json();
 
@@ -124,6 +127,39 @@ export async function checkEmailExists(email) {
     });
     const data = await response.json();
     return data.data.exists;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function requestBackendToSendPasswordResetEmail(email) {
+  try {
+    const response = await fetch("/api/auth/password-reset", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(email),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function sendConfirmationEmailRequest(email) {
+  try {
+    const response = await fetch("/api/auth/signin/email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Confirmation-URL": "http://localhost:3000/onboard",
+      },
+      body: JSON.stringify({ emailAddress: email }),
+    });
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error(error);
   }
