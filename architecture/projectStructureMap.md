@@ -4,9 +4,9 @@
     - node.js.yml
 - .gitignore
 - architecture
+  - SignUpFlow.drawio
   - mapProjectStructure.js
   - projectStructureMap.md
-  - SignUpFlow.drawio
 - average-js-webshop.code-workspace
 - backend
   - .DS_Store
@@ -17,6 +17,7 @@
   - config
     - firebase
       - serviceAccountKey.json
+      - serviceAccountKey.json.json
     - mongodb
       - data
         - addresses.js
@@ -24,9 +25,14 @@
         - fields_to_categories.json
         - products.js
         - products.json
+        - properties.js
         - users.js
       - db.js
       - passwordRules.js
+      - scripts
+        - dalle.js
+        - imageGen.js
+        - transform.js
       - seeder.js
     - nodemon
       - nodemon.json
@@ -42,13 +48,20 @@
     - address.model.js
     - category.model.js
     - product.model.js
+    - property.model.js
     - user.model.js
   - package-lock.json
   - package.json
+  - public
+    - info.md
   - routes
     - authRoutes.js
     - userRoutes.js
   - server.js
+  - templates
+    - email
+      - confreg.html
+      - forgpass.html
   - utils
     - appError.js
     - catchAsync.js
@@ -60,29 +73,40 @@
   - validators
     - authValidator.js
     - userValidator.js
+    - validatorOptions.js
 - frontend
+  - .DS_Store
+  - .env
   - .gitignore
+  - example.env
   - jsconfig.json
   - package-lock.json
   - package.json
   - public
+    - emails
+      - confreg.html
+      - forgpass.html
     - favicon.ico
+    - img
+      - svg
     - index.html
     - logo192.png
     - logo512.png
     - manifest.json
     - robots.txt
   - src
+    - App.js
     - api
       - adminApi.js
+      - authApi.js
       - cartApi.js
       - checkoutApi.js
       - index.js
       - ordersApi.js
       - productsApi.js
-      - usersApi.js
-    - App.js
     - assets
+      - img
+        - icons
       - styles
         - css
           - bootstrap.css
@@ -92,35 +116,48 @@
         - main.scss
         - sass
           - abstracts
-            - \_functions.scss
-            - \_mixins.scss
-            - \_variables.scss
+            - _animations.scss
+            - _functions.scss
+            - _mixins.scss
+            - _variables.scss
           - base
-            - \_base.scss
-            - \_typography.scss
+            - _base.scss
+            - _typography.scss
+            - _utilities.scss
           - components
-            - \_buttons.scss
-            - \_logo.scss
-            - \_searchbar.scss
+            - _buttons.scss
+            - _cards.scss
+            - _form-validation-messages.scss
+            - _forms.scss
+            - _loaders.scss
+            - _logo.scss
+            - _search-bar.scss
+            - _status-messages.scss
           - layout
-            - \_footer.scss
-            - \_header.scss
-            - \_layout.scss
+            - _footer.scss
+            - _header.scss
+            - _layout.scss
           - pages
-            - \_pages.scss
+            - _auth.scss
+            - _home.scss
+            - _pages.scss
           - themes
-            - \_themes.scss
+            - _themes.scss
           - vendors
-            - \_vendors.scss
+            - _vendors.scss
     - components
       - common
+        - Button.jsx
+        - Card.jsx
         - Logo.jsx
+        - StatusMessage.jsx
       - forms
         - EditProfileForm.jsx
-        - GoogleSignInButton.jsx
-        - SearchBar.jsx
+        - ForgotPasswordForm.jsx
+        - FormElements.jsx
+        - FormValidationMessage.jsx
+        - On_boardingForm.jsx
         - SignInForm.jsx
-        - SignOutButton.jsx
         - SignUpForm.jsx
       - layout
         - Footer.jsx
@@ -129,25 +166,46 @@
         - ProfileSidebar.jsx
       - miscellaneous
         - FAQ.jsx
+      - navigation
+        - SearchBar.jsx
       - uitemplates
         - ButtonTemplates.jsx
         - TypographyTemplates.jsx
+    - context
+      - AuthContext.js
+      - CartContext.js
+      - CheckoutContext.js
+      - ProductContext.js
+      - index.js
+    - hooks
+      - index.js
+      - useAuth.js
     - index.css
     - index.js
     - reportWebVitals.js
+    - routes
     - screens
+      - EmailTestScreen.jsx
+      - HomeScreen.jsx
       - auth
-        - GoogleCallback.jsx
+        - AuthScreens.jsx
+        - ConfirmRegistrationScreen.jsx
+        - ForgotPasswordScreen.jsx
+        - InternalAuthCallbackScreen.jsx
+        - OAuthCallbackScreen.jsx
         - OnboardingScreen.jsx
         - SignInScreen.jsx
         - SignUpScreen.jsx
-      - ErrorScreen.jsx
-      - HomeScreen.jsx
-      - NotFoundScreen.jsx
+      - error
+        - ErrorScreen.jsx
+        - NotFoundScreen.jsx
+      - gdpr
+        - PrivacyPolicyScreen.jsx
       - profile
         - EditProfileScreen.jsx
         - ViewProfileScreen.jsx
-      - UITemplateExamplesScreen.jsx
     - setupTests.js
     - utils
-      - validator.js
+      - oauthConfig.js
+      - oauthHelpers.js
+      - validators.js

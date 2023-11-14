@@ -87,6 +87,119 @@ $outline-types: primary, secondary, warning, danger, success, info, light, dark,
   color: var(--grayscale-80);
 }
 
+.btn-outline-light {
+  border-color: var(--grayscale-30);
+
+  &:hover {
+    background-color: var(--grayscale-10);
+    color: var(--grayscale-80);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--secondary-40);
+  border-color: var(--secondary-50);
+}
+
+.btn-success {
+  background-color: var(--success-70);
+  border-color: var(--success-70);
+
+  &:hover {
+    background-color: var(--success-50);
+    border-color: var(--success-50);
+  }
+
+  &:active {
+    background-color: var(--success-80);
+    border-color: var(--success-80);
+  }
+}
+
+.btn-danger {
+  background-color: var(--accent-60);
+  border-color: var(--accent-60);
+
+  &:hover {
+    background-color: var(--accent-50);
+    border-color: var(--accent-50);
+  }
+
+  &:active {
+    background-color: var(--accent-70);
+    border-color: var(--accent-70);
+  }
+}
+
+.btn-outline-danger {
+  background-color: var(--grayscale-0);
+  border-color: var(--accent-60);
+  color: var(--accent-60);
+
+  &:hover {
+    background-color: var(--accent-50);
+    border-color: var(--accent-50);
+    color: var(--grayscale-10);
+  }
+
+  &:active {
+    background-color: var(--accent-70);
+    border-color: var(--accent-70);
+    color: var(--grayscale-0);
+  }
+}
+
+.btn-outline-success {
+  background-color: var(--grayscale-0);
+  border-color: var(--success-70);
+  color: var(--success-70);
+
+  &:hover {
+    background-color: var(--success-50);
+    border-color: var(--success-50);
+    color: var(--grayscale-10);
+  }
+
+  &:active {
+    background-color: var(--success-80);
+    border-color: var(--success-80);
+    color: var(--grayscale-0);
+  }
+}
+
+.btn-info {
+  background-color: var(--primary-70);
+  border-color: var(--primary-70);
+
+  &:hover {
+    background-color: var(--primary-50);
+    border-color: var(--primary-50);
+  }
+
+  &:active {
+    background-color: var(--primary-80);
+    border-color: var(--primary-80);
+  }
+}
+
+.btn-info-outline {
+  background-color: var(--grayscale-0);
+  border-color: var(--primary-70);
+  color: var(--primary-70);
+
+  &:hover {
+    background-color: var(--primary-50);
+    border-color: var(--primary-50);
+    color: var(--grayscale-10);
+  }
+
+  &:active {
+    background-color: var(--primary-80);
+    border-color: var(--primary-80);
+    color: var(--grayscale-0);
+  }
+}
+
 .btn-link {
   @extend .btn;
   background-color: transparent;
