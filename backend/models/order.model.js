@@ -8,10 +8,7 @@ const OrderSchema = new Schema({
     ref: 'User',
   },
   orderDate: Date,
-  paymentMethodID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'PaymentMethod',
-  },
+  paymentMethod: String,
   isPaid: Boolean,
   shippingAddressID: {
     type: mongoose.Schema.Types.ObjectId,

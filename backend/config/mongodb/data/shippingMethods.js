@@ -13,8 +13,8 @@ module.exports = [
   },
   {
     _id: '6553a252ca9245c705d31ebc',
-    name: 'MPL',
-    price_net: 3278,
-    tax_percentage: 27,
+    name: 'In person',
+    price_net: 0,
+    tax_percentage: 0,
   },
 ];

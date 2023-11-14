@@ -88,6 +88,21 @@ function getTotals(orderLines) {
   return { order_total_net, order_total_vat, order_total_gross };
 }
 
+function getRandomPaymentMethod() {
+  const paymentMethods = [
+    'creditCard',
+    'bankPreTransfer',
+    'bankTransferNETTerms',
+    'cashOnDelivery',
+    'applePay',
+    'gPay',
+  ];
+
+  const randomIndex = Math.floor(Math.random() * paymentMethods.length);
+
+  return paymentMethods[randomIndex];
+}
+
 const orders = [];
 const numOrders = 3;
 
@@ -97,7 +112,7 @@ users.forEach((user) => {
       user_id: user._id,
       order_date: getRandomDate(new Date('2023-01-01'), new Date('2023-12-30')),
       // TODO
-      payment_method_id: undefined,
+      payment_method: getRandomPaymentMethod(),
       is_paid: getRandomBoolean(),
       shipping_address_id: getUsersRandomAddressID(user),
       billing_address_id: getUsersRandomAddressID(user),

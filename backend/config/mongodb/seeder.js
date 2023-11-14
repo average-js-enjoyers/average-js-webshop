@@ -129,7 +129,7 @@ const importData = async () => {
       _id: new mongoose.Types.ObjectId(order._id),
       userID: new mongoose.Types.ObjectId(order.user_id),
       orderDate: order.order_date,
-      payment_method_id: new mongoose.Types.ObjectId(order.payment_method_id),
+      paymentMethod: order.payment_method,
       isPaid: order.is_paid,
       shippingAddressID: new mongoose.Types.ObjectId(order.shipping_address_id),
       billingAddressID: new mongoose.Types.ObjectId(order.billing_address_id),

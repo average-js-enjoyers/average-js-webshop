@@ -9,7 +9,7 @@ function getRandomInt(min, max) {
 
 const shippingMethods = [];
 
-const names = ['GLS', 'FoxPost', 'MPL'];
+const names = ['GLS', 'FoxPost', 'In person'];
 
 names.forEach((name) => {
   const shippingMethod = {
