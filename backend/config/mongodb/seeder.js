@@ -12,6 +12,7 @@ const Category = require('../../models/category.model');
 const Property = require('../../models/property.model');
 const Variation = require('../../models/variation.model');
 const ProductItem = require('../../models/productItem.model');
+const Order = require('../../models/order.model');
 
 const users = require('./data/users');
 const addresses = require('./data/addresses');
@@ -20,6 +21,7 @@ const products = require('./data/products');
 const properties = require('./data/properties');
 const variations = require('./data/variations');
 const productItems = require('./data/productItems');
+const orders = require('./data/orders');
 
 const connectDB = require('./db');
 
@@ -38,6 +40,7 @@ const importData = async () => {
     await Variation.deleteMany();
     await Product.deleteMany();
     await ProductItem.deleteMany();
+    await Order.deleteMany();
 
     const sampleAddresses = addresses.map((address) => ({
       _id: new mongoose.Types.ObjectId(address._id), // Generate a new ObjectId for each address
@@ -112,6 +115,21 @@ const importData = async () => {
       variations: productItem.variations,
     }));
 
+    const sampleOrders = orders.map((order) => ({
+      _id: new mongoose.Types.ObjectId(order._id),
+      userId: new mongoose.Types.ObjectId(order.user_id),
+      orderDate: order.order_date,
+      payment_method_id: new mongoose.Types.ObjectId(order.payment_method_id),
+      isPaid: order.is_paid,
+      shippingAddressID: new mongoose.Types.ObjectId(order.shipping_address_id),
+      billingAddressID: new mongoose.Types.ObjectId(order.billing_address_id),
+      shippingMethod: new mongoose.Types.ObjectId(order.shipping_method_id),
+      orderTotalNet: order.order_total_net,
+      orderTotalVat: order.order_total_vat,
+      orderTotalGross: order.order_total_gross,
+      orderStatus: order.order_status,
+    }));
+
     await User.create(sampleUsers);
     await Address.insertMany(sampleAddresses);
     await Category.insertMany(sampleCategories);
@@ -119,6 +137,7 @@ const importData = async () => {
     await Variation.insertMany(sampleVariations);
     await Product.insertMany(sampleProducts);
     await ProductItem.insertMany(sampleProductItems);
+    await Order.insertMany(sampleOrders);
 
     /* await ProductCategory.create(...sampleCategories);
     await Product.create(...sampleProducts); */
@@ -142,6 +161,7 @@ const destroyData = async () => {
     await Variation.deleteMany();
     await Category.deleteMany();
     await ProductItem.deleteMany();
+    await Order.deleteMany();
 
     console.log('Data Destroyed!'.red.inverse);
     process.exit();
