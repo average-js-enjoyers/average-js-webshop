@@ -1,10 +1,18 @@
 import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { Card, CardBody, CardTitle, CardFooter } from "components/common/Card";
+import {
+  Card,
+  CardHeader,
+  CardLogo,
+  CardBody,
+  CardTitle,
+  CardFooter,
+} from "components/common/Card";
 import StatusMessage from "components/common/StatusMessage";
 
 import AuthContext from "context/AuthContext";
+import { EnvelopePaperFill } from "react-bootstrap-icons";
 
 export default function ConfirmRegistrationScreen() {
   const { confregEmailSent, clearConfregEmailSent } = useContext(AuthContext);
@@ -30,12 +38,15 @@ export default function ConfirmRegistrationScreen() {
       )}
 
       <Card>
-        <CardBody>
+        <CardHeader>
+          <CardLogo>
+            <EnvelopePaperFill color="var(--secondary-90)" />
+          </CardLogo>
           <CardTitle level="1" textAlign="center">
-            <span className="emoji-logo emoji-logo--display">📨</span> <br />
-            Confirm Your Registration
+            Confirm Registration
           </CardTitle>
-
+        </CardHeader>
+        <CardBody>
           <div
             style={{
               display: "flex",

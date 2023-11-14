@@ -142,6 +142,14 @@
       width: 100%;
       min-height: 50rem;
 
+      /*   box-shadow: none !important;
+      border: none !important;
+      background-color: transparent !important;
+
+      & .card__footer {
+        background-color: transparent !important;
+      } */
+
       @include breakpoint("xl") {
         // There used to be a footer margin fix here. Maybe needed later?
       }

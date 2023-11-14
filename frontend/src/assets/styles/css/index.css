@@ -163,6 +163,44 @@
     transform: translateX(-30px);
   }
 }
+/* Define the keyframes for the pulsating effect */
+@keyframes pulsate {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+}
+@keyframes pulsateLogo {
+  0% {
+    box-shadow: 0 0 0 0.15rem var(--secondary-50);
+    transform: scale(1);
+  }
+  5% {
+    box-shadow: 0 0 0 0.15rem var(--secondary-50);
+    transform: scale(1);
+  }
+  45% {
+    box-shadow: 0 0 2rem 0.5rem var(--secondary-10);
+    transform: scale(1.05);
+  }
+  55% {
+    box-shadow: 0 0 1rem 1rem var(--secondary-10);
+    transform: scale(1.05c);
+  }
+  95% {
+    box-shadow: 0 0 0 0.15rem var(--secondary-50);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 0 0.15rem var(--secondary-50);
+    transform: scale(1);
+  }
+}
 /* Animated routes */
 #routeRootWithAnimations {
   width: 100%;
@@ -1417,7 +1455,6 @@ strong {
 }
 
 form {
-  margin-top: 3rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -1747,7 +1784,51 @@ input[type=checkbox]:focus + label:before {
 .card:hover {
   box-shadow: var(--dropshadow-muted--hover);
 }
+.card .card__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 3rem 4.5rem 0;
+  background-color: var(--grayscale-0);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+@media (max-width: 992px) {
+  .card .card__header {
+    padding: 3rem 3rem 0;
+  }
+}
+@media (max-width: 768px) {
+  .card .card__header {
+    padding: 3rem 1.5rem 0;
+  }
+}
+@media (max-width: 576px) {
+  .card .card__header {
+    padding: 1.5rem 1rem 0;
+  }
+}
+.card .card__logo {
+  align-self: center;
+  width: 7.5rem;
+  height: 7.5rem;
+  padding: 1.5rem;
+  border-radius: 100rem;
+  background-color: var(--grayscale-0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pulsateLogo 10s infinite;
+}
+.card .card__logo svg {
+  width: 100%;
+  height: 100%;
+}
 .card .card__body {
+  display: flex;
+  flex-direction: column;
   padding: 4.5rem;
   background-color: var(--grayscale-0);
   height: 100%;
@@ -2370,6 +2451,13 @@ input[type=checkbox]:focus + label:before {
 .auth-screen__main .card {
   width: 100%;
   min-height: 50rem;
+  /*   box-shadow: none !important;
+  border: none !important;
+  background-color: transparent !important;
+
+  & .card__footer {
+    background-color: transparent !important;
+  } */
 }
 @media (max-width: 992px) {
   .auth-screen__main .card {
