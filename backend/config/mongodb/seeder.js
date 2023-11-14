@@ -117,17 +117,23 @@ const importData = async () => {
 
     const sampleOrders = orders.map((order) => ({
       _id: new mongoose.Types.ObjectId(order._id),
-      userId: new mongoose.Types.ObjectId(order.user_id),
+      userID: new mongoose.Types.ObjectId(order.user_id),
       orderDate: order.order_date,
       payment_method_id: new mongoose.Types.ObjectId(order.payment_method_id),
       isPaid: order.is_paid,
       shippingAddressID: new mongoose.Types.ObjectId(order.shipping_address_id),
       billingAddressID: new mongoose.Types.ObjectId(order.billing_address_id),
-      shippingMethod: new mongoose.Types.ObjectId(order.shipping_method_id),
+      shippingMethodID: new mongoose.Types.ObjectId(order.shipping_method_id),
       orderTotalNet: order.order_total_net,
       orderTotalVat: order.order_total_vat,
       orderTotalGross: order.order_total_gross,
       orderStatus: order.order_status,
+      orderLines: order.order_lines.map((orderLine) => ({
+        productItemID: new mongoose.Types.ObjectId(orderLine.product_item_id),
+        qty: orderLine.qty,
+        priceNet: orderLine.price_net,
+        taxPercentage: orderLine.tax_percentage,
+      })),
     }));
 
     await User.create(sampleUsers);

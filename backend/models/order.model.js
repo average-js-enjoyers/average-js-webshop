@@ -21,7 +21,7 @@ const OrderSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Address',
   },
-  shippingMethod: {
+  shippingMethodID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'ShippingMethod',
   },
@@ -29,6 +29,7 @@ const OrderSchema = new Schema({
   orderTotalVat: Number,
   orderTotalGross: Number,
   orderStatus: String,
+  orderLines: [],
 });
 
 module.exports = mongoose.model('Order', OrderSchema);
