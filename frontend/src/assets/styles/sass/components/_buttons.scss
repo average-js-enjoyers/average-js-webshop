@@ -93,17 +93,20 @@ $outline-types: primary, secondary, warning, danger, success, info, light, dark,
   border: none;
   box-shadow: none;
   color: var(--primary-50);
+  font-weight: 500;
+  font-size: 1.4rem;
+  letter-spacing: 0.05rem;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     box-shadow: none;
-    color: var(--primary-70);
-    text-decoration: underline;
-    text-decoration-thickness: 0.15rem;
-    text-underline-offset: 0.3rem;
+    color: var(--primary-40);
+    transform: none;
   }
 
   &:active {
     box-shadow: none;
-    color: var(--primary-90);
+    color: var(--primary-70);
+    transform: none;
   }
 }

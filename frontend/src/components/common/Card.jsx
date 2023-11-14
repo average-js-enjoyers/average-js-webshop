@@ -18,6 +18,15 @@ export function CardHeader({ className, children, ...props }) {
   );
 }
 
+export function CardLogo({ className, children, ...props }) {
+  const cardLogoClass = `card__logo ${className || ""}`.trim();
+  return (
+    <div className={cardLogoClass} {...props}>
+      {children}
+    </div>
+  );
+}
+
 export function CardImage({ src, alt, className, ...props }) {
   const cardImageClass = `card__image ${className || ""}`.trim();
 

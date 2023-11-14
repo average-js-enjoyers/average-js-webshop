@@ -16,7 +16,7 @@ import {
   createUser,
   fetchAccessToken,
   requestBackendToSendPasswordResetEmail,
-  sendConfirmationEmailRequest,
+  requestConfRegEmail,
 } from "api";
 
 export const useAuth = () => {
@@ -61,15 +61,17 @@ export const useAuth = () => {
   const signInWithProviderToken = useCallback(
     async (provider, accessToken, refreshToken) => {
       try {
-        const userInfo = await fetchUserInfoAndGetNewToken(
+        const response = await fetchUserInfoAndGetNewToken(
           provider,
           accessToken
         );
+        console.log(response);
+        const userInfo = response.data.user;
 
         authContext.setAuthInfo({ user: userInfo });
 
         if (!userInfo.emailConfirmed) {
-          navigate("/onboard", { replace: true });
+          navigate(`/onboard/${response.token}`, { replace: true });
         } else {
           navigate("/", { state: { signInSuccess: true } });
         }
@@ -85,16 +87,10 @@ export const useAuth = () => {
     [navigate, authContext]
   );
 
-  const signUp = useCallback(
-    async (user) => {
+  const sendConfRegEmail = useCallback(
+    async (email) => {
       try {
-        const data = await createUser(user);
-        // Maybe sign in the user directly or set some state to confirm registration
-        // TODO - Implement sign in after sign up
-        if (data.error) {
-          throw new Error(data.error);
-        }
-        const response = await sendConfirmationEmailRequest(user.emailAddress);
+        const response = await requestConfRegEmail(email);
         if (response.error) {
           authContext.setConfregEmailSent("COULD_NOT_SEND");
           navigate("/confirm-registration", {});
@@ -108,6 +104,25 @@ export const useAuth = () => {
       }
     },
     [navigate, authContext]
+  );
+
+  const signUp = useCallback(
+    async (user) => {
+      try {
+        const data = await createUser(user);
+        // Maybe sign in the user directly or set some state to confirm registration
+        // TODO - Implement sign in after sign up
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        sessionStorage.setItem("signUpEmail", user.emailAddress);
+        sendConfRegEmail(user.emailAddress);
+      } catch (error) {
+        // handle error
+        console.error(error);
+      }
+    },
+    [sendConfRegEmail]
   );
 
   const signOut = useCallback(() => {
@@ -145,5 +160,6 @@ export const useAuth = () => {
     signInWithProviderToken,
     signOut,
     sendPasswordResetEmail,
+    sendConfRegEmail,
   };
 };
