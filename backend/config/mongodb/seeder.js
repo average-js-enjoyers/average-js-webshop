@@ -9,11 +9,13 @@ const Address = require('../../models/address.model');
 // Products
 const Product = require('../../models/product.model');
 const Category = require('../../models/category.model');
+const Property = require('../../models/property.model');
 
 const users = require('./data/users');
 const addresses = require('./data/addresses');
 const categories = require('./data/categories');
 const products = require('./data/products');
+const properties = require('./data/properties');
 
 const connectDB = require('./db');
 
@@ -28,6 +30,7 @@ const importData = async () => {
     await Address.deleteMany();
 
     await Category.deleteMany();
+    await Property.deleteMany();
     await Product.deleteMany();
 
     const sampleAddresses = addresses.map((address) => ({
@@ -67,16 +70,26 @@ const importData = async () => {
       parentCategory: new mongoose.Types.ObjectId(category.parentCategory),
     }));
 
+    // Get all categories from the categories array and add the admin user to each category
+    const sampleProperties = properties.map((property) => ({
+      _id: new mongoose.Types.ObjectId(property._id),
+      key: property.key,
+      value: property.value,
+      categoryID: new mongoose.Types.ObjectId(property.category_id),
+    }));
+
     // Get all products from the products array and add the admin user to each product
     const sampleProducts = products.map((product) => ({
       name: product.name,
       description: product.description,
       categoryID: new mongoose.Types.ObjectId(product.categoryID),
+      properties: product.properties,
     }));
 
     await User.create(sampleUsers);
     await Address.insertMany(sampleAddresses);
     await Category.insertMany(sampleCategories);
+    await Property.insertMany(sampleProperties);
     await Product.insertMany(sampleProducts);
 
     /* await ProductCategory.create(...sampleCategories);
@@ -97,6 +110,7 @@ const destroyData = async () => {
     await Address.deleteMany();
 
     await Product.deleteMany();
+    await Property.deleteMany();
     await Category.deleteMany();
 
     console.log('Data Destroyed!'.red.inverse);
