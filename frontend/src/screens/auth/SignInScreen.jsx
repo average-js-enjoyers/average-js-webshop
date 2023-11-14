@@ -24,17 +24,16 @@ export default function SignInScreen() {
     <>
       {oauthError && <StatusMessage type="danger" message={oauthError} />}
       <Card>
+        <CardHeader>
+          <CardLogo>
+            <PersonCheckFill color="var(--secondary-90)" />
+          </CardLogo>
+          <CardTitle level="1" textAlign="center">
+            Sign In Now
+          </CardTitle>
+        </CardHeader>
         <CardBody>
-          <CardHeader>
-            <CardLogo>
-              <PersonCheckFill color="var(--secondary-90)" />
-            </CardLogo>
-            <CardTitle level="1" textAlign="center">
-              Sign In Now
-            </CardTitle>
-          </CardHeader>
           <SignInForm />
-
           <p className="mt-3 text-center">
             <Link to="/forgot-password">Forgot your password?</Link>
           </p>

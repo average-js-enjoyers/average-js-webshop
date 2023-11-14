@@ -1417,10 +1417,12 @@ strong {
   /* max-height: 8rem;
   overflow: hidden; */
   transition: all 0.3s ease-in-out;
-  margin-bottom: 3rem;
 }
 .form-validation-message:not(:first-child) {
   margin-top: 1rem;
+}
+.form-validation-message:last-child {
+  margin-bottom: 3rem;
 }
 .form-validation-message span {
   font-size: 1.3rem;
@@ -1453,11 +1455,6 @@ strong {
 
 .form-validation-message__text {
   color: var(--grayscale-90);
-}
-
-/* StatusMessage.css */
-.form-validation-message--enter {
-  animation: slideAndFloat 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 .loader {
