@@ -1,7 +1,6 @@
 module.exports = [
   {
     _id: '655102c6018dd03d19e133e2',
-    categoryID: '655102c5018dd03d19e13111',
     name: 'BattleRig Titan',
     description:
       'High-performance gaming PC built for intense gaming sessions.',
@@ -23,10 +22,10 @@ module.exports = [
       '654fb092f52d84098a241e54',
       '654fb092f52d84098a241e55',
     ],
+    category_id: '507f1f77bcf86cd799439013',
   },
   {
     _id: '655095c3169fa30bfc4c5db9',
-    categoryID: '655102c5018dd03d19e13112',
     name: 'PixelMaster Pro',
     description:
       'Built for both gaming and content creation, offering top-notch performance.',
@@ -48,10 +47,10 @@ module.exports = [
       '654fb092f52d84098a241e59',
       '654fb092f52d84098a241e5a',
     ],
+    category_id: '507f1f77bcf86cd799439013',
   },
   {
     _id: '655095c3169fa30bfc4c5dba',
-    categoryID: '655102c5018dd03d19e13113',
     name: 'StealthStrike Elite',
     description: 'Sleek design with a punch of power for all modern games.',
     images: [
@@ -72,10 +71,10 @@ module.exports = [
       '654fb092f52d84098a241e5e',
       '654fb092f52d84098a241e5f',
     ],
+    category_id: '507f1f77bcf86cd799439013',
   },
   {
     _id: '655095c3169fa30bfc4c5dbc',
-    categoryID: '655102c5018dd03d19e13114',
     name: 'CyberPulse Xtreme',
     description: 'A futuristic gaming PC with customizable RGB lighting.',
     images: [
@@ -96,10 +95,10 @@ module.exports = [
       '654fb092f52d84098a241e63',
       '654fb092f52d84098a241e64',
     ],
+    category_id: '507f1f77bcf86cd799439013',
   },
   {
     _id: '655095c3169fa30bfc4c5dbd',
-    categoryID: '655102c5018dd03d19e13115',
     name: 'AlphaNode Predator',
     description: 'For gamers who demand nothing but the best.',
     images: [
@@ -120,10 +119,10 @@ module.exports = [
       '654fb092f52d84098a241e58',
       '654fb092f52d84098a241e69',
     ],
+    category_id: '507f1f77bcf86cd799439013',
   },
   {
     _id: '655095c3169fa30bfc4c5dbe',
-    categoryID: '655102c5018dd03d19e13116',
     name: 'CompactCore i5',
     description:
       'Ultra-compact PC ideal for home entertainment and basic tasks.',
@@ -145,10 +144,10 @@ module.exports = [
       '654fb092f52d84098a241e6d',
       '654fb092f52d84098a241e6e',
     ],
+    category_id: '507f1f77bcf86cd799439014',
   },
   {
     _id: '655095c3169fa30bfc4c5dbf',
-    categoryID: '655102c5018dd03d19e13117',
     name: 'NanoRyzen R5',
     description: "Mini PC with AMD's efficiency and power.",
     images: [
@@ -169,10 +168,10 @@ module.exports = [
       '654fb092f52d84098a241e71',
       '654fb092f52d84098a241e73',
     ],
+    category_id: '507f1f77bcf86cd799439014',
   },
   {
     _id: '655095c3169fa30bfc4c5dc0',
-    categoryID: '655102c5018dd03d19e13118',
     name: 'QuickBox M3',
     description: 'A budget-friendly mini PC for everyday use.',
     images: [
@@ -193,10 +192,10 @@ module.exports = [
       '654fb092f52d84098a241e76',
       '654fb092f52d84098a241e78',
     ],
+    category_id: '507f1f77bcf86cd799439014',
   },
   {
     _id: '655095c3169fa30bfc4c5dc1',
-    categoryID: '655102c5018dd03d19e13119',
     name: 'PicoCube Z2',
     description: 'Tiny yet powerful mini PC for versatile use.',
     images: [
@@ -217,10 +216,10 @@ module.exports = [
       '654fb092f52d84098a241e6e',
       '654fb092f52d84098a241e79',
     ],
+    category_id: '507f1f77bcf86cd799439014',
   },
   {
     _id: '655095c3169fa30bfc4c5dc2',
-    categoryID: '655102c5018dd03d19e1311a',
     name: 'SwiftCenter i7',
     description: 'Mini PC designed for performance in a small package.',
     images: [
@@ -241,10 +240,10 @@ module.exports = [
       '654fb092f52d84098a241e73',
       '654fb092f52d84098a241e7e',
     ],
+    category_id: '507f1f77bcf86cd799439014',
   },
   {
     _id: '655095c3169fa30bfc4c5dc3',
-    categoryID: '655102c5018dd03d19e1311b',
     name: 'BusinessBox Pro',
     description: 'Ideal PC for businesses and offices with multitasking needs.',
     images: [
@@ -265,10 +264,10 @@ module.exports = [
       '654fb092f52d84098a241e86',
       '654fb092f52d84098a241e87',
     ],
+    category_id: '507f1f77bcf86cd799439015',
   },
   {
     _id: '655095c3169fa30bfc4c5dc4',
-    categoryID: '655102c5018dd03d19e1311c',
     name: 'OfficeMaster i5',
     description: 'A reliable and efficient office PC for daily tasks.',
     images: [
@@ -289,10 +288,10 @@ module.exports = [
       '654fb092f52d84098a241e8b',
       '654fb092f52d84098a241e8c',
     ],
+    category_id: '507f1f77bcf86cd799439015',
   },
   {
     _id: '655095c3169fa30bfc4c5dc5',
-    categoryID: '655102c5018dd03d19e1311d',
     name: 'WorkStream R7',
     description: 'AMD-powered PC optimized for business applications.',
     images: [
@@ -313,10 +312,10 @@ module.exports = [
       '654fb092f52d84098a241e8f',
       '654fb092f52d84098a241e91',
     ],
+    category_id: '507f1f77bcf86cd799439015',
   },
   {
     _id: '655095c3169fa30bfc4c5dc6',
-    categoryID: '655102c5018dd03d19e1311e',
     name: 'TaskForce Elite',
     description: 'For businesses requiring power and reliability.',
     images: [
@@ -337,10 +336,10 @@ module.exports = [
       '654fb092f52d84098a241e95',
       '654fb092f52d84098a241e96',
     ],
+    category_id: '507f1f77bcf86cd799439015',
   },
   {
     _id: '655095c3169fa30bfc4c5dc7',
-    categoryID: '655102c5018dd03d19e1311f',
     name: 'EfficiencyOne R5',
     description: 'Energy-efficient office PC with solid performance.',
     images: [
@@ -361,10 +360,10 @@ module.exports = [
       '654fb092f52d84098a241e98',
       '654fb092f52d84098a241e99',
     ],
+    category_id: '507f1f77bcf86cd799439015',
   },
   {
     _id: '655095c3169fa30bfc4c5dc8',
-    categoryID: '655102c5018dd03d19e13120',
     name: 'Intel Core i9-12900K',
     description: 'A powerful CPU designed for gamers and content creators.',
     images: [
@@ -385,10 +384,10 @@ module.exports = [
       '654fb092f52d84098a241e9f',
       '654fb092f52d84098a241ea0',
     ],
+    category_id: '507f1f77bcf86cd799439017',
   },
   {
     _id: '655095c3169fa30bfc4c5dc9',
-    categoryID: '655102c5018dd03d19e13121',
     name: 'AMD Ryzen 9 5950X',
     description:
       "AMD's flagship CPU for high-end applications and multitasking.",
@@ -410,10 +409,10 @@ module.exports = [
       '654fb092f52d84098a241ea2',
       '654fb092f52d84098a241ea5',
     ],
+    category_id: '507f1f77bcf86cd799439017',
   },
   {
     _id: '655095c3169fa30bfc4c5dca',
-    categoryID: '655102c5018dd03d19e13122',
     name: 'Intel Core i7-12700K',
     description:
       'A balanced CPU offering great performance for gaming and productivity.',
@@ -435,10 +434,10 @@ module.exports = [
       '654fb092f52d84098a241ea8',
       '654fb092f52d84098a241ea9',
     ],
+    category_id: '507f1f77bcf86cd799439017',
   },
   {
     _id: '655095c3169fa30bfc4c5dcb',
-    categoryID: '655102c5018dd03d19e13123',
     name: 'AMD Ryzen 7 5800X',
     description: 'Efficient and powerful, great for gaming and general use.',
     images: [
@@ -459,10 +458,10 @@ module.exports = [
       '654fb092f52d84098a241ead',
       '654fb092f52d84098a241eae',
     ],
+    category_id: '507f1f77bcf86cd799439017',
   },
   {
     _id: '655095c3169fa30bfc4c5dcc',
-    categoryID: '655102c5018dd03d19e13124',
     name: 'Intel Core i5-11600K',
     description: 'A mid-range CPU perfect for mainstream tasks and gaming.',
     images: [
@@ -483,10 +482,10 @@ module.exports = [
       '654fb092f52d84098a241eb2',
       '654fb092f52d84098a241eb3',
     ],
+    category_id: '507f1f77bcf86cd799439017',
   },
   {
     _id: '655095c3169fa30bfc4c5dcd',
-    categoryID: '655102c5018dd03d19e13125',
     name: 'MegaForce Z590-A PRO',
     description: 'Motherboard built for next-gen gaming setups.',
     images: [
@@ -507,10 +506,10 @@ module.exports = [
       '654fb092f52d84098a241eb8',
       '654fb092f52d84098a241eb9',
     ],
+    category_id: '507f1f77bcf86cd799439018',
   },
   {
     _id: '655095c3169fa30bfc4c5dce',
-    categoryID: '655102c5018dd03d19e13126',
     name: 'UltraBoard B550 GAMING X',
     description: 'A reliable AMD motherboard for performance systems.',
     images: [
@@ -531,10 +530,10 @@ module.exports = [
       '654fb092f52d84098a241eba',
       '654fb092f52d84098a241ebb',
     ],
+    category_id: '507f1f77bcf86cd799439018',
   },
   {
     _id: '655095c3169fa30bfc4c5dcf',
-    categoryID: '655102c5018dd03d19e13127',
     name: 'TechStar H570M PRO-VDH',
     description:
       'Micro-ATX motherboard designed for business and mainstream use.',
@@ -556,10 +555,10 @@ module.exports = [
       '654fb092f52d84098a241ec2',
       '654fb092f52d84098a241ec3',
     ],
+    category_id: '507f1f77bcf86cd799439018',
   },
   {
     _id: '655095c3169fa30bfc4c5dd0',
-    categoryID: '655102c5018dd03d19e13128',
     name: 'ForceBoard X570 ELITE',
     description: 'High-end AMD motherboard with PCIe 4.0 support.',
     images: [
@@ -580,10 +579,10 @@ module.exports = [
       '654fb092f52d84098a241eba',
       '654fb092f52d84098a241ec5',
     ],
+    category_id: '507f1f77bcf86cd799439018',
   },
   {
     _id: '655095c3169fa30bfc4c5dd1',
-    categoryID: '655102c5018dd03d19e13129',
     name: 'NanoForce B460M AORUS',
     description: 'Compact motherboard with great features for gaming setups.',
     images: [
@@ -604,10 +603,10 @@ module.exports = [
       '654fb092f52d84098a241ec3',
       '654fb092f52d84098a241eca',
     ],
+    category_id: '507f1f77bcf86cd799439018',
   },
   {
     _id: '655095c3169fa30bfc4c5dd2',
-    categoryID: '655102c5018dd03d19e1312a',
     name: 'HyperX Predator DDR5 32GB',
     description: 'High-speed memory module with RGB lighting.',
     images: [
@@ -628,10 +627,10 @@ module.exports = [
       '654fb092f52d84098a241ed1',
       '654fb092f52d84098a241ed2',
     ],
+    category_id: '507f1f77bcf86cd799439019',
   },
   {
     _id: '655095c3169fa30bfc4c5dd3',
-    categoryID: '655102c5018dd03d19e1312b',
     name: 'G.Skill Ripjaws V DDR4 16GB',
     description: 'Reliable memory module ideal for gaming and multitasking.',
     images: [
@@ -652,10 +651,10 @@ module.exports = [
       '654fb092f52d84098a241ed5',
       '654fb092f52d84098a241ed7',
     ],
+    category_id: '507f1f77bcf86cd799439019',
   },
   {
     _id: '655095c3169fa30bfc4c5dd4',
-    categoryID: '655102c5018dd03d19e1312c',
     name: 'Corsair Vengeance LPX DDR4 64GB',
     description: 'High-capacity memory kit designed for demanding tasks.',
     images: [
@@ -676,10 +675,10 @@ module.exports = [
       '654fb092f52d84098a241ed8',
       '654fb092f52d84098a241ed9',
     ],
+    category_id: '507f1f77bcf86cd799439019',
   },
   {
     _id: '655095c3169fa30bfc4c5dd5',
-    categoryID: '655102c5018dd03d19e1312d',
     name: 'Crucial Ballistix DDR4 8GB',
     description: 'Affordable memory module perfect for budget builds.',
     images: [
@@ -700,10 +699,10 @@ module.exports = [
       '654fb092f52d84098a241edf',
       '654fb092f52d84098a241ee0',
     ],
+    category_id: '507f1f77bcf86cd799439019',
   },
   {
     _id: '655095c3169fa30bfc4c5dd6',
-    categoryID: '655102c5018dd03d19e1312e',
     name: 'Adata Spectrix D60G DDR4 32GB',
     description: 'Performance memory with customizable RGB lighting.',
     images: [
@@ -724,10 +723,10 @@ module.exports = [
       '654fb092f52d84098a241ee3',
       '654fb092f52d84098a241ee4',
     ],
+    category_id: '507f1f77bcf86cd799439019',
   },
   {
     _id: '655095c3169fa30bfc4c5dd7',
-    categoryID: '655102c5018dd03d19e1312f',
     name: 'MechMaster Pro X',
     description: 'Mechanical keyboard with customizable RGB lighting.',
     images: [
@@ -748,10 +747,10 @@ module.exports = [
       '654fb092f52d84098a241eea',
       '654fb092f52d84098a241eeb',
     ],
+    category_id: '507f1f77bcf86cd79943901b',
   },
   {
     _id: '655095c3169fa30bfc4c5dd8',
-    categoryID: '655102c5018dd03d19e13130',
     name: 'SilentKey LITE',
     description: 'Quiet membrane keyboard for office use.',
     images: [
@@ -772,10 +771,10 @@ module.exports = [
       '654fb092f52d84098a241eef',
       '654fb092f52d84098a241ef0',
     ],
+    category_id: '507f1f77bcf86cd79943901b',
   },
   {
     _id: '655095c3169fa30bfc4c5dd9',
-    categoryID: '655102c5018dd03d19e13131',
     name: 'GamerX RGB Elite',
     description: 'High-performance mechanical keyboard for gaming.',
     images: [
@@ -796,10 +795,10 @@ module.exports = [
       '654fb092f52d84098a241eee',
       '654fb092f52d84098a241ef1',
     ],
+    category_id: '507f1f77bcf86cd79943901b',
   },
   {
     _id: '655095c3169fa30bfc4c5dda',
-    categoryID: '655102c5018dd03d19e13132',
     name: 'TypeFast Ergo',
     description: 'Ergonomic mechanical keyboard for comfort typing.',
     images: [
@@ -820,10 +819,10 @@ module.exports = [
       '654fb092f52d84098a241ef7',
       '654fb092f52d84098a241efa',
     ],
+    category_id: '507f1f77bcf86cd79943901b',
   },
   {
     _id: '655095c3169fa30bfc4c5ddb',
-    categoryID: '655102c5018dd03d19e13133',
     name: 'TravelKey Mini',
     description: 'Portable wireless keyboard with touchpad.',
     images: [
@@ -844,10 +843,10 @@ module.exports = [
       '654fb092f52d84098a241eef',
       '654fb092f52d84098a241eff',
     ],
+    category_id: '507f1f77bcf86cd79943901b',
   },
   {
     _id: '655095c3169fa30bfc4c5ddc',
-    categoryID: '655102c5018dd03d19e13134',
     name: 'UltraView Pro 27"',
     description: '27-inch 4K IPS monitor with excellent color accuracy.',
     images: [
@@ -868,10 +867,10 @@ module.exports = [
       '654fb092f52d84098a241f03',
       '654fb092f52d84098a241f04',
     ],
+    category_id: '507f1f77bcf86cd79943901d',
   },
   {
     _id: '655095c3169fa30bfc4c5ddd',
-    categoryID: '655102c5018dd03d19e13135',
     name: 'GamerScreen X 24"',
     description: '24-inch 1080p monitor with 144Hz refresh rate for gaming.',
     images: [
@@ -892,10 +891,10 @@ module.exports = [
       '654fb092f52d84098a241f07',
       '654fb092f52d84098a241f08',
     ],
+    category_id: '507f1f77bcf86cd79943901d',
   },
   {
     _id: '655095c3169fa30bfc4c5dde',
-    categoryID: '655102c5018dd03d19e13136',
     name: 'DesignView 32"',
     description: '32-inch 4K monitor with color calibration for professionals.',
     images: [
@@ -916,10 +915,10 @@ module.exports = [
       '654fb092f52d84098a241f0d',
       '654fb092f52d84098a241f0e',
     ],
+    category_id: '507f1f77bcf86cd79943901d',
   },
   {
     _id: '655095c3169fa30bfc4c5ddf',
-    categoryID: '655102c5018dd03d19e13137',
     name: 'WideView 34"',
     description:
       '34-inch ultrawide monitor with QHD resolution for multitasking.',
@@ -941,10 +940,10 @@ module.exports = [
       '654fb092f52d84098a241f11',
       '654fb092f52d84098a241f12',
     ],
+    category_id: '507f1f77bcf86cd79943901d',
   },
   {
     _id: '655095c3169fa30bfc4c5de0',
-    categoryID: '655102c5018dd03d19e13138',
     name: 'BudgetView 22"',
     description: '22-inch 1080p monitor for everyday use and office tasks.',
     images: [
@@ -965,10 +964,10 @@ module.exports = [
       '654fb092f52d84098a241f07',
       '654fb092f52d84098a241f18',
     ],
+    category_id: '507f1f77bcf86cd79943901d',
   },
   {
     _id: '655095c3169fa30bfc4c5de1',
-    categoryID: '655102c5018dd03d19e13139',
     name: 'GlidePro X7',
     description: 'High-precision gaming mouse with RGB lighting.',
     images: [
@@ -989,10 +988,10 @@ module.exports = [
       '654fb092f52d84098a241f1c',
       '654fb092f52d84098a241f1d',
     ],
+    category_id: '507f1f77bcf86cd79943901c',
   },
   {
     _id: '655095c3169fa30bfc4c5de2',
-    categoryID: '655102c5018dd03d19e1313a',
     name: 'OfficeMouse Ergo',
     description: 'Ergonomic mouse designed for long working hours.',
     images: [
@@ -1013,10 +1012,10 @@ module.exports = [
       '654fb092f52d84098a241f21',
       '654fb092f52d84098a241f22',
     ],
+    category_id: '507f1f77bcf86cd79943901c',
   },
   {
     _id: '655095c3169fa30bfc4c5de3',
-    categoryID: '655102c5018dd03d19e1313b',
     name: 'TravelMouse Compact',
     description: 'Compact wireless mouse for on-the-go use.',
     images: [
@@ -1037,10 +1036,10 @@ module.exports = [
       '654fb092f52d84098a241f23',
       '654fb092f52d84098a241f24',
     ],
+    category_id: '507f1f77bcf86cd79943901c',
   },
   {
     _id: '655095c3169fa30bfc4c5de4',
-    categoryID: '655102c5018dd03d19e1313c',
     name: 'DesignMouse Pro',
     description: 'High-precision mouse for designers with adjustable DPI.',
     images: [
@@ -1061,10 +1060,10 @@ module.exports = [
       '654fb092f52d84098a241f28',
       '654fb092f52d84098a241f29',
     ],
+    category_id: '507f1f77bcf86cd79943901c',
   },
   {
     _id: '655095c3169fa30bfc4c5de5',
-    categoryID: '655102c5018dd03d19e1313d',
     name: 'GamerMouse Elite Z',
     description: 'RGB gaming mouse with customizable side buttons.',
     images: [
@@ -1085,10 +1084,10 @@ module.exports = [
       '654fb092f52d84098a241f2d',
       '654fb092f52d84098a241f2e',
     ],
+    category_id: '507f1f77bcf86cd79943901c',
   },
   {
     _id: '655095c3169fa30bfc4c5de6',
-    categoryID: '655102c5018dd03d19e1313e',
     name: 'QuickWave 800',
     description: '800W microwave with multiple preset programs.',
     images: [
@@ -1109,10 +1108,10 @@ module.exports = [
       '654fb092f52d84098a241f35',
       '654fb092f52d84098a241f36',
     ],
+    category_id: '507f1f77bcf86cd799439020',
   },
   {
     _id: '655095c3169fa30bfc4c5de7',
-    categoryID: '655102c5018dd03d19e1313f',
     name: 'HeatNReheat Pro',
     description: 'Powerful 1000W microwave with convection oven feature.',
     images: [
@@ -1133,10 +1132,10 @@ module.exports = [
       '654fb092f52d84098a241f39',
       '654fb092f52d84098a241f3b',
     ],
+    category_id: '507f1f77bcf86cd799439020',
   },
   {
     _id: '655095c3169fa30bfc4c5de8',
-    categoryID: '655102c5018dd03d19e13140',
     name: 'MicroChef Compact',
     description: 'Space-saving microwave ideal for small kitchens.',
     images: [
@@ -1157,10 +1156,10 @@ module.exports = [
       '654fb092f52d84098a241f3f',
       '654fb092f52d84098a241f40',
     ],
+    category_id: '507f1f77bcf86cd799439020',
   },
   {
     _id: '655095c3169fa30bfc4c5de9',
-    categoryID: '655102c5018dd03d19e13141',
     name: 'UltraWave Max',
     description: '1100W microwave with smart sensor cooking.',
     images: [
@@ -1181,10 +1180,10 @@ module.exports = [
       '654fb092f52d84098a241f43',
       '654fb092f52d84098a241f45',
     ],
+    category_id: '507f1f77bcf86cd799439020',
   },
   {
     _id: '655095c3169fa30bfc4c5dea',
-    categoryID: '655102c5018dd03d19e13142',
     name: 'EasyHeat Classic',
     description: 'Simple and reliable 800W microwave for everyday use.',
     images: [
@@ -1205,10 +1204,10 @@ module.exports = [
       '654fb092f52d84098a241f3f',
       '654fb092f52d84098a241f48',
     ],
+    category_id: '507f1f77bcf86cd799439020',
   },
   {
     _id: '655095c3169fa30bfc4c5deb',
-    categoryID: '655102c5018dd03d19e13143',
     name: 'HeatMaster Pro',
     description: 'A 4-burner stovetop with advanced heat distribution.',
     images: [
@@ -1229,10 +1228,10 @@ module.exports = [
       '654fb092f52d84098a241f4e',
       '654fb092f52d84098a241f4f',
     ],
+    category_id: '507f1f77bcf86cd799439021',
   },
   {
     _id: '655095c3169fa30bfc4c5dec',
-    categoryID: '655102c5018dd03d19e13144',
     name: 'EcoCook Hybrid',
     description:
       'Environmentally-friendly, induction and gas combined stovetop.',
@@ -1254,10 +1253,10 @@ module.exports = [
       '654fb092f52d84098a241f53',
       '654fb092f52d84098a241f54',
     ],
+    category_id: '507f1f77bcf86cd799439021',
   },
   {
     _id: '655095c3169fa30bfc4c5ded',
-    categoryID: '655102c5018dd03d19e13145',
     name: 'QuickHeat Solo',
     description: 'Single burner stovetop for compact spaces.',
     images: [
@@ -1278,10 +1277,10 @@ module.exports = [
       '654fb092f52d84098a241f58',
       '654fb092f52d84098a241f59',
     ],
+    category_id: '507f1f77bcf86cd799439021',
   },
   {
     _id: '655095c3169fa30bfc4c5dee',
-    categoryID: '655102c5018dd03d19e13146',
     name: "Chef's Delight Elite",
     description: '5-burner stovetop with precision heat control.',
     images: [
@@ -1302,10 +1301,10 @@ module.exports = [
       '654fb092f52d84098a241f5a',
       '654fb092f52d84098a241f5c',
     ],
+    category_id: '507f1f77bcf86cd799439021',
   },
   {
     _id: '655095c3169fa30bfc4c5def',
-    categoryID: '655102c5018dd03d19e13147',
     name: 'CookEase Premium',
     description: '4-burner stovetop with safety features and easy cleanup.',
     images: [
@@ -1326,12 +1325,12 @@ module.exports = [
       '654fb092f52d84098a241f58',
       '654fb092f52d84098a241f63',
     ],
+    category_id: '507f1f77bcf86cd799439021',
   },
   {
     _id: '6550ecef6b47746cc8fe39a4',
-    categoryID: '655102c5018dd03d19e13148',
-    name: 'Bread Toaster',
-    description: 'Bread toaster',
+    name: 'ToastMate 2',
+    description: '2-slice toaster with adjustable browning levels.',
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550ecef6b47746cc8fe39a4_0_1000w.jpg?alt=media',
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550ecef6b47746cc8fe39a4_0_2000w.jpg?alt=media',
@@ -1350,10 +1349,10 @@ module.exports = [
       '654fb092f52d84098a241f67',
       '654fb092f52d84098a241f68',
     ],
+    category_id: '507f1f77bcf86cd799439022',
   },
   {
     _id: '6550ecef6b47746cc8fe39a5',
-    categoryID: '655102c5018dd03d19e13149',
     name: 'CrispyBread Pro',
     description: '4-slice toaster with individual controls and bagel setting.',
     images: [
@@ -1374,10 +1373,10 @@ module.exports = [
       '654fb092f52d84098a241f6c',
       '654fb092f52d84098a241f6d',
     ],
+    category_id: '507f1f77bcf86cd799439022',
   },
   {
     _id: '6550ecef6b47746cc8fe39a6',
-    categoryID: '655102c5018dd03d19e1314a',
     name: 'QuickToast Compact',
     description: 'Compact 2-slice toaster with easy-to-clean crumb tray.',
     images: [
@@ -1398,10 +1397,10 @@ module.exports = [
       '654fb092f52d84098a241f70',
       '654fb092f52d84098a241f72',
     ],
+    category_id: '507f1f77bcf86cd799439022',
   },
   {
     _id: '6550ecef6b47746cc8fe39a7',
-    categoryID: '655102c5018dd03d19e1314b',
     name: 'BreadWarmer Deluxe',
     description: '4-slice toaster with wide slots for various bread types.',
     images: [
@@ -1422,10 +1421,10 @@ module.exports = [
       '654fb092f52d84098a241f74',
       '654fb092f52d84098a241f75',
     ],
+    category_id: '507f1f77bcf86cd799439022',
   },
   {
     _id: '6550ecef6b47746cc8fe39a8',
-    categoryID: '655102c5018dd03d19e1314c',
     name: 'MorningGlow Classic',
     description:
       'Efficient 2-slice toaster with consistent results every time.',
@@ -1447,10 +1446,10 @@ module.exports = [
       '654fb092f52d84098a241f79',
       '654fb092f52d84098a241f7a',
     ],
+    category_id: '507f1f77bcf86cd799439022',
   },
   {
     _id: '6550ecef6b47746cc8fe39a9',
-    categoryID: '655102c5018dd03d19e1314d',
     name: 'FrostCombo Plus',
     description: 'Modern combined refrigerator with adjustable cooling zones.',
     images: [
@@ -1471,10 +1470,10 @@ module.exports = [
       '654fb092f52d84098a241f80',
       '654fb092f52d84098a241f81',
     ],
+    category_id: '507f1f77bcf86cd799439024',
   },
   {
     _id: '6550ecef6b47746cc8fe39aa',
-    categoryID: '655102c5018dd03d19e1314e',
     name: 'DuoFridge Elite',
     description: 'Elegant design with smart cooling technology.',
     images: [
@@ -1495,10 +1494,10 @@ module.exports = [
       '654fb092f52d84098a241f85',
       '654fb092f52d84098a241f86',
     ],
+    category_id: '507f1f77bcf86cd799439024',
   },
   {
     _id: '6550ecef6b47746cc8fe39ab',
-    categoryID: '655102c5018dd03d19e1314f',
     name: 'CoolNFreeze Max',
     description:
       'Top freezer configuration for easy access to frequently used items.',
@@ -1520,10 +1519,10 @@ module.exports = [
       '654fb092f52d84098a241f89',
       '654fb092f52d84098a241f8b',
     ],
+    category_id: '507f1f77bcf86cd799439024',
   },
   {
     _id: '6550ecef6b47746cc8fe39ac',
-    categoryID: '655102c5018dd03d19e13150',
     name: 'TwinCool Premium',
     description:
       'Efficiently designed with separate compartments for optimal cooling.',
@@ -1545,10 +1544,10 @@ module.exports = [
       '654fb092f52d84098a241f8d',
       '654fb092f52d84098a241f90',
     ],
+    category_id: '507f1f77bcf86cd799439024',
   },
   {
     _id: '6550ecef6b47746cc8fe39ad',
-    categoryID: '655102c5018dd03d19e13151',
     name: 'FreezeNStore Ultimate',
     description: 'Ample storage and freezing space in a sleek design.',
     images: [
@@ -1569,10 +1568,10 @@ module.exports = [
       '654fb092f52d84098a241f94',
       '654fb092f52d84098a241f95',
     ],
+    category_id: '507f1f77bcf86cd799439024',
   },
   {
     _id: '6550ecef6b47746cc8fe39ae',
-    categoryID: '655102c5018dd03d19e13152',
     name: 'VinoSafe 40',
     description:
       'Store up to 40 bottles of your finest wines at optimal temperatures.',
@@ -1594,10 +1593,10 @@ module.exports = [
       '654fb092f52d84098a241f99',
       '654fb092f52d84098a241f9a',
     ],
+    category_id: '507f1f77bcf86cd799439026',
   },
   {
     _id: '6550ecef6b47746cc8fe39af',
-    categoryID: '655102c5018dd03d19e13153',
     name: 'CellarGuard Premium',
     description: 'Keep your wine collection preserved in perfect conditions.',
     images: [
@@ -1618,10 +1617,10 @@ module.exports = [
       '654fb092f52d84098a241f9e',
       '654fb092f52d84098a241f9f',
     ],
+    category_id: '507f1f77bcf86cd799439026',
   },
   {
     _id: '6550ecef6b47746cc8fe39b0',
-    categoryID: '655102c5018dd03d19e13154',
     name: 'EleganceVino 35',
     description:
       'Sleek design with UV-protected glass for your wine storage needs.',
@@ -1643,10 +1642,10 @@ module.exports = [
       '654fb092f52d84098a241fa3',
       '654fb092f52d84098a241fa4',
     ],
+    category_id: '507f1f77bcf86cd799439026',
   },
   {
     _id: '6550ecef6b47746cc8fe39b1',
-    categoryID: '655102c5018dd03d19e13155',
     name: 'WineKeeper Deluxe',
     description: 'Dual-zone wine fridge for reds and whites.',
     images: [
@@ -1667,10 +1666,10 @@ module.exports = [
       '654fb092f52d84098a241fa7',
       '654fb092f52d84098a241fa9',
     ],
+    category_id: '507f1f77bcf86cd799439026',
   },
   {
     _id: '6550ecef6b47746cc8fe39b2',
-    categoryID: '655102c5018dd03d19e13156',
     name: 'VinoVault Classic',
     description:
       'Traditional wine fridge design with modern cooling technology.',
@@ -1692,10 +1691,10 @@ module.exports = [
       '654fb092f52d84098a241fac',
       '654fb092f52d84098a241fae',
     ],
+    category_id: '507f1f77bcf86cd799439026',
   },
   {
     _id: '6550ecef6b47746cc8fe39b3',
-    categoryID: '655102c5018dd03d19e13157',
     name: 'CoolPure Basic',
     description:
       'A classic refrigerator designed for simplicity and maximum storage.',
@@ -1717,10 +1716,10 @@ module.exports = [
       '654fb092f52d84098a241fb2',
       '654fb092f52d84098a241fb3',
     ],
+    category_id: '507f1f77bcf86cd799439025',
   },
   {
     _id: '6550ecef6b47746cc8fe39b4',
-    categoryID: '655102c5018dd03d19e13158',
     name: 'FreshBox Compact',
     description: 'Ideal for small households or as a secondary refrigerator.',
     images: [
@@ -1741,10 +1740,10 @@ module.exports = [
       '654fb092f52d84098a241fb7',
       '654fb092f52d84098a241fb8',
     ],
+    category_id: '507f1f77bcf86cd799439025',
   },
   {
     _id: '6550ecef6b47746cc8fe39b5',
-    categoryID: '655102c5018dd03d19e13159',
     name: 'EcoChill Premium',
     description:
       'Environmentally-friendly, offering efficient cooling without a freezer compartment.',
@@ -1766,10 +1765,10 @@ module.exports = [
       '654fb092f52d84098a241fbc',
       '654fb092f52d84098a241fbd',
     ],
+    category_id: '507f1f77bcf86cd799439025',
   },
   {
     _id: '6550ecef6b47746cc8fe39b6',
-    categoryID: '655102c5018dd03d19e1315a',
     name: 'SimplyCool Classic',
     description: 'Efficient cooling in a timeless design.',
     images: [
@@ -1790,10 +1789,10 @@ module.exports = [
       '654fb092f52d84098a241fbf',
       '654fb092f52d84098a241fc2',
     ],
+    category_id: '507f1f77bcf86cd799439025',
   },
   {
     _id: '6550ecef6b47746cc8fe39b7',
-    categoryID: '655102c5018dd03d19e1315b',
     name: 'PureStore XL',
     description: 'Ample storage space for larger households.',
     images: [
@@ -1814,10 +1813,10 @@ module.exports = [
       '654fb092f52d84098a241fc6',
       '654fb092f52d84098a241fc7',
     ],
+    category_id: '507f1f77bcf86cd799439025',
   },
   {
     _id: '6550ecef6b47746cc8fe39b8',
-    categoryID: '655102c5018dd03d19e1315c',
     name: 'QuickDry Compact',
     description: 'Space-saving dryer with efficient drying cycles.',
     images: [
@@ -1838,10 +1837,10 @@ module.exports = [
       '654fb092f52d84098a241fcb',
       '654fb092f52d84098a241fcc',
     ],
+    category_id: '507f1f77bcf86cd799439028',
   },
   {
     _id: '6550ecef6b47746cc8fe39b9',
-    categoryID: '655102c5018dd03d19e1315d',
     name: 'EcoDry Pro',
     description: 'Energy-efficient dryer with heat pump technology.',
     images: [
@@ -1862,10 +1861,10 @@ module.exports = [
       '654fb092f52d84098a241fd0',
       '654fb092f52d84098a241fd1',
     ],
+    category_id: '507f1f77bcf86cd799439028',
   },
   {
     _id: '6550ecef6b47746cc8fe39ba',
-    categoryID: '655102c5018dd03d19e1315e',
     name: 'AirFlow Max',
     description: 'High-capacity dryer with advanced airflow system.',
     images: [
@@ -1886,10 +1885,10 @@ module.exports = [
       '654fb092f52d84098a241fd5',
       '654fb092f52d84098a241fd6',
     ],
+    category_id: '507f1f77bcf86cd799439028',
   },
   {
     _id: '6550ecef6b47746cc8fe39bb',
-    categoryID: '655102c5018dd03d19e1315f',
     name: 'HeatGuard Elite',
     description: 'Dryer with protective technology for delicate fabrics.',
     images: [
@@ -1910,10 +1909,10 @@ module.exports = [
       '654fb092f52d84098a241fd9',
       '654fb092f52d84098a241fdb',
     ],
+    category_id: '507f1f77bcf86cd799439028',
   },
   {
     _id: '6550ecef6b47746cc8fe39bc',
-    categoryID: '655102c5018dd03d19e13160',
     name: 'UltraDry Advanced',
     description: 'Top-of-the-line dryer with smart sensing and connectivity.',
     images: [
@@ -1934,10 +1933,10 @@ module.exports = [
       '654fb092f52d84098a241fde',
       '654fb092f52d84098a241fe0',
     ],
+    category_id: '507f1f77bcf86cd799439028',
   },
   {
     _id: '6550ecef6b47746cc8fe39bd',
-    categoryID: '655102c5018dd03d19e13161',
     name: 'HydroSpin Elite',
     description:
       'High-efficiency front load washer with a variety of wash cycles.',
@@ -1959,10 +1958,10 @@ module.exports = [
       '654fb092f52d84098a241fe4',
       '654fb092f52d84098a241fe5',
     ],
+    category_id: '507f1f77bcf86cd799439029',
   },
   {
     _id: '6550ecef6b47746cc8fe39be',
-    categoryID: '655102c5018dd03d19e13162',
     name: 'AquaFresh Pro',
     description:
       'Front load washing machine with advanced fabric care technology.',
@@ -1984,10 +1983,10 @@ module.exports = [
       '654fb092f52d84098a241fe9',
       '654fb092f52d84098a241fea',
     ],
+    category_id: '507f1f77bcf86cd799439029',
   },
   {
     _id: '6550ecef6b47746cc8fe39bf',
-    categoryID: '655102c5018dd03d19e13163',
     name: 'CleanWave Max',
     description:
       'Front load washer with efficient water and energy consumption.',
@@ -2009,10 +2008,10 @@ module.exports = [
       '654fb092f52d84098a241fee',
       '654fb092f52d84098a241fef',
     ],
+    category_id: '507f1f77bcf86cd799439029',
   },
   {
     _id: '6550ecef6b47746cc8fe39c0',
-    categoryID: '655102c5018dd03d19e13164',
     name: 'EcoWash Compact',
     description:
       'Space-saving front load washing machine with powerful performance.',
@@ -2034,10 +2033,10 @@ module.exports = [
       '654fb092f52d84098a241ff3',
       '654fb092f52d84098a241ff4',
     ],
+    category_id: '507f1f77bcf86cd799439029',
   },
   {
     _id: '6550ecef6b47746cc8fe39c1',
-    categoryID: '655102c5018dd03d19e13165',
     name: 'PureClean Advanced',
     description: 'Front load washing machine with antibacterial drum.',
     images: [
@@ -2058,10 +2057,10 @@ module.exports = [
       '654fb092f52d84098a241ff8',
       '654fb092f52d84098a241ff9',
     ],
+    category_id: '507f1f77bcf86cd799439029',
   },
   {
     _id: '6550ecef6b47746cc8fe39c2',
-    categoryID: '655102c5018dd03d19e13166',
     name: 'EasyLoad Classic',
     description:
       'User-friendly top load washing machine with deep clean technology.',
@@ -2083,10 +2082,10 @@ module.exports = [
       '654fb092f52d84098a241ffd',
       '654fb092f52d84098a241ffe',
     ],
+    category_id: '507f1f77bcf86cd79943902a',
   },
   {
     _id: '6550ecef6b47746cc8fe39c3',
-    categoryID: '655102c5018dd03d19e13167',
     name: 'TopClean Pro',
     description: 'High-capacity top load washer with customizable cycles.',
     images: [
@@ -2107,10 +2106,10 @@ module.exports = [
       '654fb092f52d84098a242002',
       '654fb092f52d84098a242003',
     ],
+    category_id: '507f1f77bcf86cd79943902a',
   },
   {
     _id: '6550ecef6b47746cc8fe39c4',
-    categoryID: '655102c5018dd03d19e13168',
     name: 'AeroWash Premium',
     description: 'Top load washing machine with aerodynamic wash motion.',
     images: [
@@ -2131,10 +2130,10 @@ module.exports = [
       '654fb092f52d84098a242007',
       '654fb092f52d84098a242008',
     ],
+    category_id: '507f1f77bcf86cd79943902a',
   },
   {
     _id: '6550ecef6b47746cc8fe39c5',
-    categoryID: '655102c5018dd03d19e13169',
     name: 'FreshSpin Active',
     description: 'Efficient top load washer with advanced spin technology.',
     images: [
@@ -2155,10 +2154,10 @@ module.exports = [
       '654fb092f52d84098a24200b',
       '654fb092f52d84098a24200d',
     ],
+    category_id: '507f1f77bcf86cd79943902a',
   },
   {
     _id: '6550ecef6b47746cc8fe39c6',
-    categoryID: '655102c5018dd03d19e1316a',
     name: 'UltraLoad Max',
     description:
       'Top load washing machine designed for heavy-duty washing needs.',
@@ -2180,10 +2179,10 @@ module.exports = [
       '654fb092f52d84098a242011',
       '654fb092f52d84098a242012',
     ],
+    category_id: '507f1f77bcf86cd79943902a',
   },
   {
     _id: '6550ecef6b47746cc8fe39c7',
-    categoryID: '655102c5018dd03d19e1316b',
     name: 'GamerX Pro 15',
     description: 'A gaming beast with powerful graphics and blazing speed.',
     images: [
@@ -2204,10 +2203,10 @@ module.exports = [
       '654fb092f52d84098a242016',
       '654fb092f52d84098a242017',
     ],
+    category_id: '507f1f77bcf86cd79943902d',
   },
   {
     _id: '6550ecef6b47746cc8fe39c8',
-    categoryID: '655102c5018dd03d19e1316c',
     name: 'AlphaRogue Z20',
     description: 'Designed for hardcore gamers with an immersive experience.',
     images: [
@@ -2228,10 +2227,10 @@ module.exports = [
       '654fb092f52d84098a24201b',
       '654fb092f52d84098a24201c',
     ],
+    category_id: '507f1f77bcf86cd79943902d',
   },
   {
     _id: '6550ecef6b47746cc8fe39c9',
-    categoryID: '655102c5018dd03d19e1316d',
     name: 'Lightblade G7',
     description: 'Portable gaming with a sleek design.',
     images: [
@@ -2252,10 +2251,10 @@ module.exports = [
       '654fb092f52d84098a242020',
       '654fb092f52d84098a242021',
     ],
+    category_id: '507f1f77bcf86cd79943902d',
   },
   {
     _id: '6550ecef6b47746cc8fe39ca',
-    categoryID: '655102c5018dd03d19e1316e',
     name: 'TitanForce U5',
     description: 'Dominate games with unstoppable performance.',
     images: [
@@ -2276,10 +2275,10 @@ module.exports = [
       '654fb092f52d84098a242024',
       '654fb092f52d84098a242026',
     ],
+    category_id: '507f1f77bcf86cd79943902d',
   },
   {
     _id: '6550ecef6b47746cc8fe39cb',
-    categoryID: '655102c5018dd03d19e1316f',
     name: 'StealthWarrior Max',
     description: 'A blend of aesthetics and raw gaming power.',
     images: [
@@ -2300,10 +2299,10 @@ module.exports = [
       '654fb092f52d84098a24202a',
       '654fb092f52d84098a24202b',
     ],
+    category_id: '507f1f77bcf86cd79943902d',
   },
   {
     _id: '6550ecef6b47746cc8fe39cc',
-    categoryID: '655102c5018dd03d19e13170',
     name: 'OfficeMaster L5',
     description: 'Reliable performance for everyday tasks.',
     images: [
@@ -2324,10 +2323,10 @@ module.exports = [
       '654fb092f52d84098a24202f',
       '654fb092f52d84098a242030',
     ],
+    category_id: '507f1f77bcf86cd79943902e',
   },
   {
     _id: '6550ecef6b47746cc8fe39cd',
-    categoryID: '655102c5018dd03d19e13171',
     name: 'WorkForce Pro 7',
     description: 'Built for productivity on the go.',
     images: [
@@ -2348,10 +2347,10 @@ module.exports = [
       '654fb092f52d84098a242034',
       '654fb092f52d84098a242035',
     ],
+    category_id: '507f1f77bcf86cd79943902e',
   },
   {
     _id: '6550ecef6b47746cc8fe39ce',
-    categoryID: '655102c5018dd03d19e13172',
     name: 'UltraSleek B9',
     description: 'Compact design with all-day battery.',
     images: [
@@ -2372,10 +2371,10 @@ module.exports = [
       '654fb092f52d84098a242039',
       '654fb092f52d84098a24203a',
     ],
+    category_id: '507f1f77bcf86cd79943902e',
   },
   {
     _id: '6550ecef6b47746cc8fe39cf',
-    categoryID: '655102c5018dd03d19e13173',
     name: 'TaskRunner V4',
     description: 'Performance and portability for professionals.',
     images: [
@@ -2396,10 +2395,10 @@ module.exports = [
       '654fb092f52d84098a24203d',
       '654fb092f52d84098a24203e',
     ],
+    category_id: '507f1f77bcf86cd79943902e',
   },
   {
     _id: '6550ecef6b47746cc8fe39d0',
-    categoryID: '655102c5018dd03d19e13174',
     name: 'BizMate 360',
     description: 'Flexibility and reliability in a business laptop.',
     images: [
@@ -2420,10 +2419,10 @@ module.exports = [
       '654fb092f52d84098a242043',
       '654fb092f52d84098a242044',
     ],
+    category_id: '507f1f77bcf86cd79943902e',
   },
   {
     _id: '6550ecef6b47746cc8fe39d1',
-    categoryID: '655102c5018dd03d19e13175',
     name: 'TabFlex 10',
     description: 'Entertainment and productivity in one device.',
     images: [
@@ -2444,10 +2443,10 @@ module.exports = [
       '654fb092f52d84098a242048',
       '654fb092f52d84098a242049',
     ],
+    category_id: '507f1f77bcf86cd79943902f',
   },
   {
     _id: '6550ecef6b47746cc8fe39d2',
-    categoryID: '655102c5018dd03d19e13176',
     name: 'ClearView S7',
     description: 'Stunning display with smooth performance.',
     images: [
@@ -2468,10 +2467,10 @@ module.exports = [
       '654fb092f52d84098a24204d',
       '654fb092f52d84098a24204e',
     ],
+    category_id: '507f1f77bcf86cd79943902f',
   },
   {
     _id: '6550ecef6b47746cc8fe39d3',
-    categoryID: '655102c5018dd03d19e13177',
     name: 'SketchMate Pro',
     description: 'Designed for creators with high precision stylus.',
     images: [
@@ -2492,10 +2491,10 @@ module.exports = [
       '654fb092f52d84098a242052',
       '654fb092f52d84098a242053',
     ],
+    category_id: '507f1f77bcf86cd79943902f',
   },
   {
     _id: '6550ecef6b47746cc8fe39d4',
-    categoryID: '655102c5018dd03d19e13178',
     name: 'TouchStream M5',
     description: 'Portable tablet for media consumption.',
     images: [
@@ -2516,10 +2515,10 @@ module.exports = [
       '654fb092f52d84098a242057',
       '654fb092f52d84098a242058',
     ],
+    category_id: '507f1f77bcf86cd79943902f',
   },
   {
     _id: '6550ecef6b47746cc8fe39d5',
-    categoryID: '655102c5018dd03d19e13179',
     name: 'ProSlate 12',
     description: 'Professional-grade tablet with robust apps.',
     images: [
@@ -2540,10 +2539,10 @@ module.exports = [
       '654fb092f52d84098a24205c',
       '654fb092f52d84098a24205d',
     ],
+    category_id: '507f1f77bcf86cd79943902f',
   },
   {
     _id: '6550ecef6b47746cc8fe39d6',
-    categoryID: '655102c5018dd03d19e1317a',
     name: 'Leather Wallet Case',
     description: 'Premium leather wallet case for protection and style.',
     images: [
@@ -2564,10 +2563,10 @@ module.exports = [
       '654fb092f52d84098a242061',
       '654fb092f52d84098a242062',
     ],
+    category_id: '507f1f77bcf86cd799439031',
   },
   {
     _id: '6550ecef6b47746cc8fe39d7',
-    categoryID: '655102c5018dd03d19e1317b',
     name: 'Fast Wireless Charger',
     description: 'Rapid charging with wireless convenience.',
     images: [
@@ -2588,10 +2587,10 @@ module.exports = [
       '654fb092f52d84098a242066',
       '654fb092f52d84098a242067',
     ],
+    category_id: '507f1f77bcf86cd799439031',
   },
   {
     _id: '6550ecef6b47746cc8fe39d8',
-    categoryID: '655102c5018dd03d19e1317c',
     name: 'USB-C Earbuds',
     description: 'Crisp sound quality with USB-C connectivity.',
     images: [
@@ -2612,10 +2611,10 @@ module.exports = [
       '654fb092f52d84098a24206b',
       '654fb092f52d84098a24206c',
     ],
+    category_id: '507f1f77bcf86cd799439031',
   },
   {
     _id: '6550ecef6b47746cc8fe39d9',
-    categoryID: '655102c5018dd03d19e1317d',
     name: '360° Phone Stand',
     description: 'Adjustable stand for hands-free viewing.',
     images: [
@@ -2636,10 +2635,10 @@ module.exports = [
       '654fb092f52d84098a242070',
       '654fb092f52d84098a242071',
     ],
+    category_id: '507f1f77bcf86cd799439031',
   },
   {
     _id: '6550ecef6b47746cc8fe39da',
-    categoryID: '655102c5018dd03d19e1317e',
     name: 'Screen Protector Pack',
     description: 'Ultra-clear and scratch-resistant screen protectors.',
     images: [
@@ -2660,10 +2659,10 @@ module.exports = [
       '654fb092f52d84098a242075',
       '654fb092f52d84098a242076',
     ],
+    category_id: '507f1f77bcf86cd799439031',
   },
   {
     _id: '6550ecef6b47746cc8fe39db',
-    categoryID: '655102c5018dd03d19e1317f',
     name: 'Galaxy X10',
     description: 'A flagship device with premium features.',
     images: [
@@ -2684,10 +2683,10 @@ module.exports = [
       '654fb092f52d84098a24207a',
       '654fb092f52d84098a24207b',
     ],
+    category_id: '507f1f77bcf86cd799439033',
   },
   {
     _id: '6550ecef6b47746cc8fe39dc',
-    categoryID: '655102c5018dd03d19e13180',
     name: 'Nexus Ultra',
     description: 'A sleek design with pure Android experience.',
     images: [
@@ -2708,12 +2707,12 @@ module.exports = [
       '654fb092f52d84098a24207f',
       '654fb092f52d84098a242080',
     ],
+    category_id: '507f1f77bcf86cd799439033',
   },
   {
     _id: '6550fb8eb9e69d36eee66fef',
-    categoryID: '655102c5018dd03d19e13181',
     name: 'Pixel 6 Pro',
-    description: 'Smartphone',
+    description: "Experience the best of Google's software and hardware.",
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550fb8eb9e69d36eee66fef_0_1000w.jpg?alt=media',
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550fb8eb9e69d36eee66fef_0_2000w.jpg?alt=media',
@@ -2732,10 +2731,10 @@ module.exports = [
       '654fb092f52d84098a242084',
       '654fb092f52d84098a242085',
     ],
+    category_id: '507f1f77bcf86cd799439033',
   },
   {
     _id: '6550fb8eb9e69d36eee66ff0',
-    categoryID: '655102c5018dd03d19e13182',
     name: 'OneMega 9',
     description: 'Solid performance in an affordable package.',
     images: [
@@ -2756,10 +2755,10 @@ module.exports = [
       '654fb092f52d84098a242089',
       '654fb092f52d84098a24208a',
     ],
+    category_id: '507f1f77bcf86cd799439033',
   },
   {
     _id: '6550fb8eb9e69d36eee66ff1',
-    categoryID: '655102c5018dd03d19e13183',
     name: 'Xperia Z5',
     description: 'A beautiful design with top-notch specs.',
     images: [
@@ -2780,12 +2779,12 @@ module.exports = [
       '654fb092f52d84098a24208e',
       '654fb092f52d84098a24208f',
     ],
+    category_id: '507f1f77bcf86cd799439033',
   },
   {
     _id: '6550fd2f61e03335bea4271b',
-    categoryID: '655102c5018dd03d19e13184',
-    name: 'Phone 14 Pro',
-    description: 'smarthone',
+    name: 'iPhone 14 Pro',
+    description: "Apple's latest flagship with an amazing display.",
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550fd2f61e03335bea4271b_0_1000w.jpg?alt=media',
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550fd2f61e03335bea4271b_0_2000w.jpg?alt=media',
@@ -2804,11 +2803,11 @@ module.exports = [
       '654fb092f52d84098a242093',
       '654fb092f52d84098a242094',
     ],
+    category_id: '507f1f77bcf86cd799439032',
   },
   {
     _id: '6550fe22577a6e3648610aa8',
-    categoryID: '655102c5018dd03d19e13185',
-    name: 'Phone 14',
+    name: 'iPhone 14',
     description: 'The new standard in smartphones.',
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550fe22577a6e3648610aa8_0_1000w.jpg?alt=media',
@@ -2828,12 +2827,12 @@ module.exports = [
       '654fb092f52d84098a242098',
       '654fb092f52d84098a242099',
     ],
+    category_id: '507f1f77bcf86cd799439032',
   },
   {
     _id: '6550ff0501b8767ffb4527b4',
-    categoryID: '655102c5018dd03d19e13186',
-    name: 'Phone 14 Pro Max',
-    description: 'The biggest and best Phone ever.',
+    name: 'iPhone 14 Pro Max',
+    description: 'The biggest and best iPhone ever.',
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550ff0501b8767ffb4527b4_0_1000w.jpg?alt=media',
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550ff0501b8767ffb4527b4_0_2000w.jpg?alt=media',
@@ -2852,11 +2851,11 @@ module.exports = [
       '654fb092f52d84098a24209d',
       '654fb092f52d84098a24209e',
     ],
+    category_id: '507f1f77bcf86cd799439032',
   },
   {
     _id: '6550ff0501b8767ffb4527b5',
-    categoryID: '655102c5018dd03d19e13187',
-    name: 'Phone 14 Mini',
+    name: 'iPhone 14 Mini',
     description: 'Compact without compromising on features.',
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550ff0501b8767ffb4527b5_0_1000w.jpg?alt=media',
@@ -2876,12 +2875,12 @@ module.exports = [
       '654fb092f52d84098a2420a2',
       '654fb092f52d84098a2420a3',
     ],
+    category_id: '507f1f77bcf86cd799439032',
   },
   {
     _id: '6550ff0501b8767ffb4527b6',
-    categoryID: '655102c5018dd03d19e13188',
-    name: 'Phone SE 3',
-    description: 'Affordable Phone with the latest internals.',
+    name: 'iPhone SE 3',
+    description: 'Affordable iPhone with the latest internals.',
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550ff0501b8767ffb4527b6_0_1000w.jpg?alt=media',
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6550ff0501b8767ffb4527b6_0_2000w.jpg?alt=media',
@@ -2900,10 +2899,10 @@ module.exports = [
       '654fb092f52d84098a2420a7',
       '654fb092f52d84098a2420a8',
     ],
+    category_id: '507f1f77bcf86cd799439032',
   },
   {
     _id: '6550ff0501b8767ffb4527b7',
-    categoryID: '655102c5018dd03d19e13189',
     name: 'Galaxy Watch 5',
     description:
       'The latest smartwatch in the Galaxy series, offering a balance of style and functionality.',
@@ -2925,10 +2924,10 @@ module.exports = [
       '654fb092f52d84098a2420ac',
       '654fb092f52d84098a2420ad',
     ],
+    category_id: '507f1f77bcf86cd799439035',
   },
   {
     _id: '6550ff0501b8767ffb4527b8',
-    categoryID: '655102c5018dd03d19e1318a',
     name: 'Moto 360 3rd Gen',
     description: 'A classic design with the power of modern technology.',
     images: [
@@ -2949,10 +2948,10 @@ module.exports = [
       '654fb092f52d84098a2420b1',
       '654fb092f52d84098a2420b2',
     ],
+    category_id: '507f1f77bcf86cd799439035',
   },
   {
     _id: '6550ff0501b8767ffb4527b9',
-    categoryID: '655102c5018dd03d19e1318b',
     name: 'TicWatch Pro',
     description:
       'Innovative dual-display technology for extended battery life.',
@@ -2974,10 +2973,10 @@ module.exports = [
       '654fb092f52d84098a2420b5',
       '654fb092f52d84098a2420b6',
     ],
+    category_id: '507f1f77bcf86cd799439035',
   },
   {
     _id: '6550ff0501b8767ffb4527ba',
-    categoryID: '655102c5018dd03d19e1318c',
     name: 'ZenWatch 4',
     description: 'Sleek and stylish with a focus on health and fitness.',
     images: [
@@ -2998,12 +2997,12 @@ module.exports = [
       '654fb092f52d84098a2420bb',
       '654fb092f52d84098a2420bc',
     ],
+    category_id: '507f1f77bcf86cd799439035',
   },
   {
     _id: '6551014369d364b740655996',
-    categoryID: '655102c5018dd03d19e1318d',
     name: 'Pixel Watch',
-    description: 'The best of in a smartwatch format.',
+    description: 'The best of Google in a smartwatch format.',
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6551014369d364b740655996_0_1000w.jpg?alt=media',
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6551014369d364b740655996_0_2000w.jpg?alt=media',
@@ -3022,13 +3021,13 @@ module.exports = [
       '654fb092f52d84098a2420be',
       '654fb092f52d84098a2420bf',
     ],
+    category_id: '507f1f77bcf86cd799439035',
   },
   {
     _id: '6551014369d364b740655997',
-    categoryID: '655102c5018dd03d19e1318e',
-    name: 'A Watch Series 8',
+    name: 'Apple Watch Series 8',
     description:
-      'The newest addition to the A Watch family, combining design and technology.',
+      'The newest addition to the Apple Watch family, combining design and technology.',
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6551014369d364b740655997_0_1000w.jpg?alt=media',
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6551014369d364b740655997_0_2000w.jpg?alt=media',
@@ -3047,11 +3046,11 @@ module.exports = [
       '654fb092f52d84098a2420c5',
       '654fb092f52d84098a2420c6',
     ],
+    category_id: '507f1f77bcf86cd799439036',
   },
   {
     _id: '6551014369d364b740655998',
-    categoryID: '655102c5018dd03d19e1318f',
-    name: 'A Watch SE',
+    name: 'Apple Watch SE',
     description: 'Affordable yet powerful, perfect for everyday use.',
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6551014369d364b740655998_0_1000w.jpg?alt=media',
@@ -3071,11 +3070,11 @@ module.exports = [
       '654fb092f52d84098a2420ca',
       '654fb092f52d84098a2420cb',
     ],
+    category_id: '507f1f77bcf86cd799439036',
   },
   {
     _id: '6551014369d364b740655999',
-    categoryID: '655102c5018dd03d19e13190',
-    name: 'A Watch Series 7',
+    name: 'Apple Watch Series 7',
     description: 'Robust health features in a refined design.',
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_6551014369d364b740655999_0_1000w.jpg?alt=media',
@@ -3095,13 +3094,13 @@ module.exports = [
       '654fb092f52d84098a2420cf',
       '654fb092f52d84098a2420d0',
     ],
+    category_id: '507f1f77bcf86cd799439036',
   },
   {
     _id: '655102c6018dd03d19e13462',
-    categoryID: '655102c5018dd03d19e13191',
-    name: 'A Watch N Edition',
+    name: 'Apple Watch Nike Edition',
     description:
-      'Designed for athletes, with exclusive N bands and watch faces.',
+      'Designed for athletes, with exclusive Nike bands and watch faces.',
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_655102c6018dd03d19e13462_0_1000w.jpg?alt=media',
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_655102c6018dd03d19e13462_0_2000w.jpg?alt=media',
@@ -3120,13 +3119,13 @@ module.exports = [
       '654fb092f52d84098a2420d2',
       '654fb092f52d84098a2420d5',
     ],
+    category_id: '507f1f77bcf86cd799439036',
   },
   {
     _id: '655102c6018dd03d19e13463',
-    categoryID: '655102c5018dd03d19e13192',
-    name: 'A Watch Hermès',
+    name: 'Apple Watch Hermès',
     description:
-      'A collaboration between A and Hermès, offering luxury bands and unique watch faces.',
+      'A collaboration between Apple and Hermès, offering luxury bands and unique watch faces.',
     images: [
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_655102c6018dd03d19e13463_0_1000w.jpg?alt=media',
       'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/products%2Fproduct_655102c6018dd03d19e13463_0_2000w.jpg?alt=media',
@@ -3145,10 +3144,10 @@ module.exports = [
       '654fb092f52d84098a2420d7',
       '654fb092f52d84098a2420d9',
     ],
+    category_id: '507f1f77bcf86cd799439036',
   },
   {
     _id: '655102c6018dd03d19e13464',
-    categoryID: '655102c5018dd03d19e13193',
     name: 'FitBrace Pulse',
     description: 'Monitor your heart rate and track your daily activity.',
     images: [
@@ -3169,10 +3168,10 @@ module.exports = [
       '654fb092f52d84098a2420de',
       '654fb092f52d84098a2420df',
     ],
+    category_id: '507f1f77bcf86cd799439037',
   },
   {
     _id: '655102c6018dd03d19e13465',
-    categoryID: '655102c5018dd03d19e13194',
     name: 'AquaBand Pro',
     description:
       'Designed for swimmers, with superior water resistance and swim tracking.',
@@ -3194,10 +3193,10 @@ module.exports = [
       '654fb092f52d84098a2420e3',
       '654fb092f52d84098a2420e4',
     ],
+    category_id: '507f1f77bcf86cd799439037',
   },
   {
     _id: '655102c6018dd03d19e13466',
-    categoryID: '655102c5018dd03d19e13195',
     name: 'ZenFit Ultra',
     description: 'Ultra-thin design with advanced health metrics.',
     images: [
@@ -3218,10 +3217,10 @@ module.exports = [
       '654fb092f52d84098a2420e8',
       '654fb092f52d84098a2420e9',
     ],
+    category_id: '507f1f77bcf86cd799439037',
   },
   {
     _id: '655102c6018dd03d19e13467',
-    categoryID: '655102c5018dd03d19e13196',
     name: 'GlowBrace Shine',
     description: 'Illuminated display with sleep and activity tracking.',
     images: [
@@ -3242,10 +3241,10 @@ module.exports = [
       '654fb092f52d84098a2420ec',
       '654fb092f52d84098a2420ed',
     ],
+    category_id: '507f1f77bcf86cd799439037',
   },
   {
     _id: '655102c6018dd03d19e13468',
-    categoryID: '655102c5018dd03d19e13197',
     name: 'NaturaBand Eco',
     description:
       'Made with eco-friendly materials, perfect for the environmentally conscious.',
@@ -3267,5 +3266,6 @@ module.exports = [
       '654fb092f52d84098a2420f2',
       '654fb092f52d84098a2420f3',
     ],
+    category_id: '507f1f77bcf86cd799439037',
   },
 ];

@@ -11,6 +11,7 @@ const Product = require('../../models/product.model');
 const Category = require('../../models/category.model');
 const Property = require('../../models/property.model');
 const Variation = require('../../models/variation.model');
+const ProductItem = require('../../models/productItem.model');
 
 const users = require('./data/users');
 const addresses = require('./data/addresses');
@@ -18,6 +19,7 @@ const categories = require('./data/categories');
 const products = require('./data/products');
 const properties = require('./data/properties');
 const variations = require('./data/variations');
+const productItems = require('./data/productItems');
 
 const connectDB = require('./db');
 
@@ -35,6 +37,7 @@ const importData = async () => {
     await Property.deleteMany();
     await Variation.deleteMany();
     await Product.deleteMany();
+    await ProductItem.deleteMany();
 
     const sampleAddresses = addresses.map((address) => ({
       _id: new mongoose.Types.ObjectId(address._id), // Generate a new ObjectId for each address
@@ -94,9 +97,19 @@ const importData = async () => {
       _id: new mongoose.Types.ObjectId(product._id),
       name: product.name,
       description: product.description,
-      categoryID: new mongoose.Types.ObjectId(product.categoryID),
+      categoryID: new mongoose.Types.ObjectId(product.category_id),
       properties: product.properties,
       images: product.images,
+    }));
+
+    // Get all products from the products array and add the admin user to each product
+    const sampleProductItems = productItems.map((productItem) => ({
+      _id: new mongoose.Types.ObjectId(productItem._id),
+      sku: productItem.sku,
+      qtyInStock: productItem.qty_in_stock,
+      priceNet: productItem.price_net,
+      taxPercentage: productItem.tax_percentage,
+      variations: productItem.variations,
     }));
 
     await User.create(sampleUsers);
@@ -105,6 +118,7 @@ const importData = async () => {
     await Property.insertMany(sampleProperties);
     await Variation.insertMany(sampleVariations);
     await Product.insertMany(sampleProducts);
+    await ProductItem.insertMany(sampleProductItems);
 
     /* await ProductCategory.create(...sampleCategories);
     await Product.create(...sampleProducts); */
@@ -127,6 +141,7 @@ const destroyData = async () => {
     await Property.deleteMany();
     await Variation.deleteMany();
     await Category.deleteMany();
+    await ProductItem.deleteMany();
 
     console.log('Data Destroyed!'.red.inverse);
     process.exit();
