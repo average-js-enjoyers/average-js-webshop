@@ -13,6 +13,7 @@ const Property = require('../../models/property.model');
 const Variation = require('../../models/variation.model');
 const ProductItem = require('../../models/productItem.model');
 const Order = require('../../models/order.model');
+const ShippingMethod = require('../../models/shippingMethod.model');
 
 const users = require('./data/users');
 const addresses = require('./data/addresses');
@@ -22,6 +23,7 @@ const properties = require('./data/properties');
 const variations = require('./data/variations');
 const productItems = require('./data/productItems');
 const orders = require('./data/orders');
+const shippingMethods = require('./data/shippingMethods');
 
 const connectDB = require('./db');
 
@@ -41,6 +43,7 @@ const importData = async () => {
     await Product.deleteMany();
     await ProductItem.deleteMany();
     await Order.deleteMany();
+    await ShippingMethod.deleteMany();
 
     const sampleAddresses = addresses.map((address) => ({
       _id: new mongoose.Types.ObjectId(address._id), // Generate a new ObjectId for each address
@@ -115,6 +118,13 @@ const importData = async () => {
       variations: productItem.variations,
     }));
 
+    const sampleShippingMethods = shippingMethods.map((shippingMethod) => ({
+      _id: new mongoose.Types.ObjectId(shippingMethod._id),
+      name: shippingMethod.name,
+      priceNet: shippingMethod.price_net,
+      taxPercentage: shippingMethod.tax_percentage,
+    }));
+
     const sampleOrders = orders.map((order) => ({
       _id: new mongoose.Types.ObjectId(order._id),
       userID: new mongoose.Types.ObjectId(order.user_id),
@@ -144,6 +154,7 @@ const importData = async () => {
     await Product.insertMany(sampleProducts);
     await ProductItem.insertMany(sampleProductItems);
     await Order.insertMany(sampleOrders);
+    await ShippingMethod.insertMany(sampleShippingMethods);
 
     /* await ProductCategory.create(...sampleCategories);
     await Product.create(...sampleProducts); */
@@ -168,6 +179,7 @@ const destroyData = async () => {
     await Category.deleteMany();
     await ProductItem.deleteMany();
     await Order.deleteMany();
+    await ShippingMethod.deleteMany();
 
     console.log('Data Destroyed!'.red.inverse);
     process.exit();

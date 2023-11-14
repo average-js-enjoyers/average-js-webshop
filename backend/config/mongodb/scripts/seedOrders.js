@@ -6,6 +6,7 @@ const variations = require('../data/variations');
 const users = require('../data/users');
 const addresses = require('../data/addresses');
 const productItems = require('../data/productItems');
+const shippingMethods = require('../data/shippingMethods');
 
 function getRandomDate(startDate, endDate) {
   // Get time values in milliseconds
@@ -71,6 +72,10 @@ function getRandomOrderLines(numOrderLines) {
   return orderLines;
 }
 
+function getRandomShippingMethodID() {
+  return shippingMethods[getRandomInt(0, shippingMethods.length - 1)]._id;
+}
+
 function getTotals(orderLines) {
   let order_total_net = orderLines.reduce((accumulator, orderLine) => {
     return accumulator + orderLine.price_net;
@@ -97,7 +102,7 @@ users.forEach((user) => {
       shipping_address_id: getUsersRandomAddressID(user),
       billing_address_id: getUsersRandomAddressID(user),
       // TODO
-      shipping_method_id: undefined,
+      shipping_method_id: getRandomShippingMethodID(),
       order_lines: getRandomOrderLines(getRandomInt(1, 10)),
       order_status: getRandomOrderStatus(),
     };
