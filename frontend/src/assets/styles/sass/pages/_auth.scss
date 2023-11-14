@@ -23,7 +23,14 @@
 
   @include breakpoint("lg") {
     flex-direction: column;
+
     justify-content: start;
+    @media (orientation: portrait) {
+      @media (min-height: 1200px) {
+        justify-content: space-evenly;
+      }
+    }
+
     align-items: center;
 
     gap: 6rem;
@@ -101,21 +108,29 @@
 
   &__main {
     width: 100%;
+
+    height: 110%;
+    margin-top: -2.5%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 1;
 
-    padding: 1.5rem;
+    padding: 0 1.5rem;
     max-width: 57rem;
 
     @include breakpoint("xl") {
-      margin-left: 3vw;
+      @media (orientation: landscape) {
+        margin-left: 3vw;
+      }
+      padding: 1.5rem;
     }
     @include breakpoint("lg") {
       margin-left: 0;
       padding: 0;
+      height: auto;
+      margin-top: 0;
 
       max-width: 53rem;
     }
@@ -126,6 +141,14 @@
     & .card {
       width: 100%;
       min-height: 50rem;
+
+      /*   box-shadow: none !important;
+      border: none !important;
+      background-color: transparent !important;
+
+      & .card__footer {
+        background-color: transparent !important;
+      } */
 
       @include breakpoint("xl") {
         // There used to be a footer margin fix here. Maybe needed later?

@@ -111,9 +111,10 @@ export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
   });
   const res = await response.json();
 
+  console.log(res, res.token);
   sessionStorage.setItem("accessToken", res.token);
 
-  return res.data.user;
+  return res;
 }
 
 export async function checkEmailExists(email) {
@@ -148,7 +149,7 @@ export async function requestBackendToSendPasswordResetEmail(email) {
   }
 }
 
-export async function sendConfirmationEmailRequest(email) {
+export async function requestConfRegEmail(email) {
   try {
     const response = await fetch("/api/auth/signin/email", {
       method: "POST",
@@ -162,5 +163,31 @@ export async function sendConfirmationEmailRequest(email) {
     return data;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function fetchUserData() {
+  if (!sessionStorage.getItem("accessToken")) return null;
+  if (sessionStorage.getItem("accessToken") === "undefined") return null;
+  if (sessionStorage.getItem("accessToken") === "null") return null;
+  if (sessionStorage.getItem("accessToken").length < 32) return null;
+  try {
+    const response = await fetch("/api/users/me", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+    });
+    const data = await response.json();
+
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    return data.data.user;
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 }

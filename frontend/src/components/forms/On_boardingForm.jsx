@@ -1,9 +1,7 @@
 //src/components/forms/OnboardingForm.jsx
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 
 import { passwordValidationErrors } from "utils/validators";
-import { onboardUser } from "api";
 
 import { FormValidationMessageWrapper } from "components/forms/FormValidationMessage";
 import { set } from "immutable";
@@ -15,10 +13,9 @@ export default function OnboardingForm() {
 
   const [firstName, setFirstName] = useState(authContext.user?.firstName || "");
   const [lastName, setLastName] = useState(authContext.user?.lastName || "");
+  const [email, setEmail] = useState(authContext.user?.emailAddress || "");
 
-  const [email, setEmail] = useState(authContext.user?.emailAddress);
-
-  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const [password, setnonHashedPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
@@ -89,6 +86,12 @@ export default function OnboardingForm() {
     // Set isVisible to true for messages whose text field value can be found in the array of messages returned from isPasswordValid
   }, [password, confirmPassword]);
 
+  useEffect(() => {
+    setEmail(authContext.user?.emailAddress || "");
+    setFirstName(authContext.user?.firstName || "");
+    setLastName(authContext.user?.lastName || "");
+  }, [authContext.user]);
+
   return (
     <>
       <FormValidationMessageWrapper messages={messages} />
@@ -98,13 +101,13 @@ export default function OnboardingForm() {
         onSubmit={(e) => {
           e.preventDefault();
 
-          return onboardUser({
+          /*  return onboardUser({
             firstName: firstName,
             lastName: lastName,
             phoneNumber: phoneNumber,
             password: password,
             passwordConfirm: confirmPassword,
-          });
+          }); */
         }}
       >
         <div>
@@ -112,9 +115,30 @@ export default function OnboardingForm() {
           <input type="email" value={email} disabled />
         </div>
 
+        <div className="control">
+          <label htmlFor="password">Password:</label>
+          <input
+            id="password"
+            type="password"
+            onChange={(e) => setnonHashedPassword(e.target.value)}
+            placeholder="Enter your password here"
+          />
+        </div>
+
+        <div className="control">
+          <label htmlFor="confirmPassword">Confrim password:</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            onChange={(e) => setconfirmPassword(e.target.value)}
+            placeholder="Confirm your password here"
+          />
+        </div>
+
         <div>
           <label htmlFor="firstName">First Name:</label>
           <input
+            id="firstName"
             type="text"
             onChange={(e) => setFirstName(e.target.value)}
             value={firstName}
@@ -125,6 +149,7 @@ export default function OnboardingForm() {
         <div>
           <label htmlFor="lastName">Last Name:</label>
           <input
+            id="lastName"
             type="text"
             onChange={(e) => setLastName(e.target.value)}
             value={lastName}
@@ -136,27 +161,10 @@ export default function OnboardingForm() {
           <label htmlFor="phoneNumber">Phone Number:</label>
           <input
             type="tel"
+            id="phoneNumber"
             onChange={(e) => setPhoneNumber(e.target.value)}
             value={phoneNumber}
             placeholder="Enter your phone number here"
-          />
-        </div>
-
-        <div className="control">
-          <label htmlFor="nonHashedPassword">Password:</label>
-          <input
-            type="password"
-            onChange={(e) => setnonHashedPassword(e.target.value)}
-            placeholder="Enter your password here"
-          />
-        </div>
-
-        <div className="control">
-          <label htmlFor="confirmPassword">Confrim password:</label>
-          <input
-            type="password"
-            onChange={(e) => setconfirmPassword(e.target.value)}
-            placeholder="Confirm your password here"
           />
         </div>
 

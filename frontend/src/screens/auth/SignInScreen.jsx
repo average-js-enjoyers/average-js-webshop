@@ -1,10 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
 
-import { Card, CardBody, CardTitle, CardFooter } from "components/common/Card";
+import {
+  Card,
+  CardHeader,
+  CardLogo,
+  CardBody,
+  CardTitle,
+  CardFooter,
+} from "components/common/Card";
 import StatusMessage from "components/common/StatusMessage";
 import Button from "components/common/Button";
 
 import SignInForm from "components/forms/SignInForm";
+
+import { PersonCheckFill } from "react-bootstrap-icons";
 
 import { useAuth } from "hooks/useAuth";
 
@@ -19,10 +28,14 @@ export default function SignInScreen() {
       {oauthError && <StatusMessage type="danger" message={oauthError} />}
       <Card>
         <CardBody>
-          <CardTitle level="1" textAlign="center">
-            <span className="emoji-logo emoji-logo--display">✨</span> <br />
-            Sign In Now
-          </CardTitle>
+          <CardHeader>
+            <CardLogo>
+              <PersonCheckFill color="var(--secondary-90)" />
+            </CardLogo>
+            <CardTitle level="1" textAlign="center">
+              Sign In Now
+            </CardTitle>
+          </CardHeader>
           <SignInForm />
 
           <p className="mt-3 text-center">

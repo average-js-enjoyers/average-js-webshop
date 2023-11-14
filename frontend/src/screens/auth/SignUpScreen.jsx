@@ -1,19 +1,32 @@
 import { useAuth } from "hooks";
 
 import SignUpForm from "components/forms/SignUpForm";
-import { Card, CardBody, CardTitle, CardFooter } from "components/common/Card";
+import {
+  Card,
+  CardHeader,
+  CardLogo,
+  CardBody,
+  CardTitle,
+  CardFooter,
+} from "components/common/Card";
 import Button from "components/common/Button";
+
+import { PersonPlusFill } from "react-bootstrap-icons";
 
 export default function SignUpScreen() {
   const { signUp, signInWithProvider } = useAuth();
 
   return (
     <Card>
-      <CardBody>
+      <CardHeader>
+        <CardLogo>
+          <PersonPlusFill color="var(--secondary-90)" />
+        </CardLogo>
         <CardTitle level="1" textAlign="center">
-          <span className="emoji-logo emoji-logo--display">🎀</span> <br />
           Sign Up Now
         </CardTitle>
+      </CardHeader>
+      <CardBody>
         <SignUpForm onSignUp={signUp} />
       </CardBody>
       <CardFooter>

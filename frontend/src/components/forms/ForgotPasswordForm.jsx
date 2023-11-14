@@ -4,16 +4,15 @@ import AuthContext from "context/AuthContext";
 import StatusMessage from "components/common/StatusMessage";
 import Button from "components/common/Button";
 
-function ForgotPasswordForm() {
+function ForgotPasswordForm({ className }) {
   const { sendPasswordResetEmail } = useAuth();
-
   const { passwordResetLinkSent, responseData, clearResponseData } =
     useContext(AuthContext);
 
   console.log(responseData);
 
   return (
-    <>
+    <div className={className}>
       {passwordResetLinkSent && (
         <StatusMessage
           type="success"
@@ -45,7 +44,7 @@ function ForgotPasswordForm() {
         </div>
         <Button variant="primary btn-block mt-3">Send Reset Link</Button>
       </form>
-    </>
+    </div>
   );
 }
 
