@@ -10,12 +10,14 @@ const Address = require('../../models/address.model');
 const Product = require('../../models/product.model');
 const Category = require('../../models/category.model');
 const Property = require('../../models/property.model');
+const Variation = require('../../models/variation.model');
 
 const users = require('./data/users');
 const addresses = require('./data/addresses');
 const categories = require('./data/categories');
 const products = require('./data/products');
 const properties = require('./data/properties');
+const variations = require('./data/variations');
 
 const connectDB = require('./db');
 
@@ -31,6 +33,7 @@ const importData = async () => {
 
     await Category.deleteMany();
     await Property.deleteMany();
+    await Variation.deleteMany();
     await Product.deleteMany();
 
     const sampleAddresses = addresses.map((address) => ({
@@ -78,6 +81,14 @@ const importData = async () => {
       categoryID: new mongoose.Types.ObjectId(property.category_id),
     }));
 
+    // Get all categories from the categories array and add the admin user to each category
+    const sampleVariations = variations.map((variation) => ({
+      _id: new mongoose.Types.ObjectId(variation._id),
+      key: variation.key,
+      value: variation.value,
+      categoryID: new mongoose.Types.ObjectId(variation.category_id),
+    }));
+
     // Get all products from the products array and add the admin user to each product
     const sampleProducts = products.map((product) => ({
       _id: new mongoose.Types.ObjectId(product._id),
@@ -92,6 +103,7 @@ const importData = async () => {
     await Address.insertMany(sampleAddresses);
     await Category.insertMany(sampleCategories);
     await Property.insertMany(sampleProperties);
+    await Variation.insertMany(sampleVariations);
     await Product.insertMany(sampleProducts);
 
     /* await ProductCategory.create(...sampleCategories);
@@ -113,6 +125,7 @@ const destroyData = async () => {
 
     await Product.deleteMany();
     await Property.deleteMany();
+    await Variation.deleteMany();
     await Category.deleteMany();
 
     console.log('Data Destroyed!'.red.inverse);
