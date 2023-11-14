@@ -13,9 +13,13 @@ import StatusMessage from "components/common/StatusMessage";
 
 import AuthContext from "context/AuthContext";
 import { EnvelopePaperFill } from "react-bootstrap-icons";
+import Button from "components/common/Button";
+
+import { useAuth } from "hooks";
 
 export default function ConfirmRegistrationScreen() {
   const { confregEmailSent, clearConfregEmailSent } = useContext(AuthContext);
+  const { sendConfRegEmail } = useAuth();
 
   const location = useLocation();
   const signUpSuccess = location.state?.signUpSuccess || false;
@@ -88,7 +92,14 @@ export default function ConfirmRegistrationScreen() {
             Didn't get the email?
           </p>
           <p className="mt-1 text-center">
-            <Link to="/resend-confirmation">Resend my confirmation email!</Link>
+            <Button
+              variant="link btn--compact"
+              onClick={() =>
+                sendConfRegEmail(sessionStorage.getItem("signUpEmail"))
+              }
+            >
+              Resend my confirmation email!
+            </Button>
           </p>
         </CardFooter>
       </Card>

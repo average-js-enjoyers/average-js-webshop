@@ -1,5 +1,7 @@
 // src/contexts/AuthContext.js
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+
+import { fetchUserData } from "api";
 
 const AuthContext = createContext(null);
 
@@ -11,6 +13,20 @@ export const AuthProvider = ({ children }) => {
     passwordResetLinkSent: false,
     confregEmailSent: false,
   });
+
+  useEffect(() => {
+    // Fetch user data asynchronously and update the state
+    const loadUserData = async () => {
+      const userData = await fetchUserData();
+      setAuthState((prevState) => ({
+        ...prevState,
+        user: userData,
+        isAuthenticated: !!userData, // Update isAuthenticated based on userData
+      }));
+    };
+
+    loadUserData();
+  }, []);
 
   const setAuthInfo = ({ user }) => {
     setAuthState({ ...authState, isAuthenticated: !!user, user });

@@ -19,10 +19,6 @@ export default function OnboardingScreen() {
   // Put token in session storage
   sessionStorage.setItem("accessToken", token);
 
-  // TODO - Remove token from URL. This will need an extra step of redirecting to /onboard and then to /onboard/:token
-  /*   const navigate = useNavigate();
-    navigate("/onboard", { replace: true }); */
-
   return (
     <Card>
       <CardHeader>

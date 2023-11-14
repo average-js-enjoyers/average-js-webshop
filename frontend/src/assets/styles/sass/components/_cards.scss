@@ -49,7 +49,7 @@
     justify-content: center;
     align-items: center;
 
-    animation: pulsateLogo 10s infinite;
+    box-shadow: 0 0 1rem 0.15rem var(--secondary-50);
 
     & svg {
       width: 100%;

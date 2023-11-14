@@ -18,6 +18,20 @@ const QuickSignUpForm = ({ onSignUp }) => {
   const [emailValid, setEmailValid] = useState(true);
   const [emailTaken, setEmailTaken] = useState(false);
 
+  const [signUpClicked, setSignUpClicked] = useState(false);
+
+  useEffect(() => {
+    // Only run the timer if signUpClicked is true
+    if (signUpClicked) {
+      const timer = setTimeout(() => {
+        setSignUpClicked(false);
+      }, 3000); // 3000 milliseconds = 3 seconds
+
+      // Clear the timer if the component unmounts before the timer finishes
+      return () => clearTimeout(timer);
+    }
+  }, [signUpClicked]);
+
   const signUpEnabled =
     emailValid && !emailTaken && privacyPolicyBox && termsAndServicesBox;
 
@@ -102,6 +116,10 @@ const QuickSignUpForm = ({ onSignUp }) => {
       onSubmit={(e) => {
         e.preventDefault();
 
+        if (!signUpEnabled) return;
+
+        setSignUpClicked(true);
+
         return onSignUp({
           emailAddress: email,
         });
@@ -142,12 +160,19 @@ const QuickSignUpForm = ({ onSignUp }) => {
         <label htmlFor="privacyPolicy">I accept the Privacy Policy</label>
       </div>
 
-      <input
-        type="submit"
-        className="btn btn-primary"
-        disabled={!signUpEnabled}
-        value="Sign Up Now!"
-      />
+      {signUpClicked ? (
+        <div
+          className="loader"
+          style={{ alignSelf: "center", marginTop: "1rem" }}
+        ></div>
+      ) : (
+        <input
+          type="submit"
+          className="btn btn-primary"
+          disabled={!signUpEnabled}
+          value="Sign Up Now!"
+        />
+      )}
     </form>
   );
 };

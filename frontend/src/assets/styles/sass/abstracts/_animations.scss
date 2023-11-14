@@ -55,33 +55,6 @@
   }
 }
 
-@keyframes pulsateLogo {
-  0% {
-    box-shadow: 0 0 0 0.15rem var(--secondary-50);
-    transform: scale(1);
-  }
-  5% {
-    box-shadow: 0 0 0 0.15rem var(--secondary-50);
-    transform: scale(1);
-  }
-  45% {
-    box-shadow: 0 0 2rem 0.5rem var(--secondary-10);
-    transform: scale(1.05);
-  }
-  55% {
-    box-shadow: 0 0 1rem 1rem var(--secondary-10);
-    transform: scale(1.05c);
-  }
-  95% {
-    box-shadow: 0 0 0 0.15rem var(--secondary-50);
-    transform: scale(1);
-  }
-  100% {
-    box-shadow: 0 0 0 0.15rem var(--secondary-50);
-    transform: scale(1);
-  }
-}
-
 /* Animated routes */
 #routeRootWithAnimations {
   width: 100%;

@@ -175,32 +175,6 @@
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
   }
 }
-@keyframes pulsateLogo {
-  0% {
-    box-shadow: 0 0 0 0.15rem var(--secondary-50);
-    transform: scale(1);
-  }
-  5% {
-    box-shadow: 0 0 0 0.15rem var(--secondary-50);
-    transform: scale(1);
-  }
-  45% {
-    box-shadow: 0 0 2rem 0.5rem var(--secondary-10);
-    transform: scale(1.05);
-  }
-  55% {
-    box-shadow: 0 0 1rem 1rem var(--secondary-10);
-    transform: scale(1.05c);
-  }
-  95% {
-    box-shadow: 0 0 0 0.15rem var(--secondary-50);
-    transform: scale(1);
-  }
-  100% {
-    box-shadow: 0 0 0 0.15rem var(--secondary-50);
-    transform: scale(1);
-  }
-}
 /* Animated routes */
 #routeRootWithAnimations {
   width: 100%;
@@ -1224,17 +1198,20 @@ strong {
   border: none;
   box-shadow: none;
   color: var(--primary-50);
+  font-weight: 500;
+  font-size: 1.4rem;
+  letter-spacing: 0.05rem;
+  transition: all 0.2s ease-in-out;
 }
 .btn-link:hover {
   box-shadow: none;
-  color: var(--primary-70);
-  text-decoration: underline;
-  text-decoration-thickness: 0.15rem;
-  text-underline-offset: 0.3rem;
+  color: var(--primary-40);
+  transform: none;
 }
 .btn-link:active {
   box-shadow: none;
-  color: var(--primary-90);
+  color: var(--primary-70);
+  transform: none;
 }
 
 .status-message {
@@ -1325,7 +1302,7 @@ strong {
   font-size: var(--default-font-size);
   padding: 0.5rem;
   padding-left: 1.5rem;
-  margin: 1rem 0 0;
+  margin: 0;
   border-radius: 10rem;
   border-top-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
@@ -1340,6 +1317,10 @@ strong {
   /* max-height: 8rem;
   overflow: hidden; */
   transition: all 0.3s ease-in-out;
+  margin-bottom: 3rem;
+}
+.form-validation-message:not(:first-child) {
+  margin-top: 1rem;
 }
 .form-validation-message span {
   font-size: 1.3rem;
@@ -1820,7 +1801,7 @@ input[type=checkbox]:focus + label:before {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: pulsateLogo 10s infinite;
+  box-shadow: 0 0 1rem 0.15rem var(--secondary-50);
 }
 .card .card__logo svg {
   width: 100%;
