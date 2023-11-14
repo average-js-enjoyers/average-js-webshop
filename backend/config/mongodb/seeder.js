@@ -80,10 +80,12 @@ const importData = async () => {
 
     // Get all products from the products array and add the admin user to each product
     const sampleProducts = products.map((product) => ({
+      _id: new mongoose.Types.ObjectId(product._id),
       name: product.name,
       description: product.description,
       categoryID: new mongoose.Types.ObjectId(product.categoryID),
       properties: product.properties,
+      images: product.images,
     }));
 
     await User.create(sampleUsers);
