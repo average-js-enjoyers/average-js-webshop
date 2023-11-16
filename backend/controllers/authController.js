@@ -72,7 +72,7 @@ exports.confirmEmail = catchAsync(async (req, res, next) => {
   jwtHandler.createSendToken(user, 200, res);
 });
 
-exports.requestEmailLogin = catchAsync(async (req, res, next) => {
+exports.requestEmailSignin = catchAsync(async (req, res, next) => {
   /*  
   // #swagger.tags = ['Auth']
    #swagger.parameters['body'] = {
@@ -107,8 +107,6 @@ exports.requestEmailLogin = catchAsync(async (req, res, next) => {
 
   // 3) Send it to user's email
   const confirmURL = `${confirmCallback}/${token}`;
-
-  const message = `Welcome to Average JS Webshop! We are thrilled to have you as a new member of our online community. Thank you for choosing us for your shopping needs. Click here to confirm your email: ${confirmURL}`;
 
   const template = await fs.readFile(
     path.join('./templates/email', 'confreg.html'),
@@ -160,7 +158,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.login = catchAsync(async (req, res, next) => {
+exports.signin = catchAsync(async (req, res, next) => {
   /*  
   // #swagger.tags = ['Auth']
   #swagger.parameters['body'] = {
@@ -189,10 +187,10 @@ exports.login = catchAsync(async (req, res, next) => {
   jwtHandler.createSendToken(user, 200, res);
 });
 
-exports.googleLogin = catchAsync(async (req, res, next) => {
+exports.googleSignin = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
-  const accessToken = req.params.token;
+  const accessToken = req.body.token;
 
   const oAuth2Client = new google.auth.OAuth2();
 
@@ -229,10 +227,10 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
   jwtHandler.createSendToken(user, 200, res);
 });
 
-exports.facebookLogin = catchAsync(async (req, res, next) => {
+exports.facebookSignin = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']
 
-  const accessToken = req.params.token;
+  const accessToken = req.body.token;
 
   const apiUrl = `https://graph.facebook.com/v18.0/me?fields=id,email,first_name,last_name&access_token=${accessToken}`;
 
@@ -341,13 +339,19 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 3) Send it to user's email
   const resetURL = `${resetCallback}/${resetToken}`;
 
-  const message = `Forgot your password? Click here to reset your password: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
+  const template = await fs.readFile(
+    path.join('./templates/email', 'forgpass.html'),
+    'utf8',
+  );
+  const filledTemplate = template
+    .replace('{{EMAIL}}', user.emailAddress)
+    .replace('{{RESET-URL}}', resetURL);
 
   try {
     await sendEmail({
       emailAddress: user.emailAddress,
       subject: 'Your password reset token (valid for 10 min)',
-      message,
+      message: filledTemplate,
     });
 
     res.status(200).json({
@@ -372,7 +376,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on the token
   const hashedToken = crypto
     .createHash('sha256')
-    .update(req.params.token)
+    .update(req.body.token)
     .digest('hex');
 
   const user = await User.findOne({

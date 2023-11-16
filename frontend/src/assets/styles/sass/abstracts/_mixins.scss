@@ -30,74 +30,66 @@ $breakpoints: (
     @warn "Invalid breakpoint name '#{$name}'";
   }
 }
+
 @mixin responsive-font-size {
   // Default font size for the smallest screens
   font-size: 62.5%;
 
-  // Max Width Queries
   $queries: (
     "xs": (
-      0,
-      62.5%,
-      // Font size for low DPR on xs
-      60%,
-      // Font size for high DPR on xs
+      map-get($breakpoints, "xs"),
+      61%,
+      // Slightly larger for better readability on very small screens
+      68%,
+      // High DPR: xs
     ),
     "sm": (
-      576px,
-      62.5%,
-      // Font size for low DPR on sm
-      58%,
-      // Font size for high DPR on sm
+      map-get($breakpoints, "sm"),
+      60%,
+      57%,
+      // High DPR: sm
     ),
     "md": (
-      768px,
-      62.5%,
-      // Font size for low DPR on md
-      56%,
-      // Font size for high DPR on md
+      map-get($breakpoints, "md"),
+      62%,
+      58%,
+      // High DPR: md
     ),
     "lg": (
-      992px,
-      62.5%,
-      // Font size for low DPR on lg
-      54%,
-      // Font size for high DPR on lg
+      map-get($breakpoints, "lg"),
+      61.5%,
+      56.5%,
+      // High DPR: lg
     ),
     "xl": (
-      1200px,
-      62.5%,
-      // Font size for low DPR on xl
-      52%,
-      // Font size for high DPR on xl
+      map-get($breakpoints, "xl"),
+      61%,
+      55%,
+      // High DPR: xl
     ),
     "2xl": (
-      1440px,
-      62.5%,
-      // Font size for low DPR on 2xl
-      50%,
-      // Font size for high DPR on 2xl
+      map-get($breakpoints, "2xl"),
+      60.5%,
+      53.5%,
+      // High DPR: 2xl
     ),
     "3xl": (
-      1600px,
-      62.5%,
-      // Font size for low DPR on 3xl
-      50%,
-      // Font size for high DPR on 3xl
+      map-get($breakpoints, "3xl"),
+      60%,
+      52%,
+      // High DPR: 3xl
     ),
     "4xl": (
-      1900px,
-      62.5%,
-      // Font size for low DPR on 4xl
-      46%,
-      // Font size for high DPR on 4xl
+      map-get($breakpoints, "4xl"),
+      59.5%,
+      50.5%,
+      // High DPR: 4xl
     ),
     "5xl": (
-      2200px,
-      62.5%,
-      // Font size for low DPR on 5xl
-      44%,
-      // Font size for high DPR on 5xl
+      map-get($breakpoints, "5xl"),
+      59%,
+      49%,
+      // High DPR: 5xl
     ),
   );
 
@@ -175,6 +167,14 @@ $breakpoints: (
   @include breakpoint("sm") {
     padding-left: if($padding-horizontal, $padding-horizontal, 1rem);
     padding-right: if($padding-horizontal, $padding-horizontal, 1rem);
+  }
+  @media (max-width: 420px) {
+    padding-left: if($padding-horizontal, $padding-horizontal, 0.75rem);
+    padding-right: if($padding-horizontal, $padding-horizontal, 0.75rem);
+  }
+  @media (max-width: 350px) {
+    padding-left: if($padding-horizontal, $padding-horizontal, 0.5rem);
+    padding-right: if($padding-horizontal, $padding-horizontal, 0.5rem);
   }
 }
 

@@ -22,6 +22,7 @@ import HomeScreen from "screens/HomeScreen";
 
 import AuthScreen from "screens/auth/AuthScreens";
 import OAuthCallbackScreen from "screens/auth/OAuthCallbackScreen";
+import InternalAuthCallbackScreen from "screens/auth/InternalAuthCallbackScreen";
 
 import ViewProfileScreen from "screens/profile/ViewProfileScreen";
 import EditProfileScreen from "screens/profile/EditProfileScreen";
@@ -61,7 +62,7 @@ const router = createBrowserRouter(
         path="/confirm-registration"
         element={<AuthScreen route="confirm-registration" />}
       />
-      <Route path="/onboard" element={<AuthScreen route="onboard" />} />
+      <Route path="/onboard/:token" element={<AuthScreen route="onboard" />} />
       <Route path="/signin" element={<AuthScreen route="signin" />} />
       <Route path="/admin-signin" element={<AuthScreen route="admin-signin" />} />
       <Route
@@ -69,6 +70,7 @@ const router = createBrowserRouter(
         element={<AuthScreen route="forgot-password" />}
       />
 
+      <Route path="/auth/internal" element={<InternalAuthCallbackScreen />} />
       <Route
         path="/oauth/google"
         element={<OAuthCallbackScreen provider="google" />}
@@ -77,7 +79,11 @@ const router = createBrowserRouter(
         path="/oauth/facebook"
         element={<OAuthCallbackScreen provider="facebook" />}
       />
-      
+      <Route
+        path="/forgot-password"
+        element={<AuthScreen route="forgot-password" />}
+      />
+
       <Route path="*" element={<NotFoundScreen />} />
 
       {/* For testing emails: */}

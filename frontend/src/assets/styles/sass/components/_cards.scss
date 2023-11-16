@@ -14,11 +14,57 @@
     box-shadow: var(--dropshadow-muted--hover);
   }
 
+  .card__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 3rem 4.5rem 0;
+    background-color: var(--grayscale-0);
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+
+    @include breakpoint("lg") {
+      padding: 3rem 3rem 0;
+    }
+
+    @include breakpoint("md") {
+      padding: 3rem 1.5rem 0;
+    }
+
+    @include breakpoint("sm") {
+      padding: 1.5rem 1rem 0;
+    }
+  }
+
+  .card__logo {
+    align-self: center;
+    width: 7.5rem;
+    height: 7.5rem;
+    padding: 1.5rem;
+    border-radius: 100rem;
+    background-color: var(--grayscale-0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 0 1rem 0.15rem var(--secondary-50);
+
+    & svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   .card__title {
     // Title styles here
   }
 
   .card__body {
+    display: flex;
+    flex-direction: column;
+
     padding: 4.5rem;
     background-color: var(--grayscale-0);
     height: 100%;

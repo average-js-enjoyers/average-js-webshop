@@ -8,11 +8,11 @@ const router = express.Router();
 
 router.use(authController.protect);
 
-router.post('/me/onboard', userValidator.onboard, userController.onboard);
+router.get('/me', userController.getUser);
+router.patch('/me/onboard', userValidator.onboard, userController.onboard);
 
 router.use(userController.checkOnboard);
 
-router.get('/me', userController.getUser);
 router.patch('/me', userValidator.updateMe, userController.updateMe);
 router.delete('/me', userController.deleteMe);
 

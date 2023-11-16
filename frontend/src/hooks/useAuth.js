@@ -12,51 +12,37 @@ import {
 } from "utils/oauthHelpers";
 
 import { fetchUserInfoAndGetNewToken } from "api";
-import { createUser } from "api";
+import {
+  createUser,
+  fetchAccessToken,
+  requestBackendToSendPasswordResetEmail,
+  requestConfRegEmail,
+} from "api";
 
 export const useAuth = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const signIn = useCallback(
+  const signInWithOwnBackend = useCallback(
     async (email, password) => {
-      const user = {
-        emailAddress: email,
-        password: password,
-      };
-
       try {
-        const response = await fetch("/api/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
+        const response = await fetchAccessToken(email, password);
+        authContext.setResponseData(response);
+
+        if (response.error) {
+          throw new Error(response.error.statusCode);
+        }
+
+        authContext.setAuthInfo({
+          user: response.data.user,
         });
-
-        const res = await response.json();
-        const userInfo = res.data.user;
-
-        if (!response.ok) {
-          throw new Error(res.error || "Failed to exchange code for tokens.");
-        }
-
-        authContext.setAuthInfo({ user: userInfo });
-        sessionStorage.setItem("accessToken", res.token);
-
-        // TODO - Implement callback loader sign in screen
-        if (!userInfo.emailConfirmed) {
-          navigate("/onboard", { replace: true });
-        } else {
-          navigate("/", { state: { signInSuccess: true } });
-        }
+        sessionStorage.setItem("accessToken", response.token);
+        navigate("/auth/internal");
       } catch (error) {
-        // Handle any errors that occur during the fetch
-        console.error("Error during signIn:", error);
-        throw error; // Rethrow the error if you want to handle it at a higher level
+        console.error("Error in signInWithOwnBackend.", error);
       }
     },
-    [navigate, authContext /* authContext.setAuthInfo */]
+    [authContext, navigate]
   );
 
   const signInWithProvider = useCallback((provider) => {
@@ -75,21 +61,46 @@ export const useAuth = () => {
   const signInWithProviderToken = useCallback(
     async (provider, accessToken, refreshToken) => {
       try {
-        const userInfo = await fetchUserInfoAndGetNewToken(
+        const response = await fetchUserInfoAndGetNewToken(
           provider,
           accessToken
         );
+        console.log(response);
+        const userInfo = response.data.user;
 
         authContext.setAuthInfo({ user: userInfo });
 
         if (!userInfo.emailConfirmed) {
-          navigate("/onboard", { replace: true });
+          navigate(`/onboard/${response.token}`, { replace: true });
         } else {
           navigate("/", { state: { signInSuccess: true } });
         }
       } catch (error) {
         console.error(`Error during sign-in with ${provider} token:`, error);
-        navigate("/signin", { state: { signInError: error.message } });
+        navigate("/signin", {
+          state: {
+            oauthError: `Error during sign-in with ${provider} token. Hang tight while we fix this!`,
+          },
+        });
+      }
+    },
+    [navigate, authContext]
+  );
+
+  const sendConfRegEmail = useCallback(
+    async (email) => {
+      try {
+        const response = await requestConfRegEmail(email);
+        if (response.error) {
+          authContext.setConfregEmailSent("COULD_NOT_SEND");
+          navigate("/confirm-registration", {});
+          throw new Error(response.error);
+        }
+        authContext.setConfregEmailSent(true);
+        navigate("/confirm-registration", { state: { signUpSuccess: true } });
+      } catch (error) {
+        // handle error
+        console.error(error);
       }
     },
     [navigate, authContext]
@@ -104,13 +115,14 @@ export const useAuth = () => {
         if (data.error) {
           throw new Error(data.error);
         }
-        navigate("/confirm-registration", { state: { signUpSuccess: true } });
+        sessionStorage.setItem("signUpEmail", user.emailAddress);
+        sendConfRegEmail(user.emailAddress);
       } catch (error) {
         // handle error
         console.error(error);
       }
     },
-    [navigate]
+    [sendConfRegEmail]
   );
 
   const signOut = useCallback(() => {
@@ -124,12 +136,30 @@ export const useAuth = () => {
     // window.location.href = 'https://accounts.google.com/Logout';
   }, [navigate, authContext /* authContext.setAuthInfo */]);
 
+  const sendPasswordResetEmail = useCallback(async (email) => {
+    try {
+      const data = await requestBackendToSendPasswordResetEmail(email);
+
+      if (data.error) {
+        authContext.setResponseData(data);
+        throw new Error(data.error);
+      }
+
+      authContext.setPasswordResetLinkSent(true);
+      return data.exists;
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   return {
     ...authContext,
     signUp,
-    signIn,
+    signInWithOwnBackend,
     signInWithProvider,
     signInWithProviderToken,
     signOut,
+    sendPasswordResetEmail,
+    sendConfRegEmail,
   };
 };

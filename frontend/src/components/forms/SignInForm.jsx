@@ -1,51 +1,47 @@
 //src/components/forms/SignInForm.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "hooks/useAuth";
+import AuthContext from "context/AuthContext";
+
+import StatusMessage from "components/common/StatusMessage";
 
 function SignInForm() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { signIn } = useAuth();
+  const { signInWithOwnBackend } = useAuth();
 
   const [email, setEmail] = useState("");
-  const [nonHashedPassword, setnonHashedPassword] = useState("");
+  const [password, setPassword] = useState("");
 
-  const signInError = location.state?.signInError;
-
-  useEffect(() => {
-    // Clear any sign-in error from the location state after it's been handled
-    if (signInError) {
-      // Replace the current entry in the history stack to clear the state
-      navigate(location.pathname, { replace: true, state: {} });
-    }
-  }, [signInError, navigate, location.pathname]);
+  const { responseData, clearResponseData } = useContext(AuthContext);
 
   return (
     <>
-      {signInError && (
-        <div
-          style={{
-            color: "#721c24",
-            backgroundColor: "#f8d7da",
-            borderColor: "#f5c6cb",
-            padding: "0.75rem 1.25rem",
-            marginBottom: "1rem",
-            border: "1px solid transparent",
-            borderRadius: "0.25rem",
-            fontSize: "2rem",
-            lineHeight: 1.5,
-          }}
-        >
-          Error signing in: {signInError}
-        </div>
+      {responseData?.error.statusCode === 401 && (
+        <StatusMessage
+          type="danger"
+          message="Your email or password is incorrect. Please try again."
+          cleanupFunction={() => clearResponseData()}
+        />
       )}
+      {responseData?.error.statusCode !== 401 &&
+        responseData?.error &&
+        responseData !== null && (
+          <StatusMessage
+            type="danger"
+            message={
+              "Something went wrong. We are working on it! (Error code " +
+              responseData?.error.statusCode +
+              ")"
+            }
+            cleanupFunction={() => clearResponseData()}
+          />
+        )}
       <form
         className=""
         onSubmit={(e) => {
           e.preventDefault();
-          signIn(email, nonHashedPassword);
+          signInWithOwnBackend(email, password);
         }}
       >
         <div>
@@ -53,19 +49,15 @@ function SignInForm() {
           <input
             type="email"
             onChange={(e) => setEmail(e.target.value)}
-            name="email"
-            id="email"
             placeholder="Enter your e-mail address here"
           />
         </div>
 
         <div>
-          <label htmlFor="nonHashedPassword">Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
-            onChange={(e) => setnonHashedPassword(e.target.value)}
-            name="nonHashedPassword"
-            id="nonHashedPassword"
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password here"
           />
         </div>
