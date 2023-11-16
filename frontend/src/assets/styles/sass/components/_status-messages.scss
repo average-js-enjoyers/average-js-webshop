@@ -37,8 +37,8 @@
 }
 
 .status-message--danger {
-  background-color: var(--accent-20);
-  border-left: 0.5rem solid var(--accent-50);
+  background-color: lighten(#ffd2dc, 3%);
+  border-left: 0.5rem solid var(--accent-60);
 }
 
 .status-message--warning {

@@ -17,21 +17,21 @@ function SignInForm() {
 
   return (
     <>
-      {responseData?.error.statusCode === 401 && (
+      {responseData?.error?.statusCode === 401 && (
         <StatusMessage
           type="danger"
           message="Your email or password is incorrect. Please try again."
           cleanupFunction={() => clearResponseData()}
         />
       )}
-      {responseData?.error.statusCode !== 401 &&
+      {responseData?.error?.statusCode !== 401 &&
         responseData?.error &&
         responseData !== null && (
           <StatusMessage
             type="danger"
             message={
               "Something went wrong. We are working on it! (Error code " +
-              responseData?.error.statusCode +
+              responseData?.error?.statusCode +
               ")"
             }
             cleanupFunction={() => clearResponseData()}

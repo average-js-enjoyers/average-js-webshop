@@ -3,7 +3,6 @@
 import { useContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "context/AuthContext";
-// import { signInWithApi, signOutFromApi } from "api"; // You'll define these
 import {
   generateRandomStateValue,
   generateCodeChallenge,
@@ -11,12 +10,13 @@ import {
   getAuthUrl,
 } from "utils/oauthHelpers";
 
-import { fetchUserInfoAndGetNewToken } from "api";
+import { fetchUserInfoAndGetNewToken, apiOnboardUser } from "api";
 import {
   createUser,
   fetchAccessToken,
   requestBackendToSendPasswordResetEmail,
   requestConfRegEmail,
+  apiUpdatePassword,
 } from "api";
 
 export const useAuth = () => {
@@ -130,7 +130,8 @@ export const useAuth = () => {
     sessionStorage.removeItem("accessToken");
     authContext.clearAuthInfo();
     // Redirect to the sign-in page or home page
-    navigate("/", { replace: true, state: { signOutSuccess: true } });
+    sessionStorage.setItem("signOutSuccess", true);
+    navigate("/", { replace: true });
 
     // Optionally, sign out from Google too. Uncomment the following line if needed.
     // window.location.href = 'https://accounts.google.com/Logout';
@@ -152,6 +153,70 @@ export const useAuth = () => {
     }
   }, []);
 
+  const onboardUser = useCallback(
+    async (userData, externalAuth) => {
+      try {
+        const response = await apiOnboardUser(userData);
+        if (response.error) {
+          throw new Error(response.error);
+        }
+        if (response.status === "success" && !externalAuth) {
+          const response = await fetchAccessToken(
+            userData.email,
+            userData.password
+          );
+          authContext.setAuthInfo({
+            user: response.data.user,
+          });
+          sessionStorage.removeItem("accessToken");
+          sessionStorage.setItem("accessToken", response.token);
+          sessionStorage.setItem("onboardSuccess", true);
+        }
+        if (response.status === "success" && externalAuth) {
+          authContext.setAuthInfo((prevState) => ({
+            ...prevState, // Spread the previous state
+            user: {
+              ...prevState.user, // Spread the current user object
+              ...userData, // Spread the new user data
+            },
+          }));
+          sessionStorage.setItem("onboardSuccess", true);
+        }
+      } catch (error) {
+        // handle error
+        console.error("ERROR ERROR", error);
+      }
+    },
+    [authContext.user?.emailConfirmed]
+  );
+
+  const resetPassword = useCallback(
+    async (payload) => {
+      try {
+        console.log("resetPassword request", payload);
+        const response = await apiUpdatePassword(payload);
+        authContext.setResponseData(response);
+        if (response.error) {
+          throw new Error(response.error);
+        }
+        if (response.status === "success") {
+          authContext.setAuthInfo({
+            user: response.data.user,
+          });
+          sessionStorage.removeItem("resetPwdToken");
+          sessionStorage.removeItem("accessToken");
+          sessionStorage.setItem("accessToken", response.token);
+          sessionStorage.setItem("pwdResetSuccess", true);
+        }
+        // navigate("/signin", { state: { resetPasswordSuccess: true } });
+      } catch (error) {
+        // handle error
+        console.error(error);
+      }
+    },
+    [navigate]
+  );
+
   return {
     ...authContext,
     signUp,
@@ -161,5 +226,7 @@ export const useAuth = () => {
     signOut,
     sendPasswordResetEmail,
     sendConfRegEmail,
+    onboardUser,
+    resetPassword,
   };
 };
