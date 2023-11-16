@@ -7,7 +7,7 @@ import { useAuth } from "hooks/useAuth";
 function AdminSignInForm() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { signIn } = useAuth();
+  const { signInWithOwnBackend } = useAuth();
 
   const [email, setEmail] = useState("");
   const [nonHashedPassword, setnonHashedPassword] = useState("");
@@ -45,7 +45,7 @@ function AdminSignInForm() {
         className=""
         onSubmit={(e) => {
           e.preventDefault();
-          signIn(email, nonHashedPassword);
+          signInWithOwnBackend(email, nonHashedPassword);
         }}
       >
         <div>
