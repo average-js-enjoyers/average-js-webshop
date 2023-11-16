@@ -7,6 +7,7 @@ import OnboardingScreen from "screens/auth/OnboardingScreen";
 import SignInScreen from "screens/auth/SignInScreen";
 import ForgotPasswordScreen from "screens/auth/ForgotPasswordScreen";
 import ResetPasswordScreen from "screens/auth/ResetPasswordScreen";
+import AdminSignInScreen from "screens/auth/AdminSignInScreen";
 
 function AuthScreen({ route }) {
   let screen;
@@ -16,6 +17,9 @@ function AuthScreen({ route }) {
       break;
     case "onboard":
       screen = <OnboardingScreen />;
+      break;
+    case "admin-signin":
+      screen = <AdminSignInScreen />;
       break;
     case "signup":
       screen = <SignUpScreen />;

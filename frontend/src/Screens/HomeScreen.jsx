@@ -68,6 +68,9 @@ const HomeScreen = () => {
         <Link to="/signin">
           <Button variant="success">Sign In</Button>
         </Link>
+        <Link to="/admin-signin">
+          <Button variant="success">Admin Sign In</Button>
+        </Link>
         <Link to="/onboard/token">
           <Button variant="primary ">Onboarding</Button>
         </Link>

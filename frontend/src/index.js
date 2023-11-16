@@ -68,6 +68,11 @@ const router = createBrowserRouter(
       />
       <Route path="/onboard/:token" element={<AuthScreen route="onboard" />} />
       <Route path="/signin" element={<AuthScreen route="signin" />} />
+      <Route path="/admin-signin" element={<AuthScreen route="admin-signin" />} />
+      <Route
+        path="/forgot-password"
+        element={<AuthScreen route="forgot-password" />}
+      />
 
       <Route path="/auth/internal" element={<InternalAuthCallbackScreen />} />
       <Route
