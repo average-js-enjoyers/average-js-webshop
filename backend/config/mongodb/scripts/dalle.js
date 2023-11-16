@@ -1,6 +1,5 @@
 const { OpenAI } = require('openai');
 const mongoose = require('mongoose');
-const Property = require('../../../models/property.model');
 const Product = require('../../../models/product.model');
 const path = require('path');
 const fs = require('fs');
@@ -10,7 +9,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 mongoose
-  .connect(process.env.MONGO_URI, {})
+  .connect(MONGO_URI, {})
   .then(() => console.log('DB connection successful!'));
 
 const openai = new OpenAI({
@@ -40,13 +39,13 @@ const resolutions = [
 ];
 
 async function create() {
-  const products = await Product.find().populate('properties');
+  const products = await Product.find();
 
   const startIdx = products.findIndex(
-    (product) => product.name === 'A Watch N Edition',
+    (product) => product.name === 'BattleRig Titan',
   );
 
-  for (let i = startIdx; i < products.length; i++) {
+  for (let i = startIdx; i < startIdx + 1; i++) {
     const p = products[i];
     for (let no = 0; no < angles.length; no++) {
       const prompt = `${angles[no]} ${p.name}, ${p.description}`;
@@ -61,7 +60,7 @@ async function create() {
       const b64ImageData = imageResponse.data[0].b64_json;
 
       // Specify the path and filename for saving the image
-      const dir = process.env.IMAGE_SEED_FOLDER;
+      const dir = process.env.SEED_FOLDER;
 
       // Save and resize the image to the local disk
       for (
