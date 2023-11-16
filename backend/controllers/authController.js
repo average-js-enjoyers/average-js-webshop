@@ -9,6 +9,7 @@ const sendEmail = require('../utils/email');
 const jwtHandler = require('../utils/jwtHandler');
 const fs = require('fs/promises');
 const path = require('path');
+const crypto = require('crypto');
 
 exports.getAuthType = catchAsync(async (req, res, next) => {
   // #swagger.tags = ['Auth']

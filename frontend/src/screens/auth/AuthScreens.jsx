@@ -6,6 +6,8 @@ import ConfirmRegistrationScreen from "screens/auth/ConfirmRegistrationScreen";
 import OnboardingScreen from "screens/auth/OnboardingScreen";
 import SignInScreen from "screens/auth/SignInScreen";
 import ForgotPasswordScreen from "screens/auth/ForgotPasswordScreen";
+import ResetPasswordScreen from "screens/auth/ResetPasswordScreen";
+import AdminSignInScreen from "screens/auth/AdminSignInScreen";
 
 function AuthScreen({ route }) {
   let screen;
@@ -16,11 +18,17 @@ function AuthScreen({ route }) {
     case "onboard":
       screen = <OnboardingScreen />;
       break;
+    case "admin-signin":
+      screen = <AdminSignInScreen />;
+      break;
     case "signup":
       screen = <SignUpScreen />;
       break;
     case "forgot-password":
       screen = <ForgotPasswordScreen />;
+      break;
+    case "reset-password":
+      screen = <ResetPasswordScreen />;
       break;
     default:
       screen = <ConfirmRegistrationScreen />;

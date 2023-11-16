@@ -28,3 +28,9 @@ export const passwordValidationErrors = (password) => {
 
   return errors;
 };
+
+// Checks if phone number has at least 11 digits. A plus sign is allowed at the beginning.
+export const isPhoneNumberValid = (phoneNumber) => {
+  const re = /^\+?[0-9]{11,}$/;
+  return re.test(String(phoneNumber));
+};
