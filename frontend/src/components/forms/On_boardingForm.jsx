@@ -1,15 +1,17 @@
 //src/components/forms/OnboardingForm.jsx
 import { useState, useEffect, useContext } from "react";
 
-import { passwordValidationErrors } from "utils/validators";
+import { passwordValidationErrors, isPhoneNumberValid } from "utils/validators";
 
 import { FormValidationMessageWrapper } from "components/forms/FormValidationMessage";
 import { set } from "immutable";
 
 import AuthContext from "context/AuthContext";
+import { useAuth } from "hooks";
 
 export default function OnboardingForm() {
   const authContext = useContext(AuthContext);
+  const { onboardUser } = useAuth();
 
   const [firstName, setFirstName] = useState(authContext.user?.firstName || "");
   const [lastName, setLastName] = useState(authContext.user?.lastName || "");
@@ -17,17 +19,41 @@ export default function OnboardingForm() {
 
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const [password, setnonHashedPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [passwordStrong, setPassWordStrong] = useState(true);
+
+  const [termsAndServicesBox, setTermsAndServicesBox] = useState(
+    authContext.user?.externalAuth ? false : true
+  );
+  const [privacyPolicyBox, setPrivacyPolicyBox] = useState(
+    authContext.user?.externalAuth ? false : true
+  );
+
+  const [passwordWarning, setPasswordWarning] = useState(false);
+  const [passwordLength, setPasswordLength] = useState(false);
+
+  const [noConfPwd, setNoConfPwd] = useState(false);
+
+  const [firstNameWarning, setFirstNameWarning] = useState(false);
+  const [lastNameWarning, setLastNameWarning] = useState(false);
+  const [phoneNumberWarning, setPhoneNumberWarning] = useState(false);
+
+  const handleTermsAndServicesBox = () => {
+    setTermsAndServicesBox(!termsAndServicesBox);
+  };
+
+  const handlePrivacyPolicyBox = () => {
+    setPrivacyPolicyBox(!privacyPolicyBox);
+  };
 
   let messages = [
     {
       id: 1,
       text: "Password must be at least 8 characters long.",
       type: "danger",
-      isVisible: false,
+      isVisible: passwordLength,
     },
     {
       id: 2,
@@ -49,32 +75,83 @@ export default function OnboardingForm() {
     },
     {
       id: 5,
-      text: "Password is strong! 🎉",
-      type: "success",
-      isVisible: passwordStrong,
+      text: "You need to add a valid phone number for order tracking.",
+      type: "danger",
+      isVisible: phoneNumber.length > 8 && !isPhoneNumberValid(phoneNumber),
     },
     {
       id: 6,
       text: "Passwords must match.",
       type: "danger",
-      isVisible: !passwordsMatch && confirmPassword.length > 7,
+      isVisible:
+        ((!passwordsMatch && confirmPassword.length > 7) || noConfPwd) &&
+        !authContext.user?.externalAuth,
     },
     {
       id: 7,
+      text: "You need to accept the Terms and Privacy Policy.",
+      type: "warning",
+      isVisible: !termsAndServicesBox || !privacyPolicyBox,
+    },
+    {
+      id: 8,
+      text: "Please enter a password.",
+      type: "warning",
+      isVisible:
+        password.length === 0 &&
+        passwordWarning &&
+        !authContext.user?.externalAuth,
+    },
+    {
+      id: 9,
+      text: "Please enter your first name.",
+      type: "warning",
+      isVisible: firstName.length === 0 && firstNameWarning,
+    },
+    {
+      id: 10,
+      text: "Please enter your last name.",
+      type: "warning",
+      isVisible: lastName.length === 0 && lastNameWarning,
+    },
+    {
+      id: 11,
+      text: "Please enter a phone number.",
+      type: "warning",
+      isVisible: phoneNumber.length === 0 && phoneNumberWarning,
+    },
+    {
+      id: 12,
+      text: "Password is strong! 🎉",
+      type: "success",
+      isVisible:
+        passwordStrong &&
+        !passwordsMatch &&
+        password.length > 7 &&
+        !authContext.user?.externalAuth,
+    },
+    {
+      id: 13,
       text: "Passwords match! 🎉",
       type: "success",
-      isVisible: passwordsMatch && confirmPassword.length > 7,
+      isVisible:
+        passwordsMatch &&
+        confirmPassword.length > 7 &&
+        !authContext.user?.externalAuth,
     },
   ];
   messages = messages.map((message) => {
-    if (
-      password.length > 4 &&
-      passwordValidationErrors(password).includes(message.text)
-    ) {
-      return set(message, "isVisible", true);
-    } else {
-      return message;
+    if (!authContext.user?.externalAuth) {
+      if (
+        password.length > 4 &&
+        passwordValidationErrors(password).includes(message.text)
+      ) {
+        return set(message, "isVisible", true);
+      } else {
+        return message;
+      }
     }
+    return message;
   });
 
   useEffect(() => {
@@ -97,50 +174,132 @@ export default function OnboardingForm() {
       <FormValidationMessageWrapper messages={messages} />
 
       <form
-        className="SignUpFields"
+        className="onboarding-form"
         onSubmit={(e) => {
           e.preventDefault();
 
-          /*  return onboardUser({
-            firstName: firstName,
-            lastName: lastName,
-            phoneNumber: phoneNumber,
-            password: password,
-            passwordConfirm: confirmPassword,
-          }); */
+          if (!authContext.user?.externalAuth) {
+            if (password.length === 0) {
+              setPasswordWarning(true);
+              return;
+            } else if (password.length < 8) {
+              setPasswordLength(true);
+              return;
+            }
+            if (!passwordsMatch) {
+              setNoConfPwd(true);
+              return;
+            }
+            if (!passwordStrong) return;
+          }
+
+          if (firstName.length === 0) {
+            setFirstNameWarning(true);
+            return;
+          }
+
+          if (lastName.length === 0) {
+            setLastNameWarning(true);
+            return;
+          }
+
+          if (phoneNumber.length === 0) {
+            setPhoneNumberWarning(true);
+            return;
+          }
+          if (phoneNumber.length > 0 && !isPhoneNumberValid(phoneNumber)) {
+            return;
+          }
+
+          if (!privacyPolicyBox || !termsAndServicesBox) return;
+
+          if (!authContext.user?.externalAuth) {
+            const user = {
+              email,
+              firstName,
+              lastName,
+              phoneNumber,
+              password,
+              passwordConfirm: confirmPassword,
+            };
+
+            onboardUser(user, authContext.user?.externalAuth);
+          } else {
+            const user = {
+              email,
+              firstName,
+              lastName,
+              phoneNumber,
+            };
+
+            onboardUser(user, authContext.user?.externalAuth);
+          }
         }}
       >
         <div>
-          <label>Sign Up Email:</label>
+          <label
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+            }}
+          >
+            Email used for Sign Up:
+            <span
+              style={{
+                color: "var(--grayscale-40)",
+              }}
+            >
+              Can be changed later in Settings.
+            </span>
+          </label>
           <input type="email" value={email} disabled />
         </div>
 
-        <div className="control">
-          <label htmlFor="password">Password:</label>
-          <input
-            id="password"
-            type="password"
-            onChange={(e) => setnonHashedPassword(e.target.value)}
-            placeholder="Enter your password here"
-          />
-        </div>
+        {authContext.user?.externalAuth ? (
+          ""
+        ) : (
+          <>
+            <div className="control">
+              <label htmlFor="password">Password:</label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (e.target.value.length > 0) setPasswordWarning(false);
+                  if (e.target.value.length > 7) setPasswordLength(false);
+                }}
+                placeholder="Enter your password here"
+              />
+            </div>
 
-        <div className="control">
-          <label htmlFor="confirmPassword">Confrim password:</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            onChange={(e) => setconfirmPassword(e.target.value)}
-            placeholder="Confirm your password here"
-          />
-        </div>
+            <div className="control">
+              <label htmlFor="confirmPassword">Confirm password:</label>
+              <input
+                id="confirmPassword"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => {
+                  if (e.target.value.length > 0) setNoConfPwd(false);
+                  setconfirmPassword(e.target.value);
+                }}
+                placeholder="Confirm your password here"
+              />
+            </div>
+          </>
+        )}
 
         <div>
           <label htmlFor="firstName">First Name:</label>
           <input
             id="firstName"
             type="text"
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+              if (e.target.value.length > 0) setFirstNameWarning(false);
+            }}
             value={firstName}
             placeholder="Enter your first name here"
           />
@@ -151,7 +310,10 @@ export default function OnboardingForm() {
           <input
             id="lastName"
             type="text"
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) => {
+              setLastName(e.target.value);
+              if (e.target.value.length > 0) setLastNameWarning(false);
+            }}
             value={lastName}
             placeholder="Enter your last name here"
           />
@@ -162,11 +324,46 @@ export default function OnboardingForm() {
           <input
             type="tel"
             id="phoneNumber"
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            onChange={(e) => {
+              setPhoneNumber(e.target.value);
+              if (e.target.value.length > 0) setPhoneNumberWarning(false);
+            }}
             value={phoneNumber}
             placeholder="Enter your phone number here"
           />
         </div>
+
+        {authContext.user?.externalAuth ? (
+          <>
+            <div className="checkbox mt-2 ml-2">
+              <input
+                type="checkbox"
+                checked={termsAndServicesBox}
+                onChange={handleTermsAndServicesBox}
+                name="termsAndServices"
+                id="termsAndServices" // Unique ID for this checkbox
+                className="custom-checkbox" // Class for custom styling
+              />
+              <label htmlFor="termsAndServices">
+                I accept the Terms of Service
+              </label>
+            </div>
+
+            <div className="checkbox mt-1 ml-2">
+              <input
+                type="checkbox"
+                checked={privacyPolicyBox}
+                onChange={handlePrivacyPolicyBox}
+                name="privacyPolicy"
+                id="privacyPolicy" // Unique ID for this checkbox
+                className="custom-checkbox" // Same class for consistent styling
+              />
+              <label htmlFor="privacyPolicy">I accept the Privacy Policy</label>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
 
         <input type="submit" className="btn btn-primary" value="Let's Go!" />
       </form>

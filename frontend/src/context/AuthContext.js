@@ -1,5 +1,6 @@
 // src/contexts/AuthContext.js
 import React, { createContext, useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { fetchUserData } from "api";
 
@@ -7,12 +8,15 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
-    isAuthenticated: false,
+    isAuthenticated: "loading",
     user: null,
     responseData: null, // Added field for response data
     passwordResetLinkSent: false,
     confregEmailSent: false,
   });
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch user data asynchronously and update the state
@@ -26,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     loadUserData();
-  }, []);
+  }, [location.pathname, navigate]);
 
   const setAuthInfo = ({ user }) => {
     setAuthState({ ...authState, isAuthenticated: !!user, user });
@@ -34,6 +38,16 @@ export const AuthProvider = ({ children }) => {
 
   const clearAuthInfo = () => {
     setAuthState({ ...authState, isAuthenticated: false, user: null });
+  };
+
+  const setUser = (user) => {
+    setAuthState((prevState) => ({
+      ...prevState,
+      user: {
+        ...prevState.user,
+        ...user,
+      },
+    }));
   };
 
   // New function to set response data
@@ -66,10 +80,12 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         ...authState,
+        setUser,
         setAuthInfo,
+        setAuthState,
         clearAuthInfo,
-        setResponseData, // Adding the new function to context
-        clearResponseData, // Adding the new function to context
+        setResponseData,
+        clearResponseData,
         setPasswordResetLinkSent,
         clearPasswordResetLinkSent,
         setConfregEmailSent,

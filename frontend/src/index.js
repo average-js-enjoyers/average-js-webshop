@@ -34,6 +34,8 @@ import ErrorScreen from "screens/error/ErrorScreen";
 
 import EmailTestScreen from "screens/EmailTestScreen";
 
+import ProtectedRoute from "components/routes/ProtectedRoute";
+
 // STYLES
 
 import "assets/styles/css/index.css";
@@ -51,8 +53,10 @@ const router = createBrowserRouter(
     >
       <Route element={<MainLayout />}>
         <Route index element={<HomeScreen />} />
-        <Route path="/profile/edit" element={<EditProfileScreen />} />
-        <Route path="/profile" element={<ViewProfileScreen />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile/edit" element={<EditProfileScreen />} />
+          <Route path="/profile" element={<ViewProfileScreen />} />
+        </Route>
 
         <Route path="/privacy-policy" element={<PrivacyPolicyScreen />} />
       </Route>
@@ -82,6 +86,10 @@ const router = createBrowserRouter(
       <Route
         path="/forgot-password"
         element={<AuthScreen route="forgot-password" />}
+      />
+      <Route
+        path="/reset-password/:token"
+        element={<AuthScreen route="reset-password" />}
       />
 
       <Route path="*" element={<NotFoundScreen />} />

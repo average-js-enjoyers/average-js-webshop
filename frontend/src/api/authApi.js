@@ -23,12 +23,13 @@ export async function createUser(user) {
 }
 
 //Need to find the user somehow
-export async function onboardUser(user) {
+export async function apiOnboardUser(user) {
   try {
     const response = await fetch("/api/users/me/onboard", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(user),
     });
@@ -135,12 +136,13 @@ export async function checkEmailExists(email) {
 
 export async function requestBackendToSendPasswordResetEmail(email) {
   try {
-    const response = await fetch("/api/auth/password-reset", {
+    const response = await fetch("/api/auth/forgotPassword", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Reset-URL": "http://localhost:3000/reset-password",
       },
-      body: JSON.stringify(email),
+      body: JSON.stringify({ emailAddress: email }),
     });
     const data = await response.json();
     return data;
@@ -186,6 +188,27 @@ export async function fetchUserData() {
     }
 
     return data.data.user;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export async function apiUpdatePassword(payload) {
+  try {
+    const response = await fetch("/api/auth/resetPassword", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      // This will handle HTTP errors like 404 or 500
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error(error);
     return null;

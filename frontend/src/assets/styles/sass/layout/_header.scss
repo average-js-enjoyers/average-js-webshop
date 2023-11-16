@@ -94,7 +94,7 @@
   }
 
   &__icon-text {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     line-height: 2.4rem;
     font-weight: 500;
     letter-spacing: 0.05rem;
@@ -116,7 +116,7 @@
   }
   &__bot {
     z-index: 0;
-    height: 3rem;
+    height: 4rem;
     background-color: var(--primary-80);
 
     @include breakpoint("lg") {
