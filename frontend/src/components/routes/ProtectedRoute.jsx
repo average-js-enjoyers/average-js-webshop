@@ -6,7 +6,7 @@ import AuthContext from "context/AuthContext";
 const ProtectedRoute = () => {
   const { isAuthenticated } = useContext(AuthContext);
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
+  return isAuthenticated === true ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default ProtectedRoute;
