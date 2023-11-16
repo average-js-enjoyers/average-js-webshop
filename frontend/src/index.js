@@ -63,6 +63,7 @@ const router = createBrowserRouter(
       />
       <Route path="/onboard" element={<AuthScreen route="onboard" />} />
       <Route path="/signin" element={<AuthScreen route="signin" />} />
+      <Route path="/admin-signin" element={<AuthScreen route="admin-signin" />} />
       <Route
         path="/forgot-password"
         element={<AuthScreen route="forgot-password" />}
@@ -76,7 +77,7 @@ const router = createBrowserRouter(
         path="/oauth/facebook"
         element={<OAuthCallbackScreen provider="facebook" />}
       />
-
+      
       <Route path="*" element={<NotFoundScreen />} />
 
       {/* For testing emails: */}

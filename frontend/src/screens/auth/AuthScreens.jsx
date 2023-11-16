@@ -9,6 +9,8 @@ import SignUpForm from "components/forms/SignUpForm";
 import OnboardingForm from "components/forms/OnboardingForm";
 
 import SignInForm from "components/forms/SignInForm";
+
+import AdminSignInForm from "components/forms/AdminSignInForm";
 // import { signIn } from "api";
 
 // import { useAuth } from "context/AuthContext";
@@ -22,6 +24,9 @@ function AuthScreen({ route }) {
       break;
     case "onboard":
       screen = <OnboardScreen />;
+      break;
+    case "admin-signin":
+      screen = <AdminSignInScreen />;
       break;
     case "signup":
       screen = <SignUpScreen />;
@@ -158,6 +163,19 @@ function OnboardScreen() {
           <strong>You can start shopping right away!</strong>
         </p>
       </CardFooter>
+    </Card>
+  );
+}
+
+function AdminSignInScreen() {
+  return (
+    <Card>
+      <CardBody>
+        <CardTitle level="1" textAlign="center">
+          Admin Sign In
+        </CardTitle>
+        <AdminSignInForm />
+      </CardBody>
     </Card>
   );
 }

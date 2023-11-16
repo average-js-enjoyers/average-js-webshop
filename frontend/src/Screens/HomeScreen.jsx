@@ -31,12 +31,17 @@ const HomeScreen = () => {
         />
       )}
 
+
+
       <nav style={{ display: "flex", justifyContent: "space-evenly" }}>
         <Link to="/signup">
           <Button variant="secondary btn--compact">Sign Up</Button>
         </Link>
         <Link to="/signin">
           <Button variant="outline-primary btn--compact">Sign In</Button>
+        </Link>
+        <Link to="/admin-signin">
+          <Button variant="outline-primary btn--compact">Admin Sign In</Button>
         </Link>
         <Link to="/onboard">
           <Button variant="outline-warning btn--compact">Onboarding</Button>
