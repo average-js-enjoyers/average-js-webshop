@@ -48,8 +48,8 @@
 }
 
 .form-validation-message--danger {
-  background-color: var(--accent-10);
-  border-left: 0.5rem solid var(--accent-50);
+  background-color: lighten(#ffd2dc, 4%);
+  border-left: 0.5rem solid var(--accent-60);
 }
 
 .form-validation-message--warning {

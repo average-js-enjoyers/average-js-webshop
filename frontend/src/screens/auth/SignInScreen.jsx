@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import {
   Card,
@@ -14,11 +14,21 @@ import OAuthButtons from "components/common/OAuthButtons";
 import SignInForm from "components/forms/SignInForm";
 
 import { PersonCheckFill } from "react-bootstrap-icons";
+import { useAuth } from "hooks";
+import { useEffect } from "react";
 
 export default function SignInScreen() {
   const location = useLocation();
 
   const oauthError = location.state?.oauthError || null;
+
+  const authContext = useAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (authContext.isAuthenticated) {
+      navigate("/");
+    }
+  }, [authContext, navigate]);
 
   return (
     <>

@@ -3,17 +3,22 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 // import { useAuth } from "context/AuthContext";
-import { useAuth } from "hooks/useAuth";
+import { useAuth } from "hooks";
+import { fetchUserData } from "api";
 
 import Button from "components/common/Button";
 import StatusMessage from "components/common/StatusMessage";
 
 const HomeScreen = () => {
-  const { isAuthenticated, user, signIn, signOut } = useAuth();
+  const { signOut, isAuthenticated } = useAuth();
 
   // Check for the navigation state
   const location = useLocation();
-  const { signInSuccess, signOutSuccess } = location.state || {};
+  const { signInSuccess } = location.state || {};
+
+  const signOutSuccess = sessionStorage.getItem("signOutSuccess");
+  const onboardSuccess = sessionStorage.getItem("onboardSuccess");
+  const pwdResetSuccess = sessionStorage.getItem("pwdResetSuccess");
 
   return (
     <div className="home-screen">
@@ -26,8 +31,25 @@ const HomeScreen = () => {
 
       {signOutSuccess && (
         <StatusMessage
-          type="info"
+          type="success"
           message="You have signed out successfully. See you soon!"
+          cleanupFunction={() => sessionStorage.removeItem("signOutSuccess")}
+        />
+      )}
+
+      {onboardSuccess && (
+        <StatusMessage
+          type="success"
+          message="You have successfully onboarded. Welcome to the Shop!"
+          cleanupFunction={() => sessionStorage.removeItem("onboardSuccess")}
+        />
+      )}
+
+      {pwdResetSuccess && (
+        <StatusMessage
+          type="success"
+          message="You have changed your password and are now signed in. Welcome to the Shop!"
+          cleanupFunction={() => sessionStorage.removeItem("pwdResetSuccess")}
         />
       )}
 
@@ -37,7 +59,6 @@ const HomeScreen = () => {
           display: "flex",
           justifyContent: "space-evenly",
           flexWrap: "wrap",
-          gap: "1.5rem",
           gap: "1rem",
         }}
       >
@@ -57,9 +78,12 @@ const HomeScreen = () => {
         <Link to="/profile/edit">
           <Button variant="outline-info ">Edit Profile</Button>
         </Link>
-        <Button variant="outline-danger " onClick={signOut}>
-          Sign Out
-        </Button>
+
+        {isAuthenticated && (
+          <Button variant="outline-danger " onClick={signOut}>
+            Sign Out
+          </Button>
+        )}
       </nav>
       <div
         className="mt-6"

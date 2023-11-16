@@ -1345,8 +1345,8 @@ strong {
 }
 
 .status-message--danger {
-  background-color: var(--accent-20);
-  border-left: 0.5rem solid var(--accent-50);
+  background-color: #ffe1e8;
+  border-left: 0.5rem solid var(--accent-60);
 }
 
 .status-message--warning {
@@ -1439,8 +1439,8 @@ strong {
 }
 
 .form-validation-message--danger {
-  background-color: var(--accent-10);
-  border-left: 0.5rem solid var(--accent-50);
+  background-color: #ffe6ec;
+  border-left: 0.5rem solid var(--accent-60);
 }
 
 .form-validation-message--warning {
