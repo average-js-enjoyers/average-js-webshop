@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import ProfileScreen from "screens/profile/ProfileScreen";
 import Button from "components/common/Button";
 
-const ViewProfileScreen = () => {
+export default function ProfileDashboardScreen() {
   return (
     <ProfileScreen
       activeScreen="/profile"
@@ -19,8 +19,8 @@ const ViewProfileScreen = () => {
       subtitle="Check out and change anything about you: personal details,
     addresses, favorites and more."
     >
-      <div className="profile-cards-container">
-        <Card className={"user-detail-summary"} dropShade={true} deco={true}>
+      <div className="profile-dashboard">
+        <Card className={"profile-summary"} dropShade={true} deco={true}>
           <Button
             variant="outline-light btn--compact btn--muted"
             className="profile-edit-button"
@@ -34,7 +34,7 @@ const ViewProfileScreen = () => {
           </Button>
           <CardHeader align="start">
             <CardTitle
-              className={"user-detail-summary__title"}
+              className={"profile-summary__title"}
               level="3"
               textAlign="left"
             >
@@ -42,57 +42,56 @@ const ViewProfileScreen = () => {
             </CardTitle>
           </CardHeader>
           <CardBody>
-            <div className="user-detail-summary__list">
-              <div className="user-detail-summary__item">
-                <p className="user-detail-summary__label">First Name</p>
-                <p className="user-detail-summary__value">Márton</p>
+            <div className="profile-summary__list">
+              <div className="profile-summary__item">
+                <p className="profile-summary__label">First Name</p>
+                <p className="profile-summary__value">Márton</p>
               </div>
-              <div className="user-detail-summary__item">
-                <p className="user-detail-summary__label">Last Name</p>
-                <p className="user-detail-summary__value">Kiss G.</p>
+              <div className="profile-summary__item">
+                <p className="profile-summary__label">Last Name</p>
+                <p className="profile-summary__value">Kiss G.</p>
               </div>
-              <div className="user-detail-summary__item">
-                <p className="user-detail-summary__label">Password</p>
+              <div className="profile-summary__item">
+                <p className="profile-summary__label">Password</p>
                 <Link
                   to="/profile/edit"
-                  className="user-detail-summary__value user-detail-summary__value--link"
+                  className="profile-summary__value profile-summary__value--link"
                 >
                   Change Password Here
                 </Link>
               </div>
-              <div className="user-detail-summary__item">
-                <p className="user-detail-summary__label">Phone Number</p>
-                <p className="user-detail-summary__value">+36 30 420 69 69</p>
+              <div className="profile-summary__item">
+                <p className="profile-summary__label">Phone Number</p>
+                <p className="profile-summary__value">+36 30 420 69 69</p>
               </div>
-              <div className="user-detail-summary__item">
-                <p className="user-detail-summary__label">Email</p>
-                <p className="user-detail-summary__value">
-                  teker.marton@gmail.com
-                </p>
+              <div className="profile-summary__item">
+                <p className="profile-summary__label">Email</p>
+                <p className="profile-summary__value">theshade42@gmail.com</p>
               </div>
             </div>
           </CardBody>
+          <CardFooter></CardFooter>
         </Card>
-        <div className="shipping-billing-container">
-          <Card className={"address-list-summary"} dropShade={true} deco={true}>
+        <div className="primary-addresses-container">
+          <Card className={"primary-address-card"} dropShade={true} deco={true}>
             <CardHeader align="start">
               <CardTitle level="3" textAlign="left">
-                <strong>Shipping</strong> Addresses
+                <strong>Shipping</strong> Address
               </CardTitle>
             </CardHeader>
             <CardBody>
-              <div className="address-list-summary__item">
-                <div className="badge badge-success">Active</div>
-                <p className="address-list-summary__address-name">
+              <div className="primary-address-card__item">
+                <div className="badge badge-primary">Primary</div>
+                <p className="primary-address-card__address-name">
                   Cube Base HQ
                 </p>
-                <p className="address-list-summary__street">
+                <p className="primary-address-card__street">
                   Csók István tér 420.
                 </p>
-                <p className="address-list-summary__city">
+                <p className="primary-address-card__city">
                   2483 Gárdony, HUNGARY
                 </p>
-                <p className="address-list-summary__phone-number">
+                <p className="primary-address-card__phone-number">
                   +36 30 420 69 69
                 </p>
               </div>
@@ -111,25 +110,25 @@ const ViewProfileScreen = () => {
               </Button>
             </CardFooter>
           </Card>
-          <Card className={"address-list-summary"} dropShade={true} deco={true}>
+          <Card className={"primary-address-card"} dropShade={true} deco={true}>
             <CardHeader align="start">
               <CardTitle level="3" textAlign="left">
-                <strong>Billing</strong> Addresses
+                <strong>Billing</strong> Address
               </CardTitle>
             </CardHeader>
             <CardBody>
-              <div className="address-list-summary__item">
-                <div className="badge badge-success">Active</div>
-                <p className="address-list-summary__address-name">
+              <div className="primary-address-card__item">
+                <div className="badge badge-primary">Primary</div>
+                <p className="primary-address-card__address-name">
                   Cube Base HQ
                 </p>
-                <p className="address-list-summary__street">
+                <p className="primary-address-card__street">
                   Csók István tér 420.
                 </p>
-                <p className="address-list-summary__city">
+                <p className="primary-address-card__city">
                   2483 Gárdony, HUNGARY
                 </p>
-                <p className="address-list-summary__phone-number">
+                <p className="primary-address-card__phone-number">
                   +36 30 420 69 69
                 </p>
               </div>
@@ -168,6 +167,4 @@ const ViewProfileScreen = () => {
       </div>
     </ProfileScreen>
   );
-};
-
-export default ViewProfileScreen;
+}

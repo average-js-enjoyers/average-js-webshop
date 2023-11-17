@@ -1,7 +1,7 @@
 import ProfileScreen from "screens/profile/ProfileScreen";
 import EditProfileForm from "components/forms/EditProfileForm";
 
-export default function EditProfileScreen() {
+export default function ProfileEditScreen() {
   return (
     <ProfileScreen
       activeScreen="/profile/edit"

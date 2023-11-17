@@ -1,0 +1,148 @@
+.profile-dashboard {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 3rem;
+
+  .profile-summary {
+    position: relative;
+
+    & .card__footer {
+      display: none;
+    }
+    @include breakpoint("sm") {
+      & .card__footer {
+        display: block;
+        height: 7.5rem;
+      }
+    }
+
+    .btn-outline-light {
+      position: absolute;
+      top: 3rem;
+      right: 3rem;
+
+      @include breakpoint("md") {
+        right: 1.5rem;
+      }
+      @include breakpoint("sm") {
+        top: auto;
+        right: auto;
+        bottom: 1.5rem;
+        left: 3rem;
+      }
+    }
+
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+
+      overflow: hidden;
+    }
+
+    &__item {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      @include breakpoint("md") {
+        width: 48%;
+      }
+    }
+
+    &__label {
+      font-size: 1.45rem;
+      letter-spacing: 0.05rem;
+      font-weight: 700;
+      color: var(--primary-80);
+    }
+
+    &__value {
+      font-size: 1.65rem;
+      letter-spacing: 0.05rem;
+      font-weight: 400;
+      padding-left: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 23rem;
+
+      &--link {
+        font-weight: 500;
+        font-size: 1.5rem;
+        letter-spacing: 0.05rem;
+      }
+    }
+  }
+
+  .primary-addresses-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+
+    @include breakpoint("lg") {
+      flex-direction: row;
+    }
+    @media (max-width: 720px) {
+      flex-direction: column;
+    }
+    @include breakpoint("sm") {
+      flex-direction: column;
+    }
+
+    .primary-address-card {
+      flex-grow: 1;
+      .card__body {
+        padding: 3rem 1.5rem;
+      }
+      .card__footer {
+        align-items: flex-start;
+      }
+
+      &__item {
+        padding: 1.5rem 4.5rem 1.5rem 3rem;
+        background-color: var(--grayscale-0);
+        border-radius: 1rem;
+        box-shadow: var(--dropshadow-muted);
+        border: 0.2rem solid var(--grayscale-10);
+        border-left: 0.3rem solid var(--primary-70);
+        width: 30rem;
+        margin: 0 auto;
+        position: relative;
+
+        .badge {
+          position: absolute;
+          top: 1.5rem;
+          right: 1.5rem;
+        }
+      }
+
+      &__address-name {
+        font-size: 1.6rem;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 19rem;
+      }
+
+      &__street {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 23rem;
+        margin-top: 0.5rem;
+      }
+
+      &__city,
+      &__phone-number {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 23rem;
+      }
+    }
+  }
+}
