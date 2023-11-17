@@ -22,10 +22,37 @@
   &--compact {
     height: 4.5rem;
     padding: 0 1.5rem;
+
+    & a {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+
+      & svg {
+        width: 3rem;
+        height: 3rem;
+        fill: var(--primary-70);
+      }
+
+      & span {
+        line-height: 4.2rem;
+        font-weight: 500;
+      }
+    }
   }
 
   &--muted {
     box-shadow: var(--dropshadow-muted);
+
+    &:hover {
+      box-shadow: var(--dropshadow-muted--hover);
+    }
+
+    &:active {
+      box-shadow: var(--dropshadow-muted--active);
+    }
   }
 
   &.disabled,
@@ -88,11 +115,16 @@ $outline-types: primary, secondary, warning, danger, success, info, light, dark,
 }
 
 .btn-outline-light {
-  border-color: var(--grayscale-30);
+  border-color: var(--grayscale-20);
 
   &:hover {
     background-color: var(--grayscale-10);
+    border-color: var(--grayscale-20);
     color: var(--grayscale-80);
+  }
+
+  &:active {
+    border-color: var(--grayscale-10);
   }
 }
 

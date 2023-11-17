@@ -47,8 +47,8 @@ function ProfileNavigation({ activeScreen }) {
     <div className="profile-navigation-wrapper">
       <Card className={"profile-navigation"}>
         <ul className="profile-navigation__list">
-          {screens.map((screen) => (
-            <li className="profile-navigation__item">
+          {screens.map((screen, i) => (
+            <li key={i} className="profile-navigation__item">
               <Link
                 to={screen.path}
                 className={`profile-navigation__link ${

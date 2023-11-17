@@ -1,12 +1,26 @@
 import React from "react";
 
-export function Card({ className, children, dropShade = false, ...props }) {
+export function Card({
+  className,
+  children,
+  dropShade = false,
+  deco = false,
+  ...props
+}) {
   const cardClass = `card ${dropShade && "drop-shade"} ${
     className || ""
   }`.trim();
   return (
     <div className={cardClass} {...props}>
-      <div className={"card-container"}>{children}</div>
+      <div className={"card-container"}>
+        {deco && (
+          <>
+            <div className="card-deco card-deco--1"></div>
+            <div className="card-deco card-deco--2"></div>
+          </>
+        )}
+        {children}
+      </div>
     </div>
   );
 }

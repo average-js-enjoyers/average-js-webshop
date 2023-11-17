@@ -119,7 +119,7 @@
   --dropshadow-std--hover: 1px 2px 12px 0px rgba(0, 0, 0, 0.2); /* Slightly larger blur, but lower opacity */
   --dropshadow-std--active: 1px 2px 4px 0px rgba(0, 0, 0, 0.35); /* Smaller blur, but higher opacity */
   --dropshadow-muted: 2px 3px 5px 0px rgba(0, 0, 0, 0.1);
-  --dropshadow-muted--hover: 2px 3px 12px 0px rgba(0, 0, 0, 0.08); /* Slightly larger blur, but lower opacity */
+  --dropshadow-muted--hover: 2px 3px 7px 0px rgba(0, 0, 0, 0.08); /* Slightly larger blur, but lower opacity */
   --dropshadow-muted--active: 2px 3px 3px 0px rgba(0, 0, 0, 0.15); /* Smaller blur, but higher opacity */
 }
 
@@ -175,11 +175,29 @@
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
   }
 }
-/* Animated routes */
-#routeRootWithAnimations {
-  width: 100%;
+/* Initial styles for the element */
+#screenFadeIn {
+  position: fixed;
+  width: 100vw;
+  height: 100vw;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--grayscale-0);
+  opacity: 1; /* Initial opacity */
+  animation: fadeOut 0.2s ease-in-out forwards 0.2s; /* Apply the fade-out animation with a 0.5s delay */
 }
 
+/* Keyframes for the fade-out animation */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none; /* Hide the element after fading out */
+  }
+}
 /* Start state for entering */
 .fade-enter {
   opacity: 0;
@@ -972,8 +990,30 @@ strong {
   height: 4.5rem;
   padding: 0 1.5rem;
 }
+.btn--compact a {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+.btn--compact a svg {
+  width: 3rem;
+  height: 3rem;
+  fill: var(--primary-70);
+}
+.btn--compact a span {
+  line-height: 4.2rem;
+  font-weight: 500;
+}
 .btn--muted {
   box-shadow: var(--dropshadow-muted);
+}
+.btn--muted:hover {
+  box-shadow: var(--dropshadow-muted--hover);
+}
+.btn--muted:active {
+  box-shadow: var(--dropshadow-muted--active);
 }
 .btn.disabled, .disabled.btn-link, .disabled.btn-outline-link, .disabled.btn-outline-dark, .disabled.btn-outline-light, .disabled.btn-outline-info, .disabled.btn-outline-success, .disabled.btn-outline-danger, .disabled.btn-outline-warning, .disabled.btn-outline-secondary, .disabled.btn-outline-primary, .disabled.btn-dark, .disabled.btn-light, .disabled.btn-info, .disabled.btn-danger, .disabled.btn-warning, .disabled.btn-success, .disabled.btn-secondary, .disabled.btn-primary, .btn:disabled, .btn-link:disabled, .btn-outline-link:disabled, .btn-outline-dark:disabled, .btn-outline-light:disabled, .btn-outline-info:disabled, .btn-outline-success:disabled, .btn-outline-danger:disabled, .btn-outline-warning:disabled, .btn-outline-secondary:disabled, .btn-outline-primary:disabled, .btn-dark:disabled, .btn-light:disabled, .btn-info:disabled, .btn-danger:disabled, .btn-warning:disabled, .btn-success:disabled, .btn-secondary:disabled, .btn-primary:disabled {
   color: var(--grayscale-50);
@@ -1222,11 +1262,15 @@ strong {
 }
 
 .btn-outline-light {
-  border-color: var(--grayscale-30);
+  border-color: var(--grayscale-20);
 }
 .btn-outline-light:hover {
   background-color: var(--grayscale-10);
+  border-color: var(--grayscale-20);
   color: var(--grayscale-80);
+}
+.btn-outline-light:active {
+  border-color: var(--grayscale-10);
 }
 
 .btn-secondary {
@@ -1887,7 +1931,7 @@ input[type=checkbox]:focus + label:before {
 .card .card-container {
   overflow: hidden;
   position: relative;
-  z-index: 3;
+  z-index: 2;
   border-radius: 1rem;
   border: 0.3rem solid var(--grayscale-10);
   box-shadow: var(--dropshadow-muted);
@@ -1998,6 +2042,28 @@ input[type=checkbox]:focus + label:before {
   .card .card__footer {
     padding: 1.5rem 1rem;
   }
+}
+.card .card-deco {
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+  border-radius: 3rem;
+}
+.card .card-deco--1 {
+  top: -0.3rem;
+  left: -0.3rem;
+  width: 3rem;
+  height: 3rem;
+  border-bottom-right-radius: 10rem;
+  background-image: linear-gradient(to top left, var(--primary-50), var(--primary-90));
+}
+.card .card-deco--2 {
+  bottom: -0.3rem;
+  right: -0.3rem;
+  width: 6rem;
+  height: 6rem;
+  border-top-left-radius: 10rem;
+  background-image: linear-gradient(to bottom right, var(--primary-50), var(--primary-90));
 }
 
 .profile-navigation {
@@ -2944,6 +3010,14 @@ input[type=checkbox]:focus + label:before {
   flex-grow: 1;
   gap: 3rem;
 }
+.profile-main .profile-cards-container .user-details-summary {
+  position: relative;
+}
+.profile-main .profile-cards-container .user-details-summary button {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+}
 .profile-main .profile-cards-container .shipping-billing-container {
   display: flex;
   justify-content: space-between;
@@ -2971,8 +3045,14 @@ input[type=checkbox]:focus + label:before {
 .profile-main .profile-cards-container .shipping-billing-container .shipping-address-list-summary {
   flex-grow: 1;
 }
+.profile-main .profile-cards-container .shipping-billing-container .shipping-address-list-summary .card__footer {
+  align-items: flex-start;
+}
 .profile-main .profile-cards-container .shipping-billing-container .billing-address-list-summary {
   flex-grow: 1;
+}
+.profile-main .profile-cards-container .shipping-billing-container .billing-address-list-summary .card__footer {
+  align-items: flex-start;
 }
 
 /*# sourceMappingURL=index.css.map */

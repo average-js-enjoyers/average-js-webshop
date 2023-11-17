@@ -9,6 +9,8 @@ import ForgotPasswordScreen from "screens/auth/ForgotPasswordScreen";
 import ResetPasswordScreen from "screens/auth/ResetPasswordScreen";
 import AdminSignInScreen from "screens/auth/AdminSignInScreen";
 
+import { useCustomReloadHandler } from "hooks";
+
 function AuthScreen({ route }) {
   let screen;
   switch (route) {
@@ -39,6 +41,8 @@ function AuthScreen({ route }) {
 }
 
 function AuthScreenWrapper({ children }) {
+  useCustomReloadHandler();
+
   return (
     <div className="auth-screen-wrapper">
       <div className="auth-screen-wrapper__deco auth-screen-wrapper__deco--1"></div>

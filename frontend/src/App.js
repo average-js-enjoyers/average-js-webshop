@@ -1,26 +1,19 @@
-import { useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { useEffect, useState } from "react";
 
 function App() {
   const location = useLocation();
+  const [key, setKey] = useState(0);
 
-  const nodeRef = useRef(null); // Create a ref to pass to CSSTransition
+  useEffect(() => {
+    // Trigger a re-render when the location changes (route change)
+    setKey(key + 1);
+  }, [location]);
 
   return (
     <>
-      <TransitionGroup>
-        <CSSTransition
-          nodeRef={nodeRef}
-          key={location.pathname}
-          classNames="fade"
-          timeout={300}
-        >
-          <div ref={nodeRef} id="routeRootWithAnimations">
-            <Outlet /> {/* <Outlet /> is used to render child routes */}
-          </div>
-        </CSSTransition>
-      </TransitionGroup>
+      <div key={key} id="screenFadeIn"></div>
+      <Outlet />
     </>
   );
 }

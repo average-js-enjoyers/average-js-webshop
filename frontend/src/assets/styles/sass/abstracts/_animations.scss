@@ -55,9 +55,28 @@
   }
 }
 
-/* Animated routes */
-#routeRootWithAnimations {
-  width: 100%;
+/* Initial styles for the element */
+#screenFadeIn {
+  position: fixed;
+  width: 100vw;
+  height: 100vw;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--grayscale-0);
+  opacity: 1; /* Initial opacity */
+  animation: fadeOut 0.2s ease-in-out forwards 0.2s; /* Apply the fade-out animation with a 0.5s delay */
+}
+
+/* Keyframes for the fade-out animation */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none; /* Hide the element after fading out */
+  }
 }
 
 /* Start state for entering */
