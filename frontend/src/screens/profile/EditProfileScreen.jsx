@@ -1,15 +1,14 @@
+import ProfileScreen from "screens/profile/ProfileScreen";
 import EditProfileForm from "components/forms/EditProfileForm";
-import ProfileSidebar from "components/layout/ProfileSidebar";
 
-function EditProfileScreen() {
+export default function EditProfileScreen() {
   return (
-    <>
-      <ProfileSidebar />
-      <h1>Edit Profile</h1>
-      <p>Edit your profile here</p>
+    <ProfileScreen
+      activeScreen="/profile/edit"
+      title="Edit Account"
+      subtitle="Change your account details, update your password and edit your list of addresses."
+    >
       <EditProfileForm />
-    </>
+    </ProfileScreen>
   );
 }
-
-export default EditProfileScreen;
