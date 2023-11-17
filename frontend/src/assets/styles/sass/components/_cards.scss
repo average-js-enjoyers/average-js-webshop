@@ -22,6 +22,8 @@
   }
 
   &.drop-shade {
+    height: 100%;
+
     &::after {
       width: 100%;
       height: 100%;

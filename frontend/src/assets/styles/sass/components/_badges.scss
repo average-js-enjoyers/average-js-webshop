@@ -1,0 +1,40 @@
+.badge {
+  font-size: 1.4rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.3rem;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  display: inline-block;
+  letter-spacing: 0.05rem;
+
+  // font-variant: small-caps;
+  color: #fff;
+  background-color: #6c757d;
+
+  &-primary {
+    background-color: var(--primary-70);
+  }
+
+  &-secondary {
+    background-color: var(--secondary-70);
+  }
+
+  &-success {
+    background-color: var(--success-70);
+  }
+
+  &-danger {
+    background-color: var(--danger-70);
+  }
+
+  &-warning {
+    background-color: var(--warning-70);
+  }
+
+  &-info {
+    background-color: var(--info-70);
+  }
+}
