@@ -9,7 +9,11 @@ import {
   ShieldFillCheck,
 } from "react-bootstrap-icons";
 
+import { useAuth } from "hooks";
+
 function ProfileNavigation({ activeScreen }) {
+  const { signOut } = useAuth();
+
   const screens = [
     {
       name: "Dashboard",
@@ -36,11 +40,6 @@ function ProfileNavigation({ activeScreen }) {
       icon: <ShieldFillCheck className="profile-navigation__icon" />,
       path: "/profile/warranty",
     },
-    {
-      name: "Sign Out",
-      icon: <BoxArrowUpRight className="profile-navigation__icon" />,
-      path: "/signout",
-    },
   ];
 
   return (
@@ -62,6 +61,15 @@ function ProfileNavigation({ activeScreen }) {
               </Link>
             </li>
           ))}
+          <li key={"signout"} className="profile-navigation__item">
+            <button
+              onClick={signOut}
+              className={`profile-navigation__link profile-navigation__link--signout`}
+            >
+              <BoxArrowUpRight className="profile-navigation__icon" />
+              <span className="profile-navigation__text">Sign Out</span>
+            </button>
+          </li>
         </ul>
       </Card>
     </div>

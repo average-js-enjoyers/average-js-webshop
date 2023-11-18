@@ -21,7 +21,7 @@
 
     @include breakpoint("md") {
       align-items: start;
-      max-width: 50rem;
+      max-width: 90%;
       margin-bottom: -1.5rem;
     }
     @include breakpoint("sm") {
@@ -69,8 +69,7 @@
     @include breakpoint("md") {
       justify-content: space-between;
       min-width: auto;
-      width: 42rem;
-      margin-left: auto;
+      width: 95%;
       order: 2;
     }
     @include breakpoint("sm") {
@@ -186,6 +185,9 @@
     justify-content: space-between;
     gap: 6rem;
     margin-top: 6rem;
+    max-width: 100%;
+    overflow: hidden;
+    padding-bottom: 3rem;
 
     @include breakpoint("2xl") {
       gap: 4.5rem;

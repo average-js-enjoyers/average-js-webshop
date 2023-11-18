@@ -1,3 +1,5 @@
+//src/screens/profile/ProfileDashboardScreen.jsx
+
 import {
   Card,
   CardHeader,
@@ -6,12 +8,21 @@ import {
   CardBody,
   CardFooter,
 } from "components/common/Card";
-import { PencilSquare } from "react-bootstrap-icons";
+import {
+  HeartFill,
+  PencilSquare,
+  Truck,
+  FileEarmarkTextFill,
+} from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import ProfileScreen from "screens/profile/ProfileScreen";
 import Button from "components/common/Button";
 
+import { useProduct } from "hooks/useProduct";
+
 export default function ProfileDashboardScreen() {
+  const { dummyProductCardData, renderProductCards } = useProduct();
+
   return (
     <ProfileScreen
       activeScreen="/profile"
@@ -81,7 +92,7 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="primary-address-card__item">
-                <div className="badge badge-primary">Primary</div>
+                <div className="badge badge--primary">Primary</div>
                 <p className="primary-address-card__address-name">
                   Cube Base HQ
                 </p>
@@ -102,7 +113,7 @@ export default function ProfileDashboardScreen() {
                 className="profile-edit-button"
               >
                 <Link to="/profile/edit">
-                  <PencilSquare />
+                  <Truck />
                   <span>
                     Manage <strong>Shipping</strong> Addresses
                   </span>
@@ -118,7 +129,7 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="primary-address-card__item">
-                <div className="badge badge-primary">Primary</div>
+                <div className="badge badge--primary">Primary</div>
                 <p className="primary-address-card__address-name">
                   Cube Base HQ
                 </p>
@@ -139,7 +150,7 @@ export default function ProfileDashboardScreen() {
                 className="profile-edit-button"
               >
                 <Link to="/profile/edit">
-                  <PencilSquare />
+                  <FileEarmarkTextFill />
                   <span>
                     Manage <strong>Billing</strong> Addresses
                   </span>
@@ -148,21 +159,32 @@ export default function ProfileDashboardScreen() {
             </CardFooter>
           </Card>
         </div>
-        <Card
-          className={"favorite-products-summary"}
-          dropShade={true}
-          deco={true}
-        >
+        <Card className={"favorites-summary"} dropShade={true} deco={true}>
           <CardHeader align="start">
             <CardTitle
-              className={"favorite-products-summary__title"}
+              className={"favorites-summary__title"}
               level="3"
               textAlign="left"
             >
               <strong>Favorite</strong> Products
             </CardTitle>
           </CardHeader>
-          <CardBody></CardBody>
+          <CardBody className={"favorites-summary__list"}>
+            {renderProductCards(dummyProductCardData)}
+          </CardBody>
+          <CardFooter>
+            <Button
+              variant="outline-light btn--compact btn--muted"
+              className="profile-edit-button"
+            >
+              <Link to="/profile/favorites">
+                <HeartFill />
+                <span>
+                  Manage Your <strong>Favorites</strong>
+                </span>
+              </Link>
+            </Button>
+          </CardFooter>
         </Card>
       </div>
     </ProfileScreen>

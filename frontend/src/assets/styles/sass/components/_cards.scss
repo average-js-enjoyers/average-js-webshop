@@ -93,10 +93,12 @@
 
     overflow-y: auto;
     &::-webkit-scrollbar {
-      width: 0.3rem;
+      width: 0.5rem;
+      border-radius: 3px;
     }
     &::-webkit-scrollbar-thumb {
       background-color: var(--grayscale-40);
+      border-radius: 3px;
     }
     &::-webkit-scrollbar-track {
       background-color: var(--grayscale-10);
@@ -171,5 +173,189 @@
         var(--primary-90)
       );
     }
+  }
+}
+
+.product-card {
+  width: 27.4rem;
+  border-radius: 1rem;
+  border: 0.2rem solid var(--grayscale-10);
+  box-shadow: var(--dropshadow-muted);
+
+  &__img-wrapper {
+    width: 26rem;
+    height: 26rem;
+    margin: 0.5rem 0.5rem 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 0.5rem;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__badge-list {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__badge {
+    padding: 0.5rem 1.5rem;
+    font-variant: small-caps;
+    opacity: 0.95;
+
+    border-top-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  &__button {
+    width: 6rem;
+    height: 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 1rem;
+    box-shadow: var(--dropshadow-muted);
+
+    cursor: pointer;
+
+    transition: all 0.1s ease-in-out; // Specify property for transition
+
+    &:hover {
+      box-shadow: var(--dropshadow-muted--hover);
+      transform: scale(1.05);
+
+      & .product-card__icon--favorite-add {
+        animation: icon-pulse 0.66s ease-in-out infinite;
+      }
+      & .product-card__icon--cart-add,
+      & .product-card__icon--cart-remove {
+        transform: scale(1.1);
+      }
+    }
+
+    &:active {
+      box-shadow: var(--dropshadow-muted--active);
+    }
+
+    &--favorite {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 2;
+
+      background-color: var(--grayscale-0);
+      background-image: linear-gradient(
+        to bottom right,
+        var(--grayscale-0),
+        var(--grayscale-20)
+      );
+
+      &.product-card__button--active {
+        background-color: var(--accent-60);
+        background-image: linear-gradient(
+          to bottom right,
+          var(--accent-60),
+          var(--accent-80)
+        );
+      }
+    }
+
+    &--cart {
+      background-color: var(--primary-70);
+      background-image: linear-gradient(
+        to bottom right,
+        var(--primary-60),
+        var(--primary-80)
+      );
+
+      &.product-card__button--active {
+        background-color: var(--success-60);
+        background-image: linear-gradient(
+          to bottom right,
+          var(--success-60),
+          var(--success-80)
+        );
+      }
+    }
+  }
+
+  &__icon {
+    width: 3rem;
+    height: 3rem;
+
+    text-shadow: 0 0 0.5rem var(--grayscale-70);
+
+    &--favorite-add {
+      fill: var(--grayscale-50);
+    }
+
+    &--favorite-remove {
+      fill: var(--accent-10);
+      transition: transform 0.2s ease-in-out; // Specify property for transition
+    }
+
+    &--cart-add,
+    &--cart-remove {
+      fill: var(--grayscale-0);
+      transition: transform 0.2s ease-in-out; // Specify property for transition
+    }
+  }
+
+  &__name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    max-height: 4.8rem;
+
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1.5rem;
+  }
+
+  &__prices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__base {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--grayscale-40);
+    text-decoration: line-through;
+  }
+
+  &__current {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-70);
   }
 }
