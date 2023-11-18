@@ -31,7 +31,7 @@ export default function ProfileDashboardScreen() {
     addresses, favorites and more."
     >
       <section className="profile-main__content profile-dashboard">
-        <Card className={"profile-summary"} dropShade={true} deco={true}>
+        <Card className={"profile-summary"} dropShade={false} deco={true}>
           <Button
             variant="outline-light btn--compact btn--muted"
             className="profile-edit-button"
@@ -84,7 +84,11 @@ export default function ProfileDashboardScreen() {
           <CardFooter></CardFooter>
         </Card>
         <div className="primary-addresses-container">
-          <Card className={"primary-address-card"} dropShade={true} deco={true}>
+          <Card
+            className={"primary-address-card"}
+            dropShade={false}
+            deco={true}
+          >
             <CardHeader align="start">
               <CardTitle level="3" textAlign="left">
                 Primary <strong>Shipping</strong>
@@ -121,7 +125,11 @@ export default function ProfileDashboardScreen() {
               </Button>
             </CardFooter>
           </Card>
-          <Card className={"primary-address-card"} dropShade={true} deco={true}>
+          <Card
+            className={"primary-address-card"}
+            dropShade={false}
+            deco={true}
+          >
             <CardHeader align="start">
               <CardTitle level="3" textAlign="left">
                 Primary <strong>Billing</strong>
@@ -161,7 +169,7 @@ export default function ProfileDashboardScreen() {
             </CardFooter>
           </Card>
         </div>
-        <Card className={"favorites-summary"} dropShade={true} deco={true}>
+        <Card className={"favorites-summary"} dropShade={false} deco={true}>
           <CardHeader align="start">
             <CardTitle
               className={"favorites-summary__title"}

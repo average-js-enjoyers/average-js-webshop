@@ -20,13 +20,8 @@
     width: 100%;
 
     padding: 0.5rem 0 1rem;
-    border-bottom: 1px solid var(--grayscale-30);
 
     transition: all 0.1s ease-in-out;
-
-    &:last-child {
-      border-bottom: none;
-    }
 
     @include breakpoint("lg") {
       width: 30%;
@@ -86,7 +81,7 @@
 
     &--active {
       background-color: var(--primary-0);
-      border: 0.1rem solid var(--primary-10);
+      border-right: 0.2rem solid var(--primary-70);
 
       &:hover {
         transform: scale(1) !important;
