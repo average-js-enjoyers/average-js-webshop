@@ -161,26 +161,30 @@ export const useAuth = () => {
           throw new Error(response.error);
         }
         if (response.status === "success" && !externalAuth) {
-          const response = await fetchAccessToken(
-            userData.email,
-            userData.password
-          );
-          authContext.setAuthInfo({
-            user: response.data.user,
-          });
-          sessionStorage.removeItem("accessToken");
-          sessionStorage.setItem("accessToken", response.token);
-          sessionStorage.setItem("onboardSuccess", true);
+          setTimeout(async () => {
+            const response = await fetchAccessToken(
+              userData.email,
+              userData.password
+            );
+            authContext.setAuthInfo({
+              user: response.data.user,
+            });
+            sessionStorage.removeItem("accessToken");
+            sessionStorage.setItem("accessToken", response.token);
+            sessionStorage.setItem("onboardSuccess", true);
+          }, 2000);
         }
         if (response.status === "success" && externalAuth) {
-          authContext.setAuthInfo((prevState) => ({
-            ...prevState, // Spread the previous state
-            user: {
-              ...prevState.user, // Spread the current user object
-              ...userData, // Spread the new user data
-            },
-          }));
-          sessionStorage.setItem("onboardSuccess", true);
+          setTimeout(() => {
+            authContext.setAuthInfo((prevState) => ({
+              ...prevState, // Spread the previous state
+              user: {
+                ...prevState.user, // Spread the current user object
+                ...userData, // Spread the new user data
+              },
+            }));
+            sessionStorage.setItem("onboardSuccess", true);
+          }, 2000);
         }
       } catch (error) {
         // handle error

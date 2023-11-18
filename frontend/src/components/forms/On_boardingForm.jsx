@@ -154,6 +154,20 @@ export default function OnboardingForm() {
     return message;
   });
 
+  const [onboardClicked, setOnboardClicked] = useState(false);
+
+  useEffect(() => {
+    // Only run the timer if onboardClicked is true
+    if (onboardClicked) {
+      const timer = setTimeout(() => {
+        setOnboardClicked(false);
+      }, 3000); // 3000 milliseconds = 3 seconds
+
+      // Clear the timer if the component unmounts before the timer finishes
+      return () => clearTimeout(timer);
+    }
+  }, [onboardClicked]);
+
   useEffect(() => {
     setPasswordsMatch(password === confirmPassword);
     setPassWordStrong(
@@ -223,6 +237,7 @@ export default function OnboardingForm() {
               passwordConfirm: confirmPassword,
             };
 
+            setOnboardClicked(true);
             onboardUser(user, authContext.user?.externalAuth);
           } else {
             const user = {
@@ -232,6 +247,7 @@ export default function OnboardingForm() {
               phoneNumber,
             };
 
+            setOnboardClicked(true);
             onboardUser(user, authContext.user?.externalAuth);
           }
         }}
@@ -257,7 +273,16 @@ export default function OnboardingForm() {
         </div>
 
         {authContext.user?.externalAuth ? (
-          ""
+          <p
+            style={{
+              color: "var(--grayscale-60)",
+            }}
+            className="my-1"
+          >
+            You don't need a password, because you are using Google or Facebook
+            to sign up. If you also want use our own built-in Sign In, you can
+            add a password later in the Settings.
+          </p>
         ) : (
           <>
             <div className="control">
@@ -365,7 +390,14 @@ export default function OnboardingForm() {
           ""
         )}
 
-        <input type="submit" className="btn btn-primary" value="Let's Go!" />
+        {onboardClicked ? (
+          <div
+            className="loader"
+            style={{ alignSelf: "center", marginTop: "1rem" }}
+          ></div>
+        ) : (
+          <input type="submit" className="btn btn-primary" value="Let's go!" />
+        )}
       </form>
     </>
   );

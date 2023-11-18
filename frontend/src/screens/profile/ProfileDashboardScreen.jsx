@@ -30,7 +30,7 @@ export default function ProfileDashboardScreen() {
       subtitle="Check out and change anything about you: personal details,
     addresses, favorites and more."
     >
-      <div className="profile-dashboard">
+      <section className="profile-main__content profile-dashboard">
         <Card className={"profile-summary"} dropShade={true} deco={true}>
           <Button
             variant="outline-light btn--compact btn--muted"
@@ -186,7 +186,7 @@ export default function ProfileDashboardScreen() {
             </Button>
           </CardFooter>
         </Card>
-      </div>
+      </section>
     </ProfileScreen>
   );
 }

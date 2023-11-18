@@ -8,7 +8,9 @@ export default function ProfileEditScreen() {
       title="Edit Account"
       subtitle="Change your account details, update your password and edit your list of addresses."
     >
-      <EditProfileForm />
+      <section className="profile-main__content profile-edit">
+        <EditProfileForm />
+      </section>
     </ProfileScreen>
   );
 }

@@ -1,15 +1,4 @@
 .profile-dashboard {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 3rem;
-  width: calc(100% - 50rem - 6rem - 1rem);
-  padding: 0 0.75rem;
-
-  @include breakpoint("lg") {
-    width: 100%;
-  }
-
   .profile-summary {
     position: relative;
 

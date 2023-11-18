@@ -43,7 +43,7 @@ function ProfileNavigation({ activeScreen }) {
   ];
 
   return (
-    <div className="profile-navigation-wrapper">
+    <nav className="profile-main__navigation">
       <Card className={"profile-navigation"}>
         <ul className="profile-navigation__list">
           {screens.map((screen, i) => (
@@ -72,7 +72,7 @@ function ProfileNavigation({ activeScreen }) {
           </li>
         </ul>
       </Card>
-    </div>
+    </nav>
   );
 }
 
