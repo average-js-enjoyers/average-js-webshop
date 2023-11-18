@@ -87,12 +87,12 @@ export default function ProfileDashboardScreen() {
           <Card className={"primary-address-card"} dropShade={true} deco={true}>
             <CardHeader align="start">
               <CardTitle level="3" textAlign="left">
-                <strong>Shipping</strong> Address
+                Primary <strong>Shipping</strong>
               </CardTitle>
             </CardHeader>
             <CardBody>
               <div className="primary-address-card__item">
-                <div className="badge badge--primary">Primary</div>
+                <div className="badge badge--success">Active</div>
                 <p className="primary-address-card__address-name">
                   Cube Base HQ
                 </p>
@@ -124,23 +124,25 @@ export default function ProfileDashboardScreen() {
           <Card className={"primary-address-card"} dropShade={true} deco={true}>
             <CardHeader align="start">
               <CardTitle level="3" textAlign="left">
-                <strong>Billing</strong> Address
+                Primary <strong>Billing</strong>
               </CardTitle>
             </CardHeader>
             <CardBody>
               <div className="primary-address-card__item">
-                <div className="badge badge--primary">Primary</div>
-                <p className="primary-address-card__address-name">
-                  Cube Base HQ
+                <div className="badge badge--success">Active</div>
+                <p className="primary-address-card__address-name">L-TECH</p>
+                <p className="primary-address-card__company">L-TECH Kft.</p>
+                <p className="primary-address-card__tax-no">
+                  Tax: <span>11116422-2-07</span>
                 </p>
                 <p className="primary-address-card__street">
-                  Csók István tér 420.
+                  Széchenyi utca 105.
                 </p>
                 <p className="primary-address-card__city">
-                  2483 Gárdony, HUNGARY
+                  8151 Szabadbattyán, HUNGARY
                 </p>
                 <p className="primary-address-card__phone-number">
-                  +36 30 420 69 69
+                  +36 30 339 82 88
                 </p>
               </div>
             </CardBody>
@@ -166,7 +168,7 @@ export default function ProfileDashboardScreen() {
               level="3"
               textAlign="left"
             >
-              <strong>Favorite</strong> Products
+              Your <strong>Favorite</strong> Products
             </CardTitle>
           </CardHeader>
           <CardBody className={"favorites-summary__list"}>

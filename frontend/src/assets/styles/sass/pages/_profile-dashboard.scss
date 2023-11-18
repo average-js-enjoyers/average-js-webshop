@@ -1,4 +1,8 @@
 .profile-dashboard {
+  & .card__title {
+    font-weight: 400;
+  }
+
   .profile-summary {
     position: relative;
 
@@ -74,6 +78,7 @@
   .primary-addresses-container {
     display: flex;
     justify-content: space-between;
+    align-items: stretch;
     gap: 3rem;
 
     @include breakpoint("lg") {
@@ -110,6 +115,11 @@
         margin: 0 auto;
         position: relative;
 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        flex-grow: 1;
+
         .badge {
           position: absolute;
           top: 1.5rem;
@@ -118,22 +128,49 @@
       }
 
       &__address-name {
-        font-size: 1.6rem;
+        font-size: 1.65rem;
         font-weight: 700;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         width: 19rem;
+        margin-bottom: 0.5rem;
       }
 
-      &__street {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 23rem;
-        margin-top: 0.5rem;
+      &__company {
+        font-weight: 500;
+        font-size: 1.5rem;
+
+        &::before {
+          display: block;
+          content: " ";
+          width: 20rem;
+          height: 1px;
+          background-color: var(--grayscale-30);
+          margin: 1rem 0 0.25rem;
+        }
       }
 
+      &__tax-no {
+        position: relative;
+        & span {
+          font-family: "Courier New", Courier, monospace;
+          font-weight: 700;
+        }
+
+        &::after {
+          display: block;
+          content: " ";
+          width: 20rem;
+          height: 1px;
+          background-color: var(--grayscale-30);
+          margin: 0.25rem 0;
+        }
+      }
+
+      &__company,
+      &__tax-no,
+      &__street,
       &__city,
       &__phone-number {
         white-space: nowrap;

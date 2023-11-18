@@ -15,7 +15,7 @@
   --primary-90: #00328c; /* Deep Navy */
   --primary-100: #001e78; /* Midnight Blue */
   /* Secondary Tonal Pattern */
-  --secondary-0: #ebf5ff; /* Light Blue-Purple */
+  --secondary-0: #ebefff; /* Light Blue-Purple */
   --secondary-10: #d7e1ff; /* Soft Blue-Purple */
   --secondary-20: #c3cdfa; /* Mild Blue-Purple */
   --secondary-30: #afb9f5; /* Blue-Purple */
@@ -36,8 +36,8 @@
   --success-60: #50dc8c; /* Deeper, Bright Green */
   --success-70: #37cd78; /* More Vivid Dark Green */
   --success-80: #1ebc64; /* Bright Forest Green */
-  --success-90: #05af50; /* Intense Deep Forest Green */
-  --success-100: #009c3c; /* Darker, Rich Green */
+  --success-90: #039845; /* Intense Deep Forest Green */
+  --success-100: #00773e; /* Darker, Rich Green */
   /* Accent Tonal Pattern */
   --accent-0: #ffebf0; /* Soft Pink */
   --accent-10: #ffd2dc; /* Light Pink */
@@ -132,7 +132,7 @@
   overflow: hidden;
   background-color: var(--grayscale-0);
   opacity: 1; /* Initial opacity */
-  animation: fadeOut 0.2s ease-in-out forwards 0.3s; /* Apply the fade-out animation with a 0.5s delay */
+  animation: fadeOut 0.35s ease-in-out forwards 0.15s; /* Apply the fade-out animation with a 0.5s delay */
 }
 
 @keyframes pulse {
@@ -1974,11 +1974,14 @@ input[type=checkbox]:focus + label:before {
 .card .card-container {
   overflow: hidden;
   position: relative;
+  height: 100%;
   z-index: 2;
   border-radius: 1rem;
   border: 0.3rem solid var(--grayscale-10);
   box-shadow: var(--dropshadow-muted);
   background-color: var(--grayscale-0);
+  display: flex;
+  flex-direction: column;
 }
 .card .card-container:hover {
   box-shadow: var(--dropshadow-muted--hover);
@@ -2041,6 +2044,7 @@ input[type=checkbox]:focus + label:before {
 .card .card__body {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   padding: 4.5rem;
   background-color: var(--grayscale-0);
   overflow-y: auto;
@@ -3129,10 +3133,20 @@ input[type=checkbox]:focus + label:before {
   overflow: hidden;
   padding-bottom: 3rem;
 }
+@media (max-width: 1600px) {
+  .profile-main {
+    gap: 3rem;
+  }
+}
 .profile-main__navigation {
   width: 40rem;
   margin-left: 10rem;
   padding: 0 0.75rem;
+}
+@media (max-width: 1600px) {
+  .profile-main__navigation {
+    width: 35rem;
+  }
 }
 @media (max-width: 1440px) {
   .profile-main__navigation {
@@ -3159,6 +3173,11 @@ input[type=checkbox]:focus + label:before {
   width: calc(100% - 50rem - 6rem - 1rem);
   padding: 0 0.75rem;
 }
+@media (max-width: 1600px) {
+  .profile-main__content {
+    width: calc(100% - 45rem - 6rem - 1rem);
+  }
+}
 @media (max-width: 992px) {
   .profile-main__content {
     width: 100%;
@@ -3184,6 +3203,9 @@ input[type=checkbox]:focus + label:before {
   }
 }
 
+.profile-dashboard .card__title {
+  font-weight: 400;
+}
 .profile-dashboard .profile-summary {
   position: relative;
 }
@@ -3254,6 +3276,7 @@ input[type=checkbox]:focus + label:before {
 .profile-dashboard .primary-addresses-container {
   display: flex;
   justify-content: space-between;
+  align-items: stretch;
   gap: 3rem;
 }
 @media (max-width: 992px) {
@@ -3295,6 +3318,10 @@ input[type=checkbox]:focus + label:before {
   width: 30rem;
   margin: 0 auto;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
 }
 .profile-dashboard .primary-addresses-container .primary-address-card__item .badge {
   position: absolute;
@@ -3302,21 +3329,42 @@ input[type=checkbox]:focus + label:before {
   right: 1.5rem;
 }
 .profile-dashboard .primary-addresses-container .primary-address-card__address-name {
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 19rem;
+  margin-bottom: 0.5rem;
 }
-.profile-dashboard .primary-addresses-container .primary-address-card__street {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 23rem;
-  margin-top: 0.5rem;
+.profile-dashboard .primary-addresses-container .primary-address-card__company {
+  font-weight: 500;
+  font-size: 1.5rem;
 }
-.profile-dashboard .primary-addresses-container .primary-address-card__city, .profile-dashboard .primary-addresses-container .primary-address-card__phone-number {
+.profile-dashboard .primary-addresses-container .primary-address-card__company::before {
+  display: block;
+  content: " ";
+  width: 20rem;
+  height: 1px;
+  background-color: var(--grayscale-30);
+  margin: 1rem 0 0.25rem;
+}
+.profile-dashboard .primary-addresses-container .primary-address-card__tax-no {
+  position: relative;
+}
+.profile-dashboard .primary-addresses-container .primary-address-card__tax-no span {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+}
+.profile-dashboard .primary-addresses-container .primary-address-card__tax-no::after {
+  display: block;
+  content: " ";
+  width: 20rem;
+  height: 1px;
+  background-color: var(--grayscale-30);
+  margin: 0.25rem 0;
+}
+.profile-dashboard .primary-addresses-container .primary-address-card__company, .profile-dashboard .primary-addresses-container .primary-address-card__tax-no, .profile-dashboard .primary-addresses-container .primary-address-card__street, .profile-dashboard .primary-addresses-container .primary-address-card__city, .profile-dashboard .primary-addresses-container .primary-address-card__phone-number {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -189,11 +189,18 @@
     overflow: hidden;
     padding-bottom: 3rem;
 
+    @include breakpoint("3xl") {
+      gap: 3rem;
+    }
+
     &__navigation {
       width: 40rem;
       margin-left: 10rem;
       padding: 0 0.75rem;
 
+      @include breakpoint("3xl") {
+        width: 35rem;
+      }
       @include breakpoint("2xl") {
         width: 20vw;
         min-width: 30rem;
@@ -215,6 +222,9 @@
       width: calc(100% - 50rem - 6rem - 1rem);
       padding: 0 0.75rem;
 
+      @include breakpoint("3xl") {
+        width: calc(100% - 45rem - 6rem - 1rem);
+      }
       @include breakpoint("lg") {
         width: 100%;
       }
