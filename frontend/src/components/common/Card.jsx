@@ -103,10 +103,15 @@ export function CardTitle({
   );
 }
 
-export function CardFooter({ className, children, ...props }) {
+export function CardFooter({
+  className,
+  children,
+  align = "center",
+  ...props
+}) {
   const cardFooterClass = `card__footer ${className || ""}`.trim();
   return (
-    <div className={cardFooterClass} {...props}>
+    <div className={cardFooterClass} style={{ alignItems: align }} {...props}>
       {children}
     </div>
   );

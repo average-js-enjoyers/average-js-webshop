@@ -65,31 +65,56 @@
     }
 
     @include breakpoint("sm") {
-      padding: 1.5rem 7.5vw 0;
+      padding: 3rem 7.5vw 0;
+    }
+
+    @media (max-width: 420px) {
+      padding: 3rem 2.5vw 0;
     }
   }
 
   .card__logo {
     align-self: center;
-    width: 7.5rem;
-    height: 7.5rem;
-    padding: 1.5rem;
+    width: 6rem;
+    height: 6rem;
+    min-width: 6rem;
+    min-height: 6rem;
+    padding: 1rem;
     border-radius: 100rem;
     background-color: var(--grayscale-0);
     display: flex;
     justify-content: center;
     align-items: center;
 
-    box-shadow: 0 0 1rem 0.15rem var(--secondary-50);
-
     & svg {
       width: 100%;
       height: 100%;
     }
+
+    &--profile {
+      box-shadow: var(--dropshadow-muted);
+      border: 1px solid var(--grayscale-20);
+
+      & svg {
+        fill: var(--primary-50);
+      }
+    }
+
+    &--auth {
+      width: 7.5rem;
+      height: 7.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 0 1rem 0.15rem var(--secondary-50);
+    }
   }
 
   .card__title {
-    // Title styles here
+    display: flex;
+    align-items: center;
+
+    & .card__logo {
+      margin-right: 1.5rem;
+    }
   }
 
   .card__body {
@@ -121,6 +146,10 @@
 
     @include breakpoint("sm") {
       padding: 3rem 7.5vw;
+    }
+
+    @media (max-width: 420px) {
+      padding: 3rem 2.5vw;
     }
   }
 
@@ -368,5 +397,115 @@
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--primary-70);
+  }
+}
+
+.address-card {
+  flex-grow: 1;
+
+  .card__body {
+    padding: 3rem 1.5rem;
+  }
+  .card__footer {
+    align-items: flex-start;
+
+    @include breakpoint("xl") {
+      padding: 3rem 1rem;
+    }
+  }
+
+  &__wrapper {
+    padding: 1.5rem 3rem;
+    background-color: var(--grayscale-0);
+    border-radius: 1rem;
+    box-shadow: var(--dropshadow-muted);
+    border: 0.2rem solid var(--grayscale-10);
+    border-left: 0.3rem solid var(--primary-70);
+    max-width: 35rem;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    flex-grow: 1;
+
+    .badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+  }
+
+  &__address-name {
+    font-size: 1.65rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 19rem;
+    margin-bottom: 0.5rem;
+    flex-grow: 1;
+  }
+
+  &__company {
+    font-weight: 500;
+    font-size: 1.5rem;
+
+    &::before {
+      display: block;
+      content: " ";
+      width: 20rem;
+      height: 1px;
+      background-color: var(--grayscale-30);
+      margin: 1rem 0 0.25rem;
+    }
+  }
+
+  &__tax-no {
+    position: relative;
+    & span {
+      font-family: "Courier New", Courier, monospace;
+      font-weight: 700;
+    }
+
+    &::after {
+      display: block;
+      content: " ";
+      width: 20rem;
+      height: 1px;
+      background-color: var(--grayscale-30);
+      margin: 0.25rem 0;
+    }
+  }
+
+  &__company,
+  &__tax-no,
+  &__street,
+  &__city,
+  &__phone-number {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 23rem;
+    flex-grow: 0.25;
+  }
+
+  &__edit-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    border: none;
+    padding: 0.5rem 1rem;
+    & svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      fill: var(--grayscale-40);
+      transition: fill 0.2s ease-in-out;
+      &:hover {
+        fill: var(--primary-50);
+      }
+    }
   }
 }

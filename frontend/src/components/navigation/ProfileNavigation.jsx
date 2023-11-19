@@ -21,9 +21,9 @@ function ProfileNavigation({ activeScreen }) {
       path: "/profile",
     },
     {
-      name: "Edit Profile Data",
+      name: "Manage Account",
       icon: <PencilSquare className="profile-navigation__icon" />,
-      path: "/profile/edit",
+      path: "/profile/manage",
     },
     {
       name: "My Order History",

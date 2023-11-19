@@ -17,11 +17,13 @@ import {
 import { Link } from "react-router-dom";
 import ProfileScreen from "screens/profile/ProfileScreen";
 import Button from "components/common/Button";
+import AddressCard from "components/common/AddressCard";
 
-import { useProduct } from "hooks/useProduct";
+import { useAuth, useProduct } from "hooks";
 
 export default function ProfileDashboardScreen() {
   const { dummyProductCardData, renderProductCards } = useProduct();
+  const { shippingAddresses, billingAddresses } = useAuth();
 
   return (
     <ProfileScreen
@@ -33,9 +35,9 @@ export default function ProfileDashboardScreen() {
         <Card className={"profile-summary"} dropShade={false} deco={true}>
           <Button
             variant="outline-light btn--compact btn--muted"
-            className="profile-edit-button"
+            className="profile-manage-button"
           >
-            <Link to="/profile/edit">
+            <Link to="/profile/manage">
               <PencilSquare />
               <span>
                 Manage <strong>Account Details</strong>
@@ -64,7 +66,7 @@ export default function ProfileDashboardScreen() {
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Password</p>
                 <Link
-                  to="/profile/edit"
+                  to="/profile/manage"
                   className="profile-summary__value profile-summary__value--link"
                 >
                   Change Password Here
@@ -82,40 +84,41 @@ export default function ProfileDashboardScreen() {
           </CardBody>
           <CardFooter></CardFooter>
         </Card>
-        <div className="primary-addresses-container">
-          <Card
-            className={"primary-address-card"}
-            dropShade={false}
-            deco={true}
-          >
+        <div className="primary-address-cards-container primary-address-cards-container--primary">
+          <Card className={"address-card"} dropShade={false} deco={true}>
             <CardHeader align="start">
               <CardTitle level="3" textAlign="left">
-                Primary <strong>Shipping</strong>
+                <span>
+                  Primary <strong>Shipping</strong>
+                </span>
               </CardTitle>
             </CardHeader>
             <CardBody>
-              <div className="primary-address-card__item">
-                <div className="badge badge--success">Active</div>
-                <p className="primary-address-card__address-name">
-                  Cube Base HQ
-                </p>
-                <p className="primary-address-card__street">
-                  Csók István tér 420.
-                </p>
-                <p className="primary-address-card__city">
-                  2483 Gárdony, HUNGARY
-                </p>
-                <p className="primary-address-card__phone-number">
-                  +36 30 420 69 69
-                </p>
+              <div className="address-list address-list--primary">
+                {shippingAddresses.map(
+                  (address) =>
+                    address.isActive && (
+                      <AddressCard
+                        key={address._id}
+                        isActive={address.isActive}
+                        type="shipping"
+                        name={address.name}
+                        company={address.company}
+                        taxNo={address.taxNo}
+                        street={address.street}
+                        city={address.city}
+                        phoneNumber={address.phoneNumber}
+                      />
+                    )
+                )}
               </div>
             </CardBody>
-            <CardFooter>
+            <CardFooter align="start">
               <Button
                 variant="outline-light btn--compact btn--muted"
-                className="profile-edit-button"
+                className="profile-manage-button"
               >
-                <Link to="/profile/edit">
+                <Link to="/profile/manage">
                   <Truck />
                   <span>
                     Manage <strong>Shipping</strong> Addresses
@@ -124,41 +127,40 @@ export default function ProfileDashboardScreen() {
               </Button>
             </CardFooter>
           </Card>
-          <Card
-            className={"primary-address-card"}
-            dropShade={false}
-            deco={true}
-          >
+          <Card className={"address-card"} dropShade={false} deco={true}>
             <CardHeader align="start">
               <CardTitle level="3" textAlign="left">
-                Primary <strong>Billing</strong>
+                <span>
+                  Primary <strong>Billing</strong>
+                </span>
               </CardTitle>
             </CardHeader>
             <CardBody>
-              <div className="primary-address-card__item">
-                <div className="badge badge--success">Active</div>
-                <p className="primary-address-card__address-name">L-TECH</p>
-                <p className="primary-address-card__company">L-TECH Kft.</p>
-                <p className="primary-address-card__tax-no">
-                  Tax: <span>11116422-2-07</span>
-                </p>
-                <p className="primary-address-card__street">
-                  Széchenyi utca 105.
-                </p>
-                <p className="primary-address-card__city">
-                  8151 Szabadbattyán, HUNGARY
-                </p>
-                <p className="primary-address-card__phone-number">
-                  +36 30 339 82 88
-                </p>
+              <div className="address-list address-list--primary">
+                {billingAddresses.map(
+                  (address) =>
+                    address.isActive && (
+                      <AddressCard
+                        key={address._id}
+                        isActive={address.isActive}
+                        type="billing"
+                        name={address.name}
+                        company={address.company}
+                        taxNo={address.taxNo}
+                        street={address.street}
+                        city={address.city}
+                        phoneNumber={address.phoneNumber}
+                      />
+                    )
+                )}
               </div>
             </CardBody>
-            <CardFooter>
+            <CardFooter align="start">
               <Button
                 variant="outline-light btn--compact btn--muted"
-                className="profile-edit-button"
+                className="profile-manage-button"
               >
-                <Link to="/profile/edit">
+                <Link to="/profile/manage">
                   <FileEarmarkTextFill />
                   <span>
                     Manage <strong>Billing</strong> Addresses
@@ -175,16 +177,18 @@ export default function ProfileDashboardScreen() {
               level="3"
               textAlign="left"
             >
-              Your <strong>Favorite</strong> Products
+              <span>
+                Your <strong>Favorite</strong> Products
+              </span>
             </CardTitle>
           </CardHeader>
           <CardBody className={"favorites-summary__list"}>
             {renderProductCards(dummyProductCardData)}
           </CardBody>
-          <CardFooter>
+          <CardFooter align="start">
             <Button
               variant="outline-light btn--compact btn--muted"
-              className="profile-edit-button"
+              className="profile-manage-button"
             >
               <Link to="/profile/favorites">
                 <HeartFill />

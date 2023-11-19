@@ -51,7 +51,7 @@ export default function OnboardingScreen() {
   return (
     <Card>
       <CardHeader>
-        <CardLogo>
+        <CardLogo className="card__logo--auth">
           <BrightnessAltHighFill color="var(--secondary-90)" />
         </CardLogo>
         <CardTitle level="1" textAlign="center">

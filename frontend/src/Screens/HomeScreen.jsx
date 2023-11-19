@@ -78,8 +78,8 @@ const HomeScreen = () => {
           <Button variant="light ">View Profile</Button>
         </Link>
 
-        <Link to="/profile/edit">
-          <Button variant="outline-info ">Edit Profile</Button>
+        <Link to="/profile/manage">
+          <Button variant="outline-info ">Manage Account</Button>
         </Link>
 
         {isAuthenticated && (

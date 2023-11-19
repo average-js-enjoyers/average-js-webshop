@@ -15,7 +15,7 @@ export default function ForgotPasswordScreen() {
   return (
     <Card>
       <CardHeader>
-        <CardLogo>
+        <CardLogo className="card__logo--auth">
           <KeyFill color="var(--secondary-90)" />
         </CardLogo>
         <CardTitle level="1" textAlign="center">

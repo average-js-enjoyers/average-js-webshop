@@ -35,6 +35,8 @@
     color: var(--primary-60);
     text-transform: uppercase;
     font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 1.5rem;
   }
 
   &-subtitle {
@@ -219,6 +221,7 @@
       flex-direction: column;
       flex-grow: 1;
       gap: 3rem;
+      row-gap: 4.5rem;
       width: calc(100% - 50rem - 6rem - 1rem);
       padding: 0 0.75rem;
 
@@ -227,6 +230,14 @@
       }
       @include breakpoint("lg") {
         width: 100%;
+      }
+      @include breakpoint("sm") {
+        row-gap: 3rem;
+      }
+
+      & .card__title {
+        font-weight: 400;
+        margin-bottom: 0.5rem;
       }
     }
 
@@ -242,6 +253,18 @@
       justify-content: start;
       gap: 3rem;
       margin-top: 3rem;
+    }
+  }
+
+  .address-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    flex-grow: 1;
+    gap: 3rem;
+    min-height: 15rem;
+    &--primary {
+      justify-content: center;
     }
   }
 }

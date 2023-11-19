@@ -25,7 +25,7 @@ import OAuthCallbackScreen from "screens/auth/OAuthCallbackScreen";
 import InternalAuthCallbackScreen from "screens/auth/InternalAuthCallbackScreen";
 
 import ProfileDashboardScreen from "screens/profile/ProfileDashboardScreen";
-import ProfileEditScreen from "screens/profile/ProfileEditScreen";
+import ProfileManageAccountScreen from "screens/profile/ProfileManageAccountScreen";
 
 import PrivacyPolicyScreen from "screens/gdpr/PrivacyPolicyScreen";
 
@@ -55,7 +55,10 @@ const router = createBrowserRouter(
         <Route index element={<HomeScreen />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfileDashboardScreen />} />
-          <Route path="/profile/edit" element={<ProfileEditScreen />} />
+          <Route
+            path="/profile/manage"
+            element={<ProfileManageAccountScreen />}
+          />
         </Route>
 
         <Route path="/privacy-policy" element={<PrivacyPolicyScreen />} />

@@ -1,8 +1,4 @@
 .profile-dashboard {
-  & .card__title {
-    font-weight: 400;
-  }
-
   .profile-summary {
     position: relative;
 
@@ -75,112 +71,6 @@
     }
   }
 
-  .primary-addresses-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 3rem;
-
-    @include breakpoint("lg") {
-      flex-direction: row;
-    }
-    @media (max-width: 720px) {
-      flex-direction: column;
-    }
-    @include breakpoint("sm") {
-      flex-direction: column;
-    }
-
-    .primary-address-card {
-      flex-grow: 1;
-      .card__body {
-        padding: 3rem 1.5rem;
-      }
-      .card__footer {
-        align-items: flex-start;
-
-        @include breakpoint("xl") {
-          padding: 3rem 1rem;
-        }
-      }
-
-      &__item {
-        padding: 1.5rem 4.5rem 1.5rem 3rem;
-        background-color: var(--grayscale-0);
-        border-radius: 1rem;
-        box-shadow: var(--dropshadow-muted);
-        border: 0.2rem solid var(--grayscale-10);
-        border-left: 0.3rem solid var(--primary-70);
-        width: 30rem;
-        margin: 0 auto;
-        position: relative;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        flex-grow: 1;
-
-        .badge {
-          position: absolute;
-          top: 1.5rem;
-          right: 1.5rem;
-        }
-      }
-
-      &__address-name {
-        font-size: 1.65rem;
-        font-weight: 700;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 19rem;
-        margin-bottom: 0.5rem;
-      }
-
-      &__company {
-        font-weight: 500;
-        font-size: 1.5rem;
-
-        &::before {
-          display: block;
-          content: " ";
-          width: 20rem;
-          height: 1px;
-          background-color: var(--grayscale-30);
-          margin: 1rem 0 0.25rem;
-        }
-      }
-
-      &__tax-no {
-        position: relative;
-        & span {
-          font-family: "Courier New", Courier, monospace;
-          font-weight: 700;
-        }
-
-        &::after {
-          display: block;
-          content: " ";
-          width: 20rem;
-          height: 1px;
-          background-color: var(--grayscale-30);
-          margin: 0.25rem 0;
-        }
-      }
-
-      &__company,
-      &__tax-no,
-      &__street,
-      &__city,
-      &__phone-number {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 23rem;
-      }
-    }
-  }
-
   .card.favorites-summary {
     .card-container {
       max-width: 100%;
@@ -222,6 +112,28 @@
     .card__footer {
       align-items: start;
       margin-top: 3rem;
+    }
+  }
+
+  .primary-address-cards-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: stretch;
+    gap: 3rem;
+
+    @include breakpoint("lg") {
+      flex-direction: row;
+    }
+    @media (max-width: 720px) {
+      flex-direction: column;
+    }
+    @include breakpoint("sm") {
+      flex-direction: column;
+    }
+
+    .card__body {
+      margin-bottom: 3rem;
     }
   }
 }
