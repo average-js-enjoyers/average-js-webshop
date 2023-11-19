@@ -26,9 +26,8 @@ export default function ProfileDashboardScreen() {
   return (
     <ProfileScreen
       activeScreen="/profile"
-      title="My Profile"
-      subtitle="Check out and change anything about you: personal details,
-    addresses, favorites and more."
+      title="Profile Dashboard"
+      subtitle="Your most important profile information at a glance."
     >
       <section className="profile-main__content profile-dashboard">
         <Card className={"profile-summary"} dropShade={false} deco={true}>

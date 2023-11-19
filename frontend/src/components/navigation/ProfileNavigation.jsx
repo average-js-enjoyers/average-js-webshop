@@ -21,7 +21,7 @@ function ProfileNavigation({ activeScreen }) {
       path: "/profile",
     },
     {
-      name: "Edit Account & Addresses",
+      name: "Edit Profile Data",
       icon: <PencilSquare className="profile-navigation__icon" />,
       path: "/profile/edit",
     },
@@ -36,7 +36,7 @@ function ProfileNavigation({ activeScreen }) {
       path: "/profile/favorites",
     },
     {
-      name: "Warranty Information",
+      name: "Warranty Info",
       icon: <ShieldFillCheck className="profile-navigation__icon" />,
       path: "/profile/warranty",
     },
