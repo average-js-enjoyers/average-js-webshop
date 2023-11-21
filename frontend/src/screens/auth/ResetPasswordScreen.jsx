@@ -31,7 +31,7 @@ function ResetPasswordScreen() {
   return (
     <Card>
       <CardHeader>
-        <CardLogo>
+        <CardLogo className="card__logo--auth">
           <ShieldLock color="var(--secondary-90)" />
         </CardLogo>
         <CardTitle level="1" textAlign="center">

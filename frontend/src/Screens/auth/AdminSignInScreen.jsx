@@ -29,7 +29,7 @@ export default function AdminSignInScreen() {
       <Card>
         <CardBody>
           <CardHeader>
-            <CardLogo>
+            <CardLogo className="card__logo--auth">
               <PersonCheckFill color="var(--secondary-90)" />
             </CardLogo>
             <CardTitle level="1" textAlign="center">

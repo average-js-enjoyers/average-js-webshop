@@ -24,8 +24,8 @@ import AuthScreen from "screens/auth/AuthScreens";
 import OAuthCallbackScreen from "screens/auth/OAuthCallbackScreen";
 import InternalAuthCallbackScreen from "screens/auth/InternalAuthCallbackScreen";
 
-import ViewProfileScreen from "screens/profile/ViewProfileScreen";
-import EditProfileScreen from "screens/profile/EditProfileScreen";
+import ProfileDashboardScreen from "screens/profile/ProfileDashboardScreen";
+import ProfileManageAccountScreen from "screens/profile/ProfileManageAccountScreen";
 
 import PrivacyPolicyScreen from "screens/gdpr/PrivacyPolicyScreen";
 
@@ -54,8 +54,11 @@ const router = createBrowserRouter(
       <Route element={<MainLayout />}>
         <Route index element={<HomeScreen />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/profile/edit" element={<EditProfileScreen />} />
-          <Route path="/profile" element={<ViewProfileScreen />} />
+          <Route path="/profile" element={<ProfileDashboardScreen />} />
+          <Route
+            path="/profile/manage"
+            element={<ProfileManageAccountScreen />}
+          />
         </Route>
 
         <Route path="/privacy-policy" element={<PrivacyPolicyScreen />} />
@@ -68,7 +71,10 @@ const router = createBrowserRouter(
       />
       <Route path="/onboard/:token" element={<AuthScreen route="onboard" />} />
       <Route path="/signin" element={<AuthScreen route="signin" />} />
-      <Route path="/admin-signin" element={<AuthScreen route="admin-signin" />} />
+      <Route
+        path="/admin-signin"
+        element={<AuthScreen route="admin-signin" />}
+      />
       <Route
         path="/forgot-password"
         element={<AuthScreen route="forgot-password" />}

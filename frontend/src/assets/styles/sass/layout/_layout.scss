@@ -17,6 +17,7 @@
   @include breakpoint("lg") {
     padding-top: 4.5rem;
     padding-bottom: 4.5rem;
+    transform: translateY(7.5rem);
   }
   @include breakpoint("md") {
     padding-top: 3rem;

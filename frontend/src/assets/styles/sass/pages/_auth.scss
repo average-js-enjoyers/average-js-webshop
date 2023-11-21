@@ -1,25 +1,11 @@
 .auth-screen {
-  height: 100%;
+  min-height: 100vh;
   z-index: 3;
 
   display: flex;
   justify-content: space-between;
 
   @include responsivePadding($padding-top: 6rem, $padding-bottom: 6rem);
-
-  &::-webkit-scrollbar {
-    width: 0.7rem;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--grayscale-50);
-    border-radius: 0.3rem;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: var(--grayscale-10);
-    border-radius: 0.3rem;
-  }
 
   @include breakpoint("lg") {
     flex-direction: column;
@@ -37,9 +23,7 @@
     padding-top: 4.5rem;
     padding-bottom: 4.5rem;
 
-    overflow-y: scroll;
     overflow-x: hidden;
-    scroll-behavior: smooth;
   }
   @include breakpoint("md") {
     padding-top: 3rem;
@@ -50,7 +34,7 @@
   }
 
   &-wrapper {
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
     overflow: hidden;
 
@@ -70,7 +54,6 @@
         z-index: -1;
       }
 
-      // Modifiers for specific decoration elements
       &--1 {
         bottom: 0;
         left: 0;
@@ -109,8 +92,6 @@
   &__main {
     width: 100%;
 
-    height: 110%;
-    margin-top: -2.5%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -142,16 +123,7 @@
       width: 100%;
       min-height: 50rem;
 
-      /*   box-shadow: none !important;
-      border: none !important;
-      background-color: transparent !important;
-
-      & .card__footer {
-        background-color: transparent !important;
-      } */
-
       @include breakpoint("xl") {
-        // There used to be a footer margin fix here. Maybe needed later?
       }
       @include breakpoint("lg") {
         min-height: 40rem;

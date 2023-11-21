@@ -1,0 +1,108 @@
+.profile-navigation {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    list-style: none;
+
+    padding: 1.5rem 0;
+
+    @include breakpoint("lg") {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      gap: 0.5rem;
+    }
+  }
+
+  &__item {
+    width: 100%;
+
+    padding: 0.5rem 0 1rem;
+
+    transition: all 0.1s ease-in-out;
+
+    @include breakpoint("lg") {
+      width: 30%;
+      border-bottom: none;
+      padding: 0;
+    }
+    @include breakpoint("md") {
+      width: 45%;
+    }
+    @include breakpoint("sm") {
+      width: 100%;
+    }
+  }
+
+  &__list:hover {
+    & .profile-navigation__link:hover {
+      transform: scale(1.05); // Scale down other links
+      z-index: 1; // Ensure the hovered link is above others
+    }
+    & .profile-navigation__link {
+      transform: scale(0.95); // Scale down other links
+    }
+    & .profile-navigation__link--active {
+      transform: scale(1); // Scale down other links
+    }
+  }
+
+  &__link {
+    width: 90%;
+    margin-left: 5%;
+    height: 7.5rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1.5rem;
+
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+
+    transition: all 0.1s ease-in-out;
+
+    border: 0.1rem solid transparent;
+
+    @include breakpoint("lg") {
+      padding: 0.5rem 1.5rem;
+    }
+    @include breakpoint("md") {
+      height: 6rem;
+    }
+    @include breakpoint("sm") {
+      height: 4.5rem;
+    }
+
+    &:hover {
+      background-color: var(--grayscale-10);
+    }
+
+    &--active {
+      background-color: var(--primary-0);
+      border-right: 0.2rem solid var(--primary-70);
+
+      &:hover {
+        transform: scale(1) !important;
+        background-color: var(--primary-0);
+      }
+    }
+
+    &--signout {
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+
+  &__icon {
+    width: 3rem;
+    fill: var(--primary-70);
+    height: 3rem;
+  }
+
+  &__text {
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+}

@@ -9,6 +9,11 @@ $breakpoints: (
   "3xl": 1600px,
   "4xl": 1900px,
   "5xl": 2200px,
+  "6xl": 2500px,
+  "7xl": 2800px,
+  "8xl": 3100px,
+  "9xl": 3400px,
+  "10xl": 3700px,
 );
 
 // Media query mixin
@@ -33,63 +38,86 @@ $breakpoints: (
 
 @mixin responsive-font-size {
   // Default font size for the smallest screens
-  font-size: 62.5%;
+  font-size: 62.5%; // 1rem = 10px
 
   $queries: (
     "xs": (
       map-get($breakpoints, "xs"),
-      61%,
+      // 0w
+      57.5%,
       // Slightly larger for better readability on very small screens
-      68%,
+      55%,
       // High DPR: xs
     ),
     "sm": (
       map-get($breakpoints, "sm"),
-      60%,
-      57%,
+      // 576w
+      57.5%,
+      55%,
       // High DPR: sm
     ),
     "md": (
       map-get($breakpoints, "md"),
-      62%,
-      58%,
+      // 768w
+      55%,
+      55%,
       // High DPR: md
     ),
     "lg": (
       map-get($breakpoints, "lg"),
-      61.5%,
-      56.5%,
+      // 992w
+      52%,
+      52%,
       // High DPR: lg
     ),
     "xl": (
       map-get($breakpoints, "xl"),
-      61%,
-      55%,
+      // 1200w
+      50%,
+      50%,
       // High DPR: xl
     ),
     "2xl": (
       map-get($breakpoints, "2xl"),
-      60.5%,
-      53.5%,
+      // 1440w
+      52%,
+      52%,
       // High DPR: 2xl
     ),
     "3xl": (
       map-get($breakpoints, "3xl"),
-      60%,
-      52%,
+      // 1600w
+      53%,
+      51%,
       // High DPR: 3xl
     ),
     "4xl": (
       map-get($breakpoints, "4xl"),
-      59.5%,
-      50.5%,
+      // 1900w
+      57.5%,
+      53%,
       // High DPR: 4xl
     ),
     "5xl": (
       map-get($breakpoints, "5xl"),
-      59%,
-      49%,
+      // 2200w
+      62.5%,
+      55%,
       // High DPR: 5xl
+    ),
+    "6xl": (
+      map-get($breakpoints, "6xl"),
+      // 2500w
+      62.5%,
+      57%,
+      // High DPR: 6xl
+    ),
+    "7xl": (
+      map-get($breakpoints, "7xl"),
+      // 2800w
+      62.5%,
+      59%,
+      // High DPR: 7xl
     ),
   );
 
@@ -149,28 +177,24 @@ $breakpoints: (
 
   // Adjust horizontal paddings at breakpoints
   @include breakpoint("5xl") {
+    padding-left: if($padding-horizontal, $padding-horizontal, 12.5%);
+    padding-right: if($padding-horizontal, $padding-horizontal, 12.5%);
+  }
+  @include breakpoint("4xl") {
     padding-left: if($padding-horizontal, $padding-horizontal, 10%);
     padding-right: if($padding-horizontal, $padding-horizontal, 10%);
   }
-  @include breakpoint("4xl") {
+  @include breakpoint("2xl") {
+    padding-left: if($padding-horizontal, $padding-horizontal, 7.5%);
+    padding-right: if($padding-horizontal, $padding-horizontal, 7.5%);
+  }
+  @include breakpoint("sm") {
     padding-left: if($padding-horizontal, $padding-horizontal, 5%);
     padding-right: if($padding-horizontal, $padding-horizontal, 5%);
   }
-  @include breakpoint("lg") {
-    padding-left: if($padding-horizontal, $padding-horizontal, 3rem);
-    padding-right: if($padding-horizontal, $padding-horizontal, 3rem);
-  }
-  @include breakpoint("md") {
-    padding-left: if($padding-horizontal, $padding-horizontal, 1.5rem);
-    padding-right: if($padding-horizontal, $padding-horizontal, 1.5rem);
-  }
-  @include breakpoint("sm") {
-    padding-left: if($padding-horizontal, $padding-horizontal, 1rem);
-    padding-right: if($padding-horizontal, $padding-horizontal, 1rem);
-  }
   @media (max-width: 420px) {
-    padding-left: if($padding-horizontal, $padding-horizontal, 0.75rem);
-    padding-right: if($padding-horizontal, $padding-horizontal, 0.75rem);
+    padding-left: if($padding-horizontal, $padding-horizontal, 1.25rem);
+    padding-right: if($padding-horizontal, $padding-horizontal, 1.25rem);
   }
   @media (max-width: 350px) {
     padding-left: if($padding-horizontal, $padding-horizontal, 0.5rem);

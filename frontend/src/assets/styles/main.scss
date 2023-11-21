@@ -7,6 +7,7 @@
 @import "./sass/base/typography";
 @import "./sass/base/utilities";
 
+@import "./sass/components/_badges.scss";
 @import "./sass/components/_buttons.scss";
 @import "./sass/components/_status-messages.scss";
 @import "./sass/components/_form-validation-messages.scss";
@@ -15,6 +16,7 @@
 @import "./sass/components/_forms.scss";
 @import "./sass/components/_search-bar.scss";
 @import "./sass/components/_cards.scss";
+@import "./sass/components/_profile-navigation.scss";
 
 @import "./sass/layout/_layout.scss";
 @import "./sass/layout/_header.scss";
@@ -23,6 +25,9 @@
 @import "./sass/pages/_pages.scss";
 @import "./sass/pages/_home.scss";
 @import "./sass/pages/_auth.scss";
+@import "./sass/pages/_profile.scss";
+@import "./sass/pages/_profile-dashboard.scss";
+@import "./sass/pages/_profile-manage.scss";
 
 @import "./sass/themes/_themes.scss";
 @import "./sass/vendors/_vendors.scss";

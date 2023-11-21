@@ -1,0 +1,105 @@
+.profile-manage {
+  & form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 3rem;
+    justify-content: start;
+
+    padding-left: 1.5rem;
+
+    @include breakpoint("md") {
+      flex-direction: column;
+      align-items: center;
+    }
+    @include breakpoint("sm") {
+      padding-left: 0;
+    }
+
+    & div.form-group {
+      width: 45%;
+      max-width: 40rem;
+
+      @include breakpoint("md") {
+        width: 100%;
+        max-width: 40rem;
+      }
+    }
+
+    & > div.w100 {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      gap: 3rem;
+      justify-content: start;
+
+      @include breakpoint("md") {
+        flex-direction: column;
+        max-width: 40rem;
+      }
+    }
+
+    & .form-message {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      align-items: center;
+
+      @include breakpoint("md") {
+        max-width: 40rem;
+      }
+
+      & span {
+        font-size: 1.5rem;
+      }
+      &--warning span {
+        color: var(--warning-90);
+      }
+      &--info span {
+        color: var(--primary-90);
+      }
+
+      & svg {
+        min-width: 2.4rem;
+        min-height: 2.4rem;
+      }
+      &--warning svg {
+        fill: var(--warning-70);
+      }
+      &--info svg {
+        fill: var(--primary-70);
+      }
+    }
+  }
+
+  @include breakpoint("md") {
+    & .card__footer {
+      align-items: center !important;
+    }
+  }
+
+  & .delete-account-form {
+    background-color: var(--grayscale-10);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 2.5vw;
+    border-radius: 1rem;
+    box-shadow: var(--dropshadow-muted);
+
+    & button {
+      & svg {
+        min-width: 2.4rem;
+        min-height: 2.4rem;
+        fill: var(--accent-60);
+      }
+
+      &:hover {
+        & svg {
+          fill: var(--grayscale-0);
+        }
+      }
+    }
+  }
+}

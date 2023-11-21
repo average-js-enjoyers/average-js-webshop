@@ -43,7 +43,7 @@ export default function ConfirmRegistrationScreen() {
 
       <Card>
         <CardHeader>
-          <CardLogo>
+          <CardLogo className="card__logo--auth">
             <EnvelopePaperFill color="var(--secondary-90)" />
           </CardLogo>
           <CardTitle level="1" textAlign="center">

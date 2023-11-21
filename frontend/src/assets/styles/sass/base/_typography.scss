@@ -20,6 +20,12 @@ h1 {
   font-size: calc(var(--default-font-size) * 2.5);
   font-weight: 700;
 
+  & span,
+  & a,
+  & strong {
+    font-size: inherit;
+  }
+
   @include breakpoint("md") {
     font-size: calc(var(--default-font-size) * 2.25);
   }
@@ -31,26 +37,56 @@ h1 {
 h2 {
   font-size: calc(var(--default-font-size) * 2.2);
   font-weight: 500;
+
+  & span,
+  & a,
+  & strong {
+    font-size: inherit;
+  }
 }
 
 h3 {
   font-size: calc(var(--default-font-size) * 1.9);
   font-weight: 500;
+
+  & span,
+  & a,
+  & strong {
+    font-size: inherit;
+  }
 }
 
 h4 {
   font-size: calc(var(--default-font-size) * 1.6);
   font-weight: 500;
+
+  & span,
+  & a,
+  & strong {
+    font-size: inherit;
+  }
 }
 
 h5 {
   font-size: calc(var(--default-font-size) * 1.3);
   font-weight: 500;
+
+  & span,
+  & a,
+  & strong {
+    font-size: inherit;
+  }
 }
 
 h6 {
   font-size: calc(var(--default-font-size) * 1.1);
   font-weight: 500;
+
+  & span,
+  & a,
+  & strong {
+    font-size: inherit;
+  }
 }
 
 .lead {

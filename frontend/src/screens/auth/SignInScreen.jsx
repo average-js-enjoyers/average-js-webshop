@@ -35,7 +35,7 @@ export default function SignInScreen() {
       {oauthError && <StatusMessage type="danger" message={oauthError} />}
       <Card>
         <CardHeader>
-          <CardLogo>
+          <CardLogo className="card__logo--auth">
             <PersonCheckFill color="var(--secondary-90)" />
           </CardLogo>
           <CardTitle level="1" textAlign="center">

@@ -20,6 +20,11 @@ button,
 input {
   // Defines how the box model works
   box-sizing: border-box;
+  // position: relative;
+}
+
+#root {
+  // position: relative;
 }
 
 hr {

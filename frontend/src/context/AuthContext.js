@@ -7,12 +7,100 @@ import { fetchUserData } from "api";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
+  const shippingAddresses = [
+    {
+      isActive: true,
+      id: 1,
+      name: "Cube Base HQ",
+      street: "Csók István tér 420.",
+      city: "2483 Gárdony, HUNGARY",
+      phoneNumber: "+36 30 420 69 69",
+    },
+    {
+      isActive: false,
+      id: 2,
+      name: "Cube Base HQ",
+      street: "Csók István tér 420.",
+      city: "2483 Gárdony, HUNGARY",
+      phoneNumber: "+36 30 420 69 69",
+    },
+    {
+      isActive: false,
+      id: 2,
+      name: "Cube Base HQ",
+      street: "Csók István tér 420.",
+      city: "2483 Gárdony, HUNGARY",
+      phoneNumber: "+36 30 420 69 69",
+    },
+    {
+      isActive: false,
+      id: 2,
+      name: "Cube Base HQ",
+      street: "Csók István tér 420.",
+      city: "2483 Gárdony, HUNGARY",
+      phoneNumber: "+36 30 420 69 69",
+    },
+    {
+      isActive: false,
+      id: 2,
+      name: "Cube Base HQ",
+      street: "Csók István tér 420.",
+      city: "2483 Gárdony, HUNGARY",
+      phoneNumber: "+36 30 420 69 69",
+    },
+  ];
+
+  const billingAddresses = [
+    {
+      isActive: true,
+      id: 1,
+      name: "L-TECH",
+      company: "L-TECH Kft.",
+      taxNo: "11116422-2-07",
+      street: "Széchenyi utca 105.",
+      city: "8151 Szabadbattyán, HUNGARY",
+      phoneNumber: "+36 30 420 69 69",
+    },
+    {
+      isActive: false,
+      id: 2,
+      name: "L-TECH",
+      company: "L-TECH Kft.",
+      taxNo: "11116422-2-07",
+      street: "Széchenyi utca 105.",
+      city: "8151 Szabadbattyán, HUNGARY",
+      phoneNumber: "+36 30 420 69 69",
+    },
+    {
+      isActive: false,
+      id: 2,
+      name: "L-TECH",
+      company: "L-TECH Kft.",
+      taxNo: "11116422-2-07",
+      street: "Széchenyi utca 105.",
+      city: "8151 Szabadbattyán, HUNGARY",
+      phoneNumber: "+36 30 420 69 69",
+    },
+    {
+      isActive: false,
+      id: 2,
+      name: "L-TECH",
+      company: "L-TECH Kft.",
+      taxNo: "11116422-2-07",
+      street: "Széchenyi utca 105.",
+      city: "8151 Szabadbattyán, HUNGARY",
+      phoneNumber: "+36 30 420 69 69",
+    },
+  ];
+
   const [authState, setAuthState] = useState({
     isAuthenticated: "loading",
     user: null,
     responseData: null, // Added field for response data
     passwordResetLinkSent: false,
     confregEmailSent: false,
+    shippingAddresses,
+    billingAddresses,
   });
 
   const location = useLocation();

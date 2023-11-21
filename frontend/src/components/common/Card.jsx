@@ -1,18 +1,39 @@
 import React from "react";
 
-export function Card({ className, children, ...props }) {
-  const cardClass = `card ${className || ""}`.trim();
+export function Card({
+  className,
+  children,
+  dropShade = false,
+  deco = false,
+  ...props
+}) {
+  const cardClass = `card ${dropShade && "drop-shade"} ${
+    className || ""
+  }`.trim();
   return (
     <div className={cardClass} {...props}>
-      {children}
+      <div className={"card-container"}>
+        {deco && (
+          <>
+            <div className="card-deco card-deco--1"></div>
+            <div className="card-deco card-deco--2"></div>
+          </>
+        )}
+        {children}
+      </div>
     </div>
   );
 }
 
-export function CardHeader({ className, children, ...props }) {
+export function CardHeader({
+  className,
+  children,
+  align = "center",
+  ...props
+}) {
   const cardHeaderClass = `card__header ${className || ""}`.trim();
   return (
-    <div className={cardHeaderClass} {...props}>
+    <div className={cardHeaderClass} style={{ alignItems: align }} {...props}>
       {children}
     </div>
   );
@@ -82,10 +103,15 @@ export function CardTitle({
   );
 }
 
-export function CardFooter({ className, children, ...props }) {
+export function CardFooter({
+  className,
+  children,
+  align = "center",
+  ...props
+}) {
   const cardFooterClass = `card__footer ${className || ""}`.trim();
   return (
-    <div className={cardFooterClass} {...props}>
+    <div className={cardFooterClass} style={{ alignItems: align }} {...props}>
       {children}
     </div>
   );
