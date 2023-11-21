@@ -59,9 +59,14 @@
       letter-spacing: 0.05rem;
       font-weight: 400;
       padding-left: 0.5rem;
+      max-width: 23.5rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      @include breakpoint("md") {
+        max-width: 21.5rem;
+      }
 
       &--link {
         font-weight: 500;

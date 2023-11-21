@@ -57,8 +57,8 @@ export const AuthProvider = ({ children }) => {
       name: "L-TECH",
       company: "L-TECH Kft.",
       taxNo: "11116422-2-07",
-      street: "Csók István tér 420.",
-      city: "2483 Gárdony, HUNGARY",
+      street: "Széchenyi utca 105.",
+      city: "8151 Szabadbattyán, HUNGARY",
       phoneNumber: "+36 30 420 69 69",
     },
     {
@@ -67,8 +67,8 @@ export const AuthProvider = ({ children }) => {
       name: "L-TECH",
       company: "L-TECH Kft.",
       taxNo: "11116422-2-07",
-      street: "Csók István tér 420.",
-      city: "2483 Gárdony, HUNGARY",
+      street: "Széchenyi utca 105.",
+      city: "8151 Szabadbattyán, HUNGARY",
       phoneNumber: "+36 30 420 69 69",
     },
     {
@@ -77,8 +77,8 @@ export const AuthProvider = ({ children }) => {
       name: "L-TECH",
       company: "L-TECH Kft.",
       taxNo: "11116422-2-07",
-      street: "Csók István tér 420.",
-      city: "2483 Gárdony, HUNGARY",
+      street: "Széchenyi utca 105.",
+      city: "8151 Szabadbattyán, HUNGARY",
       phoneNumber: "+36 30 420 69 69",
     },
     {
@@ -87,8 +87,8 @@ export const AuthProvider = ({ children }) => {
       name: "L-TECH",
       company: "L-TECH Kft.",
       taxNo: "11116422-2-07",
-      street: "Csók István tér 420.",
-      city: "2483 Gárdony, HUNGARY",
+      street: "Széchenyi utca 105.",
+      city: "8151 Szabadbattyán, HUNGARY",
       phoneNumber: "+36 30 420 69 69",
     },
   ];

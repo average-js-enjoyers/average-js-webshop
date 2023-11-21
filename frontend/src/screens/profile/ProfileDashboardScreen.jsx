@@ -78,7 +78,7 @@ export default function ProfileDashboardScreen() {
               </div>
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Email</p>
-                <p className="profile-summary__value">theshade42@gmail.com</p>
+                <p className="profile-summary__value">theshade42@gmail.com </p>
               </div>
             </div>
           </CardBody>

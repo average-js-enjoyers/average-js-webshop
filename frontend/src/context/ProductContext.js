@@ -12,8 +12,9 @@ export const ProductProvider = ({ children }) => {
       name: "“420 Blaze It” High Quality Hand-made Tobacco Grinder",
       img: "/assets/img/grinder420.png",
       badges: [
-        { text: "New", color: "warning" },
+        { text: "New", color: "success" },
         { text: "Sale", color: "secondary" },
+        { text: "-50%", color: "danger" },
       ],
       priceBase: "€ 69,000",
       priceCurrent: "€ 42,000",
@@ -26,7 +27,7 @@ export const ProductProvider = ({ children }) => {
       name: "“420 Blaze It” High Quality Hand-made Tobacco Grinder",
       img: "/assets/img/grinder420.png",
       badges: [
-        { text: "New", color: "warning" },
+        { text: "New", color: "success" },
         { text: "Sale", color: "secondary" },
       ],
       priceBase: "€ 69,000",
@@ -40,7 +41,7 @@ export const ProductProvider = ({ children }) => {
       name: "“420 Blaze It” High Quality Hand-made Tobacco Grinder",
       img: "/assets/img/grinder420.png",
       badges: [
-        { text: "New", color: "warning" },
+        { text: "New", color: "success" },
         { text: "Sale", color: "secondary" },
       ],
       priceBase: "€ 69,000",
@@ -54,7 +55,7 @@ export const ProductProvider = ({ children }) => {
       name: "“420 Blaze It” High Quality Hand-made Tobacco Grinder",
       img: "/assets/img/grinder420.png",
       badges: [
-        { text: "New", color: "warning" },
+        { text: "New", color: "success" },
         { text: "Sale", color: "secondary" },
       ],
       priceBase: "€ 69,000",
