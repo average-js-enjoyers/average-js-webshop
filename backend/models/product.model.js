@@ -16,6 +16,12 @@ const ProductSchema = new Schema({
       ref: 'Property',
     },
   ],
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Review',
+    },
+  ],
 });
 
 module.exports = mongoose.model('Product', ProductSchema);

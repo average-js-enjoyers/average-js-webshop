@@ -14,6 +14,7 @@ const Variation = require('../../models/variation.model');
 const ProductItem = require('../../models/productItem.model');
 const Order = require('../../models/order.model');
 const ShippingMethod = require('../../models/shippingMethod.model');
+const Review = require('../../models/review.model');
 
 const users = require('./data/users');
 const addresses = require('./data/addresses');
@@ -24,6 +25,7 @@ const variations = require('./data/variations');
 const productItems = require('./data/productItems');
 const orders = require('./data/orders');
 const shippingMethods = require('./data/shippingMethods');
+const reviews = require('./data/reviews');
 
 const connectDB = require('./db');
 
@@ -44,6 +46,7 @@ const importData = async () => {
     await ProductItem.deleteMany();
     await Order.deleteMany();
     await ShippingMethod.deleteMany();
+    await Review.deleteMany();
 
     const sampleAddresses = addresses.map((address) => ({
       _id: new mongoose.Types.ObjectId(address._id), // Generate a new ObjectId for each address
@@ -106,6 +109,7 @@ const importData = async () => {
       categoryID: new mongoose.Types.ObjectId(product.category_id),
       properties: product.properties,
       images: product.images,
+      reviews: product.reviews,
     }));
 
     // Get all products from the products array and add the admin user to each product
@@ -146,6 +150,16 @@ const importData = async () => {
       })),
     }));
 
+    const sampleReviews = reviews.map((review) => ({
+      _id: new mongoose.Types.ObjectId(review._id),
+      userID: new mongoose.Types.ObjectId(review.userID),
+      rating: review.rating,
+      title: review.title,
+      content: review.content,
+      createdAt: review.createdAt,
+      isHidden: review.isHidden,
+    }));
+
     await User.create(sampleUsers);
     await Address.insertMany(sampleAddresses);
     await Category.insertMany(sampleCategories);
@@ -155,6 +169,7 @@ const importData = async () => {
     await ProductItem.insertMany(sampleProductItems);
     await Order.insertMany(sampleOrders);
     await ShippingMethod.insertMany(sampleShippingMethods);
+    await Review.insertMany(sampleReviews);
 
     /* await ProductCategory.create(...sampleCategories);
     await Product.create(...sampleProducts); */
@@ -180,6 +195,7 @@ const destroyData = async () => {
     await ProductItem.deleteMany();
     await Order.deleteMany();
     await ShippingMethod.deleteMany();
+    await Review.deleteMany();
 
     console.log('Data Destroyed!'.red.inverse);
     process.exit();
