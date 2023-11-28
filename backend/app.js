@@ -9,9 +9,9 @@ const hpp = require('hpp');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const userRouter = require('./routes/user/userRoutes');
 const authRouter = require('./routes/authRoutes');
-const adminRouter = require('./routes/admin/adminRoutes');
+const userRouter = require('./routes/userRoutes');
+const adminRouter = require('./routes/adminRoutes');
 
 const app = express();
 
@@ -48,7 +48,7 @@ app.use(xss());
 app.use(hpp());
 // 3) ROUTES
 app.use('/api/auth', authRouter);
-app.use('/api/users', userRouter);
+app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter);
 
 app.all('*', (req, res, next) => {
