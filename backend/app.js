@@ -7,11 +7,11 @@ const xss = require('xss-clean');
 const cors = require('cors');
 const hpp = require('hpp');
 
-const AppError = require('./utils/appError');
+const AppError = require('./services/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const authRouter = require('./routes/authRoutes');
-const userRouter = require('./routes/userRoutes');
-const adminRouter = require('./routes/adminRoutes');
+const authRouter = require('./routes/auth/authRoutes');
+const userRouter = require('./routes/user/userRoutes');
+const adminRouter = require('./routes/admin/adminRoutes');
 
 const app = express();
 

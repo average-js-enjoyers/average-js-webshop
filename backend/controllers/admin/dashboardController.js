@@ -1,15 +1,15 @@
 const { validationResult } = require('express-validator');
-const User = require('../../models/user.model');
-const catchAsync = require('../../utils/catchAsync');
-const AppError = require('../../utils/appError');
-const dashboard = require('../../utils/admin/dashboard');
-const Order = require('../../models/order.model');
+const catchAsync = require('../../services/catchAsync');
+const AppError = require('../../services/appError');
+const dashboard = require('../../services/admin/dashboard');
 
 exports.getAggregates = catchAsync(async (req, res, next) => {
-  const ranges = req.body;
+  const elements = req.body;
 
   data = [];
-  for (const range of ranges) {
+  for (const element of elements) {
+    const range = element.range;
+
     const numActiveUsers = await dashboard.numActiveUsers(
       range.startDate,
       range.endDate,
@@ -33,14 +33,17 @@ exports.getAggregates = catchAsync(async (req, res, next) => {
     );
 
     data.push({
-      rangeName: range.rangeName,
-      startDate: range.startDate,
-      endDate: range.endDate,
-      numActiveUsers: numActiveUsers,
-      numOrders: numOrders,
-      totalSales: totalSales,
-      avgOrderValue: avgOrderValue,
-      medianOrderValue: medianOrderValue,
+      range: {
+        startDate: range.startDate,
+        endDate: range.endDate,
+      },
+      aggregates: {
+        numActiveUsers: numActiveUsers,
+        numOrders: numOrders,
+        totalSales: totalSales,
+        avgOrderValue: avgOrderValue,
+        medianOrderValue: medianOrderValue,
+      },
     });
   }
 

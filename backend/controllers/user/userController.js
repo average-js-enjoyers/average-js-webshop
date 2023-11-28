@@ -1,10 +1,10 @@
 const { validationResult } = require('express-validator');
 const User = require('../../models/user.model');
 const Address = require('../../models/address.model');
-const catchAsync = require('../../utils/catchAsync');
-const AppError = require('../../utils/appError');
-const cdn = require('../../utils/cdn');
-const jwtHandler = require('../../utils/jwtHandler');
+const catchAsync = require('../../services/catchAsync');
+const AppError = require('../../services/appError');
+const cdn = require('../../services/cdn');
+const jwtHandler = require('../../services/jwtHandler');
 
 exports.onboard = catchAsync(async (req, res, next) => {
   const errors = validationResult(req);

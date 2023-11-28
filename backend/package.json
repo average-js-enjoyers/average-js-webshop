@@ -4,7 +4,7 @@
   "description": "Average JS Webshop backend.",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --config config/nodemon/nodemon.json server.js",
+    "start": "nodemon server.js",
     "start:prod": "node server.js",
     "debug": "ndb server.js",
     "data:import": "node ./config/mongodb/seeder.js",
