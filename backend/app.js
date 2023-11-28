@@ -7,13 +7,11 @@ const xss = require('xss-clean');
 const cors = require('cors');
 const hpp = require('hpp');
 
-const swaggerUi = require('swagger-ui-express');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const userRouter = require('./routes/userRoutes');
+const userRouter = require('./routes/user/userRoutes');
 const authRouter = require('./routes/authRoutes');
-
-const swaggerDocument = require('./config/swagger/swagger.json');
+const adminRouter = require('./routes/admin/adminRoutes');
 
 const app = express();
 
@@ -21,7 +19,6 @@ app.use(cors());
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
-  app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 }
 
 // 1) GLOBAL MIDDLEWARES
@@ -49,20 +46,10 @@ app.use(xss());
 
 // Prevent parameter pollution
 app.use(hpp());
-
-// Serving static files
-//app.use(express.static(`${__dirname}/public`));
-
-// Test middleware
-app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString();
-  // console.log(req.headers);
-  next();
-});
-
 // 3) ROUTES
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
+app.use('/api/admin', adminRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

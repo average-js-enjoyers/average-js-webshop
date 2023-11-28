@@ -12,8 +12,6 @@ const path = require('path');
 const crypto = require('crypto');
 
 exports.getAuthType = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Auth']
-
   const user = await User.findById(req.user.id);
 
   res.status(200).json({
@@ -25,15 +23,6 @@ exports.getAuthType = catchAsync(async (req, res, next) => {
 });
 
 exports.isExists = catchAsync(async (req, res, next) => {
-  /*  
-  // #swagger.tags = ['Auth']
-   #swagger.parameters['body'] = {
-                in: 'body',
-                schema: {
-                    $emailAddress: 'example@example.com'
-                }
-              }*/
-
   const emailAddress = req.body.emailAddress;
 
   const user = await User.findOne({ emailAddress });
@@ -49,8 +38,6 @@ exports.isExists = catchAsync(async (req, res, next) => {
 });
 
 exports.confirmEmail = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Auth']
-
   const hashedToken = crypto
     .createHash('sha256')
     .update(req.params.token)
@@ -74,19 +61,6 @@ exports.confirmEmail = catchAsync(async (req, res, next) => {
 });
 
 exports.requestEmailSignin = catchAsync(async (req, res, next) => {
-  /*  
-  // #swagger.tags = ['Auth']
-   #swagger.parameters['body'] = {
-                in: 'body',
-                schema: {
-                    $emailAddress: 'example@example.com'
-                }
-              }
-  #swagger.parameters['Confirmation-URL'] = {
-                in: 'header',
-                type: 'string'
-        } */
-
   const { emailAddress } = req.body;
 
   const user = await User.findOne({ emailAddress });
@@ -136,15 +110,6 @@ exports.requestEmailSignin = catchAsync(async (req, res, next) => {
 });
 
 exports.signup = catchAsync(async (req, res, next) => {
-  /*  
-  // #swagger.tags = ['Auth']
-  #swagger.parameters['body'] = {
-                in: 'body',
-                schema: {
-                    $emailAddress: 'example@example.com'
-                }
-  } */
-
   const { emailAddress } = req.body;
 
   const newUser = await User.create({ emailAddress });
@@ -160,17 +125,6 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 exports.signin = catchAsync(async (req, res, next) => {
-  /*  
-  // #swagger.tags = ['Auth']
-  #swagger.parameters['body'] = {
-                in: 'body',
-                description: 'Some description...',
-                schema: {
-                    $emailAddress: 'user1@example.com',
-                    $password: 'Password123',
-                }
-        } */
-
   const { emailAddress, password } = req.body;
 
   // 2) Check if user exists && password is correct
@@ -189,8 +143,6 @@ exports.signin = catchAsync(async (req, res, next) => {
 });
 
 exports.googleSignin = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Auth']
-
   const accessToken = req.body.token;
 
   const oAuth2Client = new google.auth.OAuth2();
@@ -229,8 +181,6 @@ exports.googleSignin = catchAsync(async (req, res, next) => {
 });
 
 exports.facebookSignin = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Auth']
-
   const accessToken = req.body.token;
 
   const apiUrl = `https://graph.facebook.com/v18.0/me?fields=id,email,first_name,last_name&access_token=${accessToken}`;
@@ -312,20 +262,6 @@ exports.restrictTo =
   };
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
-  /*  
-  // #swagger.tags = ['Auth']
-  #swagger.parameters['body'] = {
-                in: 'body',
-                schema: {
-                    $emailAddress: 'user1@example.com'
-                }
-              }
-  #swagger.parameters['Reset-URL'] = {
-                in: 'header',
-                type: 'string',
-                schema: 'http://localhost:3000/callback/'
-        } */
-
   const user = await User.findOne({ emailAddress: req.body.emailAddress });
   if (!user) {
     return next(new AppError('There is no user with email address.', 404));
@@ -372,8 +308,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Auth']
-
   // 1) Get user based on the token
   const hashedToken = crypto
     .createHash('sha256')
@@ -401,8 +335,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Profile']
-
   // 1) Get user from collection
   const user = await User.findById(req.user.id).select('+password');
 
@@ -419,4 +351,14 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   // 4) Log user in, send JWT
   jwtHandler.createSendToken(user, 200, res);
+});
+
+exports.isAdmin = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  if (user.role !== 'admin') {
+    return next(new AppError('Unauthorized access!', 401));
+  }
+
+  next();
 });

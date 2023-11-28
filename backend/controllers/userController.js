@@ -7,27 +7,13 @@ const cdn = require('../utils/cdn');
 const jwtHandler = require('../utils/jwtHandler');
 
 exports.onboard = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Profile']
-
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
-    //return next(new AppError(errors.array(), 400));
   }
 
   const { firstName, lastName, phoneNumber } = req.body;
-
-  // if (
-  //   !firstName ||
-  //   !lastName ||
-  //   !phoneNumber ||
-  //   typeof phoneNumber !== 'number'
-  // ) {
-  //   return next(
-  //     new AppError('Please provide first name, last name, phone number!', 400),
-  //   );
-  // }
 
   const user = await User.findById(req.user.id);
   user.firstName = firstName;
@@ -73,8 +59,6 @@ exports.checkOnboard = catchAsync(async (req, res, next) => {
 });
 
 exports.deletePhoto = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Profile']
-
   const defaultPhoto =
     'https://storage.googleapis.com/profile-photos/default.png';
 
@@ -91,16 +75,6 @@ exports.deletePhoto = catchAsync(async (req, res, next) => {
 });
 
 exports.uploadPhoto = catchAsync(async (req, res, next) => {
-  /*  
-  #swagger.tags = ['Profile']
-  #swagger.consumes = ['multipart/form-data']
-  #swagger.parameters[0] = {
-    name: 'image',
-    in: 'formData',
-    type: 'file',
-    required: true,
-    } */
-
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
@@ -124,8 +98,6 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Profile']
-
   await User.findByIdAndUpdate(req.user.id, { active: false });
 
   res.status(204).json({
@@ -135,18 +107,6 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 });
 
 exports.updateMe = catchAsync(async (req, res, next) => {
-  /*  
-  #swagger.tags = ['Profile']
-  #swagger.parameters['body'] = {
-                in: 'body',
-                description: 'Some description...',
-                schema: {
-                    $firstName: 'John',
-                    $lastName: 'Doe',
-                    $phoneNumber: '+36201230044'
-                }
-        } */
-
   const filteredBody = filterObj(
     req.body,
     'firstName',
@@ -169,8 +129,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 });
 
 exports.getUser = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Profile']
-
   const user = await User.findOne({ _id: req.user.id });
   user.addresses = undefined;
 
@@ -187,8 +145,6 @@ exports.getUser = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllAddress = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Profile']
-
   const { addresses } = await User.findOne({ _id: req.user.id }).populate(
     'addresses',
   );
@@ -202,23 +158,6 @@ exports.getAllAddress = catchAsync(async (req, res, next) => {
 });
 
 exports.createAddress = catchAsync(async (req, res, next) => {
-  /*  
-  #swagger.tags = ['Profile']
-  #swagger.parameters['body'] = {
-                in: 'body',
-                schema: {
-                    $unitNumber: '12345',
-                    $streetNumber: '12343',
-                    $addressLine1: 'Rabbit street',
-                    $city: 'New York',
-                    $region: 'EAST COAST',
-                    $postalCode: '2483',
-                    $vatID: '6326434',
-                    $country: 'US',
-                    $type: 'Both',
-                }
-        } */
-
   const user = await User.findOne({ _id: req.user.id }).exec();
 
   const newAddress = await Address.create({
@@ -246,8 +185,6 @@ exports.createAddress = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteAddress = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Profile']
-
   const address = await Address.findById(req.query.id);
   const user = await User.findById(req.user.id);
 
@@ -266,26 +203,6 @@ exports.deleteAddress = catchAsync(async (req, res, next) => {
 });
 
 exports.updateAddress = catchAsync(async (req, res, next) => {
-  /*  
-  #swagger.tags = ['Profile']
-  #swagger.parameters['body'] = {
-    in: 'body',
-    schema: {
-        id: '614ce88d8101e980a49f0427',
-        unitNumber: 101,
-        streetNumber: 123,
-        addressLine1: '123 Main Street',
-        addressLine2: 'Apt 101',
-        city: 'City1',
-        region: 'Region1',
-        postalCode: 12345,
-        vatID: 67890,
-        country: 'Country1',
-        type: 'Residential'
-    }
-}
-  */
-
   const address = await Address.findById(req.body.id);
   const user = await User.findById(req.user.id);
 
@@ -308,8 +225,6 @@ exports.updateAddress = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
-  // #swagger.tags = ['Profile']
-
   // 1) Get user from collection
   const user = await User.findById(req.user.id).select('+password');
 
