@@ -55,14 +55,42 @@ exports.getAggregates = catchAsync(async (req, res, next) => {
 });
 
 exports.getPendingOrders = catchAsync(async (req, res, next) => {
-  const pendingOrders = await Order.find({
+  const pendingStatuses = [
+    'Pending',
+    'On hold',
+    'Payment confirmed',
+    'Processing',
+    'Shipped',
+  ];
+
+  const page = req.query.page || 1;
+  const pageSize = req.query.pageSize || 10;
+  const skip = (page - 1) * pageSize;
+
+  const totalItems = await Order.countDocuments({
     orderStatus: {
-      $in: ['Pending', 'On hold', 'Payment confirmed', 'Processing', 'Shipped'],
+      $in: pendingStatuses,
     },
   });
 
+  const totalPages = Math.ceil(totalItems / pageSize);
+
+  const pendingOrders = await Order.find({
+    orderStatus: {
+      $in: pendingStatuses,
+    },
+  })
+    .skip(skip)
+    .limit(pageSize);
+
   await res.status(200).json({
     status: 'success',
+    pagination: {
+      currentPage: page,
+      pagesize: pageSize,
+      totalItems: totalItems,
+      totalPages: totalPages,
+    },
     data: pendingOrders,
   });
 });

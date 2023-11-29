@@ -1,5 +1,5 @@
 const handleValidationError = require('../../services/handleValidationError');
-const { body, validationResult } = require('express-validator');
+const { body, query, validationResult } = require('express-validator');
 const { isDate, isAfter, isBefore } = require('validator');
 
 // Function to calculate days between two dates
@@ -33,5 +33,20 @@ exports.aggregates = [
     })
     .withMessage('Range cannot be longer than 365 days!'),
 
+  handleValidationError,
+];
+
+exports.pendingOrders = [
+  query('page')
+    .isInt({
+      gt: 0,
+    })
+    .withMessage('Page must be greater than zero!'),
+  query('pageSize')
+    .isInt({
+      gt: 0,
+      lt: 11,
+    })
+    .withMessage('Page size must be greater than 1 and less or equal than 10!'),
   handleValidationError,
 ];

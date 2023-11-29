@@ -10,6 +10,10 @@ router.post(
   dashboardController.getAggregates,
 );
 
-router.get('/pending-orders', dashboardController.getPendingOrders);
+router.get(
+  '/pending-orders',
+  dashboardValidator.pendingOrders,
+  dashboardController.getPendingOrders,
+);
 
 module.exports = router;
