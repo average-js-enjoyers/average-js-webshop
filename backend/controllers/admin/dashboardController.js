@@ -83,6 +83,17 @@ exports.getPendingOrders = catchAsync(async (req, res, next) => {
     .skip(skip)
     .limit(pageSize);
 
+  // Calculate the URL for the next and last pages
+  const baseUrl = `${req.protocol}://${req.get('host')}${
+    req.originalUrl.split('?')[0]
+  }`;
+  const nextPage = page < totalPages ? `${baseUrl}?page=${page + 1}` : null;
+  const lastPage = `${baseUrl}?page=${totalPages}`;
+
+  // Set the response headers
+  res.set('Link', `<${nextPage}>; rel="next", <${lastPage}>; rel="last"`);
+  res.set('X-Total-Count', totalItems);
+
   await res.status(200).json({
     status: 'success',
     pagination: {
