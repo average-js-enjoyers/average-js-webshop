@@ -30,13 +30,12 @@ function getRandomBoolean() {
 function getRandomOrderStatus() {
   const orderStatuses = [
     'Pending',
-    'Confirmed',
-    'Shipped',
-    'Delivered',
+    'On hold',
     'Cancelled',
-    'Returned',
-    'Refunded',
-    'Failed',
+    'Payment confirmed',
+    'Processing',
+    'Shipped',
+    'Completed',
   ];
   const randomIndex = Math.floor(Math.random() * orderStatuses.length);
 

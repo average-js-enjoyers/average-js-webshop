@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator');
 const catchAsync = require('../../services/catchAsync');
 const AppError = require('../../services/appError');
 const dashboard = require('../../services/admin/dashboard');
+const Order = require('../../models/order.model');
 
 exports.getAggregates = catchAsync(async (req, res, next) => {
   const elements = req.body;
@@ -50,5 +51,18 @@ exports.getAggregates = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: data,
+  });
+});
+
+exports.getPendingOrders = catchAsync(async (req, res, next) => {
+  const pendingOrders = await Order.find({
+    orderStatus: {
+      $in: ['Pending', 'On hold', 'Payment confirmed', 'Processing', 'Shipped'],
+    },
+  });
+
+  await res.status(200).json({
+    status: 'success',
+    data: pendingOrders,
   });
 });
