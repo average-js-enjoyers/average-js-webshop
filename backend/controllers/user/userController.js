@@ -49,7 +49,7 @@ exports.checkOnboard = catchAsync(async (req, res, next) => {
   if (!user.emailConfirmed) {
     return next(
       new AppError(
-        "You haven't finished on boarding process. Please send a POST request to api/users/me/onboard",
+        "You haven't finished on boarding process. Please send a POST request to api/user/profile/onboard",
         401,
       ),
     );

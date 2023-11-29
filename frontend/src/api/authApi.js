@@ -25,7 +25,7 @@ export async function createUser(user) {
 //Need to find the user somehow
 export async function apiOnboardUser(user) {
   try {
-    const response = await fetch("/api/users/me/onboard", {
+    const response = await fetch("/api/user/profile/onboard", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -174,7 +174,7 @@ export async function fetchUserData() {
   if (sessionStorage.getItem("accessToken") === "null") return null;
   if (sessionStorage.getItem("accessToken").length < 32) return null;
   try {
-    const response = await fetch("/api/users/me", {
+    const response = await fetch("/api/user/profile", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
