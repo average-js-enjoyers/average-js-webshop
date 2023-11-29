@@ -118,7 +118,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       message:
-        'Email confirmation is required. Send a POST request to api/users/login/email',
+        'Email confirmation is required. Send a POST request to api/auth/signin/email',
       data: newUser,
     },
   });
