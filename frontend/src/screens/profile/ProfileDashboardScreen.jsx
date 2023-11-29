@@ -21,9 +21,44 @@ import AddressCard from "components/common/AddressCard";
 
 import { useAuth, useProduct } from "hooks";
 
+import { formatPhoneNumber, splitAddressesByType } from "utils";
+
+import { useState, useEffect } from "react";
+
 export default function ProfileDashboardScreen() {
+  const { user, fetchUserAddresses } = useAuth();
+
+  const [addresses, setAddresses] = useState(null);
+  const [shippingAddresses, setShippingAddresses] = useState([]);
+  const [billingAddresses, setBillingAddresses] = useState([]);
+
+  useEffect(() => {
+    async function fetchAddresses() {
+      try {
+        const fetchedAddresses = await fetchUserAddresses();
+        setAddresses(fetchedAddresses);
+      } catch (error) {
+        console.error("Error fetching addresses:", error);
+        // Handle errors as needed
+      }
+    }
+
+    fetchAddresses();
+  }, []);
+
+  useEffect(() => {
+    if (addresses) {
+      const { shippingAddresses, billingAddresses } =
+        splitAddressesByType(addresses);
+      setShippingAddresses(shippingAddresses);
+      setBillingAddresses(billingAddresses);
+      console.log("shippingAddresses", shippingAddresses);
+      console.log("billingAddresses", billingAddresses);
+    }
+  }, [addresses]);
+
+  /* TODO - Remove for production */
   const { dummyProductCardData, renderProductCards } = useProduct();
-  const { shippingAddresses, billingAddresses } = useAuth();
 
   return (
     <ProfileScreen
@@ -57,11 +92,11 @@ export default function ProfileDashboardScreen() {
             <div className="profile-summary__list">
               <div className="profile-summary__item">
                 <p className="profile-summary__label">First Name</p>
-                <p className="profile-summary__value">Márton</p>
+                <p className="profile-summary__value">{user.firstName}</p>
               </div>
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Last Name</p>
-                <p className="profile-summary__value">Kiss G.</p>
+                <p className="profile-summary__value">{user.lastName}</p>
               </div>
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Password</p>
@@ -74,11 +109,13 @@ export default function ProfileDashboardScreen() {
               </div>
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Phone Number</p>
-                <p className="profile-summary__value">+36 30 420 69 69</p>
+                <p className="profile-summary__value">
+                  {formatPhoneNumber(user.phoneNumber)}
+                </p>
               </div>
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Email</p>
-                <p className="profile-summary__value">theshade42@gmail.com </p>
+                <p className="profile-summary__value">{user.emailAddress}</p>
               </div>
             </div>
           </CardBody>
@@ -95,22 +132,25 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="address-list address-list--primary">
-                {shippingAddresses.map(
-                  (address) =>
-                    address.isActive && (
-                      <AddressCard
-                        key={address._id}
-                        isActive={address.isActive}
-                        type="shipping"
-                        name={address.name}
-                        company={address.company}
-                        taxNo={address.taxNo}
-                        street={address.street}
-                        city={address.city}
-                        phoneNumber={address.phoneNumber}
-                      />
-                    )
-                )}
+                {shippingAddresses &&
+                  shippingAddresses.map(
+                    (address) =>
+                      address.isActive && (
+                        <AddressCard
+                          key={address._id}
+                          isActive={address.isActive}
+                          type="shipping"
+                          name={address.name || address.company || address.city}
+                          company={address.company}
+                          vatID={address.vatID}
+                          street={address.street}
+                          zip={address.zip}
+                          city={address.city}
+                          country={address.country}
+                          phoneNumber={address.phoneNumber}
+                        />
+                      )
+                  )}
               </div>
             </CardBody>
             <CardFooter align="start">
@@ -137,22 +177,25 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="address-list address-list--primary">
-                {billingAddresses.map(
-                  (address) =>
-                    address.isActive && (
-                      <AddressCard
-                        key={address._id}
-                        isActive={address.isActive}
-                        type="billing"
-                        name={address.name}
-                        company={address.company}
-                        taxNo={address.taxNo}
-                        street={address.street}
-                        city={address.city}
-                        phoneNumber={address.phoneNumber}
-                      />
-                    )
-                )}
+                {billingAddresses &&
+                  billingAddresses.map(
+                    (address) =>
+                      address.isActive && (
+                        <AddressCard
+                          key={address._id}
+                          isActive={address.isActive}
+                          type="billing"
+                          name={address.name || address.company || address.city}
+                          company={address.company}
+                          vatID={address.vatID}
+                          street={address.street}
+                          zip={address.zip}
+                          city={address.city}
+                          country={address.country}
+                          phoneNumber={address.phoneNumber}
+                        />
+                      )
+                  )}
               </div>
             </CardBody>
             <CardFooter align="start">

@@ -17,6 +17,7 @@ import {
   requestBackendToSendPasswordResetEmail,
   requestConfRegEmail,
   apiUpdatePassword,
+  apiFetchUserAddresses,
 } from "api";
 
 export const useAuth = () => {
@@ -221,6 +222,19 @@ export const useAuth = () => {
     [navigate]
   );
 
+  const fetchUserAddresses = useCallback(async () => {
+    try {
+      const data = await apiFetchUserAddresses();
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      return data;
+    } catch (error) {
+      // handle error
+      console.error(error);
+    }
+  }, []);
+
   return {
     ...authContext,
     signUp,
@@ -232,5 +246,6 @@ export const useAuth = () => {
     sendConfRegEmail,
     onboardUser,
     resetPassword,
+    fetchUserAddresses,
   };
 };

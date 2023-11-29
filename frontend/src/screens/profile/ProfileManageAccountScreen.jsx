@@ -5,11 +5,42 @@ import {
   ManagePasswordForm,
   ManagePersonalInfoForm,
 } from "components/forms/ManageAccountForms";
+import { useEffect, useState } from "react";
+import { splitAddressesByType } from "utils";
 
 import { useAuth } from "hooks";
 
 export default function ProfileEditScreen() {
-  const { shippingAddresses, billingAddresses } = useAuth();
+  const { user, fetchUserAddresses } = useAuth();
+
+  const [addresses, setAddresses] = useState(null);
+  const [shippingAddresses, setShippingAddresses] = useState([]);
+  const [billingAddresses, setBillingAddresses] = useState([]);
+
+  useEffect(() => {
+    async function fetchAddresses() {
+      try {
+        const fetchedAddresses = await fetchUserAddresses();
+        setAddresses(fetchedAddresses);
+      } catch (error) {
+        console.error("Error fetching addresses:", error);
+        // Handle errors as needed
+      }
+    }
+
+    fetchAddresses();
+  }, []);
+
+  useEffect(() => {
+    if (addresses) {
+      const { shippingAddresses, billingAddresses } =
+        splitAddressesByType(addresses);
+      setShippingAddresses(shippingAddresses);
+      setBillingAddresses(billingAddresses);
+      console.log("shippingAddresses", shippingAddresses);
+      console.log("billingAddresses", billingAddresses);
+    }
+  }, [addresses]);
 
   return (
     <ProfileScreen

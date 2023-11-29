@@ -20,8 +20,12 @@ import { Link } from "react-router-dom";
 import Button from "components/common/Button";
 import { useState } from "react";
 import AddressCard from "components/common/AddressCard";
+import { useAuth } from "hooks";
+import { formatPhoneNumber } from "utils";
 
 export function ManagePersonalInfoForm() {
+  const { user } = useAuth();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -59,7 +63,7 @@ export function ManagePersonalInfoForm() {
               value={firstName}
               name="firstName"
               onChange={(e) => setFirstName(e.target.value)}
-              placeholder="Márton"
+              placeholder={user.firstName}
             />
           </div>
           <div className="form-group">
@@ -70,7 +74,7 @@ export function ManagePersonalInfoForm() {
               value={lastName}
               name="lastName"
               onChange={(e) => setLastName(e.target.value)}
-              placeholder="Kiss G."
+              placeholder={user.lastName}
             />
           </div>
           <div className="form-group">
@@ -81,7 +85,7 @@ export function ManagePersonalInfoForm() {
               value={phoneNumber}
               name="phoneNumber"
               onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder="+36 30 420 69 69"
+              placeholder={formatPhoneNumber(user.phoneNumber)}
             />
           </div>
           <div className="w100">
@@ -93,7 +97,7 @@ export function ManagePersonalInfoForm() {
                 value={email}
                 name="email"
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="theshade42@gmail.com"
+                placeholder={user.emailAddress}
               />
             </div>
             <div className="form-group">
@@ -227,7 +231,7 @@ export function ManageAddressesForm({ type, addresses }) {
               type={type}
               name={address.name}
               company={address.company}
-              taxNo={address.taxNo}
+              vatID={address.vatID}
               street={address.street}
               city={address.city}
               phoneNumber={address.phoneNumber}
