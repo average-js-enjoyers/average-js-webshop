@@ -60,5 +60,5 @@
   "author": "Average JS Enjoyers",
   "license": "MIT",
   "homepage": "https://average-js-enjoyers.github.io/",
-  "proxy": "http://127.0.0.1:5001/"
+  "proxy": "http://127.0.0.1:8080/"
 }
