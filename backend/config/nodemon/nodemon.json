@@ -1,6 +1,0 @@
-{
-  "ignore": ["swagger.json"],
-  "events": {
-    "start": "node \"config/swagger/swagger.js\""
-  }
-}

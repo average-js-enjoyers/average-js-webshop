@@ -30,13 +30,12 @@ function getRandomBoolean() {
 function getRandomOrderStatus() {
   const orderStatuses = [
     'Pending',
-    'Confirmed',
-    'Shipped',
-    'Delivered',
+    'On hold',
     'Cancelled',
-    'Returned',
-    'Refunded',
-    'Failed',
+    'Payment confirmed',
+    'Processing',
+    'Shipped',
+    'Completed',
   ];
   const randomIndex = Math.floor(Math.random() * orderStatuses.length);
 
@@ -111,12 +110,10 @@ users.forEach((user) => {
     let order = {
       user_id: user._id,
       order_date: getRandomDate(new Date('2023-01-01'), new Date('2023-12-30')),
-      // TODO
       payment_method: getRandomPaymentMethod(),
       is_paid: getRandomBoolean(),
       shipping_address_id: getUsersRandomAddressID(user),
       billing_address_id: getUsersRandomAddressID(user),
-      // TODO
       shipping_method_id: getRandomShippingMethodID(),
       order_lines: getRandomOrderLines(getRandomInt(1, 10)),
       order_status: getRandomOrderStatus(),
