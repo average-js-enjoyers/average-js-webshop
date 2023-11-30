@@ -62,9 +62,9 @@ export default function AdminSignInScreen() {
       setCountdown(30); // Reset countdown when QR code is fetched
       interval = setInterval(() => {
         setCountdown(
-          (prevCountdown) => Math.round((prevCountdown - 0.1) * 10) / 10
+          (prevCountdown) => Math.round((prevCountdown - 1) * 10) / 10
         );
-      }, 100);
+      }, 1000);
 
       const timer = setTimeout(() => {
         clearInterval(interval); // Clear interval when QR code expires
@@ -96,7 +96,23 @@ export default function AdminSignInScreen() {
           {qrDataFetched ? (
             <div className="text-center">
               <QRCode value={qrData} />
-              <p style={{ color: "var(--accent-70)" }}>{qrData}</p>
+              <p
+                style={{
+                  color: "var(--primary-100)",
+                  backgroundColor: "var(--warning-10)",
+                  border: "1px solid var(--warning-60)",
+                  boxShadow: "0 0 5px var(--warning-20)",
+                  padding: "10px",
+                  borderRadius: "5px",
+                  textTransform: "uppercase",
+                  fontWeight: "bold",
+                  fontSize: "2rem",
+                  maxWidth: "80%",
+                  margin: "15px auto 0",
+                }}
+              >
+                {qrData}
+              </p>
               <p className="mt-3">
                 Scan the QR code above with your phone to sign in.
               </p>
