@@ -5,13 +5,14 @@ export function Card({
   children,
   dropShade = false,
   deco = false,
+  id = null,
   ...props
 }) {
   const cardClass = `card ${dropShade && "drop-shade"} ${
     className || ""
   }`.trim();
   return (
-    <div className={cardClass} {...props}>
+    <div className={cardClass} {...props} id={id ? id : ""}>
       <div className={"card-container"}>
         {deco && (
           <>

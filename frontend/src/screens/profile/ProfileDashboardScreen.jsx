@@ -1,29 +1,77 @@
 //src/screens/profile/ProfileDashboardScreen.jsx
 
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardImage,
-  CardBody,
-  CardFooter,
-} from "components/common/Card";
+// React and Hooks
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth, useProduct } from "hooks";
+
+// Library Imports
 import {
   HeartFill,
   PencilSquare,
   Truck,
   FileEarmarkTextFill,
 } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
-import ProfileScreen from "screens/profile/ProfileScreen";
-import Button from "components/common/Button";
-import AddressCard from "components/common/AddressCard";
 
-import { useAuth, useProduct } from "hooks";
+// Utility Functions
+import { formatPhoneNumber, splitAddressesByType } from "utils";
+
+// Component Imports
+import AddressCard from "components/common/AddressCard";
+import Button from "components/common/Button";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  CardFooter,
+} from "components/common/Card";
+import ProfileScreen from "screens/profile/ProfileScreen";
 
 export default function ProfileDashboardScreen() {
+  const { user, fetchUserAddresses } = useAuth();
+
+  const [addresses, setAddresses] = useState(null);
+  const [shippingAddresses, setShippingAddresses] = useState([]);
+  const [billingAddresses, setBillingAddresses] = useState([]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchAddresses() {
+      try {
+        const fetchedAddresses = await fetchUserAddresses();
+        setAddresses(fetchedAddresses);
+      } catch (error) {
+        console.error("Error fetching addresses:", error);
+        // Handle errors as needed
+      }
+    }
+
+    fetchAddresses();
+  }, []);
+
+  useEffect(() => {
+    if (addresses) {
+      const { shippingAddresses, billingAddresses } =
+        splitAddressesByType(addresses);
+      setShippingAddresses(shippingAddresses);
+      setBillingAddresses(billingAddresses);
+    }
+  }, [addresses]);
+
+  /* TODO - Remove for production */
   const { dummyProductCardData, renderProductCards } = useProduct();
-  const { shippingAddresses, billingAddresses } = useAuth();
+
+  const goToShipping = () => {
+    navigate("/profile/manage", { state: { scrollTo: "manageShipping" } });
+  };
+  const goToBilling = () => {
+    navigate("/profile/manage", { state: { scrollTo: "manageBilling" } });
+  };
+  const goToPassword = () => {
+    navigate("/profile/manage", { state: { scrollTo: "managePassword" } });
+  };
 
   return (
     <ProfileScreen
@@ -57,28 +105,31 @@ export default function ProfileDashboardScreen() {
             <div className="profile-summary__list">
               <div className="profile-summary__item">
                 <p className="profile-summary__label">First Name</p>
-                <p className="profile-summary__value">Márton</p>
+                <p className="profile-summary__value">{user.firstName}</p>
               </div>
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Last Name</p>
-                <p className="profile-summary__value">Kiss G.</p>
+                <p className="profile-summary__value">{user.lastName}</p>
               </div>
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Password</p>
-                <Link
-                  to="/profile/manage"
+                <Button
+                  variant="link btn--compact"
                   className="profile-summary__value profile-summary__value--link"
+                  onClick={goToPassword}
                 >
                   Change Password Here
-                </Link>
+                </Button>
               </div>
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Phone Number</p>
-                <p className="profile-summary__value">+36 30 420 69 69</p>
+                <p className="profile-summary__value">
+                  {formatPhoneNumber(user.phoneNumber)}
+                </p>
               </div>
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Email</p>
-                <p className="profile-summary__value">theshade42@gmail.com </p>
+                <p className="profile-summary__value">{user.emailAddress}</p>
               </div>
             </div>
           </CardBody>
@@ -95,35 +146,50 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="address-list address-list--primary">
-                {shippingAddresses.map(
-                  (address) =>
-                    address.isActive && (
-                      <AddressCard
-                        key={address._id}
-                        isActive={address.isActive}
-                        type="shipping"
-                        name={address.name}
-                        company={address.company}
-                        taxNo={address.taxNo}
-                        street={address.street}
-                        city={address.city}
-                        phoneNumber={address.phoneNumber}
-                      />
-                    )
+                {shippingAddresses.length === 0 && (
+                  <p
+                    style={{
+                      textAlign: "center",
+                      alignSelf: "center",
+                      fontSize: "1.5rem",
+                      fontWeight: 500,
+                      color: "#888",
+                    }}
+                  >
+                    No shipping addresses yet.
+                  </p>
                 )}
+                {shippingAddresses &&
+                  shippingAddresses.map(
+                    (address) =>
+                      address.isActive && (
+                        <AddressCard
+                          key={address._id}
+                          isActive={address.isActive}
+                          type="shipping"
+                          name={address.name || address.company || address.city}
+                          company={address.company}
+                          vatID={address.vatID}
+                          street={address.street}
+                          zip={address.zip}
+                          city={address.city}
+                          country={address.country}
+                          phoneNumber={address.phoneNumber}
+                        />
+                      )
+                  )}
               </div>
             </CardBody>
             <CardFooter align="start">
               <Button
                 variant="outline-light btn--compact btn--muted"
                 className="profile-manage-button"
+                onClick={goToShipping}
               >
-                <Link to="/profile/manage">
-                  <Truck />
-                  <span>
-                    Manage <strong>Shipping</strong> Addresses
-                  </span>
-                </Link>
+                <Truck />
+                <span>
+                  Manage <strong>Shipping</strong> Addresses
+                </span>
               </Button>
             </CardFooter>
           </Card>
@@ -137,35 +203,50 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="address-list address-list--primary">
-                {billingAddresses.map(
-                  (address) =>
-                    address.isActive && (
-                      <AddressCard
-                        key={address._id}
-                        isActive={address.isActive}
-                        type="billing"
-                        name={address.name}
-                        company={address.company}
-                        taxNo={address.taxNo}
-                        street={address.street}
-                        city={address.city}
-                        phoneNumber={address.phoneNumber}
-                      />
-                    )
+                {billingAddresses.length === 0 && (
+                  <p
+                    style={{
+                      textAlign: "center",
+                      alignSelf: "center",
+                      fontSize: "1.5rem",
+                      fontWeight: 500,
+                      color: "#888",
+                    }}
+                  >
+                    No billing addresses yet.
+                  </p>
                 )}
+                {billingAddresses &&
+                  billingAddresses.map(
+                    (address) =>
+                      address.isActive && (
+                        <AddressCard
+                          key={address._id}
+                          isActive={address.isActive}
+                          type="billing"
+                          name={address.name || address.company || address.city}
+                          company={address.company}
+                          vatID={address.vatID}
+                          street={address.street}
+                          zip={address.zip}
+                          city={address.city}
+                          country={address.country}
+                          phoneNumber={address.phoneNumber}
+                        />
+                      )
+                  )}
               </div>
             </CardBody>
             <CardFooter align="start">
               <Button
                 variant="outline-light btn--compact btn--muted"
                 className="profile-manage-button"
+                onClick={goToBilling}
               >
-                <Link to="/profile/manage">
-                  <FileEarmarkTextFill />
-                  <span>
-                    Manage <strong>Billing</strong> Addresses
-                  </span>
-                </Link>
+                <FileEarmarkTextFill />
+                <span>
+                  Manage <strong>Billing</strong> Addresses
+                </span>
               </Button>
             </CardFooter>
           </Card>

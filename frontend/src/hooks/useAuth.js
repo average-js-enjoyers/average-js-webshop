@@ -17,6 +17,9 @@ import {
   requestBackendToSendPasswordResetEmail,
   requestConfRegEmail,
   apiUpdatePassword,
+  apiFetchUserAddresses,
+  apiUpdateUserInfo,
+  apiUpdateUserPassword,
 } from "api";
 
 export const useAuth = () => {
@@ -221,6 +224,44 @@ export const useAuth = () => {
     [navigate]
   );
 
+  const fetchUserAddresses = useCallback(async () => {
+    try {
+      const data = await apiFetchUserAddresses();
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      return data;
+    } catch (error) {
+      // handle error
+      console.error(error);
+    }
+  }, []);
+
+  const updateUserInfo = useCallback(async (userData) => {
+    try {
+      const response = await apiUpdateUserInfo(userData);
+      if (response.error) {
+        throw new Error(response.error);
+      }
+      return response;
+    } catch (error) {
+      // handle error
+      console.error("ERROR ERROR", error);
+    }
+  }, []);
+
+  const updateUserPassword = useCallback(async (passwords) => {
+    try {
+      const response = await apiUpdateUserPassword(passwords);
+      if (response.error) {
+        throw new Error(response.error);
+      }
+    } catch (error) {
+      // handle error
+      console.error("ERROR ERROR", error);
+    }
+  }, []);
+
   return {
     ...authContext,
     signUp,
@@ -232,5 +273,8 @@ export const useAuth = () => {
     sendConfRegEmail,
     onboardUser,
     resetPassword,
+    fetchUserAddresses,
+    updateUserInfo,
+    updateUserPassword,
   };
 };

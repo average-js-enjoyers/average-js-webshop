@@ -7,7 +7,7 @@ import { fetchUserData } from "api";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const shippingAddresses = [
+  /*   const shippingAddresses = [
     {
       isActive: true,
       id: 1,
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
       id: 1,
       name: "L-TECH",
       company: "L-TECH Kft.",
-      taxNo: "11116422-2-07",
+      vatID: "11116422-2-07",
       street: "Széchenyi utca 105.",
       city: "8151 Szabadbattyán, HUNGARY",
       phoneNumber: "+36 30 420 69 69",
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
       id: 2,
       name: "L-TECH",
       company: "L-TECH Kft.",
-      taxNo: "11116422-2-07",
+      vatID: "11116422-2-07",
       street: "Széchenyi utca 105.",
       city: "8151 Szabadbattyán, HUNGARY",
       phoneNumber: "+36 30 420 69 69",
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
       id: 2,
       name: "L-TECH",
       company: "L-TECH Kft.",
-      taxNo: "11116422-2-07",
+      vatID: "11116422-2-07",
       street: "Széchenyi utca 105.",
       city: "8151 Szabadbattyán, HUNGARY",
       phoneNumber: "+36 30 420 69 69",
@@ -86,12 +86,12 @@ export const AuthProvider = ({ children }) => {
       id: 2,
       name: "L-TECH",
       company: "L-TECH Kft.",
-      taxNo: "11116422-2-07",
+      vatID: "11116422-2-07",
       street: "Széchenyi utca 105.",
       city: "8151 Szabadbattyán, HUNGARY",
       phoneNumber: "+36 30 420 69 69",
     },
-  ];
+  ]; */
 
   const [authState, setAuthState] = useState({
     isAuthenticated: "loading",
@@ -99,8 +99,8 @@ export const AuthProvider = ({ children }) => {
     responseData: null, // Added field for response data
     passwordResetLinkSent: false,
     confregEmailSent: false,
-    shippingAddresses,
-    billingAddresses,
+    /* shippingAddresses,
+    billingAddresses, */
   });
 
   const location = useLocation();
@@ -118,8 +118,9 @@ export const AuthProvider = ({ children }) => {
     };
 
     loadUserData();
-  }, [location.pathname, navigate]);
+  }, [location.pathname]);
 
+  // TODO - For some reason this always returns the user to the home screen (at least from profile)
   const setAuthInfo = ({ user }) => {
     setAuthState({ ...authState, isAuthenticated: !!user, user });
   };

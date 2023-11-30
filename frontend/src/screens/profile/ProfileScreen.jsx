@@ -1,4 +1,5 @@
 import ProfileNavigation from "components/navigation/ProfileNavigation";
+import { useAuth } from "hooks";
 
 export default function ProfileScreen({
   activeScreen,
@@ -6,22 +7,27 @@ export default function ProfileScreen({
   subtitle,
   children,
 }) {
+  const { user } = useAuth();
+
   return (
     <div className="profile">
       <section className="profile-header">
         <div className="profile-intro">
           <div className="profile-intro__photo-wrapper">
             <img
-              src={`${process.env.PUBLIC_URL}/assets/img/brade-profile.png`}
+              /* src={`${process.env.PUBLIC_URL}/assets/img/brade-profile.png`} */
+              src={user.profilePhoto}
               alt="Brade Profile"
               className="profile-intro__photo"
             />
           </div>
           <div className="profile-intro__text-wrapper">
             <p className="profile-intro__welcome">Welcome,</p>
-            <h2 className="profile-intro__name">Kiss G. Márton </h2>
+            <h2 className="profile-intro__name">
+              {user.firstName} {user.lastName}
+            </h2>
             <hr className="profile-intro__rule" />
-            <p className="profile-intro__email">theshade42@gmail.com</p>
+            <p className="profile-intro__email">{user.emailAddress}</p>
           </div>
         </div>
         <div className="profile-title-wrapper">

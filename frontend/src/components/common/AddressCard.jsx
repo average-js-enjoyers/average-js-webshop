@@ -1,5 +1,6 @@
 import Button from "components/common/Button";
 import { PencilSquare } from "react-bootstrap-icons";
+import { formatPhoneNumber } from "utils";
 
 export default function AddressCard({
   isEditable = false,
@@ -7,9 +8,11 @@ export default function AddressCard({
   type = "shipping",
   name,
   company = "",
-  taxNo = "",
+  vatID = "",
+  zip,
   street,
   city,
+  country,
   phoneNumber,
 }) {
   return (
@@ -20,13 +23,18 @@ export default function AddressCard({
         <>
           <p className="address-card__company">{company}</p>
           <p className="address-card__tax-no">
-            Tax: <span>{taxNo}</span>
+            Tax: <span>{vatID}</span>
           </p>
         </>
       )}
       <p className="address-card__street">{street}</p>
-      <p className="address-card__city">{city}</p>
-      <p className="address-card__phone-number">{phoneNumber}</p>
+      <p className="address-card__city">
+        {zip && `${zip}, `}
+        {city}, {country && country.toUpperCase()}
+      </p>
+      <p className="address-card__phone-number">
+        {formatPhoneNumber(phoneNumber)}
+      </p>
       {isEditable && (
         <Button
           variant="outline-light btn--compact btn--muted"

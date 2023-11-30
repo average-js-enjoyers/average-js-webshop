@@ -5,6 +5,30 @@
     /* max-height: 8rem;
     overflow: hidden; */
     transition: all 0.3s ease-in-out;
+
+    &--fixed-height {
+      max-height: 7.5rem;
+      margin-bottom: 1.5rem;
+
+      &::-webkit-scrollbar {
+        width: 0.5rem;
+      }
+      &::-webkit-scrollbar-track {
+        background: var(--grayscale-10);
+        border-radius: 0.5rem;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: var(--grayscale-30);
+        border-radius: 0.5rem;
+      }
+
+      & .form-validation-message {
+        margin-top: 0.5rem;
+        &:last-child {
+          margin-bottom: 1rem;
+        }
+      }
+    }
   }
 
   font-size: var(--default-font-size);
@@ -26,7 +50,7 @@
   position: relative;
 
   & span {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     position: relative;
     z-index: 1;
   }

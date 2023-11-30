@@ -10,7 +10,7 @@ const AddressSchema = new Schema({
   city: String,
   region: String,
   postalCode: Number,
-  vatID: Number,
+  vatID: String,
   country: String,
   type: String,
 });
