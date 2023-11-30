@@ -1,29 +1,32 @@
 //src/screens/profile/ProfileDashboardScreen.jsx
 
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardImage,
-  CardBody,
-  CardFooter,
-} from "components/common/Card";
+// React and Hooks
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth, useProduct } from "hooks";
+
+// Library Imports
 import {
   HeartFill,
   PencilSquare,
   Truck,
   FileEarmarkTextFill,
 } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
-import ProfileScreen from "screens/profile/ProfileScreen";
-import Button from "components/common/Button";
-import AddressCard from "components/common/AddressCard";
 
-import { useAuth, useProduct } from "hooks";
-
+// Utility Functions
 import { formatPhoneNumber, splitAddressesByType } from "utils";
 
-import { useState, useEffect } from "react";
+// Component Imports
+import AddressCard from "components/common/AddressCard";
+import Button from "components/common/Button";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  CardFooter,
+} from "components/common/Card";
+import ProfileScreen from "screens/profile/ProfileScreen";
 
 export default function ProfileDashboardScreen() {
   const { user, fetchUserAddresses } = useAuth();
@@ -31,6 +34,8 @@ export default function ProfileDashboardScreen() {
   const [addresses, setAddresses] = useState(null);
   const [shippingAddresses, setShippingAddresses] = useState([]);
   const [billingAddresses, setBillingAddresses] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchAddresses() {
@@ -52,13 +57,21 @@ export default function ProfileDashboardScreen() {
         splitAddressesByType(addresses);
       setShippingAddresses(shippingAddresses);
       setBillingAddresses(billingAddresses);
-      console.log("shippingAddresses", shippingAddresses);
-      console.log("billingAddresses", billingAddresses);
     }
   }, [addresses]);
 
   /* TODO - Remove for production */
   const { dummyProductCardData, renderProductCards } = useProduct();
+
+  const goToShipping = () => {
+    navigate("/profile/manage", { state: { scrollTo: "manageShipping" } });
+  };
+  const goToBilling = () => {
+    navigate("/profile/manage", { state: { scrollTo: "manageBilling" } });
+  };
+  const goToPassword = () => {
+    navigate("/profile/manage", { state: { scrollTo: "managePassword" } });
+  };
 
   return (
     <ProfileScreen
@@ -100,12 +113,13 @@ export default function ProfileDashboardScreen() {
               </div>
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Password</p>
-                <Link
-                  to="/profile/manage"
+                <Button
+                  variant="link btn--compact"
                   className="profile-summary__value profile-summary__value--link"
+                  onClick={goToPassword}
                 >
                   Change Password Here
-                </Link>
+                </Button>
               </div>
               <div className="profile-summary__item">
                 <p className="profile-summary__label">Phone Number</p>
@@ -132,6 +146,19 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="address-list address-list--primary">
+                {shippingAddresses.length === 0 && (
+                  <p
+                    style={{
+                      textAlign: "center",
+                      alignSelf: "center",
+                      fontSize: "1.5rem",
+                      fontWeight: 500,
+                      color: "#888",
+                    }}
+                  >
+                    No shipping addresses yet.
+                  </p>
+                )}
                 {shippingAddresses &&
                   shippingAddresses.map(
                     (address) =>
@@ -157,13 +184,12 @@ export default function ProfileDashboardScreen() {
               <Button
                 variant="outline-light btn--compact btn--muted"
                 className="profile-manage-button"
+                onClick={goToShipping}
               >
-                <Link to="/profile/manage">
-                  <Truck />
-                  <span>
-                    Manage <strong>Shipping</strong> Addresses
-                  </span>
-                </Link>
+                <Truck />
+                <span>
+                  Manage <strong>Shipping</strong> Addresses
+                </span>
               </Button>
             </CardFooter>
           </Card>
@@ -177,6 +203,19 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="address-list address-list--primary">
+                {billingAddresses.length === 0 && (
+                  <p
+                    style={{
+                      textAlign: "center",
+                      alignSelf: "center",
+                      fontSize: "1.5rem",
+                      fontWeight: 500,
+                      color: "#888",
+                    }}
+                  >
+                    No billing addresses yet.
+                  </p>
+                )}
                 {billingAddresses &&
                   billingAddresses.map(
                     (address) =>
@@ -202,13 +241,12 @@ export default function ProfileDashboardScreen() {
               <Button
                 variant="outline-light btn--compact btn--muted"
                 className="profile-manage-button"
+                onClick={goToBilling}
               >
-                <Link to="/profile/manage">
-                  <FileEarmarkTextFill />
-                  <span>
-                    Manage <strong>Billing</strong> Addresses
-                  </span>
-                </Link>
+                <FileEarmarkTextFill />
+                <span>
+                  Manage <strong>Billing</strong> Addresses
+                </span>
               </Button>
             </CardFooter>
           </Card>

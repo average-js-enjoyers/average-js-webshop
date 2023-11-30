@@ -15,27 +15,34 @@ export function FormValidationMessage({ message, type = "error", isVisible }) {
   );
 }
 
-export function FormValidationMessageWrapper({ messages }) {
+export function FormValidationMessageWrapper({
+  messages,
+  className = "",
+  children,
+  showResponse,
+}) {
   let counter = 0;
 
   return (
-    <div className="form-validation-message-wrapper">
-      {messages.map((message, i) => {
-        if (message.isVisible) {
-          counter++;
-          if (counter <= 2) {
-            return (
-              <FormValidationMessage
-                key={message.id}
-                message={message.text}
-                type={message.type}
-                isVisible={message.isVisible}
-              />
-            );
+    <div className={`form-validation-message-wrapper ${className || ""}`}>
+      {!showResponse &&
+        messages.map((message, i) => {
+          if (message.isVisible) {
+            counter++;
+            if (counter <= 2) {
+              return (
+                <FormValidationMessage
+                  key={message.id}
+                  message={message.text}
+                  type={message.type}
+                  isVisible={message.isVisible}
+                />
+              );
+            }
           }
-        }
-        return null;
-      })}
+          return null;
+        })}
+      {children}
     </div>
   );
 }

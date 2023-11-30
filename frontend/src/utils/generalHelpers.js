@@ -3,9 +3,9 @@ export function formatPhoneNumber(phoneNumber) {
 
   const phoneStr = String(phoneNumber).replace(/[^\d]/g, "");
 
-  if (!phoneStr || phoneStr.length !== 11) {
-    throw new Error("Invalid phone number");
-  }
+  /* if (!phoneStr || phoneStr.length < 10) {
+     throw new Error("Invalid phone number");
+  } */
 
   // Format the phone number
   return `+${phoneStr.slice(0, 2)} ${phoneStr.slice(2, 4)} ${phoneStr.slice(

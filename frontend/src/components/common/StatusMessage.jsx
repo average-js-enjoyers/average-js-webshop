@@ -37,7 +37,7 @@ const StatusMessage = ({
     if (autoClose) {
       autoCloseTimer = setTimeout(() => {
         // Add class to trigger exit animation
-        node.classList.add("status-message--exit");
+        node?.classList.add("status-message--exit");
 
         // Set a timeout for the duration of the exit animation
         setTimeout(handleClose, 300); // Assuming exit animation is 1s

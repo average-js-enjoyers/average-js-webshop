@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { redirect, useLocation } from "react-router-dom";
+import { splitAddressesByType } from "utils";
+
 import ProfileScreen from "screens/profile/ProfileScreen";
 import {
   DeleteAccountForm,
@@ -5,13 +9,14 @@ import {
   ManagePasswordForm,
   ManagePersonalInfoForm,
 } from "components/forms/ManageAccountForms";
-import { useEffect, useState } from "react";
-import { splitAddressesByType } from "utils";
+import StatusMessage from "components/common/StatusMessage";
 
 import { useAuth } from "hooks";
 
 export default function ProfileEditScreen() {
   const { user, fetchUserAddresses } = useAuth();
+
+  const location = useLocation();
 
   const [addresses, setAddresses] = useState(null);
   const [shippingAddresses, setShippingAddresses] = useState([]);
@@ -37,10 +42,35 @@ export default function ProfileEditScreen() {
         splitAddressesByType(addresses);
       setShippingAddresses(shippingAddresses);
       setBillingAddresses(billingAddresses);
-      console.log("shippingAddresses", shippingAddresses);
-      console.log("billingAddresses", billingAddresses);
+      /*  console.log("shippingAddresses", shippingAddresses);
+      console.log("billingAddresses", billingAddresses); */
     }
   }, [addresses]);
+
+  useEffect(() => {
+    const { scrollTo } = location.state || {};
+    if (scrollTo) {
+      const element = document.getElementById(scrollTo);
+      if (element) {
+        const offset = 200;
+        const elementPosition =
+          element.getBoundingClientRect().top + window.scrollY;
+        const targetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [location]);
+
+  let { updateSuccess } = location.state || {};
+  if (updateSuccess) {
+    setTimeout(() => {
+      updateSuccess = false;
+    }, 3000);
+  }
 
   return (
     <ProfileScreen
@@ -48,11 +78,26 @@ export default function ProfileEditScreen() {
       title="Manage Account"
       subtitle="Manage your personal information, your password and your addresses."
     >
+      {updateSuccess && (
+        <StatusMessage
+          type="success"
+          message="Update successful!"
+          cleanupFunction={() => (updateSuccess = false)}
+        />
+      )}
       <section className="profile-main__content profile-manage">
         <ManagePersonalInfoForm />
         <ManagePasswordForm />
-        <ManageAddressesForm type="shipping" addresses={shippingAddresses} />
-        <ManageAddressesForm type="billing" addresses={billingAddresses} />
+        <ManageAddressesForm
+          type="shipping"
+          addresses={shippingAddresses}
+          id="manageShipping"
+        />
+        <ManageAddressesForm
+          type="billing"
+          addresses={billingAddresses}
+          id="manageBilling"
+        />
         <DeleteAccountForm />
       </section>
     </ProfileScreen>

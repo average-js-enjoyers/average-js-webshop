@@ -31,6 +31,7 @@ export const passwordValidationErrors = (password) => {
 
 // Checks if phone number has at least 11 digits. A plus sign is allowed at the beginning.
 export const isPhoneNumberValid = (phoneNumber) => {
-  const re = /^\+?[0-9]{11,}$/;
-  return re.test(String(phoneNumber));
+  // Updated regex: allows optional spaces between digits and at least 10 digits in total
+  const re = /^\+?(\d\s*){10,}$/;
+  return re.test(String(phoneNumber).replace(/\s+/g, " ")); // Replace multiple spaces with a single space
 };

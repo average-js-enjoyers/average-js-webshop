@@ -1052,17 +1052,17 @@ strong {
   height: 4.5rem;
   padding: 0 1.5rem;
 }
+.btn--compact.profile-manage-button svg {
+  width: 3rem;
+  height: 3rem;
+  fill: var(--primary-70) !important;
+}
 .btn--compact a {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
-}
-.btn--compact a svg {
-  width: 3rem;
-  height: 3rem;
-  fill: var(--primary-70);
 }
 .btn--compact a span {
   line-height: 4.2rem;
@@ -1557,6 +1557,27 @@ strong {
   overflow: hidden; */
   transition: all 0.3s ease-in-out;
 }
+.form-validation-message-wrapper--fixed-height {
+  max-height: 7.5rem;
+  margin-bottom: 1.5rem;
+}
+.form-validation-message-wrapper--fixed-height::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.form-validation-message-wrapper--fixed-height::-webkit-scrollbar-track {
+  background: var(--grayscale-10);
+  border-radius: 0.5rem;
+}
+.form-validation-message-wrapper--fixed-height::-webkit-scrollbar-thumb {
+  background: var(--grayscale-30);
+  border-radius: 0.5rem;
+}
+.form-validation-message-wrapper--fixed-height .form-validation-message {
+  margin-top: 0.5rem;
+}
+.form-validation-message-wrapper--fixed-height .form-validation-message:last-child {
+  margin-bottom: 1rem;
+}
 .form-validation-message:not(:first-child) {
   margin-top: 1rem;
 }
@@ -1564,7 +1585,7 @@ strong {
   margin-bottom: 3rem;
 }
 .form-validation-message span {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   position: relative;
   z-index: 1;
 }
@@ -3276,6 +3297,7 @@ form.form--profile textarea:disabled {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 100%;
 }
 @media (max-width: 1200px) {
   .profile-intro__name {
@@ -3314,6 +3336,7 @@ form.form--profile textarea:disabled {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 100%;
 }
 @media (max-width: 768px) {
   .profile-intro__email {
