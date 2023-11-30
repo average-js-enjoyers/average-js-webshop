@@ -108,8 +108,16 @@ export function ManagePersonalInfoForm() {
 
     if (validationMessages.some((msg) => msg.isVisible)) return;
 
+    // Create a new object with updated fields, falling back to original user values
+    const updatedUserInfo = {
+      firstName: userInfo.firstName || user.firstName,
+      lastName: userInfo.lastName || user.lastName,
+      phoneNumber: userInfo.phoneNumber || user.phoneNumber,
+      emailAddress: userInfo.email || user.emailAddress,
+    };
+
     try {
-      const response = await updateUserInfo(userInfo);
+      const response = await updateUserInfo(updatedUserInfo);
       setResponse(response); // Assuming updateUserInfo returns a response
     } catch (error) {
       setResponse("Error updating personal info");
