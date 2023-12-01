@@ -170,6 +170,7 @@ exports.signinAdmin = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       secret: secret.otpauth_url,
+      fasz: 'pöcs',
     },
   });
 });

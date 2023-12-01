@@ -4,38 +4,46 @@ const authValidator = require('../../validators/auth/authValidator');
 
 const router = express.Router();
 
-router.post('/signup', authValidator.signup, authController.signup);
-router.post('/signin', authValidator.signin, authController.signin);
+router.post('/user/signup', authValidator.signup, authController.signup);
+router.post('/user/signin', authValidator.signin, authController.signin);
 router.post(
-  '/signin/email',
+  '/user/signin/email',
   authValidator.requestEmailSignin,
   authController.requestEmailSignin,
 );
 router.post(
-  '/signin/google',
+  '/user/signin/google',
   authValidator.googleSignin,
   authController.googleSignin,
 );
 router.post(
-  '/signin/facebook',
+  '/user/signin/facebook',
   authValidator.facebookSignin,
   authController.facebookSignin,
 );
 router.post(
-  '/forgotPassword',
+  '/user/password/forgot',
   authValidator.forgotPassword,
   authController.forgotPassword,
 );
 router.patch(
-  '/resetPassword',
+  '/user/password/reset',
   authValidator.resetPassword,
   authController.resetPassword,
 );
-router.post('/email/exists', authValidator.isExists, authController.isExists);
-router.get('/type', authController.protect, authController.getAuthType);
+router.post(
+  '/user/info/email',
+  authValidator.isExists,
+  authController.isExists,
+);
+router.get(
+  '/user/info/type',
+  authController.protect,
+  authController.getAuthType,
+);
 
 // ADMIN SIGNIN
-router.post('/signin/admin', authValidator.signin, authController.signinAdmin);
-router.post('/verify-2fa', authController.verify2fa);
+router.post('/admin/signin', authValidator.signin, authController.signinAdmin);
+router.post('/admin/verify-2fa', authController.verify2fa);
 
 module.exports = router;
