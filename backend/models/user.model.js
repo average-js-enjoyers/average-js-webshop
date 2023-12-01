@@ -69,6 +69,10 @@ const UserSchema = new Schema({
       ref: 'Address',
     },
   ],
+  twofa: {
+    secret: String,
+    verified: Boolean,
+  },
 });
 
 UserSchema.pre('save', async function (next) {

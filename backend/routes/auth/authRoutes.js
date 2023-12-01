@@ -34,4 +34,8 @@ router.patch(
 router.post('/email/exists', authValidator.isExists, authController.isExists);
 router.get('/type', authController.protect, authController.getAuthType);
 
+// ADMIN SIGNIN
+router.post('/signin/admin', authValidator.signin, authController.signinAdmin);
+router.post('/verify-2fa', authController.verify2fa);
+
 module.exports = router;

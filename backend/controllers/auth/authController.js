@@ -10,6 +10,7 @@ const jwtHandler = require('../../services/jwtHandler');
 const fs = require('fs/promises');
 const path = require('path');
 const crypto = require('crypto');
+const speakeasy = require('speakeasy');
 
 exports.getAuthType = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
@@ -137,6 +138,61 @@ exports.signin = catchAsync(async (req, res, next) => {
   ) {
     return next(new AppError('Incorrect email or password', 401));
   }
+
+  // 3) If everything ok, send token to client
+  jwtHandler.createSendToken(user, 200, res);
+});
+
+exports.signinAdmin = catchAsync(async (req, res, next) => {
+  const { emailAddress, password } = req.body;
+
+  // 2) Check if user exists && password is correct
+  const user = await User.findOne({ emailAddress }).select('+password');
+
+  if (
+    !user ||
+    user.password === undefined ||
+    !(await user.correctPassword(password, user.password))
+  ) {
+    return next(new AppError('Incorrect email or password', 401));
+  }
+
+  const secret = speakeasy.generateSecret({ length: 20 });
+
+  await User.findByIdAndUpdate(user._id, {
+    twofa: {
+      secret: secret.base32,
+      verified: false,
+    },
+  });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      secret: secret.otpauth_url,
+    },
+  });
+});
+
+exports.verify2fa = catchAsync(async (req, res, next) => {
+  const { emailAddress, token } = req.body;
+
+  const user = await User.findOne({ emailAddress });
+
+  // Retrieve the user's secret key
+  const secret = user.secret;
+
+  // Verify the token
+  const verified = speakeasy.totp.verify({
+    secret,
+    encoding: 'base32',
+    token,
+  });
+
+  // Update the user's verification status
+  user.verified = verified;
+
+  await User.findByIdAndUpdate(user._id, user);
 
   // 3) If everything ok, send token to client
   jwtHandler.createSendToken(user, 200, res);
