@@ -60,6 +60,7 @@
     "node-clipboardy": "^1.0.3",
     "nodemailer": "^6.1.1",
     "openai": "^4.17.4",
+    "puppeteer": "^21.5.2",
     "sharp": "^0.32.6",
     "validator": "^13.11.0",
     "xss-clean": "^0.1.1"
