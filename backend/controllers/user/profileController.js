@@ -30,6 +30,7 @@ exports.onboard = catchAsync(async (req, res, next) => {
     }
     user.password = password;
     user.passwordConfirm = passwordConfirm;
+    user.hasPassword = true;
   }
 
   user.emailConfirmed = true;
@@ -60,7 +61,7 @@ exports.checkOnboard = catchAsync(async (req, res, next) => {
 
 exports.deletePhoto = catchAsync(async (req, res, next) => {
   const defaultPhoto =
-    'https://storage.googleapis.com/profile-photos/default.png';
+    'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/profile-photos%2Fdefault.png?alt=media';
 
   await User.findByIdAndUpdate(req.user.id, {
     profilePhoto: defaultPhoto,
@@ -112,6 +113,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     'firstName',
     'lastName',
     'phoneNumber',
+    'emailAddress',
   );
 
   // 3) Update user document
@@ -239,6 +241,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // 3) If so, update password
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
+  user.hasPassword = true;
   await user.save();
   // User.findByIdAndUpdate will NOT work as intended!
 
