@@ -61,7 +61,7 @@ exports.checkOnboard = catchAsync(async (req, res, next) => {
 
 exports.deletePhoto = catchAsync(async (req, res, next) => {
   const defaultPhoto =
-    'https://storage.googleapis.com/profile-photos/default.png';
+    'https://firebasestorage.googleapis.com/v0/b/average-js-webshop.appspot.com/o/profile-photos%2Fdefault.png?alt=media';
 
   await User.findByIdAndUpdate(req.user.id, {
     profilePhoto: defaultPhoto,
