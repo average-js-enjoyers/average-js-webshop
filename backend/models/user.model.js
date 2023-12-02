@@ -63,26 +63,17 @@ const UserSchema = new Schema({
     default: false,
     select: true,
   },
+  hasPassword: {
+    type: Boolean,
+    default: false,
+    select: true,
+  },
   addresses: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Address',
     },
   ],
-  twofa: {
-    secret: {
-      type: String,
-      select: false,
-    },
-    verified: {
-      type: Boolean,
-      default: false,
-    },
-    enabled: {
-      type: Boolean,
-      default: false,
-    },
-  },
 });
 
 UserSchema.pre('save', async function (next) {

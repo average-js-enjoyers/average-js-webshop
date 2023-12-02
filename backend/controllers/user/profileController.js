@@ -30,6 +30,7 @@ exports.onboard = catchAsync(async (req, res, next) => {
     }
     user.password = password;
     user.passwordConfirm = passwordConfirm;
+    user.hasPassword = true;
   }
 
   user.emailConfirmed = true;
@@ -239,6 +240,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // 3) If so, update password
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
+  user.hasPassword = true;
   await user.save();
   // User.findByIdAndUpdate will NOT work as intended!
 

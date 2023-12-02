@@ -84,6 +84,7 @@ const importData = async () => {
       active: user.active,
       addresses: user.addresses,
       emailConfirmed: user.emailConfirmed,
+      hasPassword: true,
     }));
 
     const sampleAdmins = admins.map((admin) => ({
