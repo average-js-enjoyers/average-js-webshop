@@ -16,6 +16,9 @@ const Order = require('../../models/order.model');
 const ShippingMethod = require('../../models/shippingMethod.model');
 const Review = require('../../models/review.model');
 
+// Admins
+const Admin = require('../../models/admin.model');
+
 const users = require('./data/users');
 const addresses = require('./data/addresses');
 const categories = require('./data/categories');
@@ -26,6 +29,8 @@ const productItems = require('./data/productItems');
 const orders = require('./data/orders');
 const shippingMethods = require('./data/shippingMethods');
 const reviews = require('./data/reviews');
+
+const admins = require('./data/admins');
 
 const connectDB = require('./db');
 
@@ -47,6 +52,8 @@ const importData = async () => {
     await Order.deleteMany();
     await ShippingMethod.deleteMany();
     await Review.deleteMany();
+
+    await Admin.deleteMany();
 
     const sampleAddresses = addresses.map((address) => ({
       _id: new mongoose.Types.ObjectId(address._id), // Generate a new ObjectId for each address
@@ -76,6 +83,15 @@ const importData = async () => {
       active: user.active,
       addresses: user.addresses,
       emailConfirmed: user.emailConfirmed,
+    }));
+
+    const sampleAdmins = admins.map((admin) => ({
+      _id: new mongoose.Types.ObjectId(admin._id),
+      emailAddress: admin.emailAddress,
+      password: admin.password,
+      firstName: admin.firstName,
+      lastName: admin.lastName,
+      registrationDate: admin.registrationDate,
     }));
 
     // Get all categories from the categories array and add the admin user to each category
@@ -171,6 +187,8 @@ const importData = async () => {
     await ShippingMethod.insertMany(sampleShippingMethods);
     await Review.insertMany(sampleReviews);
 
+    await Admin.create(sampleAdmins);
+
     /* await ProductCategory.create(...sampleCategories);
     await Product.create(...sampleProducts); */
 
@@ -196,6 +214,8 @@ const destroyData = async () => {
     await Order.deleteMany();
     await ShippingMethod.deleteMany();
     await Review.deleteMany();
+
+    await Admin.deleteMany();
 
     console.log('Data Destroyed!'.red.inverse);
     process.exit();

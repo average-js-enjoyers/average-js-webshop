@@ -10,7 +10,6 @@ const puppeteer = require('puppeteer');
 
 const AppError = require('./services/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const authRouter = require('./routes/auth/authRoutes');
 const userRouter = require('./routes/user/userRoutes');
 const adminRouter = require('./routes/admin/adminRoutes');
 
@@ -48,7 +47,6 @@ app.use(xss());
 // Prevent parameter pollution
 app.use(hpp());
 // 3) ROUTES
-app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter);
 
