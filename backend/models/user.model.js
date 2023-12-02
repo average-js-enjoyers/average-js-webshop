@@ -14,7 +14,7 @@ const UserSchema = new Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email'],
   },
-  phoneNumber: Number,
+  phoneNumber: String,
   password: {
     type: String,
     required: [false, 'Please provide a password'],

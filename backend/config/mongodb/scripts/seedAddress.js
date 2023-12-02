@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { faker } = require('@faker-js/faker');
+const { faker: faker } = require('@faker-js/faker');
 const clipboardy = require('node-clipboardy');
 
 const numOfAddresses = 100;
@@ -29,5 +29,6 @@ function createRandomAddress() {
     zip: faker.location.zipCode('####'),
     name: faker.animal.cat(),
     country: faker.location.country(),
+    phoneNumber: faker.phone.number(),
   };
 }

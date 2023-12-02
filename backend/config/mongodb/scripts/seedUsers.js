@@ -29,7 +29,7 @@ function createRandomUser() {
   return {
     _id: new mongoose.Types.ObjectId(),
     emailAddress: fakerHU.internet.email(),
-    phoneNumber: Number(fakerHU.string.numeric(11)),
+    phoneNumber: fakerHU.phone.number(),
     password: 'Asdasd42',
     firstName: fakerHU.person.firstName(),
     lastName: fakerHU.person.lastName(),
