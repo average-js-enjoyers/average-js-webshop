@@ -34,7 +34,7 @@ export default function AdminSignInScreen() {
   const fetchQRCodeData = async () => {
     try {
       const response = await fetch("/scrape");
-      if (!response.ok) throw new Error("Network response was not ok");
+      if (!response.ok) throw new Error("Network response was not ok!");
       const data = await response.text(); // Assuming the endpoint returns plain text
       setQrData(data);
       setQrDataFetched(true);
