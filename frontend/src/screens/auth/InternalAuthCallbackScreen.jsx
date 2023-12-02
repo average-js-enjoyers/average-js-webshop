@@ -2,17 +2,23 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "components/common/Logo";
+import { useAuth } from "hooks";
 
 function InternalAuthCallbackScreen() {
   const navigate = useNavigate();
+  const { setResponseData } = useAuth();
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      navigate("/", { state: { signInSuccess: true } });
+      setResponseData({
+        status: "success",
+        message: "You have signed in successfully. Welcome!",
+      });
+      navigate("/");
     }, 2000);
 
     return () => clearTimeout(timeoutId);
-  }, [navigate]);
+  }, [navigate, setResponseData]);
 
   return (
     <div className="auth-callback-loader">

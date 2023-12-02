@@ -2,12 +2,15 @@
 
 import Button from "components/common/Button";
 import React, { useState, useEffect } from "react";
+import { useAuth } from "hooks";
 
 export default function AddressCRUDForm({ type }) {
+  const { addAddress } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     type: [type], // Set the initial value of the type checkbox based on the prop
     country: "",
+    zip: "",
     city: "",
     region: "",
     street: "",
@@ -44,10 +47,38 @@ export default function AddressCRUDForm({ type }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission here
-    console.log("Form data submitted:", formData);
+
+    /* const requestBody = {
+      ...formData,
+      addressLine: formData.street,
+      type:
+        formData.type.length === 2
+          ? "Both"
+          : formData.type[0].slice(0, 1).toUpperCase() +
+            formData.type[0].slice(1),
+      }; */
+
+    // TODO - Remove after backend is implemented
+    const requestBody = {
+      unitNumber: "12345",
+      streetNumber: "12343",
+      addressLine1: "Rabbit street",
+      city: "New York",
+      region: "EAST COAST",
+      postalCode: "2483",
+      vatID: "6326434",
+      country: "US",
+      type: "Both",
+    };
+
+    // Send POST request to /api/user/profile/address with Bearer token and requestBody
+
+    console.log("Form data submitted:", requestBody);
+
+    addAddress(requestBody);
   };
 
   return (
@@ -79,7 +110,7 @@ export default function AddressCRUDForm({ type }) {
           />
         </div>
         <div className="form-group">
-          <label>Type</label>
+          <label>Address Type</label>
           <div>
             {["shipping", "billing"].map((typeOption) => (
               <div className="checkbox mt-2" key={typeOption}>
@@ -111,14 +142,51 @@ export default function AddressCRUDForm({ type }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="city">City</label>
+          <label htmlFor="region">Region or County</label>
           <input
-            id="city"
+            id="region"
             type="text"
-            value={formData.city}
-            name="city"
+            value={formData.region}
+            name="region"
             onChange={handleChange}
-            placeholder="City"
+            placeholder="Region or County"
+          />
+        </div>
+
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem" }}>
+          <div className="form-group" style={{ width: "25%" }}>
+            <label htmlFor="zip">ZIP Code</label>
+            <input
+              id="zip"
+              type="text"
+              value={formData.zip}
+              name="zip"
+              onChange={handleChange}
+              placeholder="ZIP Code"
+            />
+          </div>
+          <div className="form-group" style={{ flexGrow: "1" }}>
+            <label htmlFor="city">City</label>
+            <input
+              id="city"
+              type="text"
+              value={formData.city}
+              name="city"
+              onChange={handleChange}
+              placeholder="City"
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="street">Street</label>
+          <input
+            id="street"
+            type="text"
+            value={formData.street}
+            name="street"
+            onChange={handleChange}
+            placeholder="Street"
           />
         </div>
         {formData.type.includes("billing") && (

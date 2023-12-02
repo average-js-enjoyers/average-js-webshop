@@ -24,6 +24,7 @@ import {
   apiFetchUserAddresses,
   apiUpdateUserInfo,
   apiUpdateUserPassword,
+  apiAddAddress,
 } from "api";
 
 export const useAuth = () => {
@@ -82,7 +83,11 @@ export const useAuth = () => {
         if (!userInfo.emailConfirmed) {
           navigate(`/onboard/${response.token}`, { replace: true });
         } else {
-          navigate("/", { state: { signInSuccess: true } });
+          authContext.setResponseData({
+            status: "success",
+            message: "You have signed in successfully. Welcome!",
+          });
+          navigate("/");
         }
       } catch (error) {
         console.error(`Error during sign-in with ${provider} token:`, error);
@@ -135,15 +140,13 @@ export const useAuth = () => {
   );
 
   const signOut = useCallback(() => {
-    // Clear the application session
     sessionStorage.removeItem("accessToken");
     authContext.clearAuthInfo();
-    // Redirect to the sign-in page or home page
-    sessionStorage.setItem("signOutSuccess", true);
+    authContext.setResponseData({
+      status: "success",
+      message: "You have signed out successfully. See you soon!",
+    });
     navigate("/", { replace: true });
-
-    // Optionally, sign out from Google too. Uncomment the following line if needed.
-    // window.location.href = 'https://accounts.google.com/Logout';
   }, [navigate, authContext /* authContext.setAuthInfo */]);
 
   const sendPasswordResetEmail = useCallback(async (email) => {
@@ -272,6 +275,21 @@ export const useAuth = () => {
     }
   }, []);
 
+  const addAddress = useCallback(async (address) => {
+    try {
+      const response = await apiAddAddress(address);
+      authContext.setResponseData(response);
+      if (response.error) {
+        throw new Error(response.error);
+      }
+      console.log("response", response);
+      return response;
+    } catch (error) {
+      // handle error
+      console.error("ERROR ERROR", error);
+    }
+  }, []);
+
   return {
     ...authContext,
     signUp,
@@ -286,5 +304,6 @@ export const useAuth = () => {
     fetchUserAddresses,
     updateUserInfo,
     updateUserPassword,
+    addAddress,
   };
 };

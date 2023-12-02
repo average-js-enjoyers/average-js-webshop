@@ -78,7 +78,6 @@ export default function ProfileEditScreen() {
   const { toggleModal, setModalChildren } = useModal();
 
   function handleAddAddress(type) {
-    console.log("handleAddAddress", type);
     setModalChildren(<AddressCRUDForm type={type} />);
     toggleModal();
   }

@@ -128,7 +128,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   const clearAuthInfo = () => {
-    setAuthState({ ...authState, isAuthenticated: false, user: null });
+    setAuthState((prevState) => ({
+      ...prevState,
+      isAuthenticated: false,
+      user: null,
+      responseData: null, // Clear responseData here as well
+    }));
   };
 
   const setUser = (user) => {
@@ -143,7 +148,10 @@ export const AuthProvider = ({ children }) => {
 
   // New function to set response data
   const setResponseData = (data) => {
-    setAuthState({ ...authState, responseData: data });
+    setAuthState((prevState) => ({
+      ...prevState,
+      responseData: data,
+    }));
   };
 
   // New function to clear response data

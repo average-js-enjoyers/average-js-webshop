@@ -524,7 +524,7 @@ export function ManageAddressesForm({ type, addresses, id, onAddAddress }) {
           )}
           {addresses.map((address, i) => (
             <AddressCard
-              key={`${type}-${address.id}`}
+              key={`${type}-${address._id}`}
               isEditable={true}
               isActive={address.isActive}
               type={type}
@@ -532,6 +532,9 @@ export function ManageAddressesForm({ type, addresses, id, onAddAddress }) {
               company={address.company}
               vatID={address.vatID}
               street={address.street}
+              zip={address.zip}
+              region={address.region}
+              country={address.country}
               city={address.city}
               phoneNumber={address.phoneNumber}
             />
