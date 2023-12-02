@@ -22,8 +22,6 @@ function ResetPasswordForm({ className }) {
 
   const [noConfPwd, setNoConfPwd] = useState(false);
 
-  console.log(sessionStorage.getItem("resetPwdToken"));
-
   let messages = [
     {
       id: 1,

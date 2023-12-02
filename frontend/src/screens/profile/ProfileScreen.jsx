@@ -1,5 +1,6 @@
 import ProfileNavigation from "components/navigation/ProfileNavigation";
 import { useAuth } from "hooks";
+import { useEffect, useState } from "react";
 
 export default function ProfileScreen({
   activeScreen,
@@ -7,7 +8,15 @@ export default function ProfileScreen({
   subtitle,
   children,
 }) {
-  const { user } = useAuth();
+  const { user: authUser } = useAuth();
+  const [user, setUser] = useState(authUser);
+
+  useEffect(() => {
+    if (authUser) {
+      setUser(authUser);
+    }
+    // This effect should run whenever `authUser` changes
+  }, [authUser]);
 
   return (
     <div className="profile">

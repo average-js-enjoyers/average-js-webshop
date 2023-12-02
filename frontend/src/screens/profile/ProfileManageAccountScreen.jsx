@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { redirect, useLocation } from "react-router-dom";
 import { splitAddressesByType } from "utils";
+import { useModal } from "hooks";
 
 import ProfileScreen from "screens/profile/ProfileScreen";
 import {
@@ -12,6 +13,8 @@ import {
 import StatusMessage from "components/common/StatusMessage";
 
 import { useAuth } from "hooks";
+import Modal from "components/common/Modal";
+import AddressCRUDForm from "components/forms/AddressCRUDForm";
 
 export default function ProfileEditScreen() {
   const { user, fetchUserAddresses } = useAuth();
@@ -72,6 +75,14 @@ export default function ProfileEditScreen() {
     }, 3000);
   }
 
+  const { toggleModal, setModalChildren } = useModal();
+
+  function handleAddAddress(type) {
+    console.log("handleAddAddress", type);
+    setModalChildren(<AddressCRUDForm type={type} />);
+    toggleModal();
+  }
+
   return (
     <ProfileScreen
       activeScreen="/profile/manage"
@@ -92,11 +103,13 @@ export default function ProfileEditScreen() {
           type="shipping"
           addresses={shippingAddresses}
           id="manageShipping"
+          onAddAddress={handleAddAddress}
         />
         <ManageAddressesForm
           type="billing"
           addresses={billingAddresses}
           id="manageBilling"
+          onAddAddress={handleAddAddress}
         />
         <DeleteAccountForm />
       </section>

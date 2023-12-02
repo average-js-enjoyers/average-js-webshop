@@ -46,7 +46,6 @@ function OAuthCallbackScreen({ provider }) {
           );
         }
 
-        console.log(innerState, typeof innerState, state, typeof state);
         if (state !== innerState) {
           throw new Error(
             `State does not match. Possible CSRF attack with ${provider}.`

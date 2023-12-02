@@ -112,7 +112,6 @@ export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
   });
   const res = await response.json();
 
-  console.log(res, res.token);
   sessionStorage.setItem("accessToken", res.token);
 
   return res;

@@ -10,7 +10,11 @@ import {
   getAuthUrl,
 } from "utils/oauthHelpers";
 
-import { fetchUserInfoAndGetNewToken, apiOnboardUser } from "api";
+import {
+  fetchUserInfoAndGetNewToken,
+  apiOnboardUser,
+  fetchUserData,
+} from "api";
 import {
   createUser,
   fetchAccessToken,
@@ -24,6 +28,9 @@ import {
 
 export const useAuth = () => {
   const authContext = useContext(AuthContext);
+
+  // console.log("authContext", authContext);
+
   const navigate = useNavigate();
 
   const signInWithOwnBackend = useCallback(
@@ -68,7 +75,6 @@ export const useAuth = () => {
           provider,
           accessToken
         );
-        console.log(response);
         const userInfo = response.data.user;
 
         authContext.setAuthInfo({ user: userInfo });
@@ -178,15 +184,19 @@ export const useAuth = () => {
           }, 2000);
         }
         if (response.status === "success" && externalAuth) {
-          setTimeout(() => {
-            authContext.setAuthInfo((prevState) => ({
-              ...prevState, // Spread the previous state
-              user: {
-                ...prevState.user, // Spread the current user object
-                ...userData, // Spread the new user data
-              },
-            }));
-            sessionStorage.setItem("onboardSuccess", true);
+          setTimeout(async () => {
+            const user = await fetchUserData(
+              sessionStorage.getItem("accessToken")
+            );
+            if (!user.emailConfirmed) {
+              throw new Error("Operation failed.");
+            } else {
+              authContext.setAuthInfo({
+                user: user,
+              });
+              sessionStorage.setItem("onboardSuccess", true);
+              navigate("/");
+            }
           }, 2000);
         }
       } catch (error) {
@@ -194,7 +204,7 @@ export const useAuth = () => {
         console.error("ERROR ERROR", error);
       }
     },
-    [authContext.user?.emailConfirmed]
+    [authContext]
   );
 
   const resetPassword = useCallback(
