@@ -6,7 +6,7 @@ const passwordRules = require('../config/mongodb/passwordRules');
 
 const { Schema } = mongoose;
 
-const UserSchema = new Schema({
+const AdminSchema = new Schema({
   emailAddress: {
     type: String,
     required: [true, 'Please provide your email'],
@@ -14,7 +14,6 @@ const UserSchema = new Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email'],
   },
-  phoneNumber: String,
   password: {
     type: String,
     required: [false, 'Please provide a password'],
@@ -27,12 +26,6 @@ const UserSchema = new Schema({
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
-  emailConfirmed: {
-    type: Boolean,
-    default: false,
-    select: true,
-  },
-  emailConfirmedAt: Date,
   firstName: {
     type: String,
     required: [false, 'Please tell us your first name!'],
@@ -47,36 +40,14 @@ const UserSchema = new Schema({
     default: Date.now,
   },
   lastLoginDate: Date,
-  role: {
-    type: String,
-    enum: ['user', 'admin'],
-    default: 'user',
+  twofa: {
+    secret: String,
+    verified: Boolean,
+    enabled: Boolean,
   },
-  twoFactorEnabled: Boolean,
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
-  externalAuth: {
-    type: Boolean,
-    default: false,
-    select: true,
-  },
-  hasPassword: {
-    type: Boolean,
-    default: false,
-    select: true,
-  },
-  addresses: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Address',
-    },
-  ],
 });
 
-UserSchema.pre('save', async function (next) {
+AdminSchema.pre('save', async function (next) {
   // Only run this function if password was actually modified
   if (!this.isModified('password')) return next();
 
@@ -86,34 +57,21 @@ UserSchema.pre('save', async function (next) {
   next();
 });
 
-UserSchema.pre('save', function (next) {
+AdminSchema.pre('save', function (next) {
   if (!this.isModified('password') || this.isNew) return next();
 
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
-UserSchema.pre('save', function (next) {
-  if (!this.isModified('emailConfirmed') || this.isNew) return next();
-
-  this.emailConfirmedAt = Date.now() - 1000;
-  next();
-});
-
-UserSchema.pre(/^find/, function (next) {
-  // this points to the current query
-  this.find({ active: { $ne: false } });
-  next();
-});
-
-UserSchema.methods.correctPassword = async function (
+AdminSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword,
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-UserSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+AdminSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
@@ -127,7 +85,7 @@ UserSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   return false;
 };
 
-UserSchema.methods.createPasswordResetToken = function () {
+AdminSchema.methods.createPasswordResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString('hex');
 
   this.passwordResetToken = crypto
@@ -142,4 +100,4 @@ UserSchema.methods.createPasswordResetToken = function () {
   return resetToken;
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Admin', AdminSchema);

@@ -3,16 +3,17 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const AddressSchema = new Schema({
-  unitNumber: Number,
-  streetNumber: Number,
-  addressLine1: String,
-  addressLine2: String,
   city: String,
   region: String,
-  postalCode: Number,
   vatID: String,
-  country: String,
   type: String,
+  isActive: Boolean,
+  company: String,
+  addressLine: String,
+  zip: String,
+  name: String,
+  country: String,
+  phoneNumber: String,
 });
 
 module.exports = mongoose.model('Address', AddressSchema);

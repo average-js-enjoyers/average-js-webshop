@@ -1,9 +1,9 @@
-//src/api/authApi.js
+//src/api/user/authApi.js
 import { isEmailValid } from "utils/validators";
 
 export async function createUser(user) {
   try {
-    const response = await fetch("/api/auth/signup", {
+    const response = await fetch("/api/user/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export async function apiOnboardUser(user) {
 
 export async function doesEmailExist(email) {
   try {
-    const response = await fetch("/api/auth/email/exists", {
+    const response = await fetch("/api/user/auth/email/exists", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export const isUserRegistered = async (email) => {
 
 export async function fetchAccessToken(email, password) {
   try {
-    const response = await fetch("/api/auth/signin", {
+    const response = await fetch("/api/user/auth/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -103,7 +103,7 @@ export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
 
   //  This is how the call should include the Authorization header
   // TODO - Remove accessToken from the query after backend implementation
-  const response = await fetch(`/api/auth/signin/${authServer}`, {
+  const response = await fetch(`/api/user/auth/signin/${authServer}`, {
     method: "POST", // Specify the method
     headers: {
       "Content-Type": "application/json",
@@ -120,7 +120,7 @@ export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
 
 export async function checkEmailExists(email) {
   try {
-    const response = await fetch("/api/auth/email/exists", {
+    const response = await fetch("/api/user/auth/email/exists", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -136,7 +136,7 @@ export async function checkEmailExists(email) {
 
 export async function requestBackendToSendPasswordResetEmail(email) {
   try {
-    const response = await fetch("/api/auth/forgotPassword", {
+    const response = await fetch("/api/user/auth/forgotPassword", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -153,7 +153,7 @@ export async function requestBackendToSendPasswordResetEmail(email) {
 
 export async function requestConfRegEmail(email) {
   try {
-    const response = await fetch("/api/auth/signin/email", {
+    const response = await fetch("/api/user/auth/signin/email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -196,7 +196,7 @@ export async function fetchUserData() {
 
 export async function apiUpdatePassword(payload) {
   try {
-    const response = await fetch("/api/auth/resetPassword", {
+    const response = await fetch("/api/user/auth/resetPassword", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
