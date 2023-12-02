@@ -1,34 +1,34 @@
 const express = require('express');
-const userController = require('../../controllers/user/userController');
+const profileController = require('../../controllers/user/profileController');
 const profileValidator = require('../../validators/user/profileValidator');
 const upload = require('../../services/upload');
 
 const router = express.Router();
 
-router.get('', userController.getUser);
-router.patch('/onboard', profileValidator.onboard, userController.onboard);
+router.get('', profileController.getUser);
+router.patch('/onboard', profileValidator.onboard, profileController.onboard);
 
-router.use(userController.checkOnboard);
+router.use(profileController.checkOnboard);
 
-router.patch('', profileValidator.updateMe, userController.updateMe);
-router.delete('', userController.deleteMe);
+router.patch('', profileValidator.updateMe, profileController.updateMe);
+router.delete('', profileController.deleteMe);
 
-router.post('/photo', upload.single('image'), userController.uploadPhoto);
-router.delete('/photo', userController.deletePhoto);
+router.post('/photo', upload.single('image'), profileController.uploadPhoto);
+router.delete('/photo', profileController.deletePhoto);
 
 router.patch(
   '/password',
   profileValidator.updatePassword,
-  userController.updatePassword,
+  profileController.updatePassword,
 );
 
-router.get('/address', userController.getAllAddress);
+router.get('/address', profileController.getAllAddress);
 router.post(
   '/address',
   profileValidator.createAddress,
-  userController.createAddress,
+  profileController.createAddress,
 );
-router.patch('/address', userController.updateAddress);
-router.delete('/address', userController.deleteAddress);
+router.patch('/address', profileController.updateAddress);
+router.delete('/address', profileController.deleteAddress);
 
 module.exports = router;

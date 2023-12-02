@@ -143,38 +143,6 @@ exports.signin = catchAsync(async (req, res, next) => {
   jwtHandler.createSendToken(user, 200, res);
 });
 
-exports.signinAdmin = catchAsync(async (req, res, next) => {
-  const { emailAddress, password } = req.body;
-
-  // 2) Check if user exists && password is correct
-  const user = await User.findOne({ emailAddress }).select('+password');
-
-  if (
-    !user ||
-    user.password === undefined ||
-    !(await user.correctPassword(password, user.password))
-  ) {
-    return next(new AppError('Incorrect email or password', 401));
-  }
-
-  const secret = speakeasy.generateSecret({ length: 20 });
-
-  await User.findByIdAndUpdate(user._id, {
-    twofa: {
-      secret: secret.base32,
-      verified: false,
-    },
-  });
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      secret: secret.otpauth_url,
-      fasz: 'pöcs',
-    },
-  });
-});
-
 exports.verify2fa = catchAsync(async (req, res, next) => {
   const { emailAddress, token } = req.body;
 

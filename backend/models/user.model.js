@@ -70,8 +70,18 @@ const UserSchema = new Schema({
     },
   ],
   twofa: {
-    secret: String,
-    verified: Boolean,
+    secret: {
+      type: String,
+      select: false,
+    },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
+    enabled: {
+      type: Boolean,
+      default: false,
+    },
   },
 });
 

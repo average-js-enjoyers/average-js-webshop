@@ -15,6 +15,5 @@ router.patch(
   authValidator.resetPassword,
   authController.resetPassword,
 );
-router.post('/verify-2fa', authController.verify2fa);
 
 module.exports = router;

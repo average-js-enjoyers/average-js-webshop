@@ -30,30 +30,6 @@ exports.signin = catchAsync(async (req, res, next) => {
   jwtHandler.createSendToken(user, 200, res);
 });
 
-exports.verify2fa = catchAsync(async (req, res, next) => {
-  const { emailAddress, token } = req.body;
-
-  const user = await Admin.findOne({ emailAddress });
-
-  // Retrieve the user's secret key
-  const secret = user.secret;
-
-  // Verify the token
-  const verified = speakeasy.totp.verify({
-    secret,
-    encoding: 'base32',
-    token,
-  });
-
-  // Update the user's verification status
-  user.verified = verified;
-
-  await Admin.findByIdAndUpdate(user._id, user);
-
-  // 3) If everything ok, send token to client
-  jwtHandler.createSendToken(user, 200, res);
-});
-
 exports.googleSignin = catchAsync(async (req, res, next) => {
   const accessToken = req.body.token;
 
@@ -93,7 +69,6 @@ exports.googleSignin = catchAsync(async (req, res, next) => {
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
-  // 1) Getting token and check of it's there
   let token;
   if (
     req.headers.authorization &&
@@ -108,10 +83,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  // 2) Verification token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-  // 3) Check if user still exists
   const currentUser = await Admin.findById(decoded.id);
   if (!currentUser) {
     return next(
@@ -122,7 +95,24 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  // 4) Check if user changed password after the token was issued
+  const isTokenExpired = decoded.exp <= Math.floor(Date.now() / 1000);
+
+  if (isTokenExpired) {
+    if (currentUser.twofa.enabled) {
+      await Admin.findByIdAndUpdate(currentUser._id, {
+        twofa: {
+          secret: currentUser.twofa.secret,
+          verified: false,
+          enabled: currentUser.twofa.enabled,
+        },
+      });
+    }
+
+    return next(
+      new AppError('This token has expires. Please log in again', 401),
+    );
+  }
+
   if (currentUser.changedPasswordAfter(decoded.iat)) {
     return next(
       new AppError('User recently changed password! Please log in again.', 401),
@@ -237,14 +227,4 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   // 4) Log user in, send JWT
   jwtHandler.createSendToken(user, 200, res);
-});
-
-exports.isAdmin = catchAsync(async (req, res, next) => {
-  const user = await Admin.findById(req.user.id);
-
-  if (user.role !== 'admin') {
-    return next(new AppError('Unauthorized access!', 401));
-  }
-
-  next();
 });

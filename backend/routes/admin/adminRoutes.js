@@ -1,7 +1,9 @@
 const express = require('express');
 const authController = require('../../controllers/admin/authController');
+const twoFactorController = require('../../controllers/admin/twoFactorController');
 const dashboardRouter = require('./dashboardRoutes');
 const authRoutes = require('./authRoutes');
+const twoFactorRouter = require('./twoFactorRoutes');
 const puppeteer = require('puppeteer');
 
 const router = express.Router();
@@ -33,6 +35,8 @@ router.get('/util/scrape', async (req, res) => {
 });
 
 router.use(authController.protect);
+router.use('/two-factor', twoFactorRouter);
+router.use(twoFactorController.protect2fa);
 router.use('/dashboard', dashboardRouter);
 
 module.exports = router;

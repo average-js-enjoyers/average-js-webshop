@@ -43,6 +43,7 @@ const AdminSchema = new Schema({
   twofa: {
     secret: String,
     verified: Boolean,
+    enabled: Boolean,
   },
 });
 
