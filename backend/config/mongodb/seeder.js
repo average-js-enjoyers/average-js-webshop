@@ -57,16 +57,17 @@ const importData = async () => {
 
     const sampleAddresses = addresses.map((address) => ({
       _id: new mongoose.Types.ObjectId(address._id), // Generate a new ObjectId for each address
-      unitNumber: address.unitNumber,
-      streetNumber: address.streetNumber,
-      addressLine1: address.addressLine1,
-      addressLine2: address.addressLine2,
       city: address.city,
       region: address.region,
-      postalCode: address.postalCode,
       vatID: address.vatID,
-      countryID: address.country, // Assuming countryID is an ObjectId
       type: address.type,
+      isActive: address.isActive,
+      company: address.company,
+      addressLine: address.addressLine,
+      zip: address.zip,
+      name: address.name,
+      country: address.country,
+      phoneNumber: address.phoneNumber,
     }));
 
     // Get all users
