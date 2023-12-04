@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   Card,
@@ -8,7 +8,6 @@ import {
   CardTitle,
   CardFooter,
 } from "components/common/Card";
-import StatusMessage from "components/common/StatusMessage";
 import OAuthButtons from "components/common/OAuthButtons";
 
 import SignInForm from "components/forms/SignInForm";
@@ -18,10 +17,6 @@ import { useAuth } from "hooks";
 import { useEffect } from "react";
 
 export default function SignInScreen() {
-  const location = useLocation();
-
-  const oauthError = location.state?.oauthError || null;
-
   const authContext = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
@@ -32,7 +27,6 @@ export default function SignInScreen() {
 
   return (
     <>
-      {oauthError && <StatusMessage type="danger" message={oauthError} />}
       <Card>
         <CardHeader>
           <CardLogo className="card__logo--auth">

@@ -1,5 +1,4 @@
 //src/api/user/authApi.js
-import { isEmailValid } from "utils/validators";
 
 export async function createUser(user) {
   try {
@@ -43,7 +42,7 @@ export async function apiOnboardUser(user) {
 
 export async function doesEmailExist(email) {
   try {
-    const response = await fetch("/api/user/auth/email/exists", {
+    const response = await fetch("/api/user/auth/info/email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,30 +55,6 @@ export async function doesEmailExist(email) {
     console.error(error);
   }
 }
-
-export const isUserRegistered = async (email) => {
-  if (isEmailValid(email)) {
-    try {
-      const response = await fetch("DONTLEAVEMEHERE", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        return data.exists;
-      } else {
-        throw new Error("Failed to fetch email check");
-      }
-    } catch (error) {
-      console.error(error);
-      return false;
-    }
-  }
-};
 
 export async function fetchAccessToken(email, password) {
   try {
@@ -112,7 +87,6 @@ export async function fetchUserInfoAndGetNewToken(authServer, accessToken) {
   });
   const res = await response.json();
 
-  console.log(res, res.token);
   sessionStorage.setItem("accessToken", res.token);
 
   return res;
@@ -196,7 +170,7 @@ export async function fetchUserData() {
 
 export async function apiUpdatePassword(payload) {
   try {
-    const response = await fetch("/api/user/auth/resetPassword", {
+    const response = await fetch("/api/user/auth/password/forgot", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

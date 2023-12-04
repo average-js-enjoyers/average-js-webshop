@@ -1,6 +1,5 @@
 // src/contexts/AuthContext.js
 import React, { createContext, useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
 import { fetchUserData } from "api";
 
@@ -103,22 +102,25 @@ export const AuthProvider = ({ children }) => {
     billingAddresses, */
   });
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  // Function to load user data using JWT token
+  const loadAuthState = async () => {
+    const token = sessionStorage.getItem("accessToken"); // Replace 'jwtToken' with your actual token key
+    if (token) {
+      // If token exists, fetch user data
+      const userData = await fetchUserData(token);
+      setAuthState({
+        ...authState,
+        isAuthenticated: !!userData,
+        user: userData,
+      });
+    } else {
+      setAuthState({ ...authState, isAuthenticated: false });
+    }
+  };
 
   useEffect(() => {
-    // Fetch user data asynchronously and update the state
-    const loadUserData = async () => {
-      const userData = await fetchUserData();
-      setAuthState((prevState) => ({
-        ...prevState,
-        user: userData,
-        isAuthenticated: !!userData, // Update isAuthenticated based on userData
-      }));
-    };
-
-    loadUserData();
-  }, [location.pathname]);
+    loadAuthState();
+  }, []); // Empty dependency array to run only on component mount
 
   // TODO - For some reason this always returns the user to the home screen (at least from profile)
   const setAuthInfo = ({ user }) => {
@@ -126,7 +128,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   const clearAuthInfo = () => {
-    setAuthState({ ...authState, isAuthenticated: false, user: null });
+    setAuthState((prevState) => ({
+      ...prevState,
+      isAuthenticated: false,
+      user: null,
+      responseData: null, // Clear responseData here as well
+    }));
   };
 
   const setUser = (user) => {
@@ -141,7 +148,10 @@ export const AuthProvider = ({ children }) => {
 
   // New function to set response data
   const setResponseData = (data) => {
-    setAuthState({ ...authState, responseData: data });
+    setAuthState((prevState) => ({
+      ...prevState,
+      responseData: data,
+    }));
   };
 
   // New function to clear response data

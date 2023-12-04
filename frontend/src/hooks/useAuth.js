@@ -10,7 +10,11 @@ import {
   getAuthUrl,
 } from "utils/oauthHelpers";
 
-import { fetchUserInfoAndGetNewToken, apiOnboardUser } from "api";
+import {
+  fetchUserInfoAndGetNewToken,
+  apiOnboardUser,
+  fetchUserData,
+} from "api";
 import {
   createUser,
   fetchAccessToken,
@@ -20,10 +24,12 @@ import {
   apiFetchUserAddresses,
   apiUpdateUserInfo,
   apiUpdateUserPassword,
+  apiAddAddress,
 } from "api";
 
 export const useAuth = () => {
   const authContext = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const signInWithOwnBackend = useCallback(
@@ -68,7 +74,6 @@ export const useAuth = () => {
           provider,
           accessToken
         );
-        console.log(response);
         const userInfo = response.data.user;
 
         authContext.setAuthInfo({ user: userInfo });
@@ -76,15 +81,19 @@ export const useAuth = () => {
         if (!userInfo.emailConfirmed) {
           navigate(`/onboard/${response.token}`, { replace: true });
         } else {
-          navigate("/", { state: { signInSuccess: true } });
+          authContext.setResponseData({
+            status: "success",
+            message: "You have signed in successfully. Welcome!",
+          });
+          navigate("/");
         }
       } catch (error) {
         console.error(`Error during sign-in with ${provider} token:`, error);
-        navigate("/signin", {
-          state: {
-            oauthError: `Error during sign-in with ${provider} token. Hang tight while we fix this!`,
-          },
+        authContext.setResponseData({
+          status: "error",
+          message: `Error during sign-in with ${provider} token. Hang tight while we fix this!`,
         });
+        navigate("/signin", { replace: true });
       }
     },
     [navigate, authContext]
@@ -96,11 +105,21 @@ export const useAuth = () => {
         const response = await requestConfRegEmail(email);
         if (response.error) {
           authContext.setConfregEmailSent("COULD_NOT_SEND");
+          authContext.setResponseData({
+            status: "error",
+            message:
+              "Error sending confirmation email. 😟 Please request a resend a bit later.",
+          });
           navigate("/confirm-registration", {});
           throw new Error(response.error);
         }
         authContext.setConfregEmailSent(true);
-        navigate("/confirm-registration", { state: { signUpSuccess: true } });
+        authContext.setResponseData({
+          status: "success",
+          message:
+            "You have signed up successfully. Check your inbox for a confirmation email.",
+        });
+        navigate("/confirm-registration", { replace: true });
       } catch (error) {
         // handle error
         console.error(error);
@@ -113,8 +132,6 @@ export const useAuth = () => {
     async (user) => {
       try {
         const data = await createUser(user);
-        // Maybe sign in the user directly or set some state to confirm registration
-        // TODO - Implement sign in after sign up
         if (data.error) {
           throw new Error(data.error);
         }
@@ -129,15 +146,13 @@ export const useAuth = () => {
   );
 
   const signOut = useCallback(() => {
-    // Clear the application session
     sessionStorage.removeItem("accessToken");
     authContext.clearAuthInfo();
-    // Redirect to the sign-in page or home page
-    sessionStorage.setItem("signOutSuccess", true);
+    authContext.setResponseData({
+      status: "success",
+      message: "You have signed out successfully. See you soon!",
+    });
     navigate("/", { replace: true });
-
-    // Optionally, sign out from Google too. Uncomment the following line if needed.
-    // window.location.href = 'https://accounts.google.com/Logout';
   }, [navigate, authContext /* authContext.setAuthInfo */]);
 
   const sendPasswordResetEmail = useCallback(async (email) => {
@@ -145,10 +160,16 @@ export const useAuth = () => {
       const data = await requestBackendToSendPasswordResetEmail(email);
 
       if (data.error) {
-        authContext.setResponseData(data);
+        authContext.setResponseData({
+          status: "error",
+          message: "Something went wrong. Please try again!",
+        });
         throw new Error(data.error);
       }
-
+      authContext.setResponseData({
+        status: "success",
+        message: "Sent password reset link to your email!",
+      });
       authContext.setPasswordResetLinkSent(true);
       return data.exists;
     } catch (error) {
@@ -174,19 +195,26 @@ export const useAuth = () => {
             });
             sessionStorage.removeItem("accessToken");
             sessionStorage.setItem("accessToken", response.token);
-            sessionStorage.setItem("onboardSuccess", true);
+            authContext.setResponseData({
+              status: "success",
+              message: "You have successfully onboarded. Welcome to the Shop!",
+            });
           }, 2000);
         }
         if (response.status === "success" && externalAuth) {
-          setTimeout(() => {
-            authContext.setAuthInfo((prevState) => ({
-              ...prevState, // Spread the previous state
-              user: {
-                ...prevState.user, // Spread the current user object
-                ...userData, // Spread the new user data
-              },
-            }));
-            sessionStorage.setItem("onboardSuccess", true);
+          setTimeout(async () => {
+            const user = await fetchUserData(
+              sessionStorage.getItem("accessToken")
+            );
+            if (!user.emailConfirmed) {
+              throw new Error("Operation failed.");
+            } else {
+              authContext.setAuthInfo({
+                user: user,
+              });
+              sessionStorage.setItem("onboardSuccess", true);
+              navigate("/");
+            }
           }, 2000);
         }
       } catch (error) {
@@ -194,7 +222,7 @@ export const useAuth = () => {
         console.error("ERROR ERROR", error);
       }
     },
-    [authContext.user?.emailConfirmed]
+    [authContext]
   );
 
   const resetPassword = useCallback(
@@ -213,7 +241,6 @@ export const useAuth = () => {
           sessionStorage.removeItem("resetPwdToken");
           sessionStorage.removeItem("accessToken");
           sessionStorage.setItem("accessToken", response.token);
-          sessionStorage.setItem("pwdResetSuccess", true);
         }
         // navigate("/signin", { state: { resetPasswordSuccess: true } });
       } catch (error) {
@@ -240,7 +267,15 @@ export const useAuth = () => {
   const updateUserInfo = useCallback(async (userData) => {
     try {
       const response = await apiUpdateUserInfo(userData);
+      authContext.setResponseData({
+        ...response,
+        message: "User info updated successfully.",
+      });
       if (response.error) {
+        authContext.setResponseData({
+          status: "error",
+          message: "Something went wrong. Please try again!",
+        });
         throw new Error(response.error);
       }
       return response;
@@ -262,6 +297,21 @@ export const useAuth = () => {
     }
   }, []);
 
+  const addAddress = useCallback(async (address) => {
+    try {
+      const response = await apiAddAddress(address);
+      authContext.setResponseData(response);
+      if (response.error) {
+        throw new Error(response.error);
+      }
+      console.log("response", response);
+      return response;
+    } catch (error) {
+      // handle error
+      console.error("ERROR ERROR", error);
+    }
+  }, []);
+
   return {
     ...authContext,
     signUp,
@@ -276,5 +326,6 @@ export const useAuth = () => {
     fetchUserAddresses,
     updateUserInfo,
     updateUserPassword,
+    addAddress,
   };
 };

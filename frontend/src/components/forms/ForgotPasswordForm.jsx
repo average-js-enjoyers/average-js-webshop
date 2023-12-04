@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useAuth } from "hooks/useAuth";
 import AuthContext from "context/AuthContext";
-import StatusMessage from "components/common/StatusMessage";
 import Button from "components/common/Button";
 
 import { isEmailValid } from "utils/validators";
@@ -10,12 +9,7 @@ import { FormValidationMessageWrapper } from "components/forms/FormValidationMes
 
 function ForgotPasswordForm({ className }) {
   const { sendPasswordResetEmail } = useAuth();
-  const {
-    passwordResetLinkSent,
-    responseData,
-    clearResponseData,
-    setAuthState,
-  } = useContext(AuthContext);
+  const { responseData } = useContext(AuthContext);
 
   const [sendResetClicked, setSendResetClicked] = useState(false);
 
@@ -50,29 +44,6 @@ function ForgotPasswordForm({ className }) {
 
   return (
     <div className={className}>
-      {passwordResetLinkSent && (
-        <StatusMessage
-          type="success"
-          message="Sent password reset link to your email!"
-          cleanupFunction={() => {
-            setAuthState((prevState) => ({
-              ...prevState,
-              passwordResetLinkSent: false,
-            }));
-          }}
-        />
-      )}
-      {responseData?.error && responseData !== null && (
-        <StatusMessage
-          type="danger"
-          message={
-            responseData?.message === "There is no user with email address."
-              ? "We couldn't find a user with this email address. 😐"
-              : responseData?.message
-          }
-          cleanupFunction={() => clearResponseData()}
-        />
-      )}
       <FormValidationMessageWrapper messages={messages} />
 
       <form

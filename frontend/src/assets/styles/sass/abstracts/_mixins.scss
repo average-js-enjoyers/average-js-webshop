@@ -66,57 +66,57 @@ $breakpoints: (
     "lg": (
       map-get($breakpoints, "lg"),
       // 992w
-      52%,
-      52%,
+      55%,
+      55%,
       // High DPR: lg
     ),
     "xl": (
       map-get($breakpoints, "xl"),
       // 1200w
-      50%,
-      50%,
+      55%,
+      55%,
       // High DPR: xl
     ),
     "2xl": (
       map-get($breakpoints, "2xl"),
       // 1440w
-      52%,
-      52%,
+      55%,
+      55%,
       // High DPR: 2xl
     ),
     "3xl": (
       map-get($breakpoints, "3xl"),
       // 1600w
-      53%,
-      51%,
+      55%,
+      55%,
       // High DPR: 3xl
     ),
     "4xl": (
       map-get($breakpoints, "4xl"),
       // 1900w
       57.5%,
-      53%,
+      57.5%,
       // High DPR: 4xl
     ),
     "5xl": (
       map-get($breakpoints, "5xl"),
       // 2200w
       62.5%,
-      55%,
+      62.5%,
       // High DPR: 5xl
     ),
     "6xl": (
       map-get($breakpoints, "6xl"),
       // 2500w
       62.5%,
-      57%,
+      62.5%,
       // High DPR: 6xl
     ),
     "7xl": (
       map-get($breakpoints, "7xl"),
       // 2800w
       62.5%,
-      59%,
+      62.5%,
       // High DPR: 7xl
     ),
   );
