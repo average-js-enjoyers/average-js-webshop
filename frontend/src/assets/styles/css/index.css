@@ -2615,6 +2615,11 @@ form.form--profile textarea:disabled {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+.modal-overlay .modal__content {
+  overflow-y: scroll;
+  height: auto;
 }
 .modal-overlay .modal::-webkit-scrollbar {
   width: 0.5rem;

@@ -30,8 +30,6 @@ import {
 export const useAuth = () => {
   const authContext = useContext(AuthContext);
 
-  // console.log("authContext", authContext);
-
   const navigate = useNavigate();
 
   const signInWithOwnBackend = useCallback(
@@ -91,11 +89,11 @@ export const useAuth = () => {
         }
       } catch (error) {
         console.error(`Error during sign-in with ${provider} token:`, error);
-        navigate("/signin", {
-          state: {
-            oauthError: `Error during sign-in with ${provider} token. Hang tight while we fix this!`,
-          },
+        authContext.setResponseData({
+          status: "error",
+          message: `Error during sign-in with ${provider} token. Hang tight while we fix this!`,
         });
+        navigate("/signin", { replace: true });
       }
     },
     [navigate, authContext]
@@ -107,11 +105,21 @@ export const useAuth = () => {
         const response = await requestConfRegEmail(email);
         if (response.error) {
           authContext.setConfregEmailSent("COULD_NOT_SEND");
+          authContext.setResponseData({
+            status: "error",
+            message:
+              "Error sending confirmation email. 😟 Please request a resend a bit later.",
+          });
           navigate("/confirm-registration", {});
           throw new Error(response.error);
         }
         authContext.setConfregEmailSent(true);
-        navigate("/confirm-registration", { state: { signUpSuccess: true } });
+        authContext.setResponseData({
+          status: "success",
+          message:
+            "You have signed up successfully. Check your inbox for a confirmation email.",
+        });
+        navigate("/confirm-registration", { replace: true });
       } catch (error) {
         // handle error
         console.error(error);
@@ -124,8 +132,6 @@ export const useAuth = () => {
     async (user) => {
       try {
         const data = await createUser(user);
-        // Maybe sign in the user directly or set some state to confirm registration
-        // TODO - Implement sign in after sign up
         if (data.error) {
           throw new Error(data.error);
         }
@@ -154,10 +160,16 @@ export const useAuth = () => {
       const data = await requestBackendToSendPasswordResetEmail(email);
 
       if (data.error) {
-        authContext.setResponseData(data);
+        authContext.setResponseData({
+          status: "error",
+          message: "Something went wrong. Please try again!",
+        });
         throw new Error(data.error);
       }
-
+      authContext.setResponseData({
+        status: "success",
+        message: "Sent password reset link to your email!",
+      });
       authContext.setPasswordResetLinkSent(true);
       return data.exists;
     } catch (error) {
@@ -183,7 +195,10 @@ export const useAuth = () => {
             });
             sessionStorage.removeItem("accessToken");
             sessionStorage.setItem("accessToken", response.token);
-            sessionStorage.setItem("onboardSuccess", true);
+            authContext.setResponseData({
+              status: "success",
+              message: "You have successfully onboarded. Welcome to the Shop!",
+            });
           }, 2000);
         }
         if (response.status === "success" && externalAuth) {
@@ -226,7 +241,6 @@ export const useAuth = () => {
           sessionStorage.removeItem("resetPwdToken");
           sessionStorage.removeItem("accessToken");
           sessionStorage.setItem("accessToken", response.token);
-          sessionStorage.setItem("pwdResetSuccess", true);
         }
         // navigate("/signin", { state: { resetPasswordSuccess: true } });
       } catch (error) {
@@ -253,7 +267,15 @@ export const useAuth = () => {
   const updateUserInfo = useCallback(async (userData) => {
     try {
       const response = await apiUpdateUserInfo(userData);
+      authContext.setResponseData({
+        ...response,
+        message: "User info updated successfully.",
+      });
       if (response.error) {
+        authContext.setResponseData({
+          status: "error",
+          message: "Something went wrong. Please try again!",
+        });
         throw new Error(response.error);
       }
       return response;

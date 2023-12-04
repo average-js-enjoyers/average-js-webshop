@@ -10,7 +10,6 @@ import {
   ManagePasswordForm,
   ManagePersonalInfoForm,
 } from "components/forms/ManageAccountForms";
-import StatusMessage from "components/common/StatusMessage";
 
 import { useAuth } from "hooks";
 import Modal from "components/common/Modal";
@@ -68,13 +67,6 @@ export default function ProfileEditScreen() {
     }
   }, [location]);
 
-  let { updateSuccess } = location.state || {};
-  if (updateSuccess) {
-    setTimeout(() => {
-      updateSuccess = false;
-    }, 3000);
-  }
-
   const { toggleModal, setModalChildren } = useModal();
 
   function handleAddAddress(type) {
@@ -88,13 +80,6 @@ export default function ProfileEditScreen() {
       title="Manage Account"
       subtitle="Manage your personal information, your password and your addresses."
     >
-      {updateSuccess && (
-        <StatusMessage
-          type="success"
-          message="Update successful!"
-          cleanupFunction={() => (updateSuccess = false)}
-        />
-      )}
       <section className="profile-main__content profile-manage">
         <ManagePersonalInfoForm />
         <ManagePasswordForm />

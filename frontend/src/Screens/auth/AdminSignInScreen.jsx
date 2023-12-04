@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import {
   Card,
@@ -6,9 +6,7 @@ import {
   CardLogo,
   CardBody,
   CardTitle,
-  CardFooter,
 } from "components/common/Card";
-import StatusMessage from "components/common/StatusMessage";
 import Button from "components/common/Button";
 
 import AdminSignInForm from "components/forms/AdminSignInForm";
@@ -24,8 +22,6 @@ import QRCode from "qrcode.react";
 export default function AdminSignInScreen() {
   const { signInWithProvider } = useAuth();
   const location = useLocation();
-
-  const oauthError = location.state?.oauthError || null;
 
   const [qrData, setQrData] = useState(null);
   const [qrDataFetched, setQrDataFetched] = useState(false);
@@ -82,7 +78,6 @@ export default function AdminSignInScreen() {
 
   return (
     <>
-      {oauthError && <StatusMessage type="danger" message={oauthError} />}
       <Card>
         <CardHeader>
           <CardLogo className="card__logo--auth">

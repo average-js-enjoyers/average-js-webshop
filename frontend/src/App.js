@@ -48,7 +48,7 @@ const RouteWrapper = ({ component: Component, ...props }) => {
     <>
       {showMessage && (
         <StatusMessage
-          type={responseData?.status === "error" ? "danger" : "success"}
+          status={responseData?.status}
           message={responseData?.message}
           cleanupFunction={() => clearResponseData()}
         />

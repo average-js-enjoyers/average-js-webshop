@@ -8,7 +8,7 @@ import Logo from "components/common/Logo";
 
 function OAuthCallbackScreen({ provider }) {
   const navigate = useNavigate();
-  const { signInWithProviderToken } = useAuth();
+  const { signInWithProviderToken, setResponseData } = useAuth();
 
   // TODO - Do something with the codeVerifier
   const codeVerifier = sessionStorage.getItem(`${provider}CodeVerifier`);
@@ -41,12 +41,20 @@ function OAuthCallbackScreen({ provider }) {
         const data = await response.json();
 
         if (!response.ok) {
+          setResponseData({
+            status: "error",
+            message: `Error during sign-in with ${provider}. Hang tight while we fix this!`,
+          });
           throw new Error(
             data.error || `Failed to exchange code for tokens with ${provider}.`
           );
         }
 
         if (state !== innerState) {
+          setResponseData({
+            status: "error",
+            message: `Error during sign-in with ${provider}. Hang tight while we fix this!`,
+          });
           throw new Error(
             `State does not match. Possible CSRF attack with ${provider}.`
           );
@@ -61,7 +69,11 @@ function OAuthCallbackScreen({ provider }) {
         );
       } catch (error) {
         console.error(`Error during ${provider} token exchange:`, error);
-        navigate("/signin", { state: { signInError: error.message } });
+        setResponseData({
+          status: "error",
+          message: `Error during sign-in with ${provider} token. Hang tight while we fix this!`,
+        });
+        navigate("/signin", { replace: true });
       }
     },
     [
@@ -72,6 +84,7 @@ function OAuthCallbackScreen({ provider }) {
       tokenExchangeUrl,
       signInWithProviderToken,
       provider,
+      setResponseData,
     ]
   );
 
@@ -85,19 +98,19 @@ function OAuthCallbackScreen({ provider }) {
     const state = params.get("state");
     const innerState = sessionStorage.getItem(`${provider}State`);
 
-    // Set a timeout to wait for 1 second
+    // Set a timeout for animation's sake
     const timeoutId = setTimeout(() => {
       if (code && codeVerifier && isSubscribed) {
         exchangeCodeForTokens(code, codeVerifier, state, innerState);
         sessionStorage.removeItem("codeVerifier");
       }
-    }, 1500); // 1500 milliseconds = 1.5 seconds
+    }, 1500);
 
     return () => {
       isSubscribed = false;
       clearTimeout(timeoutId);
     };
-  }, [exchangeCodeForTokens]);
+  }, []);
 
   return (
     <div className="auth-callback-loader">

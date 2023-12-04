@@ -3,18 +3,20 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 
 const statusTypes = {
   success: "--success",
-  danger: "--danger",
+  error: "--danger",
+  fail: "--danger",
   warning: "--warning",
   info: "--info",
 };
 
 // Add a new prop `autoClose` with a default value of `false`
 const StatusMessage = ({
-  type,
+  status,
   message,
   cleanupFunction,
   autoClose = true,
 }) => {
+  const type = status;
   const statusClass = statusTypes[type] || "";
   const messageRef = useRef(null);
   const [visible, setVisible] = useState(true); // State to manage visibility

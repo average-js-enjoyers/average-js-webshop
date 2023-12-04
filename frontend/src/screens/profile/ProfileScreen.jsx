@@ -1,7 +1,6 @@
 import ProfileNavigation from "components/navigation/ProfileNavigation";
 import { useAuth } from "hooks";
 import { useEffect, useState } from "react";
-import StatusMessage from "components/common/StatusMessage";
 
 export default function ProfileScreen({
   activeScreen,
@@ -9,7 +8,7 @@ export default function ProfileScreen({
   subtitle,
   children,
 }) {
-  const { user: authUser, responseData, clearResponseData } = useAuth();
+  const { user: authUser } = useAuth();
   const [user, setUser] = useState(authUser);
 
   useEffect(() => {
@@ -21,26 +20,6 @@ export default function ProfileScreen({
 
   return (
     <div className="profile">
-      {responseData?.error?.statusCode === 401 && (
-        <StatusMessage
-          type="danger"
-          message="Your email or password is incorrect. Please try again."
-          cleanupFunction={() => clearResponseData()}
-        />
-      )}
-      {responseData?.error?.statusCode !== 401 &&
-        responseData?.error &&
-        responseData !== null && (
-          <StatusMessage
-            type="danger"
-            message={
-              "Something went wrong. We are working on it! (Error code " +
-              responseData?.error?.statusCode +
-              ")"
-            }
-            cleanupFunction={() => clearResponseData()}
-          />
-        )}
       <section className="profile-header">
         <div className="profile-intro">
           <div className="profile-intro__photo-wrapper">

@@ -1,6 +1,3 @@
-import { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
-
 import {
   Card,
   CardHeader,
@@ -9,38 +6,16 @@ import {
   CardTitle,
   CardFooter,
 } from "components/common/Card";
-import StatusMessage from "components/common/StatusMessage";
-
-import AuthContext from "context/AuthContext";
 import { EnvelopePaperFill } from "react-bootstrap-icons";
 import Button from "components/common/Button";
 
 import { useAuth } from "hooks";
 
 export default function ConfirmRegistrationScreen() {
-  const { confregEmailSent, clearConfregEmailSent } = useContext(AuthContext);
-  const { sendConfRegEmail } = useAuth();
-
-  const location = useLocation();
-  const signUpSuccess = location.state?.signUpSuccess || false;
+  const { sendConfRegEmail, confregEmailSent } = useAuth();
 
   return (
     <>
-      {confregEmailSent === true && confregEmailSent !== "COULD_NOT_SEND" && (
-        <StatusMessage
-          type="success"
-          message="We've just sent you the confirmation email!"
-          cleanupFunction={() => clearConfregEmailSent()}
-        />
-      )}
-      {confregEmailSent === "COULD_NOT_SEND" && (
-        <StatusMessage
-          type="danger"
-          message="Error sending confirmation email. Please request a resend a bit later."
-          cleanupFunction={() => clearConfregEmailSent()}
-        />
-      )}
-
       <Card>
         <CardHeader>
           <CardLogo className="card__logo--auth">
@@ -60,13 +35,13 @@ export default function ConfirmRegistrationScreen() {
               marginTop: "3rem",
             }}
           >
-            {!signUpSuccess && (
+            {confregEmailSent === "COULD_NOT_SEND" && (
               <p className="text-center lead">
                 We could not send you a confirmation email. <br /> Please try
                 again later.
               </p>
             )}
-            {signUpSuccess === true && (
+            {confregEmailSent === true && (
               <>
                 <p
                   className="text-center"

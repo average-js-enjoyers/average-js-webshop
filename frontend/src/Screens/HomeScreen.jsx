@@ -1,56 +1,16 @@
 //src/screens/HomeScreen.jsx
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // import { useAuth } from "context/AuthContext";
 import { useAuth } from "hooks";
 
 import Button from "components/common/Button";
-import StatusMessage from "components/common/StatusMessage";
 
 const HomeScreen = () => {
   const { signOut, isAuthenticated } = useAuth();
 
-  // Check for the navigation state
-  const location = useLocation();
-  const { signInSuccess } = location.state || {};
-
-  const signOutSuccess = sessionStorage.getItem("signOutSuccess");
-  const onboardSuccess = sessionStorage.getItem("onboardSuccess");
-  const pwdResetSuccess = sessionStorage.getItem("pwdResetSuccess");
-
   return (
     <div className="home-screen">
-      {signInSuccess && (
-        <StatusMessage
-          type="success"
-          message="Welcome back! You have signed in successfully."
-        />
-      )}
-
-      {signOutSuccess && (
-        <StatusMessage
-          type="success"
-          message="You have signed out successfully. See you soon!"
-          cleanupFunction={() => sessionStorage.removeItem("signOutSuccess")}
-        />
-      )}
-
-      {onboardSuccess && (
-        <StatusMessage
-          type="success"
-          message="You have successfully onboarded. Welcome to the Shop!"
-          cleanupFunction={() => sessionStorage.removeItem("onboardSuccess")}
-        />
-      )}
-
-      {pwdResetSuccess && (
-        <StatusMessage
-          type="success"
-          message="You have changed your password and are now signed in. Welcome to the Shop!"
-          cleanupFunction={() => sessionStorage.removeItem("pwdResetSuccess")}
-        />
-      )}
-
       <h1 className="text-center mb-3">Auth & User Development Kit</h1>
       <nav
         style={{
