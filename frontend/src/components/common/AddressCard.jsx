@@ -12,6 +12,7 @@ export default function AddressCard({
   zip,
   street,
   city,
+  region,
   country,
   phoneNumber,
 }) {
@@ -30,7 +31,7 @@ export default function AddressCard({
       <p className="address-card__street">{street}</p>
       <p className="address-card__city">
         {zip && `${zip}, `}
-        {city}, {country && country.toUpperCase()}
+        {city}, {region && `${region}, `} {country && country.toUpperCase()}
       </p>
       <p className="address-card__phone-number">
         {formatPhoneNumber(phoneNumber)}

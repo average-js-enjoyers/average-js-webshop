@@ -54,3 +54,21 @@ export async function apiUpdateUserPassword(passwords) {
     throw new Error("Failed to update user password");
   }
 }
+
+export async function apiAddAddress(address) {
+  try {
+    const response = await fetch("/api/user/profile/address", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken2")}`,
+      },
+      body: JSON.stringify(address),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to add address");
+  }
+}

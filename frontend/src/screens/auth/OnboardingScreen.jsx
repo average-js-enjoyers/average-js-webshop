@@ -20,7 +20,6 @@ export default function OnboardingScreen() {
   const token = location.pathname.split("/")[2];
 
   const authContext = useContext(AuthContext);
-  console.log(authContext);
 
   // Put token in session storage
   if (

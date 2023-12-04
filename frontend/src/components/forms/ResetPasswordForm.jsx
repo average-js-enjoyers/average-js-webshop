@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "hooks/useAuth";
-import StatusMessage from "components/common/StatusMessage";
 import Button from "components/common/Button";
 
 import { FormValidationMessageWrapper } from "components/forms/FormValidationMessage";
@@ -9,7 +8,7 @@ import { set } from "immutable";
 import { passwordValidationErrors } from "utils/validators";
 
 function ResetPasswordForm({ className }) {
-  const { responseData, clearResponseData, resetPassword } = useAuth();
+  const { resetPassword } = useAuth();
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
@@ -21,8 +20,6 @@ function ResetPasswordForm({ className }) {
   const [passwordStrong, setPassWordStrong] = useState(true);
 
   const [noConfPwd, setNoConfPwd] = useState(false);
-
-  console.log(sessionStorage.getItem("resetPwdToken"));
 
   let messages = [
     {
@@ -96,26 +93,6 @@ function ResetPasswordForm({ className }) {
 
   return (
     <div className={className}>
-      {/* {passwordResetLinkSent && (
-        <StatusMessage
-          type="success"
-          message="Sent password reset link to your email!"
-          cleanupFunction={() => {
-            setAuthState((prevState) => ({
-              ...prevState,
-              passwordResetLinkSent: false,
-            }));
-          }}
-        />
-      )}*/}
-      {responseData?.error && responseData !== null && (
-        <StatusMessage
-          type="danger"
-          message={responseData?.message}
-          cleanupFunction={() => clearResponseData()}
-        />
-      )}
-
       <FormValidationMessageWrapper messages={messages} />
 
       <form

@@ -231,6 +231,7 @@ export default function ProfileDashboardScreen() {
                           zip={address.zip}
                           city={address.city}
                           country={address.country}
+                          region={address.region}
                           phoneNumber={address.phoneNumber}
                         />
                       )

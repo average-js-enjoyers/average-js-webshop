@@ -33,7 +33,7 @@ import { FormValidationMessageWrapper } from "components/forms/FormValidationMes
 import { useAuth } from "hooks";
 
 export function ManagePersonalInfoForm() {
-  const { user, updateUserInfo } = useAuth();
+  const { user, updateUserInfo, setUser } = useAuth();
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -119,6 +119,11 @@ export function ManagePersonalInfoForm() {
     try {
       const response = await updateUserInfo(updatedUserInfo);
       setResponse(response); // Assuming updateUserInfo returns a response
+      console.log("response", response);
+      if (response.status === "success") {
+        const user = await response.data.user;
+        setUser(user);
+      }
     } catch (error) {
       setResponse("Error updating personal info");
     }
@@ -483,7 +488,7 @@ export function ManagePasswordForm() {
   );
 }
 
-export function ManageAddressesForm({ type, addresses, id }) {
+export function ManageAddressesForm({ type, addresses, id, onAddAddress }) {
   return (
     <Card id={id} className={"profile-manage__addresses"} deco={true}>
       <CardHeader align="start">
@@ -519,7 +524,7 @@ export function ManageAddressesForm({ type, addresses, id }) {
           )}
           {addresses.map((address, i) => (
             <AddressCard
-              key={`${type}-${address.id}`}
+              key={`${type}-${address._id}`}
               isEditable={true}
               isActive={address.isActive}
               type={type}
@@ -527,6 +532,9 @@ export function ManageAddressesForm({ type, addresses, id }) {
               company={address.company}
               vatID={address.vatID}
               street={address.street}
+              zip={address.zip}
+              region={address.region}
+              country={address.country}
               city={address.city}
               phoneNumber={address.phoneNumber}
             />
@@ -534,7 +542,13 @@ export function ManageAddressesForm({ type, addresses, id }) {
         </div>
       </CardBody>
       <CardFooter align="start">
-        <Button variant="primary btn--muted" className="btn--bold">
+        <Button
+          variant="primary btn--muted"
+          className="btn--bold"
+          onClick={() => {
+            onAddAddress(type);
+          }}
+        >
           <PlusCircleFill />
           Add New Address
         </Button>
