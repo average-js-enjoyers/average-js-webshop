@@ -38,35 +38,16 @@ exports.updatePassword = [
 ];
 
 exports.createAddress = [
-  // Unit Number (optional)
-  body('unitNumber').optional().isInt(),
-
-  // Street Number (required)
-  body('streetNumber').notEmpty().isInt(),
-
-  // Address Line 1 (required)
-  body('addressLine1').notEmpty().isString(),
-
-  // Address Line 2 (optional)
-  body('addressLine2').optional().isString(),
-
-  // City (required)
   body('city').notEmpty().isString(),
-
-  // Region (optional)
-  body('region').optional().isString(),
-
-  // Postal Code (required)
-  body('postalCode').notEmpty().isInt(),
-
-  // VAT ID (optional)
-  body('vatID').optional().isInt(),
-
-  // Country (required)
+  body('region').notEmpty().isString(),
+  body('vatID').notEmpty().isString(),
+  body('type').notEmpty().isIn(['Both', 'Shipping', 'Billing']),
+  body('isActive').notEmpty().isBoolean(),
+  body('company').notEmpty().isString(),
+  body('addressLine').notEmpty().isString(),
+  body('zip').notEmpty().isString(),
+  body('name').notEmpty().isString(),
   body('country').notEmpty().isString(),
-
-  // Type (required)
-  body('type').notEmpty().isIn(['Both', 'Individual', 'Company']), // Assuming 'type' should be one of these values
-
+  body('phoneNumber').notEmpty().isString(),
   handleValidationError,
 ];
