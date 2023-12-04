@@ -12,7 +12,6 @@ import {
 } from "components/forms/ManageAccountForms";
 
 import { useAuth } from "hooks";
-import Modal from "components/common/Modal";
 import AddressCRUDForm from "components/forms/AddressCRUDForm";
 
 export default function ProfileEditScreen() {

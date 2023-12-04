@@ -2619,7 +2619,7 @@ form.form--profile textarea:disabled {
 }
 .modal-overlay .modal__content {
   overflow-y: scroll;
-  height: auto;
+  height: calc(100% - 6rem);
 }
 .modal-overlay .modal::-webkit-scrollbar {
   width: 0.5rem;

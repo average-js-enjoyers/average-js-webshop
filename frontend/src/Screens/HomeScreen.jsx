@@ -2,12 +2,14 @@
 import { Link } from "react-router-dom";
 
 // import { useAuth } from "context/AuthContext";
-import { useAuth } from "hooks";
+import { useAuth, useModal } from "hooks";
 
 import Button from "components/common/Button";
 
 const HomeScreen = () => {
   const { signOut, isAuthenticated } = useAuth();
+
+  const { toggleModal, setModalChildren } = useModal();
 
   return (
     <div className="home-screen">
