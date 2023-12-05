@@ -81,7 +81,10 @@ exports.uploadPhoto = catchAsync(async (req, res, next) => {
   }
 
   const uploadedImage = req.file;
-  const imgUrl = await cdn.create(uploadedImage, req.user.id);
+  const imgUrl = await cdn.create(
+    uploadedImage,
+    `profile-photos/${req.user.id}.jpg`,
+  );
   await User.findByIdAndUpdate(req.user.id, { profilePhoto: imgUrl });
 
   res.status(200).json({

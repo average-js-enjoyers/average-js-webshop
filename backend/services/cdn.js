@@ -9,7 +9,7 @@ admin.initializeApp({
   storageBucket: 'gs://average-js-webshop.appspot.com',
 });
 
-exports.create = async (uploadedImage, newfileName) => {
+exports.create = async (uploadedImage, filePath) => {
   const imageBuffer = uploadedImage.path; // The image data
 
   const processedImageBuffer = await sharp(imageBuffer)
@@ -17,8 +17,6 @@ exports.create = async (uploadedImage, newfileName) => {
     .toBuffer();
 
   const bucket = admin.storage().bucket();
-
-  const filePath = `profile-photos/${newfileName}.jpg`;
 
   const file = bucket.file(filePath);
 
