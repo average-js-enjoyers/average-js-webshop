@@ -36,7 +36,7 @@ exports.aggregates = [
   handleValidationError,
 ];
 
-exports.pendingOrders = [
+exports.openOrders = [
   query('page')
     .isInt({
       gt: 0,

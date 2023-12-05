@@ -54,8 +54,8 @@ exports.getAggregates = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getPendingOrders = catchAsync(async (req, res, next) => {
-  const pendingStatuses = [
+exports.getOpenOrders = catchAsync(async (req, res, next) => {
+  const openStatuses = [
     'Pending',
     'On hold',
     'Payment confirmed',
@@ -69,15 +69,15 @@ exports.getPendingOrders = catchAsync(async (req, res, next) => {
 
   const totalItems = await Order.countDocuments({
     orderStatus: {
-      $in: pendingStatuses,
+      $in: openStatuses,
     },
   });
 
   const totalPages = Math.ceil(totalItems / pageSize);
 
-  const pendingOrders = await Order.find({
+  const getOpenOrders = await Order.find({
     orderStatus: {
-      $in: pendingStatuses,
+      $in: openStatuses,
     },
   })
     .skip(skip)
@@ -87,11 +87,22 @@ exports.getPendingOrders = catchAsync(async (req, res, next) => {
   const baseUrl = `${req.protocol}://${req.get('host')}${
     req.originalUrl.split('?')[0]
   }`;
-  const nextPage = page < totalPages ? `${baseUrl}?page=${page + 1}` : null;
-  const lastPage = `${baseUrl}?page=${totalPages}`;
+
+  const previousPage =
+    page > 1
+      ? `${baseUrl}?page=${Number(page) - 1}&pageSize=${pageSize}`
+      : null;
+  const nextPage =
+    page < totalPages
+      ? `${baseUrl}?page=${Number(page) + 1}&pageSize=${pageSize}`
+      : null;
+  const lastPage = `${baseUrl}?page=${totalPages}&pageSize=${pageSize}`;
 
   // Set the response headers
-  res.set('Link', `<${nextPage}>; rel="next", <${lastPage}>; rel="last"`);
+  res.set(
+    'Link',
+    `<${previousPage}>; rel="previous", <${nextPage}>; rel="next", <${lastPage}>; rel="last"`,
+  );
   res.set('X-Total-Count', totalItems);
 
   await res.status(200).json({
@@ -102,6 +113,6 @@ exports.getPendingOrders = catchAsync(async (req, res, next) => {
       totalItems: totalItems,
       totalPages: totalPages,
     },
-    data: pendingOrders,
+    data: getOpenOrders,
   });
 });

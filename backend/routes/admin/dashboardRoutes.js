@@ -11,9 +11,9 @@ router.post(
 );
 
 router.get(
-  '/pending-orders',
-  dashboardValidator.pendingOrders,
-  dashboardController.getPendingOrders,
+  '/open-orders',
+  dashboardValidator.openOrders,
+  dashboardController.getOpenOrders,
 );
 
 module.exports = router;
