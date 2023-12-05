@@ -163,16 +163,16 @@ exports.createAddress = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ _id: req.user.id }).exec();
 
   const newAddress = await Address.create({
-    unitNumber: req.body.unitNumber,
-    streetNumber: req.body.streetNumber,
-    addressLine1: req.body.addressLine1,
-    addressLine2: req.body.addressLine2,
     city: req.body.city,
     region: req.body.region,
-    postalCode: req.body.postalCode,
     vatID: req.body.vatID,
-    country: req.body.country,
     type: req.body.type,
+    isActive: req.body.isActive,
+    company: req.body.company,
+    addressLine: req.body.addressLine,
+    name: req.body.name,
+    country: req.body.country,
+    phoneNumber: req.body.phoneNumber,
   });
 
   user.addresses.push(newAddress._id);
