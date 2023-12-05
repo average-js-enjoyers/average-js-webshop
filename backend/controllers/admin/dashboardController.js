@@ -3,6 +3,7 @@ const catchAsync = require('../../services/catchAsync');
 const AppError = require('../../services/appError');
 const dashboard = require('../../services/admin/dashboard');
 const Order = require('../../models/order.model');
+const factory = require('../handlerFactory');
 
 exports.getAggregates = catchAsync(async (req, res, next) => {
   const elements = req.body;
@@ -54,65 +55,8 @@ exports.getAggregates = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getOpenOrders = catchAsync(async (req, res, next) => {
-  const openStatuses = [
-    'Pending',
-    'On hold',
-    'Payment confirmed',
-    'Processing',
-    'Shipped',
-  ];
-
-  const page = req.query.page || 1;
-  const pageSize = req.query.pageSize || 10;
-  const skip = (page - 1) * pageSize;
-
-  const totalItems = await Order.countDocuments({
-    orderStatus: {
-      $in: openStatuses,
-    },
-  });
-
-  const totalPages = Math.ceil(totalItems / pageSize);
-
-  const getOpenOrders = await Order.find({
-    orderStatus: {
-      $in: openStatuses,
-    },
-  })
-    .skip(skip)
-    .limit(pageSize);
-
-  // Calculate the URL for the next and last pages
-  const baseUrl = `${req.protocol}://${req.get('host')}${
-    req.originalUrl.split('?')[0]
-  }`;
-
-  const previousPage =
-    page > 1
-      ? `${baseUrl}?page=${Number(page) - 1}&pageSize=${pageSize}`
-      : null;
-  const nextPage =
-    page < totalPages
-      ? `${baseUrl}?page=${Number(page) + 1}&pageSize=${pageSize}`
-      : null;
-  const lastPage = `${baseUrl}?page=${totalPages}&pageSize=${pageSize}`;
-
-  // Set the response headers
-  res.set(
-    'Link',
-    `<${previousPage}>; rel="previous", <${nextPage}>; rel="next", <${lastPage}>; rel="last"`,
-  );
-  res.set('X-Total-Count', totalItems);
-
-  await res.status(200).json({
-    status: 'success',
-    pagination: {
-      currentPage: page,
-      pagesize: pageSize,
-      totalItems: totalItems,
-      totalPages: totalPages,
-    },
-    data: getOpenOrders,
-  });
+exports.getOpenOrders = factory.getAll(Order, {
+  orderStatus: {
+    $in: ['Pending', 'On hold', 'Payment confirmed', 'Processing', 'Shipped'],
+  },
 });

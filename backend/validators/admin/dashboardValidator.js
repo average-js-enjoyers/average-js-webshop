@@ -59,11 +59,13 @@ exports.aggregates = [
 
 exports.openOrders = [
   query('page')
+    .optional()
     .isInt({
       gt: 0,
     })
     .withMessage('Page must be greater than zero!'),
-  query('pageSize')
+  query('limit')
+    .optional()
     .isInt({
       gt: 0,
       lt: 11,
