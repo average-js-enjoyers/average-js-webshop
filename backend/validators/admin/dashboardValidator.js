@@ -18,20 +18,41 @@ exports.aggregates = [
   body()
     .isArray({ min: 1 })
     .withMessage('Request must contain at least one range!'),
-  body('**.startDate').isDate().withMessage('Invalid start date format!'),
-  body('**.endDate').isDate().withMessage('Invalid end date format!'),
-  body('*.range')
-    .custom((value) => {
-      const days = daysBetweenDates(value.endDate, value.startDate);
-      return days >= 0;
-    })
-    .withMessage('Start date must be before end date.'),
-  body('*.range')
-    .custom((value) => {
-      const days = daysBetweenDates(value.endDate, value.startDate);
-      return days <= 365;
-    })
-    .withMessage('Range cannot be longer than 365 days!'),
+
+  body('**.startDate')
+    .isDate({ format: 'YYYY-MM-DD' })
+    .withMessage('Invalid start date format!'),
+
+  body('**.endDate')
+    .isDate({ format: 'YYYY-MM-DD' })
+    .withMessage('Invalid end date format!'),
+
+  body('*.range').custom((value) => {
+    const startDate = new Date(value.startDate);
+    const endDate = new Date(value.endDate);
+    const currentDate = new Date();
+
+    if (startDate > currentDate) {
+      throw new Error('Start date cannot be later than the current date.');
+    }
+
+    if (endDate > currentDate) {
+      throw new Error('End date cannot be later than the current date.');
+    }
+
+    // Check if start date is before end date
+    if (startDate >= endDate) {
+      throw new Error('Start date must be before end date.');
+    }
+
+    // Check if range is longer than 365 days
+    const daysDiff = Math.floor((endDate - startDate) / (24 * 60 * 60 * 1000));
+    if (daysDiff > 365) {
+      throw new Error('Range cannot be longer than 365 days!');
+    }
+
+    return true;
+  }),
 
   handleValidationError,
 ];
