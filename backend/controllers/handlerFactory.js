@@ -72,10 +72,12 @@ exports.getAll = (Model, filter = {}) =>
       .sort()
       .limitFields()
       .paginate();
-    // const doc = await features.query.explain();
+
     const doc = await features.query;
 
-    const totalItems = await Model.countDocuments(filter);
+    const totalItems = await Model.countDocuments(
+      new APIFeatures(Model.find(filter), req.query).filter().query,
+    );
     const totalPages = Math.ceil(totalItems / features.limit);
 
     // Calculate the URL for the next and last pages
@@ -85,19 +87,15 @@ exports.getAll = (Model, filter = {}) =>
 
     const previousPage =
       features.page > 1
-        ? `${baseUrl}?page=${Number(features.page) - 1}&pageSize=${
-            features.limit
-          }`
+        ? `${baseUrl}?page=${Number(features.page) - 1}&limit=${features.limit}`
         : null;
 
     const nextPage =
       features.page < totalPages
-        ? `${baseUrl}?page=${Number(features.page) + 1}&pageSize=${
-            features.limit
-          }`
+        ? `${baseUrl}?page=${Number(features.page) + 1}&limit=${features.limit}`
         : null;
 
-    const lastPage = `${baseUrl}?page=${totalPages}&pageSize=${features.limit}`;
+    const lastPage = `${baseUrl}?page=${totalPages}&limit=${features.limit}`;
 
     // Set the response headers
     res.set(
