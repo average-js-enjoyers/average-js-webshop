@@ -1,4 +1,5 @@
 const admin = require('firebase-admin');
+const { getStorage, ref, getDownloadURL } = require('firebase-admin/storage');
 const sharp = require('sharp');
 const fs = require('fs');
 const serviceAccount = require('../config/firebase/serviceAccountKey.json');
@@ -48,5 +49,9 @@ exports.create = async (uploadedImage, newfileName) => {
   fileStream.write(processedImageBuffer);
   fileStream.end();
 
-  return `https://storage.googleapis.com/${bucket.name}/${filePath}`;
+  // Get the downloadUrl for a given file ref
+  const fileRef = getStorage().bucket(admin.storageBucket).file(filePath);
+  const downloadUrl = await getDownloadURL(fileRef);
+
+  return downloadUrl;
 };
