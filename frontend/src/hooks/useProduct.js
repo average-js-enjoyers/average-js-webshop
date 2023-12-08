@@ -13,7 +13,7 @@ export const useProduct = () => {
     return productCardsData.map((product, index) => {
       return (
         <ProductCard
-          key={index}
+          key={product.productId}
           productId={product.productId}
           className={product.className}
           name={product.name}
