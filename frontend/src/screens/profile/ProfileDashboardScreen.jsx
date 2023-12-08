@@ -28,37 +28,20 @@ import {
 } from "components/common/Card";
 import ProfileScreen from "screens/profile/ProfileScreen";
 
-export default function ProfileDashboardScreen() {
-  const { user, fetchUserAddresses } = useAuth();
+// Redux
+import { useGetUserQuery, useGetUserAddressesQuery } from "slices/userApiSlice";
 
-  const [addresses, setAddresses] = useState(null);
-  const [shippingAddresses, setShippingAddresses] = useState([]);
-  const [billingAddresses, setBillingAddresses] = useState([]);
+export default function ProfileDashboardScreen() {
+  const { fetchUserAddresses } = useAuth();
+
+  // Updated user data fetching with RTK Query
+  const { data: user, loading, error } = useGetUserQuery();
+  const { data: addresses } = useGetUserAddressesQuery();
+
+  console.log("user", user);
+  console.log("addresses", addresses);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    async function fetchAddresses() {
-      try {
-        const fetchedAddresses = await fetchUserAddresses();
-        setAddresses(fetchedAddresses);
-      } catch (error) {
-        console.error("Error fetching addresses:", error);
-        // Handle errors as needed
-      }
-    }
-
-    fetchAddresses();
-  }, []);
-
-  useEffect(() => {
-    if (addresses) {
-      const { shippingAddresses, billingAddresses } =
-        splitAddressesByType(addresses);
-      setShippingAddresses(shippingAddresses);
-      setBillingAddresses(billingAddresses);
-    }
-  }, [addresses]);
 
   /* TODO - Remove for production */
   const { dummyProductCardData, renderProductCards } = useProduct();
@@ -80,61 +63,68 @@ export default function ProfileDashboardScreen() {
       subtitle="Your most important profile information at a glance."
     >
       <section className="profile-main__content profile-dashboard">
-        <Card className={"profile-summary"} dropShade={false} deco={true}>
-          <Button
-            variant="outline-light btn--compact btn--muted"
-            className="profile-manage-button"
-          >
-            <Link to="/profile/manage">
-              <PencilSquare />
-              <span>
-                Manage <strong>Account Details</strong>
-              </span>
-            </Link>
-          </Button>
-          <CardHeader align="start">
-            <CardTitle
-              className={"profile-summary__title"}
-              level="3"
-              textAlign="left"
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Something went wrong...</p>
+        ) : (
+          <Card className={"profile-summary"} dropShade={false} deco={true}>
+            <Button
+              variant="outline-light btn--compact btn--muted"
+              className="profile-manage-button"
             >
-              Basic Account Details
-            </CardTitle>
-          </CardHeader>
-          <CardBody>
-            <div className="profile-summary__list">
-              <div className="profile-summary__item">
-                <p className="profile-summary__label">First Name</p>
-                <p className="profile-summary__value">{user.firstName}</p>
+              <Link to="/profile/manage">
+                <PencilSquare />
+                <span>
+                  Manage <strong>Account Details</strong>
+                </span>
+              </Link>
+            </Button>
+            <CardHeader align="start">
+              <CardTitle
+                className={"profile-summary__title"}
+                level="3"
+                textAlign="left"
+              >
+                Basic Account Details
+              </CardTitle>
+            </CardHeader>
+            <CardBody>
+              <div className="profile-summary__list">
+                <div className="profile-summary__item">
+                  <p className="profile-summary__label">First Name</p>
+                  <p className="profile-summary__value">{user?.firstName}</p>
+                </div>
+                <div className="profile-summary__item">
+                  <p className="profile-summary__label">Last Name</p>
+                  <p className="profile-summary__value">{user?.lastName}</p>
+                </div>
+                <div className="profile-summary__item">
+                  <p className="profile-summary__label">Password</p>
+                  <Button
+                    variant="link btn--compact"
+                    className="profile-summary__value profile-summary__value--link"
+                    onClick={goToPassword}
+                  >
+                    Change Password Here
+                  </Button>
+                </div>
+                <div className="profile-summary__item">
+                  <p className="profile-summary__label">Phone Number</p>
+                  <p className="profile-summary__value">
+                    {formatPhoneNumber(user?.phoneNumber)}
+                  </p>
+                </div>
+                <div className="profile-summary__item">
+                  <p className="profile-summary__label">Email</p>
+                  <p className="profile-summary__value">{user?.emailAddress}</p>
+                </div>
               </div>
-              <div className="profile-summary__item">
-                <p className="profile-summary__label">Last Name</p>
-                <p className="profile-summary__value">{user.lastName}</p>
-              </div>
-              <div className="profile-summary__item">
-                <p className="profile-summary__label">Password</p>
-                <Button
-                  variant="link btn--compact"
-                  className="profile-summary__value profile-summary__value--link"
-                  onClick={goToPassword}
-                >
-                  Change Password Here
-                </Button>
-              </div>
-              <div className="profile-summary__item">
-                <p className="profile-summary__label">Phone Number</p>
-                <p className="profile-summary__value">
-                  {formatPhoneNumber(user.phoneNumber)}
-                </p>
-              </div>
-              <div className="profile-summary__item">
-                <p className="profile-summary__label">Email</p>
-                <p className="profile-summary__value">{user.emailAddress}</p>
-              </div>
-            </div>
-          </CardBody>
-          <CardFooter></CardFooter>
-        </Card>
+            </CardBody>
+            <CardFooter></CardFooter>
+          </Card>
+        )}
+
         <div className="primary-address-cards-container primary-address-cards-container--primary">
           <Card className={"address-card"} dropShade={false} deco={true}>
             <CardHeader align="start">
@@ -146,7 +136,9 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="address-list address-list--primary">
-                {shippingAddresses.length === 0 && (
+                {addresses.filter(
+                  (a) => a.type === "Shipping" || a.type === "Both"
+                ).length === 0 && (
                   <p
                     style={{
                       textAlign: "center",
@@ -159,10 +151,12 @@ export default function ProfileDashboardScreen() {
                     No shipping addresses yet.
                   </p>
                 )}
-                {shippingAddresses &&
-                  shippingAddresses.map(
+                {addresses &&
+                  addresses.map(
                     (address) =>
-                      address.isActive && (
+                      /* address.isActive && */
+                      (address.type === "Shipping" ||
+                        address.type === "Both") && (
                         <AddressCard
                           key={address._id}
                           isActive={address.isActive}
@@ -170,7 +164,7 @@ export default function ProfileDashboardScreen() {
                           name={address.name || address.company || address.city}
                           company={address.company}
                           vatID={address.vatID}
-                          street={address.street}
+                          addressLine={address.addressLine}
                           zip={address.zip}
                           city={address.city}
                           country={address.country}
@@ -203,7 +197,9 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="address-list address-list--primary">
-                {billingAddresses.length === 0 && (
+                {addresses.filter(
+                  (a) => a.type === "Billing" || a.type === "Both"
+                ).length === 0 && (
                   <p
                     style={{
                       textAlign: "center",
@@ -216,10 +212,12 @@ export default function ProfileDashboardScreen() {
                     No billing addresses yet.
                   </p>
                 )}
-                {billingAddresses &&
-                  billingAddresses.map(
+                {addresses &&
+                  addresses.map(
                     (address) =>
-                      address.isActive && (
+                      /* address.isActive && */
+                      (address.type === "Billing" ||
+                        address.type === "Both") && (
                         <AddressCard
                           key={address._id}
                           isActive={address.isActive}
@@ -227,7 +225,7 @@ export default function ProfileDashboardScreen() {
                           name={address.name || address.company || address.city}
                           company={address.company}
                           vatID={address.vatID}
-                          street={address.street}
+                          addressLine={address.addressLine}
                           zip={address.zip}
                           city={address.city}
                           country={address.country}
