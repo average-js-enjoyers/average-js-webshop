@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+const Address = require('./shippingMethod.model');
+const ShippingMethod = require('./shippingMethod.model');
+
 const { Schema } = mongoose;
 
 const OrderSchema = new Schema({

@@ -1,4 +1,4 @@
-const AppError = require('../services/appError');
+const { AppError } = require('../services/appError');
 
 const handleCastErrorDB = (err) => {
   const message = `Invalid ${err.path}: ${err.value}.`;
@@ -14,9 +14,9 @@ const handleDuplicateFieldsDB = (err) => {
 };
 
 const handleValidationErrorDB = (err) => {
-  const errors = Object.values(err.errors).map((el) => el.message);
+  const errors = Object.values(err.details).map((el) => el.msg);
 
-  const message = `Invalid input data. ${errors.join('. ')}`;
+  const message = `Invalid input data. ${errors.join(', ')}`;
   return new AppError(message, 400);
 };
 
@@ -29,8 +29,8 @@ const handleJWTExpiredError = () =>
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
-    error: err,
     message: err.message,
+    error: err,
     stack: err.stack,
   });
 };

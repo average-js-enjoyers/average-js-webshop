@@ -1,4 +1,5 @@
 const admin = require('firebase-admin');
+const { getStorage, ref, getDownloadURL } = require('firebase-admin/storage');
 const sharp = require('sharp');
 const fs = require('fs');
 const serviceAccount = require('../config/firebase/serviceAccountKey.json');
@@ -8,7 +9,7 @@ admin.initializeApp({
   storageBucket: 'gs://average-js-webshop.appspot.com',
 });
 
-exports.create = async (uploadedImage, newfileName) => {
+exports.create = async (uploadedImage, filePath) => {
   const imageBuffer = uploadedImage.path; // The image data
 
   const processedImageBuffer = await sharp(imageBuffer)
@@ -16,8 +17,6 @@ exports.create = async (uploadedImage, newfileName) => {
     .toBuffer();
 
   const bucket = admin.storage().bucket();
-
-  const filePath = `profile-photos/${newfileName}.jpg`;
 
   const file = bucket.file(filePath);
 
@@ -48,5 +47,9 @@ exports.create = async (uploadedImage, newfileName) => {
   fileStream.write(processedImageBuffer);
   fileStream.end();
 
-  return `https://storage.googleapis.com/${bucket.name}/${filePath}`;
+  // Get the downloadUrl for a given file ref
+  const fileRef = getStorage().bucket(admin.storageBucket).file(filePath);
+  const downloadUrl = await getDownloadURL(fileRef);
+
+  return downloadUrl;
 };

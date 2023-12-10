@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-11-29T13:34:32.742Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="_wqxur6f4pbUmdgMcEV_" version="22.1.4" type="device" pages="2">
+<mxfile host="app.diagrams.net" modified="2023-12-04T09:25:06.874Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="6Ax2PWEGhpGxyX9KSWGm" version="22.1.5" type="device" pages="3">
   <diagram id="jfQPMkhc_m6EBnlb_j9M" name="[USECASE] Shop Management System">
-    <mxGraphModel dx="1050" dy="522" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2049" dy="1071" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -592,8 +592,16 @@
       </root>
     </mxGraphModel>
   </diagram>
+  <diagram id="o4ABTZJXeHQR-0-UGdWI" name="[USECASE] Webshop">
+    <mxGraphModel dx="1434" dy="750" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
   <diagram id="oWoKQ5eRfM10xfI91AsQ" name="[STATE] Order">
-    <mxGraphModel dx="1050" dy="522" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1687" dy="1024" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -736,10 +744,10 @@
         <mxCell id="G6DUn3PrahZ7DZmVtPV8-21" value="Ready for Pickup" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=9;fillColor=#fff2cc;fontStyle=1;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="510" y="640" width="70" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Eexqk8aigqiQ7GfiH7Qv-1" value="MVP" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=9;fontColor=#000000;fillColor=none;gradientColor=none;fontStyle=1" vertex="1" parent="1">
+        <mxCell id="Eexqk8aigqiQ7GfiH7Qv-1" value="MVP" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=9;fontColor=#000000;fillColor=none;gradientColor=none;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="475" y="140" width="70" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Eexqk8aigqiQ7GfiH7Qv-2" value="not in MVP" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=9;fillColor=#fff2cc;fontStyle=1;strokeColor=#d6b656;" vertex="1" parent="1">
+        <mxCell id="Eexqk8aigqiQ7GfiH7Qv-2" value="not in MVP" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=9;fillColor=#fff2cc;fontStyle=1;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="575" y="140" width="70" height="30" as="geometry" />
         </mxCell>
       </root>
