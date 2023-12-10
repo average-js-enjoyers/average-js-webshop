@@ -10,7 +10,7 @@ export default function AddressCard({
   company = "",
   vatID = "",
   zip,
-  street,
+  addressLine,
   city,
   region,
   country,
@@ -28,7 +28,7 @@ export default function AddressCard({
           </p>
         </>
       )}
-      <p className="address-card__street">{street}</p>
+      <p className="address-card__street">{addressLine}</p>
       <p className="address-card__city">
         {zip && `${zip}, `}
         {city}, {region && `${region}, `} {country && country.toUpperCase()}
