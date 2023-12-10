@@ -136,7 +136,7 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="address-list address-list--primary">
-                {addresses.filter(
+                {addresses?.filter(
                   (a) => a.type === "Shipping" || a.type === "Both"
                 ).length === 0 && (
                   <p
@@ -197,7 +197,7 @@ export default function ProfileDashboardScreen() {
             </CardHeader>
             <CardBody>
               <div className="address-list address-list--primary">
-                {addresses.filter(
+                {addresses?.filter(
                   (a) => a.type === "Billing" || a.type === "Both"
                 ).length === 0 && (
                   <p

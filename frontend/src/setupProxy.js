@@ -1,10 +1,11 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
+const { REACT_APP_API_PROXY_URL, REACT_APP_API_PROXY_PORT } = process.env;
 
 module.exports = function (app) {
   app.use(
     "/api", // This is your API prefix
     createProxyMiddleware({
-      target: "http://127.0.0.1:8080",
+      target: `${REACT_APP_API_PROXY_URL}:${REACT_APP_API_PROXY_PORT}`,
       changeOrigin: true,
     })
   );

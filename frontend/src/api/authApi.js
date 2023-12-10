@@ -1,5 +1,7 @@
 //src/api/user/authApi.js
 
+const { REACT_APP_CLIENT_APP_URL } = process.env;
+
 export async function createUser(user) {
   try {
     const response = await fetch("/api/user/auth/signup", {
@@ -110,11 +112,11 @@ export async function checkEmailExists(email) {
 
 export async function requestBackendToSendPasswordResetEmail(email) {
   try {
-    const response = await fetch("/api/user/auth/forgotPassword", {
+    const response = await fetch("/api/user/auth/password/forgot", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Reset-URL": "http://localhost:3000/reset-password",
+        "Reset-URL": `${REACT_APP_CLIENT_APP_URL}/reset-password`,
       },
       body: JSON.stringify({ emailAddress: email }),
     });
@@ -131,7 +133,7 @@ export async function requestConfRegEmail(email) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Confirmation-URL": "http://localhost:3000/onboard",
+        "Confirmation-URL": `${REACT_APP_CLIENT_APP_URL}/onboard`,
       },
       body: JSON.stringify({ emailAddress: email }),
     });
@@ -170,7 +172,7 @@ export async function fetchUserData() {
 
 export async function apiUpdatePassword(payload) {
   try {
-    const response = await fetch("/api/user/auth/password/forgot", {
+    const response = await fetch("/api/user/auth/password/reset", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
