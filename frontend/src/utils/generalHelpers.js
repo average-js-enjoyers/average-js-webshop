@@ -15,10 +15,10 @@ export function formatPhoneNumber(phoneNumber) {
 }
 
 export function splitAddressesByType(addresses) {
-  const shippingAddresses = addresses.filter(
+  const shippingAddresses = addresses?.filter(
     (address) => address.type === "Shipping" || address.type === "Both"
   );
-  const billingAddresses = addresses.filter(
+  const billingAddresses = addresses?.filter(
     (address) => address.type === "Billing" || address.type === "Both"
   );
 
